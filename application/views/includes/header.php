@@ -13,8 +13,8 @@
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
-      <!-- angular-->
-    <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
+  <!-- angular-->
+  <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
 </head>
 
 <body class="nav-md">
@@ -23,45 +23,23 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+            <a href="<?php echo base_url(); ?>dashboard" class="site_title" style="padding-left: 15px">
+              <i class="fa fa-circle-o w3-orange w3-padding-tiny w3-text-white" style="text-shadow: 2px 2px #ff0000;border-radius: 0;"></i> Swan Industries
+            </a>
           </div>
 
           <div class="clearfix"></div>
 
-          <!-- menu profile quick info -->
-          <div class="profile clearfix">
-            <div class="profile_pic">
-              <img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>John Doe</h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
-
-          <br />
-
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
+              <!-- <h3>General</h3> -->
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <li><a href="<?php echo base_url(); ?>dashboard"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+                <li><a><i class="fa fa-cubes"></i> Raw Material Section <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="index2.html">Dashboard2</a></li>
-                    <li><a href="index3.html">Dashboard3</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="form.html">General Form</a></li>
-                    <li><a href="form_advanced.html">Advanced Components</a></li>
-                    <li><a href="form_validation.html">Form Validation</a></li>
-                    <li><a href="form_wizards.html">Form Wizard</a></li>
-                    <li><a href="form_upload.html">Form Upload</a></li>
-                    <li><a href="form_buttons.html">Form Buttons</a></li>
+                    <li><a href="<?php echo base_url(); ?>materials/addmaterial">Add New Material</a></li>
+                    <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Materials</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
@@ -176,11 +154,10 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="">John Doe
+                    Welcome <b>Admin </b>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -192,70 +169,6 @@
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="<?php echo base_url(); ?>assets/images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
               </ul>
             </nav>
           </div>

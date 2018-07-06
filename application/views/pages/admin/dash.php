@@ -12,7 +12,7 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container"> -->
-        
+        <title>Swan Industries | Dashboard</title>
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
