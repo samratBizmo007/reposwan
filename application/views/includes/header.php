@@ -13,6 +13,8 @@
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
+      <!-- angular-->
+    <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
 </head>
 
 <body class="nav-md">
