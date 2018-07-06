@@ -12,6 +12,7 @@
   <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
