@@ -13,7 +13,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            Swan Industries ERP | Powered by <a href="https://bizmo-tech.com">Bizmo Technologies</a>
           </div>
           <div class="clearfix"></div>
         </footer>
