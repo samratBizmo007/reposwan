@@ -2,13 +2,11 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-class Registration extends CI_controller {
+class Showlogin extends CI_controller {
 
     public function __construct() {
         parent::__construct();
-        date_default_timezone_set('Asia/Kuwait');   //set Kuwait's timezone
-        $this->load->helper('cookie');
-        $this->load->library('facebook');
+        
     }
 
     public function index() {
@@ -29,15 +27,17 @@ class Registration extends CI_controller {
         // get all categories from db
 //        $data['categories'] = Registration::getAllCategories();
 //        $data['authURL'] = $this->facebook->login_url();
-
+        $this->load->view('includes/header');
         $this->load->view('pages/material/index');
+        $this->load->view('includes/footer');
+
     }
 
  
 // --------------register user fucntion starts----------------------//
     public function registerCustomer() {
         extract($_POST);
-        //print_r($_POST);die();
+        print_r($_POST);die();
         if($user_role==0){
              echo '<div class="alert alert-danger" style="margin-bottom:5px">
             <strong>Please select appropriate role!</strong> 

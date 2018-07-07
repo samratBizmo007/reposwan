@@ -53,7 +53,7 @@
 <!-- script for the add material form  -->
 <script type="text/javascript">
     var myApp = angular.module('materialApp', []);
-    myApp.controller('materialController', function ($scope, $http, $sce) {
+    myApp.controller('materialController', function ($scope,$http, $sce) {
 
         $scope.submitMaterialData = function () {
             $http({
@@ -62,7 +62,7 @@
                 data: $scope.materialData
             }).then(function (response) {
                 //alert(data);
-                $scope.material_err = data.response;
+                $scope.material_err = response;
                 //$('#material_err').val(data);
                 //document.getElementById("material_err").innerHTML = data;
             });
