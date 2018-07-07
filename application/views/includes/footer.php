@@ -28,8 +28,6 @@
   <!-- Custom Theme Scripts -->
   <script src="<?php echo base_url(); ?>assets/build/js/custom.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/alert/jquery-confirm.js"></script>
-  <!-- js file for product module -->
-  <script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
-
+  
   </body>
 </html>
