@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	// Dashboard controller
+	// Login controller
 	public function __construct(){
 		parent::__construct();
 	}

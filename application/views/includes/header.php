@@ -13,8 +13,14 @@
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
+    
   <!-- angular-->
   <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
+
+  
+  
 </head>
 
 <body class="nav-md">
@@ -23,7 +29,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="<?php echo base_url(); ?>dashboard" class="site_title" style="padding-left: 15px">
+            <a href="<?php echo base_url(); ?>admin/dashboard" class="site_title" style="padding-left: 15px">
               <i class="fa fa-circle-o w3-orange w3-padding-tiny w3-text-white" style="text-shadow: 2px 2px #ff0000;border-radius: 0;"></i> Swan Industries
             </a>
           </div>
@@ -35,11 +41,17 @@
             <div class="menu_section">
               <!-- <h3>General</h3> -->
               <ul class="nav side-menu">
-                <li><a href="<?php echo base_url(); ?>dashboard"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard </a></li>
                 <li><a><i class="fa fa-cubes"></i> Raw Material Section <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="<?php echo base_url(); ?>materials/addmaterial">Add New Material</a></li>
                     <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Materials</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-cube"></i> Product Section <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="<?php echo base_url(); ?>admin/products/addproduct">Add New Product</a></li>
+                    <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Products</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
