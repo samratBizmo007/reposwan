@@ -76,17 +76,17 @@
               <div class="w3-col l8" style="border:1px dashed">
                 <div class="w3-col l12 w3-padding-top">
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label for="sr_no">Serial Number 1 :</label>
-                    <input type="text" class="form-control" id="sr_no1" name="sr_no[]" placeholder="Enter serial number">
+                    <div class="form-group">
+                      <label for="sr_no">Serial Number 1 :</label>
+                      <input type="text" class="form-control" id="sr_no1" name="sr_no[]" placeholder="Enter serial number">
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label for="part_no">Item Code 1 :</label>
-                    <input type="text" class="form-control" id="part_no1" name="part_no[]" placeholder="Enter Item Code">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <label for="part_no">Item Code 1 :</label>
+                      <input type="text" class="form-control" id="part_no1" name="part_no[]" placeholder="Enter Item Code">
+                    </div>
                   </div>
-                </div>
                 </div>
                 <!-- extra added row div -->
                 <div class="w3-col l12" id="addedmore_DivGeneral"></div>
@@ -105,10 +105,10 @@
                   <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
                   <div class="w3-col l10 s10">
                     <select name="operations" class="form-control w3-small" id="operations">
-                    <option value="0" class="w3-text-grey w3-light-grey " selected>Please choose any one plant</option>
-                    <option value="ALD" class="w3-text-grey">Alandi</option>
-                    <option value="SNW" class="w3-text-grey">Sanaswadi</option>
-                  </select>
+                      <option value="0" class="w3-text-grey w3-light-grey " selected>Please choose any one plant</option>
+                      <option value="ALD" class="w3-text-grey">Alandi</option>
+                      <option value="SNW" class="w3-text-grey">Sanaswadi</option>
+                    </select>
                   </div>
                   <div class="w3-col l2 s2">
                     <button class="w3-button theme_bg" title="add operation"><i class="fa fa-plus"></i></button>
@@ -118,17 +118,17 @@
               <div class="w3-col l8" style="border:1px dashed">
                 <div class="w3-col l12 w3-padding-top">
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label for="machine">Machine used(in tonnes) 1 :</label>
-                    <input type="text" class="form-control" id="machine1" name="machine[]" placeholder="Enter Machine in tonnes">
+                    <div class="form-group">
+                      <label for="machine">Machine used(in tonnes) 1:</label>
+                      <input type="number" min="0" class="form-control" id="machine1" name="machine[]" placeholder="eg. 20, 30, 40 ton">
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <div class="form-group">
-                    <label for="qtyhr">Quantity per hour :</label>
-                    <input type="text" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="Enter quantity per hour">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                      <label for="qtyhr">Quantity per hour 1:</label>
+                      <input type="number" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
+                    </div>
                   </div>
-                </div>
                 </div>
                 <!-- extra added row div -->
                 <div class="w3-col l12" id="addedmore_DivMachine"></div>
@@ -163,6 +163,10 @@
 
 </div>
 <!-- /page content -->
+
+<!-- js file for product module -->
+<script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
+
      <!--  </div>
     </div>
   

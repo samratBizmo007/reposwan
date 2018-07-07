@@ -82,13 +82,13 @@ $(document).ready(function () {
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="machine">Machine used(in tonnes) '+x+' :</label>\n\
-        <input type="text" class="form-control" id="machine'+x+'" name="machine[]" placeholder="Enter serial number">\n\
+        <input type="number" class="form-control" id="machine'+x+'" name="machine[]" placeholder="eg. 20, 30, 40 ton">\n\
         </div>\n\
         </div>\n\
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="qtyhr">Quantity per hour '+x+' :</label>\n\
-        <input type="text" class="form-control" id="qtyhr'+x+'" name="qtyhr[]" placeholder="Enter Item Code">\n\
+        <input type="number" class="form-control" id="qtyhr'+x+'" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">\n\
         </div>\n\
         </div>\n\
         <a href="#" class="delete btn w3-text-black w3-right w3-small" title="remove section">remove <i class="fa fa-remove"></i>\n\
