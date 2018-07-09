@@ -6,6 +6,15 @@ class Dashboard extends CI_Controller {
 	// Dashboard controller
 	public function __construct(){
 		parent::__construct();
+
+		//start session		
+		$admin_name=$this->session->userdata('admin_name');
+		
+		$sessionArr=explode('|', $admin_name);
+		//check session variable set or not, otherwise logout
+		if(($sessionArr[0]!='SWANROCKSPlates')){
+			redirect('login');
+		}
 	}
 
 	// main index function

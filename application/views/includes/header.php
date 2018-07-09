@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Meta, title, CSS, favicons, etc. -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="images/favicon.ico" type="image/ico" />
-        <!-- Bootstrap -->
-        <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
-        <!-- Custom Theme Style -->
-        <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
-        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-        <!-- angular-->
-        <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/const.js"></script>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="images/favicon.ico" type="image/ico" />
+  <!-- Bootstrap -->
+  <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom Theme Style -->
+  <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
+    
+  <!-- angular-->
+  <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/angular-sanitize.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+  
+  
+</head>
 
 
 

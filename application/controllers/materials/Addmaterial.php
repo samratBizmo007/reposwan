@@ -58,5 +58,4 @@ class Addmaterial extends CI_controller {
                </script>';
         }
     }
-
 }
