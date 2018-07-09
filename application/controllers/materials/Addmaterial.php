@@ -1,7 +1,5 @@
 <?php
 
-error_reporting(E_ERROR | E_PARSE);
-
 class Addmaterial extends CI_controller {
 
     public function __construct() {
@@ -23,7 +21,7 @@ class Addmaterial extends CI_controller {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPGET, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("user_id: " . $user_id));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array());
         $response_json = curl_exec($ch);
         //close cURL resource
         curl_close($ch);
@@ -33,10 +31,31 @@ class Addmaterial extends CI_controller {
     }
 
     //------------fun for get the all material categories -----------------------//
-    public function addMaterialInfo(){
-       $params = json_decode(file_get_contents('php://input'),true);
-         //extract($_POST);
-       print_r($params);die();
-         //echo $material_rate; die();
-   }
+    public function addMaterialInfo() {
+        print_r($_POST);
+        die();
+        $data = $_POST;
+        $path = base_url();
+        $url = $path . 'api/Addmaterial_api/addMaterialInfo';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response_json = curl_exec($ch);
+        curl_close($ch);
+        $response = json_decode($response_json, true);
+        //echo $material_rate; die();
+        //print_r($response_json);die();
+        if ($response['status'] != 200) {
+            echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>
+            ';
+        } else {
+            echo '<h4 class="w3-text-green w3-margin"><i class="fa fa-image"></i> ' . $response['status_message'] . '</h4>
+            <script>
+            window.setTimeout(function() {
+               location.reload();
+               }, 1000);
+               </script>';
+        }
+    }
 }
