@@ -13,7 +13,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Swan Industries ERP | Powered by <a href="https://bizmo-tech.com">Bizmo Technologies</a>
+            Swan Industries ERP | Powered by <a href="https://bizmo-tech.com" target="_blank">Bizmo Technologies</a>
           </div>
           <div class="clearfix"></div>
         </footer>
