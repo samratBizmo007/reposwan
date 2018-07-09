@@ -33,10 +33,10 @@ class Addmaterial extends CI_controller {
     }
 
     //------------fun for get the all material categories -----------------------//
-     public function addMaterialInfo(){
-         $params = json_decode(file_get_contents('php://input'),true);
+    public function addMaterialInfo(){
+       $params = json_decode(file_get_contents('php://input'),true);
          //extract($_POST);
-         print_r($params);die();
+       print_r($params);die();
          //echo $material_rate; die();
-     }
+   }
 }

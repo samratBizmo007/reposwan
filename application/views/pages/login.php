@@ -13,13 +13,16 @@
   <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
-
-
-
   <!-- Custom Theme Style -->
   <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>assets/build/css/animate.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
+  <!-- angular-->
+  <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/angular-sanitize.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/const.js"></script>
+
 </head>
 
 <body class="login" style="background-image: url(<?php echo base_url(); ?>assets/images/swanbg.jpg);background-position: center;">
@@ -28,18 +31,24 @@
     <a class="hiddenanchor" id="signin"></a>
 
     <div class="login_wrapper ">
-      <div class="animate form login_form w3-padding">
+      <div ng-app="loginApp" class="animate form login_form w3-padding">
         <section class="login_content w3-padding w3-white w3-text-grey w3-card-2">
-          <form>
+          <form ng-controller="loginController" ng-submit="submit()" method="POST">
             <h1>Login Form</h1>
+
+            <div ng-bind-html="message"></div>
+
             <div>
-              <input type="text" class="form-control w3-small" placeholder="Enter email-ID here..." required>
+              <input type="text" ng-model="username" class="form-control w3-small" placeholder="Enter email-ID here..." required>
             </div>
             <div>
-              <input type="password" class="form-control w3-small" placeholder="Enter password here..." required>
+              <input type="password" ng-model="password" class="form-control w3-small" placeholder="Enter password here..." required>
             </div>
             <div>
-              <button class="btn btn-primary btn-block" type="submit">Log in as Administrator</button>
+              <button class="btn btn-primary btn-block" type="submit">
+                <span ng-show="loginButtonText == 'Authenticating user. Please wait...'"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+              {{ loginButtonText }}
+            </button>
             </div>
 
             <div class="clearfix"></div>
@@ -92,5 +101,45 @@
       </div>
     </div>
   </div>
+
+  <!-- Authenticate user script  -->
+  <script>
+    var loginApp = angular.module('loginApp', ['ngSanitize']);
+    loginApp.controller('loginController',function($scope, $http, $timeout, $window){
+      $scope.loginButtonText = "Log in as Administrator";
+      $scope.test = "false";
+
+      $scope.submit = function ()
+      {
+      $scope.message='';  
+      // spinner on button
+      $scope.test = "true";
+      $scope.loginButtonText = "Authenticating user. Please wait...";
+
+        // Do login here        
+        $timeout(function(){          
+          // POST form data to controller
+          $http({
+           method: 'POST',
+           url: '<?php echo base_url(); ?>login/checkLogin',
+           headers: {'Content-Type': 'application/json'},
+           data: JSON.stringify({username: $scope.username,password:$scope.password})
+         }).then(function (data) {
+            if(data.data=='200'){
+              //alert('got');
+              $scope.message='<p class="w3-green w3-padding-small">Login Successfull! Welcome Admin.</p>';
+              $window.location.href=BASE_URL+'admin/dashboard';
+            }
+            else{
+              $scope.message = data.data ;
+            }
+           
+         });
+         $scope.loginButtonText = "Log in as Administrator";
+       }, 2000);
+
+      }
+    });
+  </script>
 </body>
 </html>
