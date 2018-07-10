@@ -16,7 +16,7 @@ class Addmaterial extends CI_controller {
     public function getAllMaterialCategories() {
 //echo "string"; die();
         $path = base_url();
-        $url = $path . 'api/Addmaterial_api/getAllMaterialCategories';
+        $url = $path . 'api/Material_api/getAllMaterialCategories';
         //create a new cURL resource
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPGET, true);
@@ -32,11 +32,16 @@ class Addmaterial extends CI_controller {
 
     //------------fun for get the all material categories -----------------------//
     public function addMaterialInfo() {
-        print_r($_POST);
-        die();
+//        print_r($_POST);
+//        die();
         $data = $_POST;
+        extract($data);
+        if ($mat_cat_id == 0) {
+            echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i>Please Select material type first.</h4>';
+            die();
+        }
         $path = base_url();
-        $url = $path . 'api/Addmaterial_api/addMaterialInfo';
+        $url = $path . 'api/Material_api/addMaterialInfo';
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -50,7 +55,7 @@ class Addmaterial extends CI_controller {
             echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>
             ';
         } else {
-            echo '<h4 class="w3-text-green w3-margin"><i class="fa fa-image"></i> ' . $response['status_message'] . '</h4>
+            echo '<h4 class="w3-text-green w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
             <script>
             window.setTimeout(function() {
                location.reload();
@@ -58,4 +63,5 @@ class Addmaterial extends CI_controller {
                </script>';
         }
     }
+
 }

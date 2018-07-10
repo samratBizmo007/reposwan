@@ -1,5 +1,5 @@
 
-function getMaterialSpecificationDiv() {
+function getMaterialSpecifications() {
 
     var material_category = $('#mat_cat_id').val();
     $('#materialDiv').css("display", "block");
@@ -10,11 +10,11 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>Thickness</label>\n\
-<input type='number' name='thickness' ng-model='materialData.thickness' id='thickness' class='form-control' placeholder='Material Thickness' required>\n\
+<input type='number' name='thickness' ng-model='materialData.thickness' min='0' step='0.01' id='thickness' class='form-control' placeholder='Material Thickness' required>\n\
 </div>\n\
 <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>Sheet Quantity</label>\n\
-<input type='number' name='sheet_quantity' ng-model='materialData.sheet_quantity' id='sheet_quantity' class='form-control' placeholder='Sheet Quantity' required>\n\
+<input type='number' name='sheet_quantity' ng-model='materialData.sheet_quantity' min='0' step='0.01' id='sheet_quantity' class='form-control' placeholder='Sheet Quantity' required>\n\
 </div>\n\
 </div>");
             break;
@@ -23,7 +23,7 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>Diameter</label>\n\
-<input type='number' name='diameter' ng-model='materialData.diameter' id='diameter' class='form-control' placeholder='Material Diameter' required>\n\
+<input type='number' name='diameter' ng-model='materialData.diameter' id='diameter' min='0' step='0.01' class='form-control' placeholder='Material Diameter' required>\n\
 </div>\n\
 </div>");
             break;
@@ -32,15 +32,15 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Thickness</label>\n\
-<input type='number' name='thickness' ng-model='materialData.thickness' id='thickness' class='form-control' placeholder='Material Thickness' required>\n\
+<input type='number' name='thickness' ng-model='materialData.thickness' id='thickness' min='0' step='0.01' class='form-control' placeholder='Material Thickness' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Circle Quantity</label>\n\
-<input type='number' name='circle_quantity' ng-model='materialData.circle_quantity' id='circle_quantity' class='form-control' placeholder='Circle Quantity' required>\n\
+<input type='number' name='circle_quantity' ng-model='materialData.circle_quantity' min='0' step='0.01' id='circle_quantity' class='form-control' placeholder='Circle Quantity' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Diagram No</label>\n\
-<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' class='form-control' placeholder='Diagram No' required>\n\
+<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' min='0' step='0.01' class='form-control' placeholder='Diagram No' required>\n\
 </div>\n\
 </div>");
             break;
@@ -49,15 +49,15 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>ID</label>\n\
-<input type='number' name='id' ng-model='materialData.id' id='id' class='form-control' placeholder='ID' required>\n\
+<input type='number' name='id' ng-model='materialData.id' id='id' class='form-control' min='0' step='0.01' placeholder='ID' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>OD</label>\n\
-<input type='number' name='od' ng-model='materialData.od' id='od' class='form-control' placeholder='OD' required>\n\
+<input type='number' name='od' ng-model='materialData.od' id='od' class='form-control' min='0' step='0.01' placeholder='OD' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Length</label>\n\
-<input type='number' name='length' ng-model='materialData.length' id='length' class='form-control' placeholder='Length' required>\n\
+<input type='number' name='length' ng-model='materialData.length' id='length' min='0' step='0.01' class='form-control' placeholder='Length' required>\n\
 </div>\n\
 </div>");
             break;
@@ -66,11 +66,11 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>OD</label>\n\
-<input type='number' name='od' ng-model='materialData.od' id='od' class='form-control' placeholder='OD' required>\n\
+<input type='number' name='od' ng-model='materialData.od' id='od' min='0' step='0.01' class='form-control' placeholder='OD' required>\n\
 </div>\n\
 <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>Length</label>\n\
-<input type='number' name='length' ng-model='materialData.length' id='length' class='form-control' placeholder='Length' required>\n\
+<input type='number' name='length' ng-model='materialData.length' id='length' min='0' step='0.01' class='form-control' placeholder='Length' required>\n\
 </div>\n\
 </div>");
             break;
@@ -79,21 +79,21 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>ID</label>\n\
-<input type='number' name='id' ng-model='materialData.id' id='id' class='form-control' placeholder='ID' required>\n\
+<input type='number' name='id' ng-model='materialData.id' id='id' class='form-control' min='0' step='0.01' placeholder='ID' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Pitching</label>\n\
-<input type='number' name='pitching' ng-model='materialData.pitching' id='pitching' class='form-control' placeholder='Pitching' required>\n\
+<input type='number' name='pitching' ng-model='materialData.pitching' id='pitching' min='0' step='0.01' class='form-control' placeholder='Pitching' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Quantity</label>\n\
-<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' class='form-control' placeholder='Quantity' required>\n\
+<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' min='0' step='0.01' class='form-control' placeholder='Quantity' required>\n\
 </div>\n\
 </div>\n\
 <div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12 w3-margin-top'>\n\
 <label>Diagram No</label>\n\
-<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' class='form-control' placeholder='Diagram No' required>\n\
+<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' min='0' step='0.01' class='form-control' placeholder='Diagram No' required>\n\
 </div>\n\
 </div>");
             break;
@@ -102,21 +102,21 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>OD</label>\n\
-<input type='number' name='od' ng-model='materialData.od' id='od' class='form-control' placeholder='OD' required>\n\
+<input type='number' name='od' ng-model='materialData.od' id='od' class='form-control' min='0' step='0.01' placeholder='OD' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Pitching</label>\n\
-<input type='number' name='pitching' ng-model='materialData.pitching' id='pitching' class='form-control' placeholder='Pitching' required>\n\
+<input type='number' name='pitching' ng-model='materialData.pitching' id='pitching' min='0' step='0.01' class='form-control' placeholder='Pitching' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Quantity</label>\n\
-<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' class='form-control' placeholder='Quantity' required>\n\
+<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' min='0' step='0.01' class='form-control' placeholder='Quantity' required>\n\
 </div>\n\
 </div>\n\
 <div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12 w3-margin-top'>\n\
 <label>Diagram No</label>\n\
-<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' class='form-control' placeholder='Diagram No' required>\n\
+<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' min='0' step='0.01' class='form-control' placeholder='Diagram No' required>\n\
 </div>\n\
 </div>");
             break;
@@ -125,36 +125,33 @@ function getMaterialSpecificationDiv() {
             materialSpecificationDiv.html("<div class='w3-col l12'>\n\
     <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>ID</label>\n\
-<input type='number' name='id' ng-model='materialData.id' id='id' class='form-control' placeholder='ID' required>\n\
+<input type='number' name='id' ng-model='materialData.id' id='id' min='0' step='0.01' class='form-control' placeholder='ID' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Pitching</label>\n\
-<input type='number' name='pitching' ng-model='materialData.pitching' id='pitching' class='form-control' placeholder='Pitching' required>\n\
+<input type='number' name='pitching' ng-model='materialData.pitching' min='0' step='0.01' id='pitching' class='form-control' placeholder='Pitching' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Quantity</label>\n\
-<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' class='form-control' placeholder='Quantity' required>\n\
+<input type='number' name='quantity' ng-model='materialData.quantity' id='quantity' min='0' step='0.01' class='form-control' placeholder='Quantity' required>\n\
 </div>\n\
 </div>\n\
 <div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12 w3-margin-top'>\n\
 <label>Diagram No</label>\n\
-<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' id='Diagram_no' class='form-control' placeholder='Diagram No' required>\n\
+<input type='number' name='Diagram_no' ng-model='materialData.Diagram_no' min='0' step='0.01' id='Diagram_no' class='form-control' placeholder='Diagram No' required>\n\
 </div>\n\
 </div>");
     }
-};
+}
+;
 var myApp = angular.module('materialApp', []);
 myApp.controller('materialController', function ($scope, $http, $sce) {
     //  ------------------------Add Material data -------------------------//
     $(function () {
         $("#add_MaterialForm").submit(function () {
             dataString = $("#add_MaterialForm").serialize();
-            var material_id = $('#mat_cat_id').val();
-            if(material_id === '0' && material_id === ''){
-                $.alert('Please Select Material Type First');
-            }
-            
+            $('#btnsubmit').html('<span class="w3-card w3-padding-small w3-margin-bottom w3-round"><i class="fa fa-spinner fa-spin w3-large"></i> <b>Adding Material. Hang on...</b></span>');
             $.ajax({
                 type: "POST",
                 url: BASE_URL + "materials/addmaterial/addMaterialInfo",
@@ -163,6 +160,7 @@ myApp.controller('materialController', function ($scope, $http, $sce) {
                 success: function (data)
                 {
                     $.alert(data);
+                    $('#btnsubmit').html('<button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>');
                 }
             });
             return false;  //stop the actual form post !important!
@@ -176,7 +174,6 @@ myApp.controller('materialController', function ($scope, $http, $sce) {
     });
 
 //    $scope.getMaterialSpecificationDiv = function () {
-
 //        var thicknesssheetquantity = $sce.trustAsHtml("<div class='w3-col l12'>\n\
 //    <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 //<label>Thickness</label>\n\

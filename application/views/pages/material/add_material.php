@@ -7,13 +7,13 @@
             <div class="row" style=" margin-top: 5px;">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <div class="container" id="App" ng-app="materialApp" ng-controller="materialController"  style="padding:12px 36px 12px 36px">
+                    <div class="" id="App" ng-app="materialApp" ng-controller="materialController"  style="padding:12px 36px 12px 36px">
                         <form id="add_MaterialForm" method="post" role="form">
                             <div class="w3-col l12" ng-model="material_err"></div>
                             <div class="w3-col l12 w3-margin-bottom">
                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="materialCategoryDiv">
                                     <label>Material Type</label>
-                                    <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialSpecificationDiv()" required>
+                                    <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialSpecifications()" required>
                                         <option value="0">Select Material Type</option>
                                         <option ng-repeat="z in category['status_message']" value="{{z.mat_cat_id}}">{{z.material_type}}</option>
                                     </select>                               
@@ -29,17 +29,23 @@
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div id="materialRate" class="col-lg-6 col-xs-12 col-sm-12">										
                                         <label>Material Rate</label>
-                                        <input type="number" name="material_rate" ng-model="materialData.material_rate" id="material_rate" class="form-control" placeholder="Material Rate" required>
+                                        <input type="number" name="material_rate" ng-model="materialData.material_rate" id="material_rate" min="0" step="0.01" class="form-control" placeholder="Material Rate" required>
                                     </div>
                                     <div class="col-lg-6 col-xs-12 col-sm-12" id="materialWeight">
                                         <label>Material Weight</label>
-                                        <input type="number" name="material_weight" ng-model="materialData.material_weight" id="material_weight" class="form-control" placeholder="Material Weight" required>
+                                        <input type="number" name="material_weight" ng-model="materialData.material_weight" id="material_weight" min="0" step="0.01" class="form-control" placeholder="Material Weight" required>
                                     </div>											                           
+                                </div>
+                                <div class="w3-col l12 w3-margin-bottom">
+                                    <div class="col-lg-12 col-xs-12 col-sm-12">
+                                        <label>Remark</label>
+                                        <textarea  class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;" required></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
                             <div class=" w3-center w3-col l12" style="">
-                                <button  type="submit" title="add Material" class="w3-medium w3-button w3-orange">Add Material</button>
+                                <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>
                             </div>
                         </form>
                     </div>
