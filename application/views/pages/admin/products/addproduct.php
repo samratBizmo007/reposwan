@@ -101,17 +101,25 @@
             <h2>Machinery Details</h2>            
             <div class="w3-col l12">
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
-                <div class="form-group">
-                  <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
-                  <div class="w3-col l10 s10">
-                    <select name="operations" class="form-control w3-small" id="operations">
-                      <option value="0" class="w3-text-grey w3-light-grey " selected>Please choose any one plant</option>
-                      <option value="ALD" class="w3-text-grey">Alandi</option>
-                      <option value="SNW" class="w3-text-grey">Sanaswadi</option>
-                    </select>
-                  </div>
-                  <div class="w3-col l2 s2">
-                    <button class="w3-button theme_bg" title="add operation"><i class="fa fa-plus"></i></button>
+                <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
+                <div ng-app="allSkillList" ng-cloak ng-controller="SkillCtrl" class="w3-card" >
+
+                  <ul class="w3-ul">
+                    <li ng-repeat="x in products">{{x}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                  </ul>
+                  <div class="w3-container w3-light-grey">
+                    <div class="w3-row w3-margin-top">
+                      <div class="w3-col l10 s10">
+
+                        <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
+                          <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name}}</option>
+                        </select>
+                      </div>
+                      <div class="w3-col l2 s2">
+                        <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation"><i class="fa fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <p class="w3-text-red w3-center">{{errortext}}</p>
                   </div>
                 </div>
               </div>
@@ -166,7 +174,42 @@
 
 <!-- js file for product module -->
 <script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
+<script>
+  var app = angular.module("allSkillList", []); 
+  app.controller("SkillCtrl", function($scope,$http) {
+    $scope.products = [];
 
+    // add skill to temp 
+    $scope.addSkill = function () {
+      $scope.errortext = "";
+      if (!$scope.addSkillbtn) {return;}
+      if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
+        $scope.products.push($scope.addSkillbtn);
+        //$scope.errortext=JSON.stringify($scope.products);
+      } else {
+        $scope.errortext = "This operation is already listed.";
+      }
+    }
+
+    // remove skill from temp
+    $scope.removeSkill = function (x) {
+      $scope.errortext = "";    
+      $scope.products.splice(x, 1);
+    }
+
+    // get all skills in select box
+    $scope.getUsers = function(){
+      $http({
+       method: 'get',
+       url: '<?php base_url(); ?>addproduct/getAllSkills'
+     }).then(function successCallback(response) {
+      // Assign response to skills object
+      $scope.skills = response.data;
+    }); 
+   }
+   $scope.getUsers()
+ });
+</script>
      <!--  </div>
     </div>
   

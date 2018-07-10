@@ -27,7 +27,7 @@ class Login extends CI_Controller {
 		//$this->load->view('includes/footer');
 	}
 
-	// check login authentication
+	// check login authentication-----------------------------------------------------------
 	public function checkLogin(){
 		// get data passed through ANGULAR AJAX
 		$postdata = file_get_contents("php://input");
@@ -57,4 +57,18 @@ class Login extends CI_Controller {
 		}
 		//print_r($result);
 	}
+	// login fucntion ends here----------------------------------------------------------------------
+
+	// logout function starts here----------------------------------------------------
+	public function logoutAdmin(){
+	//start session		
+		$admin_name=$this->session->userdata('admin_name');
+
+	//if logout success then destroy session and unset session variables
+		$this->session->unset_userdata(array("admin_name"));
+		$this->session->sess_destroy();
+
+		redirect('login');
+	}
+	// logout function ends here---------------------------------------------------------
 }
