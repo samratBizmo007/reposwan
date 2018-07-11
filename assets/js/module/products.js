@@ -108,3 +108,130 @@ $(document).ready(function () {
     x--;
   })
 });
+
+// Angular script to add required skills in ad product form
+var app = angular.module("addProductForm", []); 
+app.controller("ProdCtrl", function($scope,$http) {
+  $scope.products = [];
+
+    // add skill to temp 
+    $scope.addSkill = function () {
+      $scope.errortext = "";
+      if (!$scope.addSkillbtn) {return;}
+      if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
+        $scope.products.push($scope.addSkillbtn);
+        //$scope.errortext=JSON.stringify($scope.products);
+      } else {
+        $scope.errortext = "This operation is already listed.";
+      }
+    }
+
+    // remove skill from temp
+    $scope.removeSkill = function (x) {
+      $scope.errortext = "";    
+      $scope.products.splice(x, 1);
+    }
+
+    // get all skills in select box
+    $scope.getSkills = function(){
+      $http({
+       method: 'get',
+       url: BASE_URL+'admin/products/addproduct/getAllSkills'
+     }).then(function successCallback(response) {
+      // Assign response to skills object
+      $scope.skills = response.data;
+    }); 
+   }
+   $scope.getSkills()
+
+   // check product type and display plant
+   $scope.prodType = function () {
+    if ($scope.typeSelected== "1")
+      $scope.plantDiv = true;
+    else
+      $scope.plantDiv = false;
+  }
+
+  // check raw material type
+  // function to disable all fields
+  $scope.InputDisable = function () {
+    $scope.enableThickness=false;
+    $scope.enableDiameter=false;
+    $scope.enableID=false;
+    $scope.enableOD=false;
+    $scope.enablePitch=false;
+    $scope.enableQuantity=false;
+    $scope.enableLength=false;
+  }
+  $scope.RmType = function (no) {
+    //if ($scope.rmtypeSelected== "1")
+    $scope.rmSpecimen = true;
+    // check type selected
+    switch($scope.rmtypeSelected1){
+      case '1':
+      $scope.InputDisable()
+      $scope.enableThickness=true;
+      $scope.enableQuantity=true;
+      break;
+      case '2':
+      $scope.InputDisable()
+      $scope.enableDiameter=true;
+      break;
+      case '3':
+      $scope.InputDisable()
+      $scope.enableThickness=true;
+      $scope.enableOD=true;
+      $scope.enableQuantity=true;
+      break;
+      case '4':
+      $scope.InputDisable()
+      $scope.enableID=true;
+      $scope.enableOD=true;
+      $scope.enableLength=true;
+      break;
+      case '5':
+      $scope.InputDisable()
+      $scope.enableOD=true;
+      $scope.enableLength=true;
+      break;
+      case '6':
+      $scope.InputDisable()
+      $scope.enableID=true;
+      $scope.enablePitch=true;
+      $scope.enableQuantity=true;
+      break;
+      case '7':
+      $scope.InputDisable()
+      $scope.enableOD=true;
+      $scope.enablePitch=true;
+      $scope.enableQuantity=true;
+      break;
+      case '8':
+      $scope.InputDisable()
+      $scope.enableID=true;
+      $scope.enablePitch=true;
+      $scope.enableQuantity=true;
+      break;
+    }
+    //$scope.enableID=true;
+
+    // script to add multiple raw material in div
+    $scope.rmArr=[];
+
+    // add skill to temp 
+    $scope.addRM = function () {
+      $scope.errorRM = "";
+      if (!$scope.rmtypeSelected) {$scope.errorRM = "Please select Raw Material Type";return;}
+      $scope.rmArr.push(
+      {
+        rm_type:$scope.rmtypeSelected,
+        rmgradeSelected:$scope.rmgradeSelected,
+        rmthickSelected:$scope.rmthickSelected
+      });
+        //employees.push({id:100,name:'Yashwant',age:30}); 
+        $scope.addedRM=JSON.stringify($scope.rmArr);
+
+      }
+
+    }
+  });

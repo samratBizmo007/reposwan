@@ -20,7 +20,7 @@
         <!-- <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div> -->
-        <form id="addProduct">
+        <form id="addProduct" ng-app="addProductForm" ng-cloak ng-controller="ProdCtrl">
           <fieldset>
             <h2>General Details</h2>
             <div class="w3-col l12">
@@ -33,13 +33,13 @@
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                 <div class="form-group">
                   <label for="prod_type">Product Type<b class="w3-text-red w3-medium">*</b> :</label>
-                  <select name="prod_type" class="form-control w3-small" id="prod_type">
+                  <select name="prod_type" class="form-control w3-small" id="prod_type" ng-change="prodType()" ng-model="typeSelected">
                     <option value="0" class="w3-text-grey" selected>REGULAR</option>
                     <option value="1" class="w3-text-grey">EX-STOCK</option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom" ng-show='plantDiv'>
                 <div class="form-group">
                   <label for="stock_plant">Ex-stock Plant<b class="w3-text-red w3-medium">*</b> :</label>
                   <select name="stock_plant" class="form-control w3-small" id="stock_plant">
@@ -102,7 +102,7 @@
             <div class="w3-col l12">
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                 <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
-                <div ng-app="allSkillList" ng-cloak ng-controller="SkillCtrl" class="w3-card" >
+                <div class="w3-card" >
 
                   <ul class="w3-ul">
                     <li ng-repeat="x in products">{{x}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
@@ -110,7 +110,7 @@
                   <div class="w3-container w3-light-grey">
                     <div class="w3-row w3-margin-top">
                       <div class="w3-col l10 s10">
-
+                        <!-- fetch skills from db -->
                         <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
                           <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name}}</option>
                         </select>
@@ -149,14 +149,82 @@
 
           <fieldset>
             <h2>Raw Material Details</h2>
-            <div class="form-group">
-              <label for="mob">Mobile Number</label>
-              <input type="text" class="form-control" id="mob" placeholder="Mobile Number">
+            <div class="w3-col l12" style="border:1px dashed">
+              <div class="w3-col l12 w3-padding-top" >              
+              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_type">Raw Material Type<b class="w3-text-red w3-medium">*</b> :</label>
+                  <select name="rm_type" class="form-control w3-small" id="rm_type" ng-change="RmType()" ng-model="rmtypeSelected">
+                    <?php foreach ($materialType['status_message'] as $key) { ?>
+                      <option value="<?php echo $key['mat_cat_id'] ?>" class="w3-text-grey"><?php echo $key['material_type'] ?></option>
+                   <?php  } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_grade">Raw Material Grade<b class="w3-text-red w3-medium">*</b> :</label>
+                  <input type="text" ng-model="rmgradeSelected" class="form-control" id="rm_grade" name="rm_grade[]" placeholder="Enter Material Grade eg.CR, etc.">
+                </div>
+              </div>                          
             </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <textarea  class="form-control" name="address" placeholder="Communication Address"></textarea>
+            <div class="w3-col l12" ng-show="rmSpecimen">
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_thick">Thickness :</label>
+                  <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_dia">Diameter :</label>
+                  <input type="number" ng-model="rmdiaSelected" min="0" ng-disabled="!enableDiameter" class="form-control" id="rm_dia" name="rm_dia[]" placeholder="Material Diameter">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_id">ID :</label>
+                  <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_od">OD :</label>
+                  <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_pitch">Pitch :</label>
+                  <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_weight">Weight (in KGs) :</label>
+                  <input type="number" min="0" ng-model="rmweightSelected" class="form-control" id="rm_weight" name="rm_weight[]" placeholder="Material Weight">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_length">Length :</label>
+                  <input type="number" min="0" ng-model="rmlenSelected" class="form-control" ng-disabled="!enableLength" id="rm_length" name="rm_length[]" placeholder="Material Length">
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="rm_quantity">Quantity :</label>
+                  <input type="number" min="0" ng-model="rmqtySelected" class="form-control" ng-disabled="!enableQuantity" id="rm_quantity" name="rm_quantity[]" placeholder="Material Quantity">
+                </div>
+              </div>
             </div>
+
+            <button class="btn btn-primary" type="button" onclick="addRM()">Add</button>
+            <p class="w3-center w3-text-red">{{errorRM}}</p>
+            <pre>{{addedRM}}</pre>
+            </div>
+            
+            
             <button type="button" name="previous2" class="previous btn btn-default w3-margin-top"><i class="fa fa-chevron-left"></i> Previous Section</button>
             <button type="submit" name="submitForm" class="submit btn btn-success w3-margin-top"> Submit  <i class="fa fa-chevron-right"></i> </button>
           </fieldset>
@@ -174,42 +242,7 @@
 
 <!-- js file for product module -->
 <script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
-<script>
-  var app = angular.module("allSkillList", []); 
-  app.controller("SkillCtrl", function($scope,$http) {
-    $scope.products = [];
 
-    // add skill to temp 
-    $scope.addSkill = function () {
-      $scope.errortext = "";
-      if (!$scope.addSkillbtn) {return;}
-      if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
-        $scope.products.push($scope.addSkillbtn);
-        //$scope.errortext=JSON.stringify($scope.products);
-      } else {
-        $scope.errortext = "This operation is already listed.";
-      }
-    }
-
-    // remove skill from temp
-    $scope.removeSkill = function (x) {
-      $scope.errortext = "";    
-      $scope.products.splice(x, 1);
-    }
-
-    // get all skills in select box
-    $scope.getUsers = function(){
-      $http({
-       method: 'get',
-       url: '<?php base_url(); ?>addproduct/getAllSkills'
-     }).then(function successCallback(response) {
-      // Assign response to skills object
-      $scope.skills = response.data;
-    }); 
-   }
-   $scope.getUsers()
- });
-</script>
      <!--  </div>
     </div>
   

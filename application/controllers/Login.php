@@ -8,20 +8,20 @@ class Login extends CI_Controller {
 		parent::__construct();
 
 		// load common model
-		$this->load->model('login_model');
-
-		//start session		
-		$admin_name=$this->session->userdata('admin_name');
-		$sessionArr=explode('|', $admin_name);
-		//check session variable set or not, otherwise logout
-		if(($sessionArr[0]=='SWANROCKSPlates')){
-			redirect('admin/dashboard');
-		}
+		$this->load->model('login_model');		
 	}
 
 	// main index function
 	public function index()
 	{
+		//start session		
+		$admin_name=$this->session->userdata('admin_name');
+		$sessionArr=explode('|', $admin_name);
+		//print_r($sessionArr);die();
+		//check session variable set or not, otherwise logout
+		if(($sessionArr[0]=='SWANROCKSPlates')){
+			redirect('admin/dashboard');
+		}
 		//$this->load->view('includes/header');
 		$this->load->view('pages/login');
 		//$this->load->view('includes/footer');
@@ -65,9 +65,8 @@ class Login extends CI_Controller {
 		$admin_name=$this->session->userdata('admin_name');
 
 	//if logout success then destroy session and unset session variables
-		$this->session->unset_userdata(array("admin_name"));
+		$this->session->unset_userdata(array('admin_name'));
 		$this->session->sess_destroy();
-
 		redirect('login');
 	}
 	// logout function ends here---------------------------------------------------------
