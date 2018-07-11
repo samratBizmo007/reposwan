@@ -59,4 +59,4 @@
 </div>
 <!-- /page content -->
 
-<script src="<?php echo base_url(); ?>assets/js/module/material.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/module/material/material.js"></script>

@@ -11,7 +11,7 @@ myApp.controller('showMaterialController', function ($scope, $http) {
 
     $http.get(BASE_URL + "materials/allmaterial/getAllMaterialDetails").then(function (categoryinfo) {
         console.log(categoryinfo);
-        $scope.category = categoryinfo.data;
+        $scope.materials = categoryinfo.data;
     });
 
 });

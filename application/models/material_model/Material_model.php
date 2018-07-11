@@ -90,7 +90,7 @@ class Material_model extends CI_Model {
     // ----------------------Fun For Add Material Details End-------------------------------------//
     //---------------------------------fun for get material details-------------------------------//
     public function getAllMaterialDetails() {
-         $sql = "SELECT * FROM material_tab";
+         $sql = "SELECT * FROM material_tab as m join material_category as c on(c.mat_cat_id = m.mat_cat_id)";
         //echo $sql; die();
         $result = $this->db->query($sql);
         if ($result->num_rows() <= 0) {
