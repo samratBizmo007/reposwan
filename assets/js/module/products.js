@@ -110,7 +110,7 @@ $(document).ready(function () {
 });
 
 // Angular script to add required skills in ad product form
-var app = angular.module("addProductForm", []); 
+var app = angular.module("addProductForm", ['ngSanitize']); 
 app.controller("ProdCtrl", function($scope,$http) {
   $scope.products = [];
 
@@ -120,7 +120,7 @@ app.controller("ProdCtrl", function($scope,$http) {
       if (!$scope.addSkillbtn) {return;}
       if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
         $scope.products.push($scope.addSkillbtn);
-        //$scope.errortext=JSON.stringify($scope.products);
+        $scope.skilJSON=JSON.stringify($scope.products);
       } else {
         $scope.errortext = "This operation is already listed.";
       }
@@ -130,6 +130,7 @@ app.controller("ProdCtrl", function($scope,$http) {
     $scope.removeSkill = function (x) {
       $scope.errortext = "";    
       $scope.products.splice(x, 1);
+      $scope.skilJSON=JSON.stringify($scope.products);
     }
 
     // get all skills in select box
@@ -163,11 +164,20 @@ app.controller("ProdCtrl", function($scope,$http) {
     $scope.enableQuantity=false;
     $scope.enableLength=false;
   }
-  $scope.RmType = function (no) {
+  $scope.RmType = function () {
     //if ($scope.rmtypeSelected== "1")
+    $scope.rmgradeSelected='';
+    $scope.rmweightSelected='';
+    $scope.rmthickSelected='';
+    $scope.rmdiaSelected='';
+    $scope.rmIDSelected='';
+    $scope.rmODSelected='';
+    $scope.rmPitchSelected='';
+    $scope.rmlenSelected='';
+    $scope.rmqtySelected='';
     $scope.rmSpecimen = true;
     // check type selected
-    switch($scope.rmtypeSelected1){
+    switch($scope.rmtypeSelected){
       case '1':
       $scope.InputDisable()
       $scope.enableThickness=true;
@@ -214,24 +224,59 @@ app.controller("ProdCtrl", function($scope,$http) {
       break;
     }
     //$scope.enableID=true;
+  }
+
 
     // script to add multiple raw material in div
     $scope.rmArr=[];
 
     // add skill to temp 
     $scope.addRM = function () {
-      $scope.errorRM = "";
-      if (!$scope.rmtypeSelected) {$scope.errorRM = "Please select Raw Material Type";return;}
+
+      if (!$scope.rmtypeSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Please select Raw Material Type!</p>";return;}
+      if (!$scope.rmgradeSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Grade is required!</p>";return;}
+      if (!$scope.rmweightSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Weight (in KGs) is required!</p>";return;}
+      if (!$scope.rmthickSelected) {$scope.rmthickSelected = 0;}
+      if (!$scope.rmdiaSelected) {$scope.rmdiaSelected = 0;}
+      if (!$scope.rmIDSelected) {$scope.rmIDSelected = 0;}
+      if (!$scope.rmODSelected) {$scope.rmODSelected = 0;}
+      if (!$scope.rmPitchSelected) {$scope.rmPitchSelected = 0;}
+      if (!$scope.rmlenSelected) {$scope.rmlenSelected = 0;}
+      if (!$scope.rmqtySelected) {$scope.rmqtySelected = 0;}
+      
       $scope.rmArr.push(
       {
         rm_type:$scope.rmtypeSelected,
         rmgradeSelected:$scope.rmgradeSelected,
-        rmthickSelected:$scope.rmthickSelected
+        rmthickSelected:$scope.rmthickSelected,
+        rmdiaSelected:$scope.rmdiaSelected,
+        rmIDSelected:$scope.rmIDSelected,
+        rmODSelected:$scope.rmODSelected,
+        rmPitchSelected:$scope.rmPitchSelected,
+        rmweightSelected:$scope.rmweightSelected,
+        rmlenSelected:$scope.rmlenSelected,
+        rmqtySelected:$scope.rmqtySelected
       });
         //employees.push({id:100,name:'Yashwant',age:30}); 
         $scope.addedRM=JSON.stringify($scope.rmArr);
+        $scope.errorRM = "";
+        $scope.rmgradeSelected='';
+        $scope.rmweightSelected='';
+        $scope.rmthickSelected='';
+        $scope.rmdiaSelected='';
+        $scope.rmIDSelected='';
+        $scope.rmODSelected='';
+        $scope.rmPitchSelected='';
+        $scope.rmlenSelected='';
+        $scope.rmqtySelected='';
 
+        $scope.rm_table='true';
       }
 
+      // remove material from temp table
+    $scope.removeMaterial = function (x) {
+      $scope.errorRM = "";    
+      $scope.rmArr.splice(x, 1);
+      $scope.addedRM=JSON.stringify($scope.rmArr);
     }
-  });
+    });

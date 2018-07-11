@@ -119,6 +119,7 @@
                         <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation"><i class="fa fa-plus"></i></button>
                       </div>
                     </div>
+                    <input type="hidden" name="skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">
                     <p class="w3-text-red w3-center">{{errortext}}</p>
                   </div>
                 </div>
@@ -143,13 +144,12 @@
                 <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnMachine" name="addMoreBtnMachine"><i class="fa fa-plus"></i> Add more</a> 
               </div>
             </div>
-
           </fieldset>
 
 
           <fieldset>
             <h2>Raw Material Details</h2>
-            <div class="w3-col l12" style="border:1px dashed">
+            <div class="w3-col l12">
               <div class="w3-col l12 w3-padding-top" >              
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                 <div class="form-group">
@@ -169,65 +169,119 @@
               </div>                          
             </div>
             <div class="w3-col l12" ng-show="rmSpecimen">
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_thick">Thickness :</label>
                   <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_dia">Diameter :</label>
                   <input type="number" ng-model="rmdiaSelected" min="0" ng-disabled="!enableDiameter" class="form-control" id="rm_dia" name="rm_dia[]" placeholder="Material Diameter">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_id">ID :</label>
                   <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_od">OD :</label>
                   <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_pitch">Pitch :</label>
                   <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
-                  <label for="rm_weight">Weight (in KGs) :</label>
+                  <label for="rm_weight">Weight (in KGs) <b class="w3-text-red w3-medium">*</b> :</label>
                   <input type="number" min="0" ng-model="rmweightSelected" class="form-control" id="rm_weight" name="rm_weight[]" placeholder="Material Weight">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_length">Length :</label>
                   <input type="number" min="0" ng-model="rmlenSelected" class="form-control" ng-disabled="!enableLength" id="rm_length" name="rm_length[]" placeholder="Material Length">
                 </div>
               </div>
-              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="rm_quantity">Quantity :</label>
                   <input type="number" min="0" ng-model="rmqtySelected" class="form-control" ng-disabled="!enableQuantity" id="rm_quantity" name="rm_quantity[]" placeholder="Material Quantity">
                 </div>
               </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group w3-padding-top">
+                  <button class="w3-button w3-margin-top theme_bg" type="button" ng-click="addRM()"><i class="fa fa-plus"></i> Add Material</button>
+                </div>
+              </div>
             </div>
-
-            <button class="btn btn-primary" type="button" onclick="addRM()">Add</button>
-            <p class="w3-center w3-text-red">{{errorRM}}</p>
-            <pre>{{addedRM}}</pre>
+            <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorRM"></p>
+            <input type="hidden" class="form-control" name="addedRM_field" id="addedRM_field" value="{{addedRM}}">
+            <!-- <pre>{{addedRM}}</pre> -->
             </div>
             
-            
-            <button type="button" name="previous2" class="previous btn btn-default w3-margin-top"><i class="fa fa-chevron-left"></i> Previous Section</button>
-            <button type="submit" name="submitForm" class="submit btn btn-success w3-margin-top"> Submit  <i class="fa fa-chevron-right"></i> </button>
+            <div class="w3-col l12 " ng-show='rm_table'>
+              <table class="table table-responsive table-bordered w3-margin-top">
+                <thead>
+                  <tr class="theme_bg w3-center">
+                    <th>Material Grade</th>
+                    <th>Material Thickness</th>
+                    <th>Material Diameter</th>
+                    <th>Material ID</th>
+                    <th>Material OD</th>
+                    <th>Material Pitch</th>
+                    <th>Material Weight</th>
+                    <th>Material Length</th>
+                    <th>Material Quantity</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="mat in rmArr">
+                  <tr class="w3-center">
+                    <td>{{mat.rmgradeSelected}}</td>
+                    <td>{{mat.rmthickSelected}}</td>
+                    <td>{{mat.rmdiaSelected}}</td>
+                    <td>{{mat.rmIDSelected}}</td>
+                    <td>{{mat.rmODSelected}}</td>
+                    <td>{{mat.rmPitchSelected}}</td>
+                    <td>{{mat.rmweightSelected}} KG</td>
+                    <td>{{mat.rmlenSelected}}</td>
+                    <td>{{mat.rmqtySelected}}</td>
+                    <td><a class="fa fa-remove w3-text-red" ng-click="removeMaterial($index)" title="remove material"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>            
           </fieldset>
+
+          <fieldset>
+            <h2>Pricing Details</h2>            
+            <div class="w3-col l12">
+              <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="old_rate">Old Rate<b class="w3-text-red w3-medium">*</b> :</label>
+                  <input type="text" class="form-control" id="old_rate" name="old_rate" placeholder="Enter Old Rate" required>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
+                <div class="form-group">
+                  <label for="new_rate">New Rate<b class="w3-text-red w3-medium">*</b> :</label>
+                  <input type="text" class="form-control" id="new_rate" name="new_rate" placeholder="Enter New Rate" required>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+
+            <button type="submit" name="submitForm" class="submit btn btn-success w3-margin-top"> Submit  <i class="fa fa-chevron-right"></i> </button>
 
         </form>
         <div class="clearfix"></div>
