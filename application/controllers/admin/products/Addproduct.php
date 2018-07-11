@@ -26,7 +26,6 @@ class Addproduct extends CI_Controller {
 	public function getAllSkills(){
 		// call to model function to get all skills from db
 		$result = $this->product_model->getSkills();
-
 		echo json_encode($result);
 	}
 }
