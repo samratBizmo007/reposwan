@@ -36,6 +36,7 @@
                                         <input type="number" name="material_weight" ng-model="materialData.material_weight" id="material_weight" min="0" step="0.01" class="form-control" placeholder="Material Weight" required>
                                     </div>											                           
                                 </div>
+                                <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div class="col-lg-12 col-xs-12 col-sm-12">
                                         <label>Remark</label>
@@ -43,7 +44,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
                             <div class=" w3-center w3-col l12" style="">
                                 <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>
                             </div>

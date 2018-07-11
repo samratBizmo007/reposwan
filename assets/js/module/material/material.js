@@ -14,7 +14,7 @@ function getMaterialSpecifications() {
 </div>\n\
 <div class='col-lg-6 col-xs-12 col-sm-12'>\n\
 <label>Sheet Quantity</label>\n\
-<input type='number' name='sheet_quantity' ng-model='materialData.sheet_quantity' min='0' step='0.01' id='sheet_quantity' class='form-control' placeholder='Sheet Quantity' required>\n\
+<input type='number' name='quantity' ng-model='materialData.quantity' min='0' step='0.01' id='quantity' class='form-control' placeholder='Quantity' required>\n\
 </div>\n\
 </div>");
             break;
@@ -36,7 +36,7 @@ function getMaterialSpecifications() {
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Circle Quantity</label>\n\
-<input type='number' name='circle_quantity' ng-model='materialData.circle_quantity' min='0' step='0.01' id='circle_quantity' class='form-control' placeholder='Circle Quantity' required>\n\
+<input type='number' name='quantity' ng-model='materialData.quantity' min='0' step='0.01' id='quantity' class='form-control' placeholder='Quantity' required>\n\
 </div>\n\
 <div class='col-lg-4 col-xs-12 col-sm-12'>\n\
 <label>Diagram No</label>\n\

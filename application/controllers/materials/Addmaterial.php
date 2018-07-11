@@ -55,7 +55,7 @@ class Addmaterial extends CI_controller {
             echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>
             ';
         } else {
-            echo '<h4 class="w3-text-green w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
+            echo '<h4 class="w3-text-black w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
             <script>
             window.setTimeout(function() {
                location.reload();

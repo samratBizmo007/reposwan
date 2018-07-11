@@ -57,20 +57,20 @@ class Material_model extends CI_Model {
         if (!isset($thickness)) {
             $thickness = 0;
         }
-        if (!isset($sheet_quantity)) {
-            $sheet_quantity = 0;
-        }
+//        if (!isset($sheet_quantity)) {
+//            $sheet_quantity = 0;
+//        }
         if (!isset($diameter)) {
             $diameter = 0;
         }
-        if (!isset($circle_quantity)) {
-            $circle_quantity = 0;
-        }
-        $sql = "INSERT INTO material_tab(mat_cat_id,material_grade,material_rate,material_weight,id,od,length,pitching,quantity,diagram_no,thickness,sheet_quantity,"
-                . "diameter,circle_quantity,remark,added_date,added_time,modified_date,modified_time,status)"
+//        if (!isset($circle_quantity)) {
+//            $circle_quantity = 0;
+//        }
+        $sql = "INSERT INTO material_tab(mat_cat_id,material_grade,material_rate,material_weight,id,od,length,pitching,quantity,diagram_no,thickness,"
+                . "diameter,remark,added_date,added_time,status)"
                 . "VALUES ('$mat_cat_id','$material_grade','$material_rate','$material_weight',"
-                . "'$id','$od','$length','$pitching','$quantity','$Diagram_no','$thickness','$sheet_quantity',"
-                . "'$diameter','$circle_quantity','$remark',now(),now(),now(),now(),'1')";
+                . "'$id','$od','$length','$pitching','$quantity','$Diagram_no','$thickness',"
+                . "'$diameter','$remark',now(),now(),'1')";
 //        echo $sql;die();
         //$this->db->query($sql)
         if ($this->db->query($sql)) {
@@ -88,9 +88,66 @@ class Material_model extends CI_Model {
     }
 
     // ----------------------Fun For Add Material Details End-------------------------------------//
+    //     // ----------------------Fun For update Material Details-------------------------------------//
+
+    public function updateMaterialDetails($data) {
+        extract($data);
+        if ($mat_cat_id == '' && $mat_cat_id == NULL) {
+            $mat_cat_id = 0;
+        }
+        if ($material_rate == '' && $material_rate == NULL) {
+            $material_rate = 0;
+        }
+        if ($material_weight == '' && $material_weight == NULL) {
+            $material_weight = 0;
+        }
+        if (!isset($id)) {
+            $id = 0;
+        }
+        if (!isset($od)) {
+            $od = 0;
+        }
+        if (!isset($length)) {
+            $length = 0;
+        }
+        if (!isset($pitching)) {
+            $pitching = 0;
+        }
+        if (!isset($quantity)) {
+            $quantity = 0;
+        }
+        if (!isset($Diagram_no)) {
+            $Diagram_no = 0;
+        }
+        if (!isset($thickness)) {
+            $thickness = 0;
+        }
+        if (!isset($diameter)) {
+            $diameter = 0;
+        }
+        $sql = "UPDATE material_tab SET material_rate = '$material_rate',material_weight='$material_weight',"
+                . "id='$id',od='$od',length='$length',pitching='$pitching',quantity='$quantity',"
+                . "diagram_no='$Diagram_no',thickness='$thickness',"
+                . "diameter='$diameter',remark='$remark',modified_date='now()',modified_time='now()',status='1' WHERE material_id = '$material_id'";
+        $this->db->query($sql);
+        if ($this->db->affected_rows() > 0) {
+            $response = array(
+                'status' => 200, //---------insert db success code
+                'status_message' => 'Material details updated Successfully..'
+            );
+        } else {
+            $response = array(
+                'status' => 500, //---------db error code 
+                'status_message' => 'Something Went Wrong... Material Not Updated Successfully.!!!'
+            );
+        }
+        return $response;
+    }
+
+    // ----------------------Fun For update Material Details End-------------------------------------//
     //---------------------------------fun for get material details-------------------------------//
     public function getAllMaterialDetails() {
-         $sql = "SELECT * FROM material_tab as m join material_category as c on(c.mat_cat_id = m.mat_cat_id)";
+        $sql = "SELECT * FROM material_tab as m join material_category as c on(c.mat_cat_id = m.mat_cat_id)";
         //echo $sql; die();
         $result = $this->db->query($sql);
         if ($result->num_rows() <= 0) {
@@ -106,4 +163,20 @@ class Material_model extends CI_Model {
     }
 
     //---------------------------------fun for get material details-------------------------------//
+    public function deleteMaterialDetails($material_id) {
+        $sql = "DELETE FROM material_tab WHERE material_id = '$material_id'";
+        //echo $sql; die();
+        $this->db->query($sql);
+        if ($this->db->affected_rows() > 0) {
+            $response = array(
+                'status' => 200,
+                'status_message' => 'Material Deleted Successfully..');
+        } else {
+            $response = array(
+                'status' => 200,
+                'status_message' => 'Material Not Deleted Successfully..');
+        }
+        return $response;
+    }
+
 }

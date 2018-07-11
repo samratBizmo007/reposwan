@@ -18,11 +18,20 @@ class Material_api extends REST_Controller {
         return $this->response($result);
     }
 
-    //----------fun for change password------------------------//
+    //----------fun for add material Details------------------------//
     public function addMaterialInfo_post() {
         $data = ($_POST);
         extract($data);
         $result = $this->Material_model->addMaterialInfo($data);
+        return $this->response($result);
+    }
+
+    //--------------fun ends here-----------------------------//
+    //----------fun for update material Details------------------------//
+    public function updateMaterialDetails_post() {
+        $data = ($_POST);
+        extract($data);
+        $result = $this->Material_model->updateMaterialDetails($data);
         return $this->response($result);
     }
 
@@ -34,4 +43,13 @@ class Material_api extends REST_Controller {
     }
 
     //----------------fun for get material details----------------------//
+    //----------------fun for get material details----------------------//
+    public function deleteMaterialDetails_get() {
+        extract($_GET);
+        $result = $this->Material_model->deleteMaterialDetails($material_id);
+        return $this->response($result);
+    }
+
+    //----------------fun for get material details----------------------//
+
 }
