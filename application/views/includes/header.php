@@ -1,9 +1,12 @@
 <?php 
 //start session     
 $admin_name=$this->session->userdata('admin_name');
+$session_name='';
+if($admin_name!=''){
+    $sessionArr=explode('|', $admin_name);
+    $session_name=$sessionArr[1];
+}
 
-$sessionArr=explode('|', $admin_name);
-$session_name=$sessionArr[1];        
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -7,15 +7,17 @@ class Dashboard extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 
-			$this->load->model('dash_model');
+		$this->load->model('dash_model');
 		//start session		
 		$admin_name=$this->session->userdata('admin_name');
 		
-		$sessionArr=explode('|', $admin_name);
+		if($admin_name==''){
+			$sessionArr=explode('|', $admin_name);
 		//check session variable set or not, otherwise logout
-		if(($sessionArr[0]!='SWANROCKSPlates')){
-			redirect('login');
-		}
+			if(($sessionArr[0]!='SWANROCKSPlates')){
+				redirect('login');
+			}
+		}		
 	}
 
 	// main index function
@@ -33,9 +35,9 @@ class Dashboard extends CI_Controller {
 		$request = json_decode($postdata,TRUE);
 		// print_r($request['skillname']);
 		// call to model function to add skills from db
-	    $result = $this->dash_model->addSkill($request['skillname']);
+		$result = $this->dash_model->addSkill($request['skillname']);
 
-	 echo json_encode($result);
+		echo json_encode($result);
 	}
 
 	//---function for show all skill

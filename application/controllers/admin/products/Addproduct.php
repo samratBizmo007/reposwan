@@ -8,6 +8,17 @@ class Addproduct extends CI_Controller {
 		parent::__construct();
 		// load common model
 		$this->load->model('product_model/product_model');
+
+		//start session		
+		$admin_name=$this->session->userdata('admin_name');
+		
+		if($admin_name==''){
+			$sessionArr=explode('|', $admin_name);
+		//check session variable set or not, otherwise logout
+			if(($sessionArr[0]!='SWANROCKSPlates')){
+				redirect('login');
+			}
+		}
 	}
 
 	// main index function

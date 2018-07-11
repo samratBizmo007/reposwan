@@ -16,12 +16,13 @@ class Login extends CI_Controller {
 	{
 		//start session		
 		$admin_name=$this->session->userdata('admin_name');
-		$sessionArr=explode('|', $admin_name);
-		//print_r($sessionArr);die();
+		if($admin_name!=''){
+			$sessionArr=explode('|', $admin_name);
 		//check session variable set or not, otherwise logout
-		if(($sessionArr[0]=='SWANROCKSPlates')){
-			redirect('admin/dashboard');
-		}
+			if(($sessionArr[0]=='SWANROCKSPlates')){
+				redirect('admin/dashboard');
+			}	
+		}		
 		//$this->load->view('includes/header');
 		$this->load->view('pages/login');
 		//$this->load->view('includes/footer');

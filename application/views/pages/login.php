@@ -39,7 +39,7 @@
             <div ng-bind-html="message"></div>
 
             <div>
-              <input type="text" ng-model="username" class="form-control w3-small" placeholder="Enter email-ID here..." required>
+              <input type="text" ng-model="username" class="form-control w3-small" placeholder="Enter username here..." required>
             </div>
             <div>
               <input type="password" ng-model="password" class="form-control w3-small" placeholder="Enter password here..." required>

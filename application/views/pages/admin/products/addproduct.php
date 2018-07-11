@@ -105,14 +105,14 @@
                 <div class="w3-card" >
 
                   <ul class="w3-ul">
-                    <li ng-repeat="x in products">{{x}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                    <li ng-repeat="x in products">{{x | uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
                   </ul>
                   <div class="w3-container w3-light-grey">
                     <div class="w3-row w3-margin-top">
                       <div class="w3-col l10 s10">
                         <!-- fetch skills from db -->
                         <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
-                          <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name}}</option>
+                          <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name | uppercase}}</option>
                         </select>
                       </div>
                       <div class="w3-col l2 s2">
@@ -280,8 +280,9 @@
             </div>
           </fieldset>
 
-
-            <button type="submit" name="submitForm" class="submit btn btn-success w3-margin-top"> Submit  <i class="fa fa-chevron-right"></i> </button>
+          <div class="w3-col l12 w3-center">
+            <button type="submit" name="submitForm" class="w3-center btn theme_bg w3-margin-top"> <i class="fa fa-save"></i> Save and Add New Product </button>
+          </div>            
 
         </form>
         <div class="clearfix"></div>
