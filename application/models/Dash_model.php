@@ -47,6 +47,7 @@ class Dash_model extends CI_Model {
 
     public function delskill($skillid)
     {
+    	//echo $skillid;die();
     	$sql="DELETE FROM skill_master WHERE skill_id='$skillid' ";
 
     	if ($this->db->query($sql)) {
