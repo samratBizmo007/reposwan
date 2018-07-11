@@ -49,10 +49,92 @@
             </div>
           </div>
           <!-- /top tiles -->
+         
+         <!-- add skill div start -->
 
+              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
+                <label for="skill">Add Skill:</label>
+                  <div class="w3-card w3-padding" ng-app="skillApp" ng-controller="skillController" >
+                   <div class="w3-container w3-light-grey">
+                     <div class="w3-row w3-margin-top">
+                      <form ng-submit="submit()" method="POST">
+                      <div class="w3-col l10 s10">
+                      <input type="text" ng-model="skillname" class="form-control w3-small"  required>
+                    </div>
+                      <div class="w3-col l2 s2"> 
+                        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
+                      </div>
+                    </form>
+                    </div>
+                    <div class="row">
+                     <div class="col-lg-12 w3-padding " ng-repeat='skill in skills'>
+                      <span>{{skill.skill_name}} </span>
+                      <button type="btn" ng-click="delskill()" class="w3-right" ><i class="fa fa-close"></i>
+                        <p>{{skill.skill_id}}</p></button>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              </div>
+
+
+
+
+         <!-- add skill div end -->
+            </div>
         </div>
         <!-- /page content -->
+ <script>
+    var skill = angular.module('skillApp', ['ngSanitize']);
+    skill.controller('skillController',function($scope, $http){
 
+
+     $scope.submit = function ()
+      {           // POST form data to controller
+          $http({
+           method: 'POST',
+           url: '<?php echo base_url(); ?>admin/dashboard/addskills',
+           headers: {'Content-Type': 'application/json'},
+           data: JSON.stringify({skillname: $scope.skillname})
+         }).then(function (data) {
+          // alert(data);
+          console.log(data);
+           
+           
+         });
+       }
+       //---------show all skill
+ $scope.getUsers = function(){
+      $http({
+       method: 'get',
+       url: '<?php base_url(); ?>products/addproduct/getAllSkills'
+     }).then(function successCallback(response) {
+      // Assign response to skills object
+      // console.log(response);
+      $scope.skills = response.data;
+      // $scope.mes=response;
+    }); 
+   }
+   $scope.getUsers()
+
+   //---del skill
+    $scope.delskill = function(skillid){
+      $http({
+       method: 'get',
+       url: '<?php base_url(); ?>dashboard/delSkill?skillid='+skillid
+     }).then(function successCallback(response) {
+      // Assign response to skills object
+      console.log(response);
+      $scope.skills = response.data;
+      // $scope.mes=response;
+    }); 
+   }
+      
+    });
+  </script>
      <!--  </div>
     </div>
   
