@@ -37,7 +37,7 @@
                     <tbody id='addedRows'>
                         <?php
                         //print_r($details);
-                        if ($details['status'] != 200) {
+                        if ($details['status'] == 200) {
                             $i = 1;
                             ?>
                             <?php foreach ($details['status_message'] as $val) { ?>
