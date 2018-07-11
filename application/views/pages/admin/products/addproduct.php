@@ -20,7 +20,7 @@
         <!-- <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
         </div> -->
-        <form id="addProduct">
+        <form id="addProduct" ng-app="addProductForm" ng-cloak ng-controller="ProdCtrl">
           <fieldset>
             <h2>General Details</h2>
             <div class="w3-col l12">
@@ -33,13 +33,13 @@
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                 <div class="form-group">
                   <label for="prod_type">Product Type<b class="w3-text-red w3-medium">*</b> :</label>
-                  <select name="prod_type" class="form-control w3-small" id="prod_type">
+                  <select name="prod_type" class="form-control w3-small" id="prod_type" ng-change="prodType()" ng-model="typeSelected">
                     <option value="0" class="w3-text-grey" selected>REGULAR</option>
                     <option value="1" class="w3-text-grey">EX-STOCK</option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+              <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom" ng-show='plantDiv'>
                 <div class="form-group">
                   <label for="stock_plant">Ex-stock Plant<b class="w3-text-red w3-medium">*</b> :</label>
                   <select name="stock_plant" class="form-control w3-small" id="stock_plant">
@@ -102,7 +102,7 @@
             <div class="w3-col l12">
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                 <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
-                <div ng-app="allSkillList" ng-cloak ng-controller="SkillCtrl" class="w3-card" >
+                <div class="w3-card" >
 
                   <ul class="w3-ul">
                     <li ng-repeat="x in products">{{x}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
@@ -110,7 +110,7 @@
                   <div class="w3-container w3-light-grey">
                     <div class="w3-row w3-margin-top">
                       <div class="w3-col l10 s10">
-
+                        <!-- fetch skills from db -->
                         <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
                           <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name}}</option>
                         </select>
@@ -149,7 +149,6 @@
 
           <fieldset>
             <h2>Raw Material Details</h2>
-<<<<<<< HEAD
             <div class="w3-col l12">
               <div class="w3-col l12 w3-padding-top" >              
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
@@ -260,7 +259,7 @@
                   </tr>
                 </tbody>
               </table>
-            </div> 
+            </div>            
           </fieldset>
 
           <fieldset>
@@ -297,42 +296,7 @@
 
 <!-- js file for product module -->
 <script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
-<script>
-  var app = angular.module("allSkillList", []); 
-  app.controller("SkillCtrl", function($scope,$http) {
-    $scope.products = [];
 
-    // add skill to temp 
-    $scope.addSkill = function () {
-      $scope.errortext = "";
-      if (!$scope.addSkillbtn) {return;}
-      if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
-        $scope.products.push($scope.addSkillbtn);
-        //$scope.errortext=JSON.stringify($scope.products);
-      } else {
-        $scope.errortext = "This operation is already listed.";
-      }
-    }
-
-    // remove skill from temp
-    $scope.removeSkill = function (x) {
-      $scope.errortext = "";    
-      $scope.products.splice(x, 1);
-    }
-
-    // get all skills in select box
-    $scope.getUsers = function(){
-      $http({
-       method: 'get',
-       url: '<?php base_url(); ?>addproduct/getAllSkills'
-     }).then(function successCallback(response) {
-      // Assign response to skills object
-      $scope.skills = response.data;
-    }); 
-   }
-   $scope.getUsers()
- });
-</script>
      <!--  </div>
     </div>
   
