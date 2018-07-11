@@ -7,9 +7,9 @@ class Allmaterial extends CI_controller {
     }
 
     public function index() {
-        //$data['details'] = Allmaterial::getAllMaterialDetails();     //-------show all materials
+        $data['details'] = Allmaterial::getAllMaterialDetails();     //-------show all materials
         $this->load->view('includes/header');
-        $this->load->view('pages/material/all_material');
+        $this->load->view('pages/material/all_material',$data);
         $this->load->view('includes/footer');
     }
 
@@ -25,7 +25,7 @@ class Allmaterial extends CI_controller {
         //close cURL resource
         curl_close($ch);
         $response = json_decode($response_json, true);        
-        print_r($response_json);
+        return $response;
     }
 
 }

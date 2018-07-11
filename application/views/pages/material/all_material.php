@@ -35,7 +35,36 @@
                         </tr>
                     </thead>
                     <tbody id='addedRows'>
-                        <tr id='rowCount' ng-if="materials['status'] == 200" ng-repeat="d in materials['status_message']">
+                        <?php
+                        //print_r($details);
+                        if ($details['status'] == 200) {
+                            $i = 1;
+                            ?>
+                            <?php foreach ($details['status_message'] as $val) { ?>
+                                <tr id='rowCount'>
+
+                                    <td class="w3-center"><?php echo $i ?></td>
+                                    <td class="w3-center"><?php echo $val['material_type']; ?></td>
+                                    <td class="w3-center"><?php echo $val['material_grade']; ?></td>
+                                    <td class="w3-center"><?php echo $val['material_rate']; ?></td>
+                                    <td class="w3-center"><?php echo $val['material_weight']; ?></td>
+                                    <td class="w3-center"><?php echo $val['remark']; ?></td>
+                                    <td class="w3-center">
+                                        <a class="btn w3-padding-small" ng-href="" onclick="" title="Update Material Details">
+                                            <i class="w3-text-green w3-large fa fa-check-circle"></i>
+                                        </a>                   
+                                        <a class="btn w3-padding-small" ng-href="" onclick="" title="Delete Material">
+                                            <i class="w3-text-red w3-large fa fa-times-circle"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <?php
+                                $i++;
+                            }
+                        }
+                        ?>
+                        <!--                        <tr id='rowCount' ng-if="materials['status'] == 200" ng-repeat="d in materials['status_message']">
                             <td class="w3-center">{{d.material_id}}</td>
                             <td class="w3-center">{{d.material_type}}</td>
                             <td class="w3-center">{{d.material_grade}}</td>
@@ -53,7 +82,7 @@
                         </tr>
                         <tr ng-if="!(materials['status'] == 200)">
                             <td colspan="8" class="w3-center">{{materials['status_message']}}</td>
-                        </tr>
+                        </tr>-->
                     </tbody>
                 </table>
             </div>
