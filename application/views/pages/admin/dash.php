@@ -66,10 +66,36 @@
                       </div>
                     </form>
                     </div>
-                    <div class="row">
+                    <div class="row" style="height:250px; overflow: auto;">
                      <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat='skill in skills'>
                       <span>{{skill.skill_name}} </span>
                       <a type="btn" ng-click="delskill(skill.skill_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
+                      </a>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<!-- div for add category -->
+                 <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
+                <label for="Category"><i class="fa fa-plus-square"></i> Add Category:</label>
+                  <div class="w3-card w3-padding" id="cat" ng-app="categoryApp" ng-controller="categoryController"  >
+                   <div class="w3-container w3-white" >
+                     <div class="w3-row w3-margin-top" >
+                      <form ng-submit="submit()" method="POST">
+                      <div class="w3-col l10 s10">
+                      <input type="text" ng-model="material_type" class="form-control w3-small"  required>
+                    </div>
+                      <div class="w3-col l2 s2"> 
+                        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
+                      </div>
+                    </form>
+                    </div>
+                    <div class="row" style=" height: 250px; overflow: auto;">
+                     <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat="cat in category['status_message']">
+                      <span>{{cat.material_type}} </span>
+                      <a type="btn" ng-click="delcategory(cat.mat_cat_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
                       </a>
                      </div>
                     </div>
@@ -87,6 +113,8 @@
             </div>
         </div>
         <!-- /page content -->
+
+        <!-- script for skill -->
  <script>
     var skill = angular.module('skillApp', ['ngSanitize']);
     skill.controller('skillController',function($scope, $http){
@@ -141,6 +169,67 @@
       
     });
   </script>
+
+
+
+<!-- script for category -->
+
+<script>
+    var category = angular.module('categoryApp', ['ngSanitize']);
+    category.controller('categoryController',function($scope, $http){
+
+
+     $scope.submit = function ()
+      {           // POST form data to controller
+          $http({
+           method: 'POST',
+           url: '<?php echo base_url(); ?>admin/dashboard/addcategory',
+           headers: {'Content-Type': 'application/json'},
+           data: JSON.stringify({material_type: $scope.material_type})
+         }).then(function (data) {
+           alert(data);
+          console.log(data);
+          $scope.material_type='';
+                   $scope.getCategory()
+
+           
+         });
+       }
+       //---------show all category
+ $scope.getCategory = function(){
+      $http({
+       method: 'get',
+       url: '<?php base_url(); ?>dashboard/showcategory'
+     }).then(function successCallback(response) {
+      // Assign response category object
+       console.log(response);
+      $scope.category = response.data;
+      // $scope.mes=response;
+    }); 
+   }
+   $scope.getCategory()
+
+   //---del skill
+    $scope.delcategory = function(mat_cat_id){
+
+      $http({
+       method: 'get',
+       url: '<?php base_url(); ?>dashboard/delcategory?mat_cat_id='+mat_cat_id
+     }).then(function successCallback(response) {
+        // alert(response);
+      // Assign response to skills object
+      console.log(response);
+      //$scope.skills = response.data;
+        $scope.getCategory()
+
+    }); 
+
+   }
+      
+    });
+    angular.bootstrap(document.getElementById("cat"), ['categoryApp']);
+  </script>
+
      <!--  </div>
     </div>
   

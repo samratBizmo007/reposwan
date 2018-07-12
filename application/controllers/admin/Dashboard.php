@@ -60,16 +60,39 @@ class Dashboard extends CI_Controller {
 
 		echo json_encode($result);
 
-		  // if ($result!=200) {
-    //         echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>';
-    //     } else {
-    //         echo '<h4 class="w3-text-black w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
-    //         <script>
-    //         window.setTimeout(function() {
-    //            location.reload();
-    //            }, 1000);
-    //            </script>';
-    //     }
+	}
+
+	//---function for add category
+	public function AddCategory(){
+		// get data passed through ANGULAR AJAX
+		$postdata = file_get_contents("php://input");
+		$request = json_decode($postdata,TRUE);
+		 print_r($request['material_type']);
+		// call to model function to add skills from db
+		$result = $this->dash_model->addcategory($request['material_type']);
+
+		echo json_encode($result);
+	}
+
+	//---function for show all category
+	public function showcategory()
+	{
+		// call to model function to get all category from db
+		$result = $this->dash_model->showcategory();
+
+		echo json_encode($result);
+
+	}
+
+	//---function for del category
+	public function delcategory()
+	{
+		extract($_GET);
+		//print_r($_GET);die();
+		// call to model function to del  category from db
+		$result = $this->dash_model->delcategory($mat_cat_id);
+
+		echo json_encode($result);
 
 	}
 }
