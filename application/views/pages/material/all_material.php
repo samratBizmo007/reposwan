@@ -242,7 +242,7 @@
                                                                             break;
                                                                         case '8':
                                                                             ?>
-                                                                            echo'<div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv">
+                                                                            <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv">
                                                                                 <div class="w3-col l12">
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
                                                                                         <label>ID <b class="w3-text-red w3-medium">*</b></label>

@@ -12,8 +12,30 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container"> -->
+
         <title>Swan Industries | Dashboard</title>
         <!-- page content -->
+        <style type="text/css">
+            /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: black; 
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+        </style>
         <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count">
@@ -79,7 +101,7 @@
 
 <!-- div for add category -->
                  <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
-                <label for="Category"><i class="fa fa-plus-square"></i> Add Category:</label>
+                <label for="Category"><i class="fa fa-plus-square"></i> Add Material Category:</label>
                   <div class="w3-card w3-padding" id="cat" ng-app="categoryApp" ng-controller="categoryController"  >
                    <div class="w3-container w3-white" >
                      <div class="w3-row w3-margin-top" >
