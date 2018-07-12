@@ -47,6 +47,7 @@ class Dashboard extends CI_Controller {
 		$result = $this->dash_model->showskill();
 
 		echo json_encode($result);
+
 	}
 
 	//---function for del skill
@@ -58,5 +59,17 @@ class Dashboard extends CI_Controller {
 		$result = $this->dash_model->delskill($skillid);
 
 		echo json_encode($result);
+
+		  // if ($result!=200) {
+    //         echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>';
+    //     } else {
+    //         echo '<h4 class="w3-text-black w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
+    //         <script>
+    //         window.setTimeout(function() {
+    //            location.reload();
+    //            }, 1000);
+    //            </script>';
+    //     }
+
 	}
 }

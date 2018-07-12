@@ -53,9 +53,9 @@
          <!-- add skill div start -->
 
               <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
-                <label for="skill">Add Skill:</label>
-                  <div class="w3-card w3-padding" ng-app="skillApp" ng-controller="skillController" >
-                   <div class="w3-container w3-light-grey">
+                <label for="skill"><i class="fa fa-database"></i> Add Skill:</label>
+                  <div class="w3-card w3-padding" ng-app="skillApp" ng-controller="skillController"  style=" height: 300px; overflow: auto;">
+                   <div class="w3-container w3-white">
                      <div class="w3-row w3-margin-top">
                       <form ng-submit="submit()" method="POST">
                       <div class="w3-col l10 s10">
@@ -67,10 +67,10 @@
                     </form>
                     </div>
                     <div class="row">
-                     <div class="col-lg-12 w3-padding " ng-repeat='skill in skills'>
+                     <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat='skill in skills'>
                       <span>{{skill.skill_name}} </span>
-                      <button type="btn" ng-click="delskill(skill.skill_id)" class="w3-right" ><i class="fa fa-close"></i>
-                      </button>
+                      <a type="btn" ng-click="delskill(skill.skill_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
+                      </a>
                      </div>
                     </div>
                   </div>
@@ -102,7 +102,9 @@
          }).then(function (data) {
           // alert(data);
           console.log(data);
-           
+          $scope.skillname='';
+                   $scope.getUsers()
+
            
          });
        }
@@ -127,13 +129,14 @@
        method: 'get',
        url: '<?php base_url(); ?>dashboard/delSkill?skillid='+skillid
      }).then(function successCallback(response) {
-      alert(response);
-
+        // alert(response);
       // Assign response to skills object
       console.log(response);
-      $scope.skills = response.data;
-      // $scope.mes=response;
+      //$scope.skills = response.data;
+        $scope.getUsers()
+
     }); 
+
    }
       
     });
