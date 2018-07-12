@@ -44,8 +44,8 @@
                   <label for="stock_plant">Ex-stock Plant<b class="w3-text-red w3-medium">*</b> :</label>
                   <select name="stock_plant" class="form-control w3-small" id="stock_plant">
                     <option value="0" class="w3-text-grey w3-light-grey " selected>Please choose any one plant</option>
-                    <option value="ALD" class="w3-text-grey">ALANDI</option>
-                    <option value="SNW" class="w3-text-grey">SANASWADI</option>
+                    <option value="ALANDI" class="w3-text-grey">ALANDI</option>
+                    <option value="SANASWADI" class="w3-text-grey">SANASWADI</option>
                   </select>
                 </div>
               </div>
@@ -78,13 +78,13 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="sr_no">Serial Number 1 :</label>
-                      <input type="text" class="form-control" id="sr_no1" name="sr_no[]" placeholder="Enter serial number">
+                      <input type="number" min="0" class="form-control" id="sr_no1" name="sr_no[]" placeholder="Enter serial number">
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="part_no">Item Code 1 :</label>
-                      <input type="text" class="form-control" id="part_no1" name="part_no[]" placeholder="Enter Item Code">
+                      <input type="text" class="form-control" id="item_code1" name="item_code[]" placeholder="Enter Item Code">
                     </div>
                   </div>
                 </div>
@@ -135,7 +135,7 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="qtyhr">Quantity per hour 1:</label>
-                      <input type="number" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
+                      <input type="number" min="0" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
                     </div>
                   </div>
                 </div>
@@ -266,26 +266,36 @@
             <h2>Pricing Details</h2>            
             <div class="w3-col l12">
               <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
+                
                 <div class="form-group">
                   <label for="old_rate">Old Rate<b class="w3-text-red w3-medium">*</b> :</label>
-                  <input type="text" class="form-control" id="old_rate" name="old_rate" placeholder="Enter Old Rate" required>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <input type="number" class="form-control" step="0.01" min="0" id="old_rate" name="old_rate" placeholder="Enter Old Rate" required>
+                  </div>
+                  
                 </div>
               </div>
               <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
                 <div class="form-group">
                   <label for="new_rate">New Rate<b class="w3-text-red w3-medium">*</b> :</label>
-                  <input type="text" class="form-control" id="new_rate" name="new_rate" placeholder="Enter New Rate" required>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-inr"></i></span>
+                    <input type="number"cstep="0.01" min="0" class="form-control" id="new_rate" name="new_rate" placeholder="Enter New Rate" required>
+                  </div>
+                  
                 </div>
               </div>
             </div>
           </fieldset>
 
           <div class="w3-col l12 w3-center">
-            <button type="submit" name="submitForm" class="w3-center btn theme_bg w3-margin-top"> <i class="fa fa-save"></i> Save and Add New Product </button>
+            <button type="submit" name="submitForm" id="submitForm" class="w3-center w3-hover-text-white btn theme_bg w3-margin-top"> <i class="fa fa-save"></i> Save and Add New Product </button>
           </div>            
 
         </form>
         <div class="clearfix"></div>
+        <div id="formOutput"></div>
       </div>
     </div>
 

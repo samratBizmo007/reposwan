@@ -41,13 +41,13 @@ $(document).ready(function () {
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="sr_no">Serial Number '+x+' :</label>\n\
-        <input type="text" class="form-control" id="sr_no'+x+'" name="sr_no[]" placeholder="Enter serial number">\n\
+        <input type="number" min="0" class="form-control" id="sr_no'+x+'" name="sr_no[]" placeholder="Enter serial number">\n\
         </div>\n\
         </div>\n\
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="part_no">Item Code '+x+' :</label>\n\
-        <input type="text" class="form-control" id="part_no'+x+'" name="part_no[]" placeholder="Enter Item Code">\n\
+        <input type="text" class="form-control" id="item_code'+x+'" name="item_code[]" placeholder="Enter Item Code">\n\
         </div>\n\
         </div>\n\
         <a href="#" class="delete btn w3-text-black w3-right w3-small" title="remove section">remove <i class="fa fa-remove"></i>\n\
@@ -82,13 +82,13 @@ $(document).ready(function () {
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="machine">Machine used(in tonnes) '+x+' :</label>\n\
-        <input type="number" class="form-control" id="machine'+x+'" name="machine[]" placeholder="eg. 20, 30, 40 ton">\n\
+        <input type="number" min="0" class="form-control" id="machine'+x+'" name="machine[]" placeholder="eg. 20, 30, 40 ton">\n\
         </div>\n\
         </div>\n\
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="qtyhr">Quantity per hour '+x+' :</label>\n\
-        <input type="number" class="form-control" id="qtyhr'+x+'" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">\n\
+        <input type="number" min="0" class="form-control" id="qtyhr'+x+'" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">\n\
         </div>\n\
         </div>\n\
         <a href="#" class="delete btn w3-text-black w3-right w3-small" title="remove section">remove <i class="fa fa-remove"></i>\n\
@@ -257,26 +257,66 @@ app.controller("ProdCtrl", function($scope,$http) {
         rmlenSelected:$scope.rmlenSelected,
         rmqtySelected:$scope.rmqtySelected
       });
-        //employees.push({id:100,name:'Yashwant',age:30}); 
-        $scope.addedRM=JSON.stringify($scope.rmArr);
-        $scope.errorRM = "";
-        $scope.rmgradeSelected='';
-        $scope.rmweightSelected='';
-        $scope.rmthickSelected='';
-        $scope.rmdiaSelected='';
-        $scope.rmIDSelected='';
-        $scope.rmODSelected='';
-        $scope.rmPitchSelected='';
-        $scope.rmlenSelected='';
-        $scope.rmqtySelected='';
+      $scope.addedRM=($scope.rmArr);
 
-        $scope.rm_table='true';
-      }
+      $scope.errorRM = "";
+      $scope.rmgradeSelected='';
+      $scope.rmweightSelected='';
+      $scope.rmthickSelected='';
+      $scope.rmdiaSelected='';
+      $scope.rmIDSelected='';
+      $scope.rmODSelected='';
+      $scope.rmPitchSelected='';
+      $scope.rmlenSelected='';
+      $scope.rmqtySelected='';
+
+      $scope.rm_table='true';
+    }
 
       // remove material from temp table
-    $scope.removeMaterial = function (x) {
-      $scope.errorRM = "";    
-      $scope.rmArr.splice(x, 1);
-      $scope.addedRM=JSON.stringify($scope.rmArr);
-    }
+      $scope.removeMaterial = function (x) {
+        $scope.errorRM = "";    
+        $scope.rmArr.splice(x, 1);
+        $scope.addedRM=JSON.stringify($scope.rmArr);
+      }
+
+
+
     });
+
+// ------------POST form data to PHP controller--------------
+$(function () {
+  $("#addProduct").submit(function () {
+    dataString = $("#addProduct").serialize();
+        // alert(dataString);
+        $.ajax({
+          type: "POST",
+          url: BASE_URL+"admin/products/addproduct/addNewProduct",
+          dataType : 'text',
+          data: dataString,
+            return: false, //stop the actual form post !important!
+            beforeSend: function(){
+              $("#submitForm").attr("disabled", true);
+              $('#submitForm').html(' <i class="fa fa-circle-o-notch fa-spin w3-large"></i> Saving New Product details, Hold on... ');
+            },
+            success: function(data){
+              $('#formOutput').html(data);
+            //$('form :input').val("");
+            $('#submitForm').removeAttr("disabled");
+            $('#submitForm').html(' <i class="fa fa-save"></i> Save and Add New Product ');
+          },
+          error:function(data){
+            $('#submitForm').removeAttr("disabled");
+            $('#formOutput').html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Something went wrong. Please refresh the page and try once again.</div>');
+
+            $('#submitForm').html(' <i class="fa fa-save"></i> Save and Add New Product ');
+            window.setTimeout(function() {
+              $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove(); 
+              });
+            }, 5000);
+          }
+        });
+        return false;  //stop the actual form post !important!
+      });
+});

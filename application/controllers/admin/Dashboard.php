@@ -11,13 +11,14 @@ class Dashboard extends CI_Controller {
 		//start session		
 		$admin_name=$this->session->userdata('admin_name');
 		
-		if($admin_name==''){
-			$sessionArr=explode('|', $admin_name);
-		//check session variable set or not, otherwise logout
-			if(($sessionArr[0]!='SWANROCKSPlates')){
-				redirect('login');
-			}
-		}		
+		if($admin_name==''){ redirect('login'); }
+        else {
+            $sessionArr=explode('|', $admin_name);
+        //check session variable set or not, otherwise logout
+            if(($sessionArr[0]!='SWANROCKSPlates')){
+                redirect('login');
+            }
+        }	
 	}
 
 	// main index function

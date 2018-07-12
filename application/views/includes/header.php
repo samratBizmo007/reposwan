@@ -72,6 +72,11 @@ if($admin_name!=''){
                                         <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Products</a></li>
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-list"></i> Inventory Section <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo base_url(); ?>inventory/showinventory">View Inventory</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 

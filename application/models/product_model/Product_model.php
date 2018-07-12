@@ -24,10 +24,46 @@ class Product_model extends CI_Model {
         if ($result->num_rows() <= 0) {
             return false;
         } else {
-            
+
             return $result->result_array();
         }        
     }
     // get all skills from db-------------------------------------
+
+    // add new product to master table--------------------------
+    public function addNewProduct($data)
+    {
+        extract($data);
+        if(!empty($data)){
+            $insertData = array(
+                'customer_name' =>  $customer_name,
+                'prod_type' =>  $prod_type,
+                'stock_plant'   =>  $stock_plant,
+                'product_name'  =>  $product_name,
+                'drawing_no'    =>  $drawing_no,
+                'revision_no'   =>  $revision_no,
+                'sr_item_code'  =>  $sr_item_code,
+                'operations'    =>  $operations ,
+                'machine_qtyhr' =>  $machine_qtyhr,
+                'rm_required'   =>  $rm_required,
+                'old_rate'  =>  $old_rate,
+                'new_rate'  =>  $new_rate,
+                'added_date'  =>  date('Y-m-d'),
+                'added_time'  =>  date('H:i:s'),
+                'modified_date'  =>  date('Y-m-d'),
+                'modified_time'  =>  date('H:i:s')
+            );
+// $sql = $this->db->set($insertData)->get_compiled_insert('product_master');
+// echo $sql;
+            $this->db->insert('product_master', $insertData);
+
+            if ($this->db->affected_rows() > 0 ) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    // add new product function ends here----------------------
 
 }
