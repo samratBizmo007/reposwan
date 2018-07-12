@@ -7,7 +7,7 @@
 //----------------fun for delete material details------------------------------------//
 function deleteMaterialDetails(material_id) {
     $.confirm({
-        title: '<h4 class="w3-text-red"><i class="fa fa-warning"></i> Are you sure you want to Delete Material.!</h4>',
+        title: '<h4 class="w3-text-red"><i class="fa fa-warning"></i> Are you sure you want to Delete Material?</h4>',
         content: '',
         type: 'red',
         buttons: {
