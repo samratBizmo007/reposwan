@@ -73,36 +73,39 @@
                                     <thead>
                                         <tr class="theme_bg">
                                             <th class="text-center">
-                                                Material Type
+                                                Customer name
                                             </th>
                                             <th class="text-center">
-                                                Material Name
+                                                Product Name
                                             </th>
                                             <th class="text-center">
-                                                Rate
+                                                Sr.no
                                             </th>
                                             <th class="text-center">
-                                                Weight
+                                                Part No
                                             </th>                           
                                             <th class="text-center">
-                                                Quantity
+                                                Drawing no
                                             </th>
                                             <th class="text-center">
-                                                Length
+                                                Added date
+                                            </th>
+                                            <th class="text-center">
+                                                Modified date
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody id='addedRows'>
                                         <tr id="rowCount" ng-if="materials['status'] == 200" ng-repeat=" m in materials['status_message']">
-                                            <td class="w3-center">{{ m.material_type}}</td>
+<!--                                            <td class="w3-center">{{ m.material_type}}</td>
                                             <td class="w3-center">{{ m.material_grade}}</td>
                                             <td class="w3-center">{{ m.material_rate}}</td>
                                             <td class="w3-center">{{ m.material_weight}}</td>
                                             <td class="w3-center">{{ m.quantity}}</td>
-                                            <td class="w3-center">{{ m.length}}</td>
+                                            <td class="w3-center">{{ m.length}}</td>-->
                                         </tr>
                                         <tr ng-if="!materials['status'] == 200">
-                                            <td class="w3-center" colspan="6">No Records Found..!</td>
+                                            <td class="w3-center" colspan="7">No Records Found..!</td>
                                         </tr>
                                     </tbody>
                                 </table>
