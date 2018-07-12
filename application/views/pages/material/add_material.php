@@ -39,8 +39,8 @@
                                 <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div class="col-lg-12 col-xs-12 col-sm-12">
-                                        <label>Remark <b class="w3-text-red w3-medium">*</b></label>
-                                        <textarea  class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;" required></textarea>
+                                        <label>Remark</label>
+                                        <textarea  class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;"></textarea>
                                     </div>
                                 </div>
                             </div>

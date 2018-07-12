@@ -4,35 +4,44 @@
  * and open the template in the editor.
  */
 
-
+//----------------fun for delete material details------------------------------------//
 function deleteMaterialDetails(material_id) {
-    $.ajax({
-        type: "POST",
-        url: BASE_URL + "materials/allmaterial/deleteMaterialDetails",
-        data: {
-            material_id: material_id
-        },
-        return: false, //stop the actual form post !important!
-        success: function (data)
-        {
-            $.alert(data);
+    $.confirm({
+        title: '<h4 class="w3-text-red"><i class="fa fa-warning"></i> Are you sure you want to Delete Material.!</h4>',
+        content: '',
+        type: 'red',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: BASE_URL + "materials/allmaterial/deleteMaterialDetails",
+                    type: "POST",
+                    data: {
+                        material_id: material_id
+                    },
+                    cache: false,
+                    success: function (data) {
+                        $.alert(data);                      
+                    }
+                });
+            },
+            cancel: function () {
+            }
         }
     });
-    return false;  //stop the actual form post !important!
 }
-var myApp = angular.module('showMaterialApp', []);
-myApp.controller('showMaterialController', function ($scope, $http) {
-    $scope.submit = function () {
-        // POST form data to controller
-        $http({
-            method: 'POST',
-            url: BASE_URL + 'materials/allmaterial/updateMaterialDetails',
-            headers: {'Content-Type': 'application/json'},
-            data: JSON.stringify($scope.materialData)
-        }).then(function (data) {
-            console.log(data);
-            alert(data);
-        });
-    };
-
-});
+//----------------delete material details----------------------------------------------//
+//var myApp = angular.module('showMaterialApp', []);
+//myApp.controller('showMaterialController', function ($scope, $http) {
+//    $scope.submit = function () {
+//        // POST form data to controller
+//        $http({
+//            method: 'POST',
+//            url: BASE_URL + 'materials/allmaterial/updateMaterialDetails',
+//            headers: {'Content-Type': 'application/json'},
+//            data: JSON.stringify($scope.materialData)
+//        }).then(function (data) {
+//            console.log(data);
+//            alert(data);
+//        });
+//    };
+//});
