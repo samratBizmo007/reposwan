@@ -38,16 +38,27 @@
                                         <th class="text-center">
                                             Length
                                         </th>
+                                        <th class="text-center">
+                                            added date
+                                        </th>
+                                        <th class="text-center">
+                                            modified date
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id='addedRows'>
-                                    <tr id="rowCount" ng-repeat=" m in materials['status_message']">
-                                        <td class="w3-center">{{ m.material_type }}</td>
-                                        <td class="w3-center">{{ m.material_grade }}</td>
-                                        <td class="w3-center">{{ m.material_rate }}</td>
-                                        <td class="w3-center">{{ m.material_weight }}</td>
-                                        <td class="w3-center">{{ m.quantity }}</td>
-                                        <td class="w3-center">{{ m.length }}</td>
+                                    <tr id="rowCount" ng-if="materials['status'] == 200" ng-repeat=" m in materials['status_message']">
+                                        <td class="w3-center">{{ m.material_type}}</td>
+                                        <td class="w3-center">{{ m.material_grade}}</td>
+                                        <td class="w3-center">{{ m.material_rate}}</td>
+                                        <td class="w3-center">{{ m.material_weight}}</td>
+                                        <td class="w3-center">{{ m.quantity}}</td>
+                                        <td class="w3-center">{{ m.length}}</td>
+                                        <td class="w3-center">{{ m.added_date}}</td>
+                                        <td class="w3-center">{{ m.modified_date}}</td>
+                                    </tr>
+                                    <tr ng-if="!materials['status'] == 200">
+                                        <td class="w3-center" colspan="8">No Records Found..!</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -55,10 +66,51 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="finishedProducts"><!-- tab 2 starts here -->
-                    <div>bye</div>
+                    <div class="tab-pane active" id="rawMaterials">  
+                        <div class="row clearfix">
+                            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                <table class="table table-responsive" id="tab_logic">
+                                    <thead>
+                                        <tr class="theme_bg">
+                                            <th class="text-center">
+                                                Material Type
+                                            </th>
+                                            <th class="text-center">
+                                                Material Name
+                                            </th>
+                                            <th class="text-center">
+                                                Rate
+                                            </th>
+                                            <th class="text-center">
+                                                Weight
+                                            </th>                           
+                                            <th class="text-center">
+                                                Quantity
+                                            </th>
+                                            <th class="text-center">
+                                                Length
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='addedRows'>
+                                        <tr id="rowCount" ng-if="materials['status'] == 200" ng-repeat=" m in materials['status_message']">
+                                            <td class="w3-center">{{ m.material_type}}</td>
+                                            <td class="w3-center">{{ m.material_grade}}</td>
+                                            <td class="w3-center">{{ m.material_rate}}</td>
+                                            <td class="w3-center">{{ m.material_weight}}</td>
+                                            <td class="w3-center">{{ m.quantity}}</td>
+                                            <td class="w3-center">{{ m.length}}</td>
+                                        </tr>
+                                        <tr ng-if="!materials['status'] == 200">
+                                            <td class="w3-center" colspan="6">No Records Found..!</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="<?php echo base_url(); ?>assets/js/module/inventory/inventory.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/module/inventory/inventory.js"></script>
