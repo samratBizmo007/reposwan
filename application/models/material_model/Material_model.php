@@ -128,7 +128,9 @@ class Material_model extends CI_Model {
         $sql = "UPDATE material_tab SET material_rate = '$material_rate',material_weight='$material_weight',"
                 . "id='$id',od='$od',length='$length',pitching='$pitching',quantity='$quantity',"
                 . "diagram_no='$Diagram_no',thickness='$thickness',"
-                . "diameter='$diameter',remark='$remark',modified_date='now()',modified_time='now()',status='1' WHERE material_id = '$material_id'";
+                . "diameter='$diameter',remark='$remark',"
+                . "modified_date='NOW()',modified_time='NOW()',status='1' WHERE material_id = '$material_id'";
+        //echo $sql;die();
         $this->db->query($sql);
         if ($this->db->affected_rows() > 0) {
             $response = array(

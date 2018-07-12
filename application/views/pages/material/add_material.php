@@ -12,7 +12,7 @@
                             <div class="w3-col l12" ng-model="material_err"></div>
                             <div class="w3-col l12 w3-margin-bottom">
                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="materialCategoryDiv">
-                                    <label>Material Type</label>
+                                    <label>Material Type <b class="w3-text-red w3-medium">*</b></label>
                                     <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialSpecifications()" required>
                                         <option value="0">Select Material Type</option>
                                         <option ng-repeat="z in category['status_message']" value="{{z.mat_cat_id}}">{{z.material_type}}</option>
@@ -22,24 +22,24 @@
                             <div id="materialDiv" style=" display: none;">
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div class="col-lg-6 col-xs-12 col-sm-12" id="materialGrade">
-                                        <label>Material Grade</label>
+                                        <label>Material Grade <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="text" name="material_grade" ng-model="materialData.material_grade" id="material_grade"  class="form-control" placeholder="Material Grade" value="" required>
                                     </div>
                                 </div>
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div id="materialRate" class="col-lg-6 col-xs-12 col-sm-12">										
-                                        <label>Material Rate</label>
+                                        <label>Material Rate <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="number" name="material_rate" ng-model="materialData.material_rate" id="material_rate" min="0" step="0.01" class="form-control" placeholder="Material Rate" required>
                                     </div>
                                     <div class="col-lg-6 col-xs-12 col-sm-12" id="materialWeight">
-                                        <label>Material Weight</label>
+                                        <label>Material Weight <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="number" name="material_weight" ng-model="materialData.material_weight" id="material_weight" min="0" step="0.01" class="form-control" placeholder="Material Weight" required>
                                     </div>											                           
                                 </div>
                                 <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div class="col-lg-12 col-xs-12 col-sm-12">
-                                        <label>Remark</label>
+                                        <label>Remark <b class="w3-text-red w3-medium">*</b></label>
                                         <textarea  class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;" required></textarea>
                                     </div>
                                 </div>

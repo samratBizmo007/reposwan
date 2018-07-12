@@ -13,6 +13,7 @@ class Allmaterial extends CI_controller {
         $this->load->view('includes/footer');
     }
 
+//------------ get all material details ----------------------------------//
     public function getAllMaterialDetails() {
         $path = base_url();
         $url = $path . 'api/Material_api/getAllMaterialDetails';
@@ -28,8 +29,9 @@ class Allmaterial extends CI_controller {
         return $response;
     }
 
+//------------ get all material details ends----------------------------------//
+//=-----------fun for update material details----------------------------//
     public function updateMaterialDetails() {
-        // get data passed through ANGULAR AJAX
         extract($_POST);
         $data = $_POST;
         //print_r($_POST);die();
@@ -42,7 +44,6 @@ class Allmaterial extends CI_controller {
         $response_json = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response_json, true);
-        //echo $material_rate; die();
         //print_r($response_json);die();
         if ($response['status'] != 200) {
             echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>';
@@ -56,6 +57,8 @@ class Allmaterial extends CI_controller {
         }
     }
 
+//=-----------fun for update material details ends----------------------------//    
+//--------------fun for delete material------------------------------//
     public function deleteMaterialDetails() {
         extract($_POST);
 //        echo $material_id;
@@ -67,11 +70,9 @@ class Allmaterial extends CI_controller {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array());
         $response_json = curl_exec($ch);
-        //close cURL resource
         curl_close($ch);
         $response = json_decode($response_json, true);
-                //print_r($response_json);die();
-
+        //print_r($response_json);die();
         if ($response['status'] != 200) {
             echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>';
         } else {
@@ -84,4 +85,5 @@ class Allmaterial extends CI_controller {
         }
     }
 
+//--------------fun for delete material ends------------------------------//
 }
