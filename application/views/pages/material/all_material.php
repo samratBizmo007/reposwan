@@ -8,7 +8,7 @@
         </div>
         <div class="row clearfix" style=" margin-top: 5px;">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                <table class="table table-responsive" id="tab_logic" width:50px;">
+                <table class="table table-responsive" id="tab_logic">
                        <thead>
                         <tr class="theme_bg">
                             <th width="7%" class="text-center">
