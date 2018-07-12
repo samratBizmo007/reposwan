@@ -15,27 +15,7 @@
 
         <title>Swan Industries | Dashboard</title>
         <!-- page content -->
-        <style type="text/css">
-            /* width */
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: white; 
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #2A3F54; 
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #2A3F54; 
-  }
-        </style>
+       <!--  -->
         <div class="right_col" role="main">
           <!-- top tiles -->
           <div class="row tile_count">
