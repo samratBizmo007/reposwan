@@ -23,17 +23,17 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: white; 
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: black; 
+    background: #2A3F54; 
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #2A3F54; 
   }
         </style>
         <div class="right_col" role="main">
@@ -84,11 +84,11 @@
                       <input type="text" ng-model="skillname" class="form-control w3-small"  required>
                     </div>
                       <div class="w3-col l2 s2"> 
-                        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary theme_bg btn-block" type="submit"><i class="fa fa-plus "></i></button>
                       </div>
                     </form>
                     </div>
-                    <div class="row" style="height:250px; overflow: auto;">
+                    <div class="row w3-padding" style="height:250px; overflow: auto;">
                      <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat='skill in skills'>
                       <span>{{skill.skill_name}} </span>
                       <a type="btn" ng-click="delskill(skill.skill_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
@@ -110,11 +110,11 @@
                       <input type="text" ng-model="material_type" class="form-control w3-small"  required>
                     </div>
                       <div class="w3-col l2 s2"> 
-                        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
+                        <button class=" theme_bg btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
                       </div>
                     </form>
                     </div>
-                    <div class="row" style=" height: 250px; overflow: auto;">
+                    <div class="row w3-padding" style=" height: 250px; overflow: auto;">
                      <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat="cat in category['status_message']">
                       <span>{{cat.material_type}} </span>
                       <a type="btn" ng-click="delcategory(cat.mat_cat_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
