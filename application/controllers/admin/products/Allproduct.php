@@ -52,11 +52,12 @@ class Allproduct extends CI_Controller {
 			<strong>Success!</strong> Product deleted successfully.
 			</div>
 			<script>
-			window.setTimeout(function() {
+			$window.setTimeout(function() {
 			$(".alert").fadeTo(500, 0).slideUp(500, function(){
 			$(this).remove(); 
 			});
-			}, 5000);
+			location.reload();
+			}, 2000);
 			</script>';
 		}
 		else{
@@ -65,7 +66,7 @@ class Allproduct extends CI_Controller {
 			<strong>Failure!</strong> Product deletion failed.
 			</div>
 			<script>
-			window.setTimeout(function() {
+			$window.setTimeout(function() {
 			$(".alert").fadeTo(500, 0).slideUp(500, function(){
 			$(this).remove(); 
 			});

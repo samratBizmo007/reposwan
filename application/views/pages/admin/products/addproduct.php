@@ -78,7 +78,7 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                       <label for="sr_no">Serial Number 1 :</label>
-                      <input type="number" min="0" class="form-control" id="sr_no1" name="sr_no[]" placeholder="Enter serial number">
+                      <input type="number" min="0" class="form-control" id="sr_no1" value="0" name="sr_no[]" placeholder="Enter serial number">
                     </div>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
@@ -116,7 +116,7 @@
                         </select>
                       </div>
                       <div class="w3-col l2 s2">
-                        <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation"><i class="fa fa-plus"></i></button>
+                        <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
                       </div>
                     </div>
                     <input type="hidden" name="skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">

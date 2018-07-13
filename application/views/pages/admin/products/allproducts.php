@@ -37,7 +37,10 @@ fieldset{
               </tr>
             </thead>
             <tbody>
-              <?php 
+              <?php
+              //print_r($allProducts);die();
+              if($allProducts){
+
               $srNo=1; 
               foreach ($allProducts as $key) {              
               $rowspan=count(json_decode($key['sr_item_code'],TRUE));
@@ -67,7 +70,12 @@ fieldset{
                   <td><a class="btn" class="no-padding" title="Remove Product" ng-click="removeProduct(<?php echo $key['prod_id']; ?>)"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 
-            <?php $srNo++; } ?>
+            <?php $srNo++; }
+            }
+            else{
+              echo '<tr class="w3-center"><td colspan="10"><b>No data available for Products</b></td></tr>';
+            }
+            ?>
             </tbody>
           </table>          
           </div>

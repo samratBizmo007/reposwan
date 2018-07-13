@@ -33,6 +33,7 @@ $(document).ready(function () {
   var wrapper = $("#addedmore_DivGeneral");
   var add_button = $("#addMoreBtnGeneral");
   var x = 1;
+  var srno=1;
   $(add_button).click(function (e) {
     e.preventDefault();
     if (x < max_fields) {
@@ -41,7 +42,7 @@ $(document).ready(function () {
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
         <div class="form-group">\n\
         <label for="sr_no">Serial Number '+x+' :</label>\n\
-        <input type="number" min="0" class="form-control" id="sr_no'+x+'" name="sr_no[]" placeholder="Enter serial number">\n\
+        <input type="number" min="0" class="form-control" id="sr_no'+x+'" value="'+srno+'" name="sr_no[]" placeholder="Enter serial number">\n\
         </div>\n\
         </div>\n\
         <div class="col-md-6 col-sm-12 col-xs-12">\n\
@@ -55,6 +56,8 @@ $(document).ready(function () {
         </div>\n\
         </div>'); 
         //add input box
+
+        srno++;
       } 
       else {
         $.alert('<label class="w3-label w3-text-red"><i class="fa fa-warning w3-xlarge"></i> You reached the maximum limit of adding ' + max_fields + ' fields</label>');   
@@ -65,6 +68,7 @@ $(document).ready(function () {
     e.preventDefault();
     $(this).parent('div').remove();
     x--;
+    srno--;
   })
 });
 
@@ -324,194 +328,34 @@ $(function () {
 // Angular js for all product view
 // Angular script to add required skills in ad product form
 var app = angular.module("allProductApp", ['ngSanitize']); 
-app.controller("allProdCtrl", function($scope,$http) {
-  // $scope.products = [];
+app.controller("allProdCtrl", function($scope,$http,$window) {
 
-  //   // add skill to temp 
-  //   $scope.addSkill = function () {
-  //     $scope.errortext = "";
-  //     if (!$scope.addSkillbtn) {return;}
-  //     if ($scope.products.indexOf($scope.addSkillbtn) == -1) {
-  //       $scope.products.push($scope.addSkillbtn);
-  //       $scope.skilJSON=JSON.stringify($scope.products);
-  //     } else {
-  //       $scope.errortext = "This operation is already listed.";
-  //     }
-  //   }
-
-    // remove product from table
-    $scope.removeProduct = function (prod_id) {
-      //alert(prod_id);
-      $.confirm({
-        title: '<h4 class="w3-text-red">Please confirm the action!</h4><span class="w3-medium">Do yo really want to delete this product?</span>',
-        content: '',
-        type: 'red',
-        buttons: {
-          confirm: function () {
-                   // alert('hii');
-                   $http({
-                     method: 'get',
-                     url: BASE_URL+'admin/products/allproduct/delProduct',
-                     params: {prod_id: prod_id},
-                   }).then(function successCallback(response) {
-      $scope.message = response.data;
-      $('#prodTableDiv').load(location.href + " #prodTableDiv>*", "");
-    }); 
-                 },
-                 cancel: function () {
-                 }
-               }
-             });
-      // $scope.errortext = "";    
-      // $scope.products.splice(x, 1);
-      // $scope.skilJSON=JSON.stringify($scope.products);
-    }
-
-  //   // get all skills in select box
-  //   $scope.getSkills = function(){
-  //     $http({
-  //      method: 'get',
-  //      url: BASE_URL+'admin/products/addproduct/getAllSkills'
-  //    }).then(function successCallback(response) {
-  //     // Assign response to skills object
-  //     $scope.skills = response.data;
-  //   }); 
-  //  }
-  //  $scope.getSkills()
-
-  //  // check product type and display plant
-  //  $scope.prodType = function () {
-  //   if ($scope.typeSelected== "1")
-  //     $scope.plantDiv = true;
-  //   else
-  //     $scope.plantDiv = false;
-  // }
-
-  // // check raw material type
-  // // function to disable all fields
-  // $scope.InputDisable = function () {
-  //   $scope.enableThickness=false;
-  //   $scope.enableDiameter=false;
-  //   $scope.enableID=false;
-  //   $scope.enableOD=false;
-  //   $scope.enablePitch=false;
-  //   $scope.enableQuantity=false;
-  //   $scope.enableLength=false;
-  // }
-  // $scope.RmType = function () {
-  //   //if ($scope.rmtypeSelected== "1")
-  //   $scope.rmgradeSelected='';
-  //   $scope.rmweightSelected='';
-  //   $scope.rmthickSelected='';
-  //   $scope.rmdiaSelected='';
-  //   $scope.rmIDSelected='';
-  //   $scope.rmODSelected='';
-  //   $scope.rmPitchSelected='';
-  //   $scope.rmlenSelected='';
-  //   $scope.rmqtySelected='';
-  //   $scope.rmSpecimen = true;
-  //   // check type selected
-  //   switch($scope.rmtypeSelected){
-  //     case '1':
-  //     $scope.InputDisable()
-  //     $scope.enableThickness=true;
-  //     $scope.enableQuantity=true;
-  //     break;
-  //     case '2':
-  //     $scope.InputDisable()
-  //     $scope.enableDiameter=true;
-  //     break;
-  //     case '3':
-  //     $scope.InputDisable()
-  //     $scope.enableThickness=true;
-  //     $scope.enableOD=true;
-  //     $scope.enableQuantity=true;
-  //     break;
-  //     case '4':
-  //     $scope.InputDisable()
-  //     $scope.enableID=true;
-  //     $scope.enableOD=true;
-  //     $scope.enableLength=true;
-  //     break;
-  //     case '5':
-  //     $scope.InputDisable()
-  //     $scope.enableOD=true;
-  //     $scope.enableLength=true;
-  //     break;
-  //     case '6':
-  //     $scope.InputDisable()
-  //     $scope.enableID=true;
-  //     $scope.enablePitch=true;
-  //     $scope.enableQuantity=true;
-  //     break;
-  //     case '7':
-  //     $scope.InputDisable()
-  //     $scope.enableOD=true;
-  //     $scope.enablePitch=true;
-  //     $scope.enableQuantity=true;
-  //     break;
-  //     case '8':
-  //     $scope.InputDisable()
-  //     $scope.enableID=true;
-  //     $scope.enablePitch=true;
-  //     $scope.enableQuantity=true;
-  //     break;
-  //   }
-  //   //$scope.enableID=true;
-  // }
-
-
-  //   // script to add multiple raw material in div
-  //   $scope.rmArr=[];
-
-  //   // add skill to temp 
-  //   $scope.addRM = function () {
-
-  //     if (!$scope.rmtypeSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Please select Raw Material Type!</p>";return;}
-  //     if (!$scope.rmgradeSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Grade is required!</p>";return;}
-  //     if (!$scope.rmweightSelected) {$scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Weight (in KGs) is required!</p>";return;}
-  //     if (!$scope.rmthickSelected) {$scope.rmthickSelected = 0;}
-  //     if (!$scope.rmdiaSelected) {$scope.rmdiaSelected = 0;}
-  //     if (!$scope.rmIDSelected) {$scope.rmIDSelected = 0;}
-  //     if (!$scope.rmODSelected) {$scope.rmODSelected = 0;}
-  //     if (!$scope.rmPitchSelected) {$scope.rmPitchSelected = 0;}
-  //     if (!$scope.rmlenSelected) {$scope.rmlenSelected = 0;}
-  //     if (!$scope.rmqtySelected) {$scope.rmqtySelected = 0;}
-
-  //     $scope.rmArr.push(
-  //     {
-  //       rm_type:$scope.rmtypeSelected,
-  //       rmgradeSelected:$scope.rmgradeSelected,
-  //       rmthickSelected:$scope.rmthickSelected,
-  //       rmdiaSelected:$scope.rmdiaSelected,
-  //       rmIDSelected:$scope.rmIDSelected,
-  //       rmODSelected:$scope.rmODSelected,
-  //       rmPitchSelected:$scope.rmPitchSelected,
-  //       rmweightSelected:$scope.rmweightSelected,
-  //       rmlenSelected:$scope.rmlenSelected,
-  //       rmqtySelected:$scope.rmqtySelected
-  //     });
-  //     $scope.addedRM=($scope.rmArr);
-
-  //     $scope.errorRM = "";
-  //     $scope.rmgradeSelected='';
-  //     $scope.rmweightSelected='';
-  //     $scope.rmthickSelected='';
-  //     $scope.rmdiaSelected='';
-  //     $scope.rmIDSelected='';
-  //     $scope.rmODSelected='';
-  //     $scope.rmPitchSelected='';
-  //     $scope.rmlenSelected='';
-  //     $scope.rmqtySelected='';
-
-  //     $scope.rm_table='true';
-  //   }
-
-  //     // remove material from temp table
-  //     $scope.removeMaterial = function (x) {
-  //       $scope.errorRM = "";    
-  //       $scope.rmArr.splice(x, 1);
-  //       $scope.addedRM=JSON.stringify($scope.rmArr);
-  //     }
+// remove product from table
+$scope.removeProduct = function (prod_id) {
+  $.confirm({
+    title: '<h4 class="w3-text-red">Please confirm the action!</h4><span class="w3-medium">Do yo really want to delete this product?</span>',
+    content: '',
+    type: 'red',
+    buttons: {
+      confirm: function () {
+       $http({
+         method: 'get',
+         url: BASE_URL+'admin/products/allproduct/delProduct',
+         params: {prod_id: prod_id},
+       }).then(function successCallback(response) {
+        $scope.message = response.data;
+        $window.setTimeout(function() {
+          $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+          });
+          location.reload();
+        }, 2000);
+      }); 
+     },
+     cancel: function () {
+     }
+   }
+ });
+}
 
 });
