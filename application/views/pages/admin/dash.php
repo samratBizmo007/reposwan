@@ -189,7 +189,7 @@
            headers: {'Content-Type': 'application/json'},
            data: JSON.stringify({material_type: $scope.material_type})
          }).then(function (data) {
-           alert(data);
+           // alert(data);
           console.log(data);
           $scope.material_type='';
                    $scope.getCategory()

@@ -10,7 +10,7 @@ class Dash_model extends CI_Model {
 
     public function addskill($skillname)
     {
-    	 $sql = "INSERT INTO skill_master(skill_name) VALUES ('$skillname')";
+    	 $sql = "INSERT INTO skill_master(skill_name) VALUES (UPPER('$skillname'))";
   
         if ($this->db->query($sql)) {
             $response = array(
@@ -68,7 +68,7 @@ class Dash_model extends CI_Model {
 
     public function addcategory($material_type)
     {
-    	 $sql = "INSERT INTO material_category(material_type) VALUES ('$material_type')";
+    	 $sql = "INSERT INTO material_category(material_type) VALUES (UPPER('$material_type'))";
   
         if ($this->db->query($sql)) {
             $response = array(
