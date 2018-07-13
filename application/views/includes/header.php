@@ -77,6 +77,12 @@ if($admin_name!=''){
                                         <li><a href="<?php echo base_url(); ?>inventory/showinventory">View Inventory</a></li>
                                     </ul>
                                 </li>
+                                 <li><a><i class="fa fa-sliders"></i> Machine Section <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo base_url(); ?>admin/machine/addmachine">Add New Machine</a></li>
+                                        <li><a href="<?php echo base_url(); ?>admin/machine/allmachine">View All Machine</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 
