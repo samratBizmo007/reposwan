@@ -7,7 +7,7 @@
             <div class="row" style=" margin-top: 5px;">
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
-                    <div class="" id="App" ng-app="materialApp" ng-controller="materialController"  style="padding:12px 36px 12px 36px">
+                    <div class="" id="App" ng-app="materialApp" ng-controller="materialController">
                         <form id="add_MaterialForm" method="post" role="form">
                             <div class="w3-col l12" ng-model="material_err"></div>
                             <div class="w3-col l12 w3-margin-bottom">

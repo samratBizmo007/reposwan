@@ -70,7 +70,7 @@
                                                         <div class="row" style=" margin-top: 5px;">
                                                             <div class="col-lg-1"></div>
                                                             <div class="col-lg-10">
-                                                                <div class="" id="App" style="padding:12px 36px 12px 36px">
+                                                                <div class="" id="App">
                                                                     <div class="w3-col l12"></div>
                                                                     <div class="w3-col l12 w3-margin-bottom">
                                                                         <div class="col-lg-6 col-xs-12 col-sm-12" id="materialCategoryDiv">
