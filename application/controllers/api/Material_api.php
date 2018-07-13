@@ -9,6 +9,7 @@ class Material_api extends REST_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('material_model/Material_model');
+        $this->load->model('inventory_model/Inventory_model');
     }
 
     //--------fun for get all categories from category tab-----------------------//
@@ -39,6 +40,13 @@ class Material_api extends REST_Controller {
     //----------------fun for get material details----------------------//
     public function getAllMaterialDetails_get() {
         $result = $this->Material_model->getAllMaterialDetails();
+        return $this->response($result);
+    }
+
+    //----------------fun for get material details----------------------//
+     //----------------fun for get material details----------------------//
+    public function getAllProductDetails_get() {
+        $result = $this->Inventory_model->getAllProductDetails();
         return $this->response($result);
     }
 
