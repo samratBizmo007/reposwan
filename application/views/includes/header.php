@@ -69,7 +69,7 @@ if($admin_name!=''){
                                 <li><a><i class="fa fa-cube"></i> Product Section <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo base_url(); ?>admin/products/addproduct">Add New Product</a></li>
-                                        <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Products</a></li>
+                                        <li><a href="<?php echo base_url(); ?>admin/products/allproduct">View All Products</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-list"></i> Inventory Section <span class="fa fa-chevron-down"></span></a>
