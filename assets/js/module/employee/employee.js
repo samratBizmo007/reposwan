@@ -8,7 +8,7 @@
 var myApp = angular.module('employeeApp', ['ngSanitize']);
 myApp.controller('employeeController', function ($scope, $http, $window) {
     $scope.products = [];
-
+//console.log($scope.products);
     // add skill to temp 
     $scope.addSkill = function () {
         $scope.errortext = "";
@@ -43,6 +43,28 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
     };
     $scope.getSkills();
 
+    //-----get employee skills
+//    $scope.deleteSkill = function (skill,emp_id) {
+//        //alert(emp_id);
+//        $http({
+//            method: 'get',
+//            url: BASE_URL + 'employee/employee/deleteSkill?emp_id=' + emp_id + '&skill=' + skill
+//        }).then(function successCallback(response) {
+//            // Assign response to skills object
+//            console.log(response);
+//            alert(response);
+////            $scope.employeeSkills = response.data[0].employee_skills;
+////            //alert(employeeSkills);
+////            $scope.products.push($scope.employeeSkills);
+////            $scope.empSkills = JSON.stringify($scope.products);
+////            $scope.existingskills(empSkills);
+//
+//        });
+//    };
+    //$scope.existingskills(empSkills);
+//    $scope.existingskills = function (id) {
+//        $scope.products = id;
+//    };
     $scope.submit = function () {
         $http({
             method: "POST",
@@ -61,4 +83,17 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
         });
     };
 
+//    $http.get(BASE_URL + "employee/employee/getAllEmployeeDetails").then(function (EmployeeInfo) {
+//        console.log(EmployeeInfo);
+//        $scope.EmpData = EmployeeInfo.data;
+//    });
 });
+//angular.bootstrap(document.getElementById("App"), ['employeeApp']);
+
+
+//var empApp = angular.module('updateEmployeeApp', ['ngSanitize']);
+//empApp.controller('updateEmployeeController', function ($scope, $http) {
+//
+//    
+//});
+//angular.bootstrap(document.getElementById("updateEmp"), ['updateEmployeeApp']);

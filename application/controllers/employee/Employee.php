@@ -19,10 +19,10 @@ class Employee extends CI_controller {
     }
 
     public function index() {
-         $data['details'] = Employee::getAllEmployeeDetails(); 
-          // print_r($data);die();
+        $data['details'] = Employee::getAllEmployeeDetails();
+        // print_r($data);die();
         $this->load->view('includes/header');
-        $this->load->view('pages/employee/add_employee',$data);
+        $this->load->view('pages/employee/add_employee', $data);
         $this->load->view('includes/footer');
     }
 
@@ -74,11 +74,10 @@ class Employee extends CI_controller {
         }
     }
 
-                    //------------ get all machine details ----------------------------------//
+    //------------ get all machine details ----------------------------------//
 
 
-    public function getAllEmployeeDetails()
-    {
+    public function getAllEmployeeDetails() {
         $path = base_url();
         $url = $path . 'api/Employee_api/getAllEmployeeDetails';
         //create a new cURL resource
@@ -91,9 +90,16 @@ class Employee extends CI_controller {
         curl_close($ch);
         $response = json_decode($response_json, true);
         return $response;
-    
     }
 
+//------------fun for get the employee skills---------------------------//
+    public function deleteSkill() {
+        extract($_GET);
+        //print_r($_GET);die();
+        //echo json_encode($_GET);
+        $result = $this->Employee_model->deleteSkill($emp_id,$skill);
+        print_r(json_encode($result));
+    }
 
     //=-----------fun for update employee details----------------------------//
     public function updateEmployeeDetails() {
@@ -148,4 +154,5 @@ class Employee extends CI_controller {
                </script>';
         }
     }
+
 }
