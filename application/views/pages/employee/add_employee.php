@@ -87,17 +87,21 @@
                     </thead>
                      <tbody>
                       <?php
-                            print_r($details);
+                            // print_r($details);
                         if ($details['status'] == 200) {
                             $i = 1;
                             foreach ($details['status_message'] as $val) {
-                                    print_r($val);
+                                    // print_r($val);
                                 ?>
                                 <tr id="rowCount">
                                     <td class="w3-center"><?php echo $i ?></td>
                                     <td class="w3-center"><?php echo $val['employee_name']; ?></td>
                                     <td class="w3-center"><?php echo $val['employee_punch_id']; ?></td>
-                                    <td class="w3-center"><?php echo $val['employee_skills']; ?></td>
+                                    <td class="w3-center"><?php foreach (json_decode($val['employee_skills'],true) as $key)
+                                    {
+                                        echo $key;
+                                    } ;
+                                     ?></td>
                                     <td class="w3-center">
                                         <a class="btn w3-padding-small" data-toggle="modal" data-target="#updateEmployeeModal_<?php echo $val['emp_id']; ?>" title="Update Employee Details">
                                             <i class="w3-text-green w3-large fa fa-edit"></i>
@@ -109,7 +113,7 @@
 
                                      <!-- Modal -->
                                     <div id="updateEmployeeModal_<?php echo $val['emp_id']; ?>" class="modal" role="dialog">
-                                        <form id="updateMachineForm_<?php echo $val['emp_id']; ?>" name="updateEmployeeForm_<?php echo $val['machine_id']; ?>">
+                                        <form id="updateMachineForm_<?php echo $val['emp_id']; ?>" name="updateEmployeeForm_<?php echo $val['emp_id']; ?>">
                                             <div class="modal-dialog modal-lg">
                                                 <!----------------------------------- Modal content------------------------------------>
                                                 <div class="modal-content">
@@ -160,7 +164,6 @@
                                                     </div>
                                                     <!----------------------------------- Modal Body------------------------------------>                                                                               
                                                 </div>
-                                            <!----------------------------------- Modal content------------------------------------->
                                         </div>
                                     </form>
                                 </div>

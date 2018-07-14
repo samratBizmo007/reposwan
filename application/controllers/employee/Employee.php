@@ -20,7 +20,7 @@ class Employee extends CI_controller {
 
     public function index() {
          $data['details'] = Employee::getAllEmployeeDetails(); 
-         // print_r($data);die();
+          // print_r($data);die();
         $this->load->view('includes/header');
         $this->load->view('pages/employee/add_employee',$data);
         $this->load->view('includes/footer');

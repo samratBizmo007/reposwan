@@ -24,12 +24,17 @@ class Employee_model extends CI_Model {
         //---------------------------------fun for get employee details-------------------------------//
     public function getAllEmployeeDetails() {
         $sql = "SELECT * FROM employee_master";
-        // echo $sql; die();
-          if ($this->db->query($sql)) {
-            return TRUE;
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'No data found.');
         } else {
-            return FALSE;
+            $response = array(
+                'status' => 200,
+                'status_message' => $result->result_array());
         }
+        return $response;
     }
 
      // ----------------------Fun For update Material Details-------------------------------------//

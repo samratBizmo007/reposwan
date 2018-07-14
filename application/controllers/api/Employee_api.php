@@ -13,7 +13,7 @@ class Employee_api extends REST_Controller {
 
 
 //----------------fun for get machine details----------------------//
-    public function getAllMachineDetails_get() {
+    public function getAllEmployeeDetails_get() {
         $result = $this->Employee_model->getAllEmployeeDetails();
         return $this->response($result);
     }
