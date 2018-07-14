@@ -79,7 +79,7 @@ class Machine_model extends CI_Model {
                 'status_message' => 'Machine Deleted Successfully..');
         } else {
             $response = array(
-                'status' => 200,
+                'status' => 500,
                 'status_message' => 'Machine Not Deleted Successfully..');
         }
         return $response;
