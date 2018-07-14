@@ -90,6 +90,30 @@ class Product_model extends CI_Model {
     }
     // get all products from db-------------------------------------
 
+    // get particular product details from db-------------------------------------
+    public function getProductDetails($prod_id){
+        $query = "SELECT * FROM product_master WHERE prod_id='$prod_id'";
+
+        $result = $this->db->query($query);
+        // handle db error
+        if (!$result)
+        {
+            // Has keys 'code' and 'message'
+            $error = $this->db->error(); 
+            return $error;
+            die();
+        }
+
+        // if no db errors
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+
+            return $result->result_array();
+        }        
+    }
+    // get particular product details from db-------------------------------------
+
     // delete particular product from db-------------------------------------
     public function delProduct($prod_id){
         $query = "DELETE FROM product_master WHERE prod_id='$prod_id'";

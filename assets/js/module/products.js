@@ -149,6 +149,7 @@ app.controller("ProdCtrl", function($scope,$http) {
    }
    $scope.getSkills()
 
+   
    // check product type and display plant
    $scope.prodType = function () {
     if ($scope.typeSelected== "1")

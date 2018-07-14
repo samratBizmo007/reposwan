@@ -1,4 +1,4 @@
-<title>Swan Industries | Dashboard</title>
+<title>Swan Industries | Add Product</title>
 <style type="text/css">
 #addProduct fieldset{
   /*display: none;*/
