@@ -31,6 +31,21 @@ class Employee extends CI_controller {
         $request = json_decode($postdata, TRUE);
         extract($request);
         // print_r($request);
+        if (!isset($skillAdded_field)) {
+            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Warning!</strong> Please add at least one Operation in Machinery Details.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			}, 5000);
+			</script>';
+            die();
+        }
+
         if ($skillAdded_field == '' || $skillAdded_field == '[]') {
             echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -97,7 +112,7 @@ class Employee extends CI_controller {
         extract($_GET);
         //print_r($_GET);die();
         //echo json_encode($_GET);
-        $result = $this->Employee_model->deleteSkill($emp_id,$skill);
+        $result = $this->Employee_model->deleteSkill($emp_id, $skill);
         print_r(json_encode($result));
     }
 

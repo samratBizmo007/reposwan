@@ -66,6 +66,10 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
 //        $scope.products = id;
 //    };
     $scope.submit = function () {
+        if (!$scope.skilJSON) {
+            $scope.message ='<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Employee Details Not Added Successfully.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove(); });}, 5000);</script>';
+            return false;
+        }
         $http({
             method: "POST",
             url: BASE_URL + "employee/employee/addEmployeeDetails",
@@ -74,11 +78,12 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
             console.log(data);
             //$.alert(data.data);
             $scope.message = data.data;
+
             $window.setTimeout(function () {
                 $(".alert").fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
                 });
-                location.reload();
+                //location.reload();
             }, 2000);
         });
     };
