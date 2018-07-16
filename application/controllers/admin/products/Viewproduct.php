@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//error_reporting('E_ALL');
 class Viewproduct extends CI_Controller {
 
 	// Viewproduct controller
@@ -38,4 +38,5 @@ class Viewproduct extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
+	
 }

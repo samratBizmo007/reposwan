@@ -74,5 +74,14 @@ class Allproduct extends CI_Controller {
 			</script>';
 		}
 	}
+
+	// get prod details by prod_id
+	public function getProdDetails(){
+		extract($_GET);
+		echo json_encode($_GET);die();
+		$result=$this->product_model->getProductDetails($prod_id);
+		echo json_encode($result);
+	}
+
 	
 }
