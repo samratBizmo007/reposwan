@@ -82,6 +82,9 @@ if($admin_name!=''){
                                   <li><a href="<?php echo base_url(); ?>employee/employee"><i class="fa fa-user"></i> Employee Section </a>
                                     
                                 </li>
+                                 <li><a href="<?php echo base_url(); ?>po_order/po_order"><i class="fa fa-first-order"></i> Purchase Order Section </a>
+                                    
+                                </li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 
