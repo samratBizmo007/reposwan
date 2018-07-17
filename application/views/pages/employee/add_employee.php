@@ -21,7 +21,7 @@
                             </div>
                             <div class="w3-col l12">
                                 <div class="col-lg-6 col-xs-12 col-sm-12 w3-margin-bottom">
-                                    <label for="operations">Operations Performed <b class="w3-text-red w3-medium">*</b> </label>
+                                    <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
                                     <div class="w3-card" >
 
                                         <ul class="w3-ul">
@@ -31,15 +31,15 @@
                                             <div class="w3-row w3-margin-top">
                                                 <div class="w3-col l10 s10">
                                                     <!-- fetch skills from db -->
-                                                    <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations" required>
+                                                    <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
                                                         <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name| uppercase}}</option>
                                                     </select>
                                                 </div>
                                                 <div class="w3-col l2 s2">
-                                                    <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation"><i class="fa fa-plus"></i></button>
+                                                    <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="skillAdded_field" ng-model="employee.skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">
+                                            <input type="hidden" name="skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">
                                             <p class="w3-text-red w3-center">{{errortext}}</p>
                                         </div>
                                     </div>
@@ -86,8 +86,19 @@
                     </tr>
                 </thead>
                 <tbody>
+<!--                      <tr ng-repeat="e in EmpData['status_message']">
+                        <td class="w3-center">{{e.employee_name}}</td>
+                        <td class="w3-center">{{e.employee_punch_id}}</td>
+                        <td class="w3-center">
+                            <ul>
+                                <li ng-repeat="o in JSON.parse(e.employee_skills)">{{o}}</li>
+                            </ul>
+                        </td>
+                        <td class="w3-center"></td>
+                    </tr>-->
+
                     <?php
-                     //print_r($details);
+                    //print_r($details);
                     if ($details['status'] == 200) {
                         $i = 1;
                         $s = 0;
@@ -105,9 +116,9 @@
                                     ?>
                                 </td>
                                 <td class="w3-center">
-<!--                                    <a class="btn w3-padding-small" data-toggle="modal" data-target="#updateEmployeeModal_<?php echo $val['emp_id']; ?>" ng-click="getEmployeeSkills(<?php echo $val['emp_id']; ?>)" title="Update Employee Details">
+                                    <a class="btn w3-padding-small" data-toggle="modal" data-target="#updateEmployeeModal_<?php echo $val['emp_id']; ?>" ng-click="getEmployeeSkills(<?php echo $val['emp_id']; ?>)" title="Update Employee Details">
                                         <i class="w3-text-green w3-large fa fa-edit"></i>
-                                    </a>                   -->
+                                    </a>                   
                                     <a class="btn w3-padding-small" onclick="deleteEmployeeDetails(<?php echo $val['emp_id']; ?>)" title="Delete Employee">
                                         <i class="w3-text-red w3-large fa fa-trash"></i>
                                     </a>
@@ -133,6 +144,7 @@
                                                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                                                     <label>Employee Name <b class="w3-text-red w3-medium">*</b></label>
                                                                     <input type="text" name="emp_name" id="emp_name" class="form-control" placeholder="Employee Name" value="<?php echo $val['employee_name'] ?>" required>
+                                                                    <input type="hidden" name="emp_id" id="emp_id" class="form-control" placeholder="Employee Name" value="<?php echo $val['emp_id'] ?>">
                                                                 </div>
                                                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                                                     <label>Punch Id <b class="w3-text-red w3-medium">*</b></label>
@@ -142,7 +154,13 @@
                                                             <div class="w3-col l12">
                                                                 <div class="col-lg-6 col-xs-12 col-sm-12 w3-margin-bottom">
                                                                     <label for="operations">Operations Performed <b class="w3-text-red w3-medium">*</b> </label>
-                                                                    <div class="w3-card" >                                                                     
+                                                                    <div class="w3-card" >
+                                                                        <ul class="w3-ul">
+                                                                            <li ng-repeat="y in employeeSkills">{{y| uppercase}}<span ng-click="deleteSkill(y,<?php echo $val['emp_id']; ?>)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                                                                        </ul>
+                                                                        <ul class="w3-ul">
+                                                                            <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                                                                        </ul>
                                                                         <div class="w3-container w3-light-grey">
                                                                             <div class="w3-row w3-margin-top">
                                                                                 <div class="w3-col l10 s10">
@@ -152,31 +170,23 @@
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="w3-col l2 s2">
-                                                                                    <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation"><i class="fa fa-plus"></i></button>
+                                                                                    <button class="w3-button theme_bg" type="button" ng-click="addNewSkill()" title="add operation"><i class="fa fa-plus"></i></button>
                                                                                 </div>
                                                                             </div>
-                                                                            <input type="hidden" name="skillAdded_field" ng-model="employee.skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">
+                                                                            <input type="hidden" name="skill_field" ng-model="skill_field" id="skill_field" value="{{skilJSON}}">
+                                                                            <input type="hidden" name="fromDbSkills" ng-model="fromDbSkills" id="fromDbSkills" value="{{fromDbSkills}}">
                                                                             <p class="w3-text-red w3-center">{{errortext}}</p>
                                                                         </div>
-                                                                        <ul class="w3-ul">
-                                                                            <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
-                                                                        </ul>
-                                                                          <?php foreach (json_decode($val['employee_skills'], true) as $key) {
-                                                                            ?>
-                                                                            <div class="w3-padding w3-border">
-                                                                                <span style="cursor:pointer;" class=""><?php echo $key; ?><span class="w3-right w3-margin-right" ng-click="deleteSkill('<?php echo $key; ?>','<?php echo $val['emp_id'];?>')">×</span></span>
-                                                                            </div>                                                                                                                                               
-                                                                            <?php
-                                                                        }
-                                                                        ?>
                                                                     </div>
                                                                 </div>
-                                                                
+
                                                             </div>
                                                             <div class="w3-center w3-col l12" style="">
                                                                 <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Update Employee</button>
                                                             </div>
+
                                                             <div class="" ng-bind-html="message"></div>
+                                                            <!--                                                            <div class="" ng-bind="skilJSON"></div>-->
                                                         </div>
                                                         <div class="col-lg-1"></div>
                                                     </div>
@@ -193,6 +203,12 @@
                             $(function () {
                             $("#updateEmployeeForm_<?php echo $val['emp_id']; ?>").submit(function (e) {
                             e.preventDefault();
+                            var skill_field = $('#skill_field').val();
+                            var fromDbSkills = $('#fromDbSkills').val();
+                            if (skill_field == '' && fromDbSkills == ''){
+                            $.alert('Please Choose atleast one operation');
+                            return false;
+                            }
                             dataString = $("#updateEmployeeForm_<?php echo $val['emp_id']; ?>").serialize();
                             $.ajax({
                             type: "POST",
