@@ -6,7 +6,7 @@ class Po_order extends CI_controller {
         parent::__construct();
         //start session     
         $admin_name = $this->session->userdata('admin_name');
-         $this->load->model('po_model/Po_model');
+        $this->load->model('po_model/Po_model');
         if ($admin_name == '') {
             redirect('login');
         } else {
@@ -24,9 +24,7 @@ class Po_order extends CI_controller {
         $this->load->view('includes/footer');
     }
 
-
-
-        //------------fun for get the all customer name -----------------------//
+    //------------fun for get the all customer name -----------------------//
     public function getAllCustomerName() {
 //echo "string"; die();
         $path = base_url();
@@ -42,5 +40,8 @@ class Po_order extends CI_controller {
         $response = json_decode($response_json, true);
         //print_r($response_json);die();
         print_r($response_json);
+    }
+    public function getCustomerProducts(){
+        
     }
 }

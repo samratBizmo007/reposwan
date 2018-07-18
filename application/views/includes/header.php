@@ -25,6 +25,7 @@ if($admin_name!=''){
     <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/build/css/dhtmlxcalendar.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
 
     <!-- angular-->
@@ -32,6 +33,8 @@ if($admin_name!=''){
     <script src="<?php echo base_url(); ?>assets/js/angular-sanitize.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/const.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar_deprecated.js"></script>
 
 
 

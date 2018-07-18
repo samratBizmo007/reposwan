@@ -6,6 +6,7 @@ class Employee_model extends CI_Model {
         parent::__construct();
     }
 
+//-------------fun for add employeee details------------------------------------//
     public function addEmployeeDetails($request) {
         extract($request);
         $sql = "INSERT INTO employee_master(employee_name,employee_punch_id,employee_skills,status)"
@@ -19,6 +20,7 @@ class Employee_model extends CI_Model {
         }
     }
 
+//-------------fun for add employeee details ends------------------------------------//
     //---------------------------------fun for get employee details-------------------------------//
     public function getAllEmployeeDetails() {
         $sql = "SELECT * FROM employee_master";
@@ -82,18 +84,11 @@ class Employee_model extends CI_Model {
 
         $sql = "UPDATE employee_master SET employee_skills = '$Arr' WHERE emp_id = '$emp_id'";
         $this->db->query($sql);
-        //print_r($skillArr);
-        // print_r(json_encode($result));
-        // if no db errors
-//        if ($result->num_rows() <= 0) {
-//            return false;
-//        } else {
-//            return $result->result_array();
-//        }
         return $Arr;
     }
 
 //------------fun for delete employee skill ends--------------------------------------//
+//-------------------fun for update employee details---------------------------------//    
     public function updateEmployeeDetails($data) {
         extract($data);
 
@@ -114,6 +109,7 @@ class Employee_model extends CI_Model {
         return $response;
     }
 
+//-------------------fun for update employee details---------------------------------//    
     //---------------------------------fun for delete material details-------------------------------//
     public function deleteEmployeeDetails($emp_id) {
         $sql = "DELETE FROM employee_master WHERE emp_id = '$emp_id'";
@@ -130,4 +126,5 @@ class Employee_model extends CI_Model {
         return $response;
     }
 
+//--------------fun for delete employee details ends ---------------------------------------------//
 }

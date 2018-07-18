@@ -22,4 +22,9 @@ class Po_model extends CI_Model {
         }
         return $response;
     }
+
+    // ----------------------get all customer name-------------------------------------//
+    // ----------------------get all products by customer name-------------------------------------//
+    
+    // ----------------------get all products by customer name-------------------------------------//
 }

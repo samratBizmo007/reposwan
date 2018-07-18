@@ -151,6 +151,7 @@
                                                                     <input type="number" name="emp_punch_id" id="emp_punch_id" class="form-control" placeholder="Employee Punching Id" value="<?php echo $val['employee_punch_id']; ?>" required>
                                                                 </div>
                                                             </div>
+                                                            <!--div for add employee skills-->
                                                             <div class="w3-col l12">
                                                                 <div class="col-lg-6 col-xs-12 col-sm-12 w3-margin-bottom">
                                                                     <label for="operations">Operations Performed <b class="w3-text-red w3-medium">*</b> </label>
@@ -179,8 +180,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
+                                                            <!--div for add employee skills-->
                                                             <div class="w3-center w3-col l12" style="">
                                                                 <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Update Employee</button>
                                                             </div>

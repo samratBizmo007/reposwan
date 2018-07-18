@@ -48,8 +48,9 @@ class Machine_model extends CI_Model {
 
     public function updateMachineDetails($data) {
         extract($data);
-       
-        $sql = "UPDATE machine_master SET machine_name = '$machine_name',machine_type='$machine_type',machine_capacity='$machine_capacity'";
+        //print_r($data);die();
+        $sql = "UPDATE machine_master SET machine_name = '$machine_name',"
+                . "machine_type='$machine_type',machine_capacity='$machine_capacity' WHERE machine_id = '$machine_id'";
                 
         //echo $sql;die();
         $this->db->query($sql);

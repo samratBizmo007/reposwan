@@ -19,13 +19,14 @@ class Employee extends CI_controller {
     }
 
     public function index() {
-        $data['details'] = Employee::getAllEmployeeDetails();
+        $data['details'] = Employee::getAllEmployeeDetails(); //------- get employee details
         // print_r($data);die();
         $this->load->view('includes/header');
         $this->load->view('pages/employee/add_employee', $data);
         $this->load->view('includes/footer');
     }
 
+//--------------------- fun for add employee details---------------------------//
     public function addEmployeeDetails() {
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata, TRUE);
@@ -89,11 +90,11 @@ class Employee extends CI_controller {
         }
     }
 
+//--------------------- fun for add employee details---------------------------//
     //------------ get employee skills ----------------------------------//
     public function getEmployeeSkills() {
         extract($_GET);
         //print_r($_GET);die();
-        //echo json_encode($_GET);
         $result = $this->Employee_model->getEmployeeSkills($emp_id);
         print_r($result[0]['employee_skills']); // json_encode($result);
     }
@@ -141,7 +142,8 @@ class Employee extends CI_controller {
         print_r(json_decode($result, TRUE));
     }
 
-    //=-----------fun for update employee details----------------------------//
+//------------fun for delete Employee skill ends---------------------------//
+    //-----------fun for update employee details----------------------------//
     public function updateEmployeeDetails() {
         extract($_POST);
         $data = $_POST;
@@ -155,10 +157,10 @@ class Employee extends CI_controller {
             echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i>Please Choose Atlest one skill for employee. </h4>';
             die();
         }
-        if ($addedSkills == '') {
+        if ($addedSkills == '') { //-----------if selected employee skills is null
             $data['updatedSkills'] = $fromDbSkills;
         }
-        if ($addedSkills != '' && $dbSkills != '') {
+        if ($addedSkills != '' && $dbSkills != '') { //-----------if selected employee skills and db skills is not null
             $updatedSkills = array_merge($addedSkills, $dbSkills);
             $data['updatedSkills'] = json_encode($updatedSkills);
         }
@@ -186,7 +188,8 @@ class Employee extends CI_controller {
         }
     }
 
-    //--------------fun for delete Employee------------------------------//
+    //-----------fun for update employee details ends----------------------------//
+    //--------------fun for delete Employee details------------------------------//
     public function deleteEmployeeDetails() {
         extract($_POST);
 //        echo $material_id;
@@ -212,5 +215,5 @@ class Employee extends CI_controller {
                </script>';
         }
     }
-
+    //--------------fun for delete Employee details------------------------------//
 }
