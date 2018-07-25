@@ -1,44 +1,43 @@
-<?php 
+<?php
 //start session     
-$admin_name=$this->session->userdata('admin_name');
-$session_name='';
-if($admin_name!=''){
-    $sessionArr=explode('|', $admin_name);
-    $session_name=$sessionArr[1];
+$admin_name = $this->session->userdata('admin_name');
+$session_name = '';
+if ($admin_name != '') {
+    $sessionArr = explode('|', $admin_name);
+    $session_name = $sessionArr[1];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
-    <!-- Bootstrap -->
-    <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/build/css/dhtmlxcalendar.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="images/favicon.ico" type="image/ico" />
+        <!-- Bootstrap -->
+        <link href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="<?php echo base_url(); ?>assets/fa/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="<?php echo base_url(); ?>assets/build/css/custom.min.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/build/css/w3.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/build/css/style.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/build/css/dhtmlxcalendar.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>assets/alert/jquery-confirm.css" rel="stylesheet">
 
-    <!-- angular-->
-    <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/angular-sanitize.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/const.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar_deprecated.js"></script>
+        <!-- angular-->
+        <script src="<?php echo base_url(); ?>assets/js/angular.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/angular-sanitize.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/const.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar.js"></script>
+        <script src="<?php echo base_url(); ?>assets/js/dhtmlxcalendar_deprecated.js"></script>
 
 
 
-</head>
+    </head>
 
 
 
@@ -80,13 +79,16 @@ if($admin_name!=''){
                                         <li><a href="<?php echo base_url(); ?>inventory/showinventory">View Inventory</a></li>
                                     </ul>
                                 </li>
-                                 <li><a href="<?php echo base_url(); ?>admin/machine/addmachine"><i class="fa fa-sliders"></i> Machine Section </a>
-                                 </li>
-                                  <li><a href="<?php echo base_url(); ?>employee/employee"><i class="fa fa-user"></i> Employee Section </a>
-                                    
+                                <li><a href="<?php echo base_url(); ?>admin/machine/addmachine"><i class="fa fa-sliders"></i> Machine Section </a>
                                 </li>
-                                 <li><a href="<?php echo base_url(); ?>po_order/po_order"><i class="fa fa-first-order"></i> Purchase Order Section </a>
-                                    
+                                <li><a href="<?php echo base_url(); ?>employee/employee"><i class="fa fa-user"></i> Employee Section </a>
+
+                                </li>
+                                <li><a><i class="fa fa-first-order"></i> Purchase Order Section <span class=" fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo base_url(); ?>po_order/po_order">Add Purchase Order</a></li>
+                                        <li><a href="<?php echo base_url(); ?>po_order/show_purchase_orders">Show Purchase Orders</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
@@ -131,7 +133,7 @@ if($admin_name!=''){
                                 </li>                  
                                 <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                             </ul>
-                        --></div>
+                            --></div>
 
                     </div>
                     <!-- /sidebar menu -->
