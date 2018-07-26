@@ -81,17 +81,17 @@
 
 <!-- div for add category -->
                  <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
-                <label for="Category"><i class="fa fa-plus-square"></i> Add Material Category:</label>
+                <label for="Category"><i class="fa fa-plus-square"></i> Material Category:</label>
                   <div class="w3-card w3-padding" id="cat" ng-app="categoryApp" ng-controller="categoryController"  >
                    <div class="w3-container w3-white" >
                      <div class="w3-row w3-margin-top" >
                       <form ng-submit="submit()" method="POST">
-                      <div class="w3-col l10 s10">
+<!--                      <div class="w3-col l10 s10">
                       <input type="text" ng-model="material_type" class="form-control w3-small"  required>
                     </div>
                       <div class="w3-col l2 s2"> 
                         <button class=" theme_bg btn btn-primary btn-block" type="submit"><i class="fa fa-plus"></i></button>
-                      </div>
+                      </div>-->
                     </form>
                     </div>
                     <div class="row w3-padding" style=" height: 250px; overflow: auto;">

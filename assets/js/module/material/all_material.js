@@ -20,7 +20,7 @@ function deleteMaterialDetails(material_id) {
                     },
                     cache: false,
                     success: function (data) {
-                        $.alert(data);                      
+                        $.alert(data);
                     }
                 });
             },
@@ -30,18 +30,4 @@ function deleteMaterialDetails(material_id) {
     });
 }
 //----------------delete material details----------------------------------------------//
-//var myApp = angular.module('showMaterialApp', []);
-//myApp.controller('showMaterialController', function ($scope, $http) {
-//    $scope.submit = function () {
-//        // POST form data to controller
-//        $http({
-//            method: 'POST',
-//            url: BASE_URL + 'materials/allmaterial/updateMaterialDetails',
-//            headers: {'Content-Type': 'application/json'},
-//            data: JSON.stringify($scope.materialData)
-//        }).then(function (data) {
-//            console.log(data);
-//            alert(data);
-//        });
-//    };
-//});
+

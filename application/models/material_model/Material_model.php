@@ -181,4 +181,27 @@ class Material_model extends CI_Model {
         return $response;
     }
 
+    public function getMaterialdetails($mat_cat_id) {
+        $sql = '';
+        if ($mat_cat_id == 0) {
+            $sql = 'SELECT * FROM material_tab as m join material_category as c on(c.mat_cat_id = m.mat_cat_id)';
+        } else {
+            $sql = "SELECT * FROM material_tab as m join material_category as c "
+                    . "on(c.mat_cat_id = m.mat_cat_id) "
+                    . "WHERE c.mat_cat_id = '$mat_cat_id'";
+        }
+        //echo $sql; die();
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'No data found.');
+        } else {
+            $response = array(
+                'status' => 200,
+                'status_message' => $result->result_array());
+        }
+        return $response;
+    }
+
 }

@@ -44,7 +44,7 @@ class Material_api extends REST_Controller {
     }
 
     //----------------fun for get material details----------------------//
-     //----------------fun for get material details----------------------//
+    //----------------fun for get material details----------------------//
     public function getAllProductDetails_get() {
         $result = $this->Inventory_model->getAllProductDetails();
         return $this->response($result);
@@ -59,5 +59,10 @@ class Material_api extends REST_Controller {
     }
 
     //----------------fun for get material details----------------------//
+    public function getMaterialdetails_get() {
+        extract($_GET);
+        $result = $this->Material_model->getMaterialdetails($mat_cat_id);
+        return $this->response($result);
+    }
 
 }

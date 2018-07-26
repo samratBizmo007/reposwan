@@ -1,15 +1,31 @@
 <!-- page content -->
 <div class="right_col" role="main">
-    <div class="container page_title" style="margin-top: 0px;margin-bottom: 0px;">
+    <div class="container page_title" style="margin-top: 0px;margin-bottom: 0px;" >
         <div class="row x_title">
             <div class="w3-padding">
                 <h3><i class="fa fa-cubes"></i> All Material</h3>
             </div>
         </div>
+        <div class="row x_title" style=" margin-top: 5px;">
+            <div class="w3-padding-small">
+                <h4>Find Material By Material Category </h4>                
+            </div>
+            <div class="w3-col l12 w3-margin-bottom">
+                <div class="col-lg-5 col-xs-12 col-sm-12" id="materialWeight">
+                    <label>Material Category <b class="w3-text-red w3-medium">*</b></label>
+                    <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialdetails();" required>
+                        <option value="0">All Material</option>
+                        <?php foreach ($material_type['status_message'] as $key) { ?>
+                            <option value="<?php echo $key['mat_cat_id']; ?>"><?php echo $key['material_type'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="row clearfix" style=" margin-top: 5px;">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                 <table class="table table-responsive" id="tab_logic">
-                       <thead>
+                    <thead>
                         <tr class="theme_bg">
                             <th width="7%" class="text-center">
                                 Sr No
@@ -145,8 +161,8 @@
                                                                                         <input type="number" name="quantity" value="<?php echo $val['quantity']; ?>" min="0" step="0.01" id="quantity" class="form-control" placeholder="Quantity" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
-                                                                                        <label>Diagram No <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Diagram No" required>
+                                                                                        <label>Drawing No <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Drawing No" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -197,8 +213,8 @@
                                                                                         <input type="number" name="id" value="<?php echo $val['id']; ?>" id="id" class="form-control" min="0" step="0.01" placeholder="ID" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
-                                                                                        <label>Pitching <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitching" required>
+                                                                                        <label>Pitch <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitch" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
                                                                                         <label>Quantity <b class="w3-text-red w3-medium">*</b></label>
@@ -207,8 +223,8 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12 w3-margin-top">
-                                                                                        <label>Diagram No <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Diagram No" required>
+                                                                                        <label>Drawing No <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Drawing No" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -223,8 +239,8 @@
                                                                                         <input type="number" name="od" value="<?php echo $val['od']; ?>" id="od" class="form-control" min="0" step="0.01" placeholder="OD" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
-                                                                                        <label>Pitching <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitching" required>
+                                                                                        <label>Pitch <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitch" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
                                                                                         <label>Quantity <b class="w3-text-red w3-medium">*</b></label>
@@ -233,8 +249,8 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12 w3-margin-top">
-                                                                                        <label>Diagram No <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Diagram No" required>
+                                                                                        <label>Drawing No <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Drawing No" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -249,8 +265,8 @@
                                                                                         <input type="number" name="id" value="<?php echo $val['id']; ?>" id="id" class="form-control" min="0" step="0.01" placeholder="ID" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
-                                                                                        <label>Pitching <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitching" required>
+                                                                                        <label>Pitch <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="pitching" value="<?php echo $val['pitching']; ?>" id="pitching" min="0" step="0.01" class="form-control" placeholder="Pitch" required>
                                                                                     </div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12">
                                                                                         <label>Quantity <b class="w3-text-red w3-medium">*</b></label>
@@ -259,8 +275,8 @@
                                                                                 </div>
                                                                                 <div>
                                                                                     <div class="col-lg-4 col-xs-12 col-sm-12 w3-margin-top">
-                                                                                        <label>Diagram No <b class="w3-text-red w3-medium">*</b></label>
-                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Diagram No" required>
+                                                                                        <label>Drawing No <b class="w3-text-red w3-medium">*</b></label>
+                                                                                        <input type="number" name="Diagram_no" value="<?php echo $val['diagram_no']; ?>" id="Diagram_no" min="0" step="0.01" class="form-control" placeholder="Drawing No" required>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>?>
@@ -326,4 +342,21 @@
 </div>
 </div>
 <!-- page content ends-->
+<script>
+    function getMaterialdetails() {
+        var mat_cat_id = $('#mat_cat_id').val();
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "materials/allmaterial/getMaterialdetails",
+            data: {
+                mat_cat_id: mat_cat_id
+            },
+            return: false, //stop the actual form post !important!
+            success: function (data) {
+                //$.alert(data);
+                $('#addedRows').html(data);
+            }
+        });
+    }
+</script>
 <script src="<?php echo base_url(); ?>assets/js/module/material/all_material.js"></script>
