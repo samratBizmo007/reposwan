@@ -122,7 +122,7 @@ class Po_order extends CI_controller {
 //        die();
         //$material_Arr = array();
         $product_arr = array();
-        //$prods_arr = array();
+        $total = 0;
         for ($i = 0; $i < count($part_drwing_no); $i++) {
             $product_arr[] = array(
                 'prod_id' => $prod_id[$i],
@@ -137,42 +137,21 @@ class Po_order extends CI_controller {
                 'netAmount' => $netAmount[$i],
                 'due_date' => $due_date[$i]
             );
+            $total = $netAmount[$i] + $total;
         }
         //$prods_arr = json_encode($product_arr);
         $data['product_details'] = json_encode($product_arr);
         $data['customer_name'] = $customer_name;
         $data['order_no'] = $order_no;
         $data['po_duedate'] = $po_duedate;
+        $data['total'] = $total;
         //print_r($data);
         //die();
         $result = $this->Po_model->addPurchaseOrder($data);
         if ($result) {
             echo '200';
-//            echo '<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round">
-//			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-//			<strong>Success!</strong> Employee Details Added successfully.
-//			</div>
-//			<script>
-//			window.setTimeout(function() {
-//			$(".alert").fadeTo(500, 0).slideUp(500, function(){
-//			$(this).remove(); 
-//			});
-//			location.reload();
-//			}, 1000);
-//			</script>';
         } else {
             echo '500';
-//            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
-//			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-//			<strong>Failure!</strong> Employee Details Not Added Successfully.
-//			</div>
-//			<script>
-//			window.setTimeout(function() {
-//			$(".alert").fadeTo(500, 0).slideUp(500, function(){
-//			$(this).remove(); 
-//			});
-//			}, 5000);
-//			</script>';
         }
     }
 

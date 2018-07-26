@@ -64,8 +64,8 @@ class Po_model extends CI_Model {
 //----------------------add po details to db------------------------------------------//
     public function addPurchaseOrder($data) {
         extract($data);
-        $sql = "INSERT INTO purchase_orders(customer_name,po_duedate,order_no,product_details,added_date,added_time,modified_date,modified_time,status)"
-                . "VALUES ('$customer_name','$po_duedate','$order_no','$product_details',now(),now(),now(),now(),'1')";
+        $sql = "INSERT INTO purchase_orders(customer_name,po_total,po_duedate,order_no,product_details,added_date,added_time,modified_date,modified_time,status)"
+                . "VALUES ('$customer_name','$total','$po_duedate','$order_no','$product_details',now(),now(),now(),now(),'1')";
         //echo $sql;die();
         //$this->db->query($sql)
         if ($this->db->query($sql)) {
