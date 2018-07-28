@@ -65,4 +65,9 @@ class Material_api extends REST_Controller {
         return $this->response($result);
     }
 
+    public function getMaterialDetailsByType_get(){
+        extract($_GET);
+        $result = $this->Material_model->getMaterialdetails($mat_cat_id);
+        return $this->response($result);
+    }
 }

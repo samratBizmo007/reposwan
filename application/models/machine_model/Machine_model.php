@@ -10,8 +10,8 @@ class Machine_model extends CI_Model {
     public function addMachineInfo($data) {
         extract($data);
         // print_r($data);die();
-       $sql = "INSERT INTO machine_master(machine_name,machine_type,machine_capacity) VALUES ('$machine_name','$machine_type','$machine_capacity')";
-  
+        $sql = "INSERT INTO machine_master(machine_name,machine_type,machine_capacity) VALUES ('$machine_name','$machine_type','$machine_capacity')";
+
         if ($this->db->query($sql)) {
             $response = array(
                 'status' => 200, //---------insert db success code
@@ -26,7 +26,7 @@ class Machine_model extends CI_Model {
         return $response;
     }
 
-        //---------------------------------fun for get machine details-------------------------------//
+    //---------------------------------fun for get machine details-------------------------------//
     public function getAllMachineDetails() {
         $sql = "SELECT * FROM machine_master";
         //echo $sql; die();
@@ -43,15 +43,34 @@ class Machine_model extends CI_Model {
         return $response;
     }
 
+    public function getAllMachines($machine_name) {
+        if ($machine_name == '') {
+            $sql = "SELECT * FROM machine_master";
+        } else {
+            $sql = "SELECT * FROM machine_master WHERE machine_name LIKE '%$machine_name%'";
+        }
+        //echo $sql; die();
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'No data found.');
+        } else {
+            $response = array(
+                'status' => 200,
+                'status_message' => $result->result_array());
+        }
+        return $response;
+    }
 
-     // ----------------------Fun For update Material Details-------------------------------------//
+    // ----------------------Fun For update Material Details-------------------------------------//
 
     public function updateMachineDetails($data) {
         extract($data);
         //print_r($data);die();
         $sql = "UPDATE machine_master SET machine_name = '$machine_name',"
                 . "machine_type='$machine_type',machine_capacity='$machine_capacity' WHERE machine_id = '$machine_id'";
-                
+
         //echo $sql;die();
         $this->db->query($sql);
         if ($this->db->affected_rows() > 0) {
@@ -67,7 +86,6 @@ class Machine_model extends CI_Model {
         }
         return $response;
     }
-
 
     //---------------------------------fun for delete material details-------------------------------//
     public function deleteMachineDetails($machine_id) {
@@ -86,4 +104,4 @@ class Machine_model extends CI_Model {
         return $response;
     }
 
-   }
+}

@@ -375,7 +375,7 @@ class Allmaterial extends CI_controller {
                                     dataString = $("#updateMaterialForm_' . $val['material_id'] . '").serialize();
                                     $.ajax({
                                         type: "POST",
-                                        url: "<?php echo base_url(); ?>materials/allmaterial/updateMaterialDetails",
+                                        url: "' . base_url() . 'materials/allmaterial/updateMaterialDetails",
                 data: dataString,
                 return: false, //stop the actual form post !important!
                 success: function (data)
@@ -393,7 +393,7 @@ class Allmaterial extends CI_controller {
                 $i++;
             }
         } else {
-            echo '<tr> <td colspan="8" class="w3-center">No Records Found..!</td></tr>';
+            echo '<tr> <td colspan="6" class="w3-center">No Records Found..!</td></tr>';
         }
     }
 

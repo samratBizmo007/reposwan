@@ -1,13 +1,13 @@
 
-    // var machine = angular.module('machineApp', ['ngSanitize']);
-    // machine.controller('machineController',function($scope, $http){
+// var machine = angular.module('machineApp', ['ngSanitize']);
+// machine.controller('machineController',function($scope, $http){
 
 var machine = angular.module('machineApp', []);
 machine.controller('machineController', function ($scope, $http, $sce)
 {
 
-     
-     $(function () {
+
+    $(function () {
         $("#add_MachineForm").submit(function () {
             dataString = $("#add_MachineForm").serialize();
             // alert(dataString);
@@ -27,5 +27,9 @@ machine.controller('machineController', function ($scope, $http, $sce)
             return false;  //stop the actual form post !important!
         });
     });
-         });
- 
+
+
+
+
+});
+

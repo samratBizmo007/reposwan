@@ -156,7 +156,7 @@ app.controller("ProdCtrl", function($scope,$http) {
       $scope.plantDiv = true;
     else
       $scope.plantDiv = false;
-  }
+  };
 
   // check raw material type
   // function to disable all fields

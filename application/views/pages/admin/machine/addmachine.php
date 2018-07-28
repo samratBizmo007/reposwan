@@ -9,14 +9,13 @@
                 <div class="col-lg-10">
                     <div class=""  ng-app="machineApp" ng-controller="machineController"  style="padding:12px 36px 12px 36px">
                         <form id="add_MachineForm" method="post" role="form">
-                            <!--                             <div class="w3-col l12" ng-model="material_err"></div>
-                            -->                             <div id="machineDiv" style="">
+                            <!--                             <div class="w3-col l12" ng-model="material_err"></div>                            -->                             <div id="machineDiv" style="">
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div id="machinename" class="col-lg-6 col-xs-12 col-sm-12">										<label>Machine name <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="text" name="machine_name" ng-model="machine_name" id="machine_name" class="form-control" placeholder="Machine Name" required>
                                     </div>
                                     <div class="col-lg-6 col-xs-12 col-sm-12" id="machinecapacity">
-                                        <label>Machine Capacity (In Tons)</label>
+                                        <label>Machine Capacity</label>
                                         <input type="number" name="machine_capacity" ng-model="machine_capacity" id="machine_capacity" min="0" step="0.01" class="form-control" placeholder="Machine Capacity" required>
                                     </div>
                                     <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
@@ -27,7 +26,6 @@
                                         </div>  
                                     </div>											                           
                                 </div>
-
                             </div>
                             <div class=" w3-center w3-col l12" style="">
                                 <button  type="submit" title="add Machine" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Machine</button>
@@ -47,6 +45,20 @@
         <div class="row x_title">
             <div class="w3-padding">
                 <h3><i class="fa fa-sliders"></i> All Machine</h3>
+            </div>
+        </div>
+        <div class="row x_title" style=" margin-top: 5px;">
+            <div class="w3-padding-small">
+                <h4>Find Machine By Machine Name </h4>                
+            </div>
+            <div class="w3-col l12 w3-margin-bottom">
+                <div class="col-lg-5 col-xs-12 col-sm-12" id="materialWeight">
+                    <label>Machine Name <b class="w3-text-red w3-medium">*</b></label>
+                    <input type="text" name="machine_nameNew" ng-model="machine_nameNew" id="machine_nameNew" class="form-control" onkeyup="getAllMachines();" placeholder="Machine Name" required>
+                </div>
+                <!--                <div class="w3-center col-lg-2 col-xs-12 col-sm-12" style="">
+                                    <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Update Machine</button>
+                                </div>-->
             </div>
         </div>
         <div class="row clearfix" style=" margin-top: 5px;">
@@ -71,7 +83,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="added_rows">
                         <?php
                         //print_r($details);
                         if ($details['status'] == 200) {
@@ -119,7 +131,7 @@
                                                                             <input type="hidden" name="machine_id" value="<?php echo $val['machine_id']; ?>" id="machine_id" class="form-control" placeholder="Machine Name">
                                                                         </div>
                                                                         <div class="col-lg-6 col-xs-12 col-sm-12" id="machinecapacity">
-                                                                            <label>Machine Capacity (In Tons)</label>
+                                                                            <label>Machine Capacity</label>
                                                                             <input type="number" name="machine_capacity" value="<?php echo $val['machine_capacity']; ?>" id="machine_capacity" min="0" step="0.01" class="form-control" placeholder="Machine Capacity" required>
                                                                         </div>  
                                                                         <div class="w3-col l12 w3-margin-bottom" id="materialSpecificationDiv"></div>
@@ -208,7 +220,7 @@
                     } else {
                         ?>
                         <tr>
-                            <td colspan="8" class="w3-center">No Records Found..!</td>
+                            <td colspan="5" class="w3-center">No Records Found..!</td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -219,5 +231,26 @@
 
 </div>
 <!-- /page content -->
+<script>
+
+    function getAllMachines() {
+        var machine_name = $('#machine_nameNew').val();
+        //alert(machine_name);
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "admin/machine/addmachine/getAllMachines",
+            data: {
+                machine_name: machine_name
+            },
+            return: false, //stop the actual form post !important!
+            success: function (data)
+            {
+                console.log(data);
+                //$.alert(data);
+                $('#added_rows').html(data);
+            }
+        });
+    }
+</script>
 <script src="<?php echo base_url(); ?>assets/js/module/machine/machine.js"></script>
 

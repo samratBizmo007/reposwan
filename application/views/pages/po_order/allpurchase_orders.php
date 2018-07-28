@@ -152,15 +152,16 @@
                                 </div>
                             </td>                            
                         </tr>
-                        <tr ng-if="po == 500">
+                        <tr ng-if="po == ''">
                             <td colspan="5" class="w3-center">No Records Found..!</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div ng-bind-html="messg_info"></div>
     </div>
 </div>
-</div>
+
 <!-- page content ends-->
 <script src="<?php echo base_url(); ?>assets/js/module/po/show_po.js"></script>
