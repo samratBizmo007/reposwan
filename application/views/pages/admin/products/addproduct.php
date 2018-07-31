@@ -50,10 +50,13 @@
                                 </div>
                                 <div class="form-group w3-col l12">
                                     <label for="stock_plant">Ex-stock Quantity<b class="w3-text-red w3-medium">*</b> :</label>
-                                    <input type="text" class="form-control" id="exstock_quantity" name="exstock_quantity" placeholder="Ex-stock Quantiry" required>
+                                    <input type="text" class="form-control" id="exstock_quantity" name="exstock_quantity" placeholder="Ex-stock Quantiry" >
                                 </div>
                             </div>
                         </div>
+<!--                        <div class="w3-col l12">
+
+                        </div>-->
 
                         <div class="w3-col l12">
                             <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
@@ -64,7 +67,7 @@
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
                                 <div class="form-group">
-                                    <label for="divrawing_no">Drawing Number/ Part Number :</label>
+                                    <label for="divrawing_no">Drawing Number :</label>
                                     <input type="text" class="form-control" id="drawing_no" name="drawing_no" placeholder="Enter drawing number">
                                 </div>
                             </div>
@@ -103,51 +106,53 @@
 
                     <fieldset>
                         <h2>Machinery Details</h2>            
-                        <div class="w3-col l12">
-                            <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
-                                <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
-                                <div class="w3-card" >
 
-                                    <ul class="w3-ul">
-                                        <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
-                                    </ul>
-                                    <div class="w3-container w3-light-grey">
-                                        <div class="w3-row w3-margin-top">
-                                            <div class="w3-col l10 s10">
-                                                <!-- fetch skills from db -->
-                                                <select name="operations" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
-                                                    <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name| uppercase}}</option>
-                                                </select>
+                        <div class="w3-col l12" style="border:1px dashed">
+                            <div class="w3-col l12 w3-padding-top" data-ng-repeat="product in productData">
+                                <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                                    <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
+                                    <div class="w3-card" >
+
+                                        <ul class="w3-ul">
+                                            <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                                        </ul>
+                                        <div class="w3-container w3-light-grey">
+                                            <div class="w3-row w3-margin-top">
+                                                <div class="w3-col l10 s10">
+                                                    <!-- fetch skills from db -->
+                                                    <select name="operations[]" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
+                                                        <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name| uppercase}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="w3-col l2 s2">
+                                                    <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
+                                                </div>
                                             </div>
-                                            <div class="w3-col l2 s2">
-                                                <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="skillAdded_field" id="skillAdded_field" value="{{skilJSON}}">
-                                        <p class="w3-text-red w3-center">{{errortext}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="w3-col l8" style="border:1px dashed">
-                                <div class="w3-col l12 w3-padding-top">
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="machine">Machine used(in tonnes) 1:</label>
-                                            <input type="number" min="0" class="form-control" id="machine1" name="machine[]" placeholder="eg. 20, 30, 40 ton">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="qtyhr">Quantity per hour 1:</label>
-                                            <input type="number" min="0" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
+                                            <input type="hidden" name="skillAdded_field[]" id="skillAdded_field" value="{{skilJSON}}">
+                                            <p class="w3-text-red w3-center">{{errortext}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- extra added row div -->
-                                <div class="w3-col l12" id="addedmore_DivMachine"></div>
-                                <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnMachine" name="addMoreBtnMachine"><i class="fa fa-plus"></i> Add more</a> 
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="machine">Machine used(in tonnes) 1:</label>
+                                        <input type="number" min="0" class="form-control" id="machine1" name="machine[]" placeholder="eg. 20, 30, 40 ton">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="qtyhr">Quantity per hour 1:</label>
+                                        <input type="number" min="0" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
+                                    </div>
+                                </div>
+                                <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeChoice()"> -remove</a>
                             </div>
+                            <a class="btn w3-text-red w3-margin-top w3-right" id="addMore" style="padding:0;" ng-click="addNewProductDiv()"><i class="fa fa-plus"></i> Add more</a> 
+                            <!-- extra added row div -->
+                            <!--                            <div class="w3-col l12" id="addedmore_DivMachine"></div>
+                                                        <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnMachine" name="addMoreBtnMachine"><i class="fa fa-plus"></i> Add more</a> -->
                         </div>
+
                     </fieldset>
 
 
@@ -288,6 +293,23 @@
                                         <input type="number"cstep="0.01" min="0" class="form-control" id="new_rate" name="new_rate" placeholder="Enter New Rate" required>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <h2>Product Packing Quantity And Finished Weight</h2>
+                        <div class="w3-col l12">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group w3-col l12">
+                                    <label for="Packing_Quantity_Per_Tray">Packing Quantity Per Tray<b class="w3-text-red w3-medium">*</b> :</label>
+                                    <input type="text" class="form-control" id="packingquantity_per_tray" name="packingquantity_per_tray" placeholder="Ex-stock Quantiry" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group w3-col l12">
+                                    <label for="Net_Finished_Weight">Net Finished Weight<b class="w3-text-red w3-medium">*</b> :</label>
+                                    <input type="text" class="form-control" id="net_finished_weight" name="net_finished_weight" placeholder="Net Finished Weight" required>
                                 </div>
                             </div>
                         </div>

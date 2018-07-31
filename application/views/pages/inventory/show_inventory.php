@@ -198,10 +198,16 @@
                                             Drawing no
                                         </th>
                                         <th class="text-center">
-                                            Product Quantity
+                                            Production Quantity
                                         </th>
                                         <th class="text-center">
-                                            Added date
+                                            Dispatched Quantity
+                                        </th>
+                                        <th class="text-center">
+                                            Total Quantity
+                                        </th>
+                                        <th class="text-center">
+                                            modified date
                                         </th>
                                         <th class="text-center">
                                             Action
@@ -237,9 +243,15 @@
                                                 </td>
                                                 <td class="w3-center"><?php echo $val['drawing_no']; ?></td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="product_quantity_<?php echo $val['prod_id'] ?>" value="<?php echo $val['product_quantity'] ?>">
+                                                    <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['production_quantity'] ?>">
                                                 </td>
-                                                <td class="w3-center"><?php echo $val['added_date']; ?></td>
+                                                <td class="w3-center">
+                                                    <input type="number" class="form-control w3-center" id="dispatched_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['dispatched'] ?>">
+                                                </td>
+                                                <td class="w3-center">
+                                                    <input type="number" class="form-control w3-center" id="total_quantity_<?php echo $val['prod_id'] ?>" value="<?php echo $val['total_quantity'] ?>">
+                                                </td>
+                                                <td class="w3-center"><?php echo $val['modified_date']; ?></td>
                                                 <td class="w3-center">
                                                     <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateProductDetails(<?php echo $val['prod_id']; ?>);" title="Update Product Details">
                                                         Update
@@ -278,6 +290,27 @@
             $("#prod").css("color", "#ECF0F1");
             $("#prod").css("background-color", "#2A3F54");
         }
+    }
+
+    function getTotalQuantity(prod_id) {
+        var production_quantity = $('#production_quantity_' + prod_id).val();
+        var dispatched_quantity = $('#dispatched_quantity_' + prod_id).val();
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "inventory/showinventory/getTotalQuantity",
+            data: {
+                production_quantity: production_quantity,
+                dispatched_quantity: dispatched_quantity,
+                prod_id: prod_id
+            },
+            return: false, //stop the actual form post !important!
+            success: function (data) {
+                //$.alert(data);
+                console.log(data);
+                $('#total_quantity_' + prod_id).val(data);
+
+            }
+        });
     }
 </script>
 <script src="<?php echo base_url(); ?>assets/js/module/inventory/inventory.js"></script>

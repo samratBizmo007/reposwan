@@ -141,7 +141,7 @@ class Showinventory extends CI_controller {
                 }
                 echo'<td class="w3-center">' . $val['drawing_no'] . '</td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="product_quantity_' . $val['prod_id'] . '" value="' . $val['product_quantity'] . '">
+                                                    <input type="number" class="form-control w3-center" id="production_quantity_' . $val['prod_id'] . '" value="' . $val['production_quantity'] . '">
                                                 </td>
                                                 <td class="w3-center">' . $val['added_date'] . '</td>
                                                 <td class="w3-center">
@@ -160,12 +160,24 @@ class Showinventory extends CI_controller {
 
     public function updateProductDetails() {
         extract($_POST);
-        $result = $this->Inventory_model->updateProductDetails($product_quantity, $prod_id);
+        //print_r($_POST);die();
+        $result = $this->Inventory_model->updateProductDetails($production_quantity, $dispatched_quantity, $total_quantity, $prod_id);
         if ($result) {
             echo '200';
         } else {
             echo '500';
         }
+    }
+
+    public function getTotalQuantity() {
+        extract($_POST);
+        $total_quantity = '';
+        if ($production_quantity == 0) {
+            $total_quantity = $production_quantity;
+        } elseif ($production_quantity != 0) {
+            $total_quantity = $production_quantity - $dispatched_quantity;
+        }
+        echo $total_quantity;
     }
 
 }

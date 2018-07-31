@@ -76,8 +76,8 @@ class Inventory_model extends CI_Model {
         }
     }
 
-    public function updateProductDetails($product_quantity, $prod_id) {
-        $sql = "UPDATE product_master SET product_quantity='$product_quantity',"
+    public function updateProductDetails($production_quantity, $dispatched_quantity, $total_quantity, $prod_id) {
+        $sql = "UPDATE product_master SET production_quantity='$production_quantity',dispatched='$dispatched_quantity',total_quantity='$total_quantity',"
                 . "modified_date= NOW(),modified_time= NOW(),status='1' WHERE prod_id = '$prod_id'";
         //echo $sql;die();
         $this->db->query($sql);

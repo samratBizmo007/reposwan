@@ -98,12 +98,16 @@ function getProducts() {
 
 
 function updateProductDetails(prod_id) {
-    var product_quantity = $('#product_quantity_' + prod_id).val();
+    var production_quantity = $('#production_quantity_' + prod_id).val();
+    var dispatched_quantity = $('#dispatched_quantity_' + prod_id).val();
+    var total_quantity = $('#total_quantity_' + prod_id).val();
     $.ajax({
         type: "POST",
         url: BASE_URL + "inventory/showinventory/updateProductDetails",
         data: {
-            product_quantity: product_quantity,
+            production_quantity: production_quantity,
+            dispatched_quantity: dispatched_quantity,
+            total_quantity: total_quantity,
             prod_id: prod_id
         },
         return: false, //stop the actual form post !important!
