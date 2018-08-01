@@ -11,15 +11,13 @@ class Employee_api extends REST_Controller {
         $this->load->model('employee_model/Employee_model');
     }
 
-
 //----------------fun for get machine details----------------------//
     public function getAllEmployeeDetails_get() {
         $result = $this->Employee_model->getAllEmployeeDetails();
         return $this->response($result);
     }
 
-
-      //----------fun for update Employee Details------------------------//
+    //----------fun for update Employee Details------------------------//
     public function updateEmployeeDetails_post() {
         $data = ($_POST);
         extract($data);
@@ -27,10 +25,11 @@ class Employee_api extends REST_Controller {
         return $this->response($result);
     }
 
-      //----------------fun for delete Employee details----------------------//
+    //----------------fun for delete Employee details----------------------//
     public function deleteEmployeeDetails_get() {
         extract($_GET);
         $result = $this->Employee_model->deleteEmployeeDetails($emp_id);
         return $this->response($result);
     }
-   }
+
+}
