@@ -141,9 +141,15 @@ class Showinventory extends CI_controller {
                 }
                 echo'<td class="w3-center">' . $val['drawing_no'] . '</td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="production_quantity_' . $val['prod_id'] . '" value="' . $val['production_quantity'] . '">
+                                                    <input type="number" class="form-control w3-center" id="production_quantity_' . $val['prod_id'] . '" onkeyup="getTotalQuantity(' . $val['prod_id'] . ');" value="' . $val['production_quantity'] . '">
                                                 </td>
-                                                <td class="w3-center">' . $val['added_date'] . '</td>
+                                                <td class="w3-center">
+                                                    <input type="number" class="form-control w3-center" id="dispatched_quantity_' . $val['prod_id'] . '" onkeyup="getTotalQuantity(' . $val['prod_id'] . ');" value="' . $val['dispatched'] . '">
+                                                </td>
+                                                <td class="w3-center">
+                                                    <input type="number" class="form-control w3-center" id="total_quantity_' . $val['prod_id'] . '" value="' . $val['total_quantity'] . '">
+                                                </td>
+                                                <td class="w3-center">' . $val['modified_date'] . '</td>
                                                 <td class="w3-center">
                                                     <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateProductDetails(' . $val['prod_id'] . ');" title="Update Product Details">
                                                         Update
