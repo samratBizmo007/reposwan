@@ -143,7 +143,7 @@ class Po_order extends CI_controller {
         $data['product_details'] = json_encode($product_arr);
         $data['customer_name'] = $customer_name;
         $data['order_no'] = $order_no;
-        $data['po_duedate'] = $po_duedate;
+        $data['po_duedate'] = $due_date;
         $data['total'] = $total;
         //print_r($data);
         //die();

@@ -64,11 +64,42 @@ class Po_model extends CI_Model {
 //----------------------add po details to db------------------------------------------//
     public function addPurchaseOrder($data) {
         extract($data);
-        $sql = "INSERT INTO purchase_orders(customer_name,po_total,po_duedate,order_no,product_details,added_date,added_time,modified_date,modified_time,status)"
-                . "VALUES ('$customer_name','$total','$po_duedate','$order_no','$product_details',now(),now(),now(),now(),'1')";
-        //echo $sql;die();
-        //$this->db->query($sql)
-        if ($this->db->query($sql)) {
+        $product_detail = array();
+        $i = 0;
+        $product_detail = json_decode($product_details, TRUE);
+        extract($product_detail);
+        if ($product_detail != '') {
+            for ($i = 0; $i < count($product_detail); $i++) {
+                //echo count($product_detail);die();
+                //print_r($product_detail[$i]['line_no']);die();
+                $line_no = $product_detail[$i]['line_no'];
+                $prod_id = $product_detail[$i]['prod_id'];
+                $part_drwing_no = $product_detail[$i]['part_drwing_no'];
+                $product_name = $product_detail[$i]['product_name'];
+                $revision_no = $product_detail[$i]['revision_no'];
+                $sr_no = $product_detail[$i]['sr_no'];
+                $product_code = $product_detail[$i]['product_code'];
+                $unit_rate = $product_detail[$i]['unit_rate'];
+                $quantity = $product_detail[$i]['quantity'];
+                $netAmount = $product_detail[$i]['netAmount'];
+                $due_date =  $product_detail[$i]['due_date'];
+                $sql = "INSERT INTO purchase_orders(customer_name,po_total,"
+                        . "po_duedate,order_no,prod_id,"
+                        . "line_no,part_drwing_no,product_name,"
+                        . "revision_no,sr_no,product_code,"
+                        . "unit_rate,quantity,net_amount,"
+                        . "product_details,added_date,"
+                        . "added_time,modified_date,"
+                        . "modified_time,status)"
+                        . "VALUES ('$customer_name','$total','$due_date',"
+                        . "'$order_no','$prod_id','$line_no',"
+                        . "'$part_drwing_no','$product_name',"
+                        . "'$revision_no','$sr_no','$product_code',"
+                        . "'$unit_rate','$quantity','$netAmount',"
+                        . "'$product_details',now(),now(),now(),now(),'1')";
+                //echo $sql;die();
+                $this->db->query($sql);
+            }
             return TRUE;
         } else {
             return FALSE;

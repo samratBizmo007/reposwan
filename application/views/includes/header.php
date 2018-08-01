@@ -90,6 +90,11 @@ if ($admin_name != '') {
                                         <li><a href="<?php echo base_url(); ?>po_order/show_purchase_orders">Show Purchase Orders</a></li>
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-clipboard"></i> P.O Reports <span class=" fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo base_url(); ?>reports/pending_orders">Pending Orders</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 
@@ -133,11 +138,10 @@ if ($admin_name != '') {
                                 </li>                  
                                 <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                             </ul>
-                            --></div>
-
+                            -->
+                        </div>
                     </div>
                     <!-- /sidebar menu -->
-
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Settings">
@@ -156,7 +160,6 @@ if ($admin_name != '') {
                     <!-- /menu footer buttons -->
                 </div>
             </div>
-
             <!-- top navigation -->
             <div class="top_nav">
                 <div class="nav_menu">
@@ -164,7 +167,6 @@ if ($admin_name != '') {
                         <div class="nav toggle">
                             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                         </div>
-
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

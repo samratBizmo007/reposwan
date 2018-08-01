@@ -130,7 +130,6 @@
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -152,8 +151,8 @@
                                 </div>
                             </td>                            
                         </tr>
-                        <tr ng-if="po == ''">
-                            <td colspan="5" class="w3-center">No Records Found..!</td>
+                        <tr ng-if=" po == ''">
+                            <td colspan="5" class="w3-center"></td>
                         </tr>
                     </tbody>
                 </table>

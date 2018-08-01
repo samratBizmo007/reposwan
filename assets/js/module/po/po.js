@@ -35,6 +35,7 @@ myApp.controller('PoController', function ($scope, $http, $sce) {
                 return: false, //stop the actual form post !important!
                 success: function (data) {
                     //$.alert(data);
+                    console.log(data);
                     if (data == 200) {
                         $("#err_message").html('<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Purchase Order Added successfully.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});	location.reload();}, 5000);</script>');
                         $('#btnsubmit').html('<button  type="submit" title="add PO" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Purchase Order</button>');

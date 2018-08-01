@@ -11,20 +11,20 @@
                         <form id="addPurchaseOrderForm" name="addPurchaseOrderForm" role="form" method="post">
                             <fieldset>
                                 <div class="w3-col l12 w3-margin-bottom w3-padding-bottom">
-                                    <div class="col-lg-4 col-xs-12 col-sm-12" id="materialCategoryDiv">
+                                    <div class="col-lg-6 col-xs-12 col-sm-12" id="materialCategoryDiv">
                                         <label>Customer Name <b class="w3-text-red w3-medium">*</b></label>
                                         <select class="form-control" id="customer_name" ng-model="customer_name" name="customer_name" ng-change="getCustomerProducts()" required>
                                             <option ng-repeat="z in customer['status_message']" value="{{z.customer_name}}">{{z.customer_name}}</option>
                                         </select>                               
                                     </div>
-                                    <div class="col-lg-4 col-xs-12 col-sm-12" id="materialWeight">
+                                    <div class="col-lg-6 col-xs-12 col-sm-12" id="materialWeight">
                                         <label>Order No <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="text" name="order_no" ng-model="order_no" id="order_no" class="form-control" placeholder="Order_no" required>
                                     </div>
-                                    <div class="col-lg-4 col-xs-12 col-sm-12" id="materialWeight">
-                                        <label>Due Date <b class="w3-text-red w3-medium">*</b></label>
-                                        <input type="date" name="po_duedate" ng-model="po_duedate" id="po_duedate" class="form-control" placeholder="Po Due Date" required>
-                                    </div>
+                                    <!--                                    <div class="col-lg-4 col-xs-12 col-sm-12" id="materialWeight">
+                                                                            <label>Due Date <b class="w3-text-red w3-medium">*</b></label>
+                                                                            <input type="date" name="po_duedate" ng-model="po_duedate" id="po_duedate" class="form-control" placeholder="Po Due Date" required>
+                                                                        </div>-->
                                 </div>
                             </fieldset>
                             <div id="PoDiv" style="display: none;">
