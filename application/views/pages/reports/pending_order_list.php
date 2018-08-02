@@ -26,6 +26,9 @@
                     <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getPoByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
                 </div>
             </div>
+            <div class="col-lg-12 col-xs-12 col-sm-12" id="materialWeight" style="padding-top:0px; padding-bottom: 10px;">
+                <button  type="button" title="Download Pending Order List" id="btnsubmit" ng-click="downloadPendingOrders()" class="w3-medium w3-button theme_bg">Download Pending Order List</button>
+            </div>
         </div>
         <!--div for filter-->
 
@@ -94,7 +97,7 @@
                             </td>                            
                         </tr>
                         <tr ng-if=" po == ''">
-                            <td colspan="5" class="w3-center"></td>
+                            <td colspan="11" class="w3-center"></td>
                         </tr>
                     </tbody>
                 </table>

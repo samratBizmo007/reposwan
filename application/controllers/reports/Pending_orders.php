@@ -4,9 +4,14 @@ class Pending_orders extends CI_controller {
 
     public function __construct() {
         parent::__construct();
-        //start session     
+        //start session    
+
         $admin_name = $this->session->userdata('admin_name');
         $this->load->model('reports_model/Pendingorders_model');
+        $this->load->helper('file');
+        $this->load->helper('url');
+        $this->load->helper('download');
+
         if ($admin_name == '') {
             redirect('login');
         } else {
@@ -48,12 +53,34 @@ class Pending_orders extends CI_controller {
         extract($_GET);
         //print_r($_GET);
         //die();
-        $result = $this->Pendingorders_model->updatePoDetails($balance,$remark,$po_id);
+        $result = $this->Pendingorders_model->updatePoDetails($balance, $remark, $po_id);
         if ($result) {
             echo '200';
         } else {
             echo '500';
         }
+    }
+
+    public function downloadPendingOrders() {
+        extract($_GET);
+        $result = $this->Pendingorders_model->downloadPendingOrders($from_date, $to_date);
+        //print_r(json_encode($result));
+        $filename = 'Pending_Orders_' . date('Y-m-d') . '.csv';
+        header("Content-Type: application/csv; ");
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+// get data 
+        $usersData = $result;
+// file creation 
+        $file = fopen('php://output', 'w');
+        $header = array("P.O Number", "P.O Date", "Line No", "Item Drg No/ Sr.No", "Rate", "Quantity", "Balanced", "Due Date", "Remark");
+        fputcsv($file, $header);
+        foreach ($usersData as $key => $line) {
+            fputcsv($file, $line);
+        }
+        fclose($file);
+        force_download($file);
+        exit;
     }
 
 }

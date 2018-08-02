@@ -95,6 +95,7 @@ if ($admin_name != '') {
                                         <li><a href="<?php echo base_url(); ?>reports/pending_orders">Pending Orders</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="<?php echo base_url(); ?>required_rawmaterial/Required_rawmaterial"><i class="fa fa-sliders"></i> Required Raw Material </a></li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 

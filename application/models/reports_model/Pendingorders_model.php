@@ -47,4 +47,24 @@ class Pendingorders_model extends CI_Model {
         }
     }
 
+    public function downloadPendingOrders($from_date, $to_date) {
+        $frm_date = date_create($from_date);
+        $t_date = date_create($to_date);
+        $fdate = date_format($frm_date, "Y/m/d");
+        $tdate = date_format($t_date, "Y/m/d");
+        $sql = "SELECT order_no,added_date,"
+                . "line_no,CONCAT(product_code,'/',sr_no) as Diag_No,"
+                . "unit_rate,quantity,balanced,po_duedate,remark "
+                . "FROM purchase_orders "
+                . "WHERE po_duedate between '$fdate' and '$tdate'";
+        $result = $this->db->query($sql);
+        //echo $sql;
+        //die();
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        }
+    }
+    
 }

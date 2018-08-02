@@ -1,31 +1,3 @@
-// script to implement multistep form in add product page
-// $(document).ready(function(){
-//   var current = 1,current_step,next_step,steps;
-//   steps = $("fieldset").length;
-//   $(".next").click(function(){
-//     current_step = $(this).parent();
-//     next_step = $(this).parent().next();
-//     next_step.show();
-//     current_step.hide();
-//     setProgressBar(++current);
-//   });
-//   $(".previous").click(function(){
-//     current_step = $(this).parent();
-//     next_step = $(this).parent().prev();
-//     next_step.show();
-//     current_step.hide();
-//     setProgressBar(--current);
-//   });
-//   setProgressBar(current);
-//   // Change progress bar action
-//   function setProgressBar(curStep){
-//     var percent = parseFloat(100 / steps) * curStep;
-//     percent = percent.toFixed();
-//     $(".progress-bar")
-//     .css("width",percent+"%")
-//     .html(percent+"%");   
-//   }
-// });
 
 // script to add extra div for serial no and item code
 $(document).ready(function () {
@@ -68,7 +40,7 @@ $(document).ready(function () {
         $(this).parent('div').remove();
         x--;
         srno--;
-    })
+    });
 });
 
 // script to add extra div for serial no and item code
@@ -339,7 +311,7 @@ $(function () {
                 $('#submitForm').html(' <i class="fa fa-circle-o-notch fa-spin w3-large"></i> Saving New Product details, Hold on... ');
             },
             success: function (data) {
-                $.alert(data);
+                //$.alert(data);
                 $('#formOutput').html(data);
                 //$('form :input').val("");
                 $('#submitForm').removeAttr("disabled");
