@@ -103,7 +103,7 @@ myApp.controller('pendingPOAppController', function ($scope, $http, $sce) {
     $scope.downloadPendingOrders = function () {
         var from_date = document.getElementById("from_date").value;
         var to_date = document.getElementById("to_date").value;
-        alert(from_date);
+        //alert(from_date);
         if (from_date == '') {
             $scope.message = $sce.trustAsHtml('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select From Date.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
             return false;
@@ -113,13 +113,6 @@ myApp.controller('pendingPOAppController', function ($scope, $http, $sce) {
             return false;
         }
         document.location.href = BASE_URL + 'reports/Pending_orders/downloadPendingOrders?from_date=' + from_date + '&to_date=' + to_date;
-
-//        $http({
-//            method: 'get',
-//            url: BASE_URL + 'reports/Pending_orders/downloadPendingOrders?from_date=' + from_date + '&to_date=' + to_date
-//        }).then(function successCallback(response) {
-//            console.log(response.data);
-//        });
     };
 
     $scope.updatePoDetails = function (po_id) {

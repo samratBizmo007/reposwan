@@ -35,4 +35,14 @@ class Required_rawmaterial extends CI_controller {
         }
     }
 
+    public function getAllPurchaseOrdersByDate() {
+        extract($_GET);
+        $result = $this->Rawmaterial_required_model->getAllPurchaseOrdersByDate($from_date,$to_date);
+        if (!$result) {
+            echo '500';
+        } else {
+            print_r(json_encode($result));
+        }
+    }
+
 }

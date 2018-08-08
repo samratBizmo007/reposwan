@@ -99,26 +99,27 @@
                                                 </div>
                                                 <!----------------------------------- Modal Body------------------------------------>                                        
                                                 <div class="modal-body">
-                                                    <div class="container page_title" style="margin-top: 0px;margin-bottom: 0px;">
+                                                    <div class="container" style="margin-top: 0px;margin-bottom: 0px;">
                                                         <fieldset>
-                                                            <div class="row" style="margin-top: 5px;">
+                                                            <div class="row w3-padding" style="margin-top: 5px;">
                                                                 <div class="col-lg-12">
-                                                                    <div class="w3-padding w3-col l12">
+                                                                    <div class=" w3-col l12 w3-padding-bottom">
                                                                         Customer Name: <b class="w3-text-black">{{p.customer_name}}</b>
                                                                     </div>
                                                                     <div class="w3-col l12">
-                                                                        <div class="w3-padding w3-col l4">
+                                                                        <div class=" w3-col l4">
                                                                             Drawing no : <b class="w3-text-black">{{p.part_drwing_no}}</b> 
                                                                         </div>
-                                                                        <div class="w3-padding w3-col l4">
+                                                                        <div class=" w3-col l4">
                                                                             Revision No : <b class="w3-text-black">{{p.revision_no}}</b> 
                                                                         </div>
-                                                                        <div class="w3-padding w3-col l4">
+                                                                        <div class=" w3-col l4">
                                                                             Product Quantity : <b class="w3-text-black">{{p.quantity}}</b> 
                                                                         </div>
                                                                     </div>
-                                                                    <div class="w3-col l12" ng-repeat="r in p.rawMaterialRequired">
-                                                                        <div class="w3-col l2 w3-padding">
+                                                                    <div class="col-lg-12" ng-repeat="r in p.rawMaterialRequired">
+                                                                        <hr>
+                                                                        <div class="w3-col l2">
                                                                             <div class="w3-center" ng-if="r.rm_type == 1">
                                                                                 <label> Type </label><br>
                                                                                 <span class="w3-center"><b class="w3-text-black">SHEET</b></span>
@@ -152,43 +153,50 @@
                                                                                 <span class="w3-center"><b class="w3-text-black">BUSH</b></span>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Grade</label><br> 
-                                                                            <span class="w3-center">{{r.rmgradeSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmgradeSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Thickness</label><br>
-                                                                            <span class="w3-center">{{r.rmthickSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmthickSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Diameter</label><br>
-                                                                            <span class="w3-center">{{r.rmdiaSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmdiaSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">                                                                                                                                                        
+                                                                        <div class="w3-col l1 w3-center">                                                                                                                                                        
                                                                             <label>ID</label><br>
-                                                                            <span>{{r.rmIDSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmIDSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>OD</label><br>
-                                                                            <span class="w3-center">{{r.rmODSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmODSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Pitch</label><br>
-                                                                            <span class="w3-center">{{r.rmPitchSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmPitchSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Weight</label><br>
-                                                                            <span class="w3-center">{{r.rmweightSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmweightSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Length</label><br>
-                                                                            <span class="w3-center">{{r.rmlenSelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmlenSelected}}</b></span>
                                                                         </div>
-                                                                        <div class="w3-col l1 w3-padding w3-center">
+                                                                        <div class="w3-col l1 w3-center">
                                                                             <label>Quantity</label><br>
-                                                                            <span class="w3-center">{{r.rmqtySelected}}</span>
+                                                                            <span class="w3-center"><b class="w3-text-black">{{r.rmqtySelected}}</b></span>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-top">
+                                                                    <label>Remark</label>
+                                                                    <textarea class="form-control" name="remark" id="remark" ng-model="remark" placeholder="Remark" rows="5" cols="50" style="resize: none;"></textarea>
+                                                                </div>
+                                                                <div class="col-lg-12 col-xs-12 col-sm-12 w3-center" id="materialWeight" style="padding-top: 23px;">
+                                                                    <button type="button" title="filter Po by date" id="btnsubmit" class="w3-medium w3-button theme_bg">Change Status</button>
                                                                 </div>
                                                                 <!--                                                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
                                                                                                                                     <div class="w3-right w3-margin-right">

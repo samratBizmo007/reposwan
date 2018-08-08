@@ -75,11 +75,15 @@ class Pending_orders extends CI_controller {
         $file = fopen('php://output', 'w');
         $header = array("P.O Number", "P.O Date", "Line No", "Item Drg No/ Sr.No", "Rate", "Quantity", "Balanced", "Due Date", "Remark");
         fputcsv($file, $header);
-        foreach ($usersData as $key => $line) {
-            fputcsv($file, $line);
+        if ($result) {
+            foreach ($usersData as $key => $line) {
+                fputcsv($file, $line);
+            }
+        } else {
+            fputcsv($file, array('------------No data available-----------'));
         }
         fclose($file);
-        force_download($file);
+        //force_download($file);
         exit;
     }
 
