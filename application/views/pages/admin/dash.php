@@ -106,7 +106,7 @@
     </div>
     <!-- Div for Add Plant-->
     <div class="row" style="padding-left:10px;">
-        <div class="col-lg-4 col-sm-12 col-xs-12 w3-margin">
+        <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
             <label for="plants"><i class="fa fa-plus-square"></i> Add Plant:</label>
             <div class="w3-card w3-padding" id="plant" ng-app="plantApp" ng-controller="plantController"  >
                 <div class="w3-container w3-white" >
@@ -121,13 +121,14 @@
                         </form>
                     </div>
                     <div class="row w3-padding" style=" height: 250px; overflow: auto;">
-                        <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat="cat in category['status_message']">
-                            <span>{{cat.material_type}} </span>
-                            <a type="btn" ng-click="delPlant(cat.mat_cat_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
+                        <div class="col-lg-12 col-xs-12 col-md-12 w3-padding" ng-repeat="p in plants['status_message']">
+                            <span>{{p.plant_name}} </span>
+                            <a type="btn" ng-click="delPlant(p.plant_id)" class="w3-right" ><i class="fa fa-times w3-text-black"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+                <div ng-bind-html="message"></div>
             </div>
         </div>
         <!-- Div for Add Plant-->
@@ -139,24 +140,25 @@
 <!-- script for category -->
 
 <script>
-    var category = angular.module('plantApp', ['ngSanitize']);
-    category.controller('plantController', function($scope, $http){
-
+    var plants = angular.module('plantApp', ['ngSanitize']);
+    plants.controller('plantController', function($scope, $http){
 
     $scope.submit = function (){           // POST form data to controller
     $http({
-    method: 'POST',
-            url: '<?php echo base_url(); ?>admin/dashboard/addPlant',
-            headers: {'Content-Type': 'application/json'},
+    method: "POST",
+            url: "<?php echo base_url(); ?>admin/dashboard/addPlant",
+            headers: {
+            'Content-Type': 'application/json'
+            },
             data: JSON.stringify({plant_location: $scope.plant_location})
     }).then(function (data) {
     // alert(data);
     console.log(data);
+    $scope.message = data.data;
     $scope.plant_location = '';
     $scope.showPlants();
     });
     };
-    
     //---------show all category
     $scope.showPlants = function(){
     $http({
@@ -165,17 +167,17 @@
     }).then(function successCallback(response) {
     // Assign response category object
     console.log(response);
-    $scope.category = response.data;
+    $scope.plants = response.data;
     // $scope.mes=response;
     });
     };
     $scope.showPlants();
     //---del skill
-    
-    $scope.delPlant = function(mat_cat_id){
+
+    $scope.delPlant = function(plant_id){
     $http({
     method: 'get',
-            url: '<?php base_url(); ?>dashboard/delPlant?mat_cat_id=' + mat_cat_id
+            url: '<?php base_url(); ?>dashboard/delPlant?plant_id=' + plant_id
     }).then(function successCallback(response) {
     // alert(response);
     // Assign response to skills object
@@ -185,8 +187,8 @@
     });
     };
     });
-    angular.bootstrap(document.getElementById("plant"), ['plantApp']);</script>
-<!-- script for skill -->
+    angular.bootstrap(document.getElementById("plant"), ['plantApp']);
+</script>
 <script>
     var skill = angular.module('skillApp', ['ngSanitize']);
     skill.controller('skillController', function($scope, $http){
@@ -200,7 +202,7 @@
             data: JSON.stringify({skillname: $scope.skillname})
     }).then(function (data) {
     // alert(data);
-    console.log(data);
+    //console.log(data);
     $scope.skillname = '';
     $scope.getUsers();
     });
@@ -233,16 +235,12 @@
     });
     };
     });
-    angular.bootstrap(document.getElementById("skill"), ['skillApp']);</script>
-
-
-
-<!-- script for category -->
+    //angular.bootstrap(document.getElementById("skill"), ['skillApp']);
+</script>
 
 <script>
     var category = angular.module('categoryApp', ['ngSanitize']);
     category.controller('categoryController', function($scope, $http){
-
 
     $scope.submit = function (){           // POST form data to controller
     $http({
@@ -264,7 +262,7 @@
             url: '<?php base_url(); ?>dashboard/showcategory'
     }).then(function successCallback(response) {
     // Assign response category object
-    console.log(response);
+    //console.log(response);
     $scope.category = response.data;
     // $scope.mes=response;
     });
@@ -287,8 +285,3 @@
     angular.bootstrap(document.getElementById("cat"), ['categoryApp']);
 </script>
 
-<!--  </div>
-</div>
-
-</body>
-</html> -->

@@ -94,9 +94,42 @@ class Dashboard extends CI_Controller {
         // get data passed through ANGULAR AJAX
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata, TRUE);
-        print_r($request['plant_location']);
+        //print_r($request['plant_location']);
         // call to model function to add skills from db
         $result = $this->dash_model->addPlant($request['plant_location']);
+        //echo json_encode($result);
+
+        if ($result) {
+            echo '200';
+        } else {
+            echo '500';
+//            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+//			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+//			<strong>Failure!</strong> Plant addition failed.
+//			</div>
+//			<script>
+//			window.setTimeout(function() {
+//			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+//			$(this).remove(); 
+//			});
+//			}, 5000);
+//			</script>';
+        }
+    }
+
+    //---function for show all category
+    public function showPlants() {
+        // call to model function to get all category from db
+        $result = $this->dash_model->showPlants();
+
+        echo json_encode($result);
+    }
+
+    public function delPlant() {
+        extract($_GET);
+        //print_r($_GET);die();
+        // call to model function to del  category from db
+        $result = $this->dash_model->delPlant($plant_id);
 
         echo json_encode($result);
     }
