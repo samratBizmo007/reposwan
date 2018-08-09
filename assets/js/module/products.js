@@ -86,6 +86,7 @@ $(document).ready(function () {
 // Angular script to add required skills in ad product form
 var app = angular.module("addProductForm", ['ngSanitize']);
 app.controller("ProdCtrl", function ($scope, $http) {
+//------------------------------------------------------------------------------------------------------//
 
     $scope.productData = [{id: 'choice1'}];
 
@@ -102,6 +103,23 @@ app.controller("ProdCtrl", function ($scope, $http) {
         $scope.productData.splice(lastItem);
     };
 //------------------------------------------------------------------------------------------------------//
+//-----------------------------------------div for add the product specifications-------------------------------------------------------------//
+    $scope.Data = [{id: 'choice1'}];
+
+    $scope.addNewProductSpecificationDiv = function () {
+        //document.getElementById("remove").style.display = "block";
+        var newItemNo = $scope.Data.length + 1;
+        $scope.Data.push({'id': 'choice' + newItemNo});
+        //$scope.removeDiv = false;
+
+    };
+
+    $scope.removeProductChoice = function () {
+        var lastItem = $scope.Data.length - 1;
+        $scope.Data.splice(lastItem);
+    };
+//-----------------------------------------div for add the product specifications-------------------------------------------------------------//
+
     $scope.products = [];
 
     // add skill to temp 
@@ -124,7 +142,20 @@ app.controller("ProdCtrl", function ($scope, $http) {
         $scope.products.splice(x, 1);
         $scope.skilJSON = JSON.stringify($scope.products);
     };
-
+//---------show all category
+    $scope.showPlants = function () {
+        //alert('hi');
+        $http({
+            method: 'get',
+            url: BASE_URL + 'admin/dashboard/showPlants'
+        }).then(function successCallback(response) {
+            // Assign response category object
+            console.log(response.data);
+            $scope.plants = response.data;
+            // $scope.mes=response;
+        });
+    };
+    $scope.showPlants();
     // get all skills in select box
     $scope.getSkills = function () {
         $http({
@@ -156,8 +187,10 @@ app.controller("ProdCtrl", function ($scope, $http) {
         $scope.enableQuantity = false;
         $scope.enableLength = false;
     };
-    $scope.RmType = function () {
-        //if ($scope.rmtypeSelected== "1")
+    $scope.RmType = function (index) {
+        var type = document.getElementById("rm_type_" + index).value;
+        alert(type);
+
         $scope.rmgradeSelected = '';
         $scope.rmweightSelected = '';
         $scope.rmthickSelected = '';
@@ -171,45 +204,45 @@ app.controller("ProdCtrl", function ($scope, $http) {
         // check type selected
         switch ($scope.rmtypeSelected) {
             case '1':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableThickness = true;
                 $scope.enableQuantity = true;
                 break;
             case '2':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableDiameter = true;
                 break;
             case '3':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableThickness = true;
                 $scope.enableOD = true;
                 $scope.enableQuantity = true;
                 break;
             case '4':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableID = true;
                 $scope.enableOD = true;
                 $scope.enableLength = true;
                 break;
             case '5':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableOD = true;
                 $scope.enableLength = true;
                 break;
             case '6':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableID = true;
                 $scope.enablePitch = true;
                 $scope.enableQuantity = true;
                 break;
             case '7':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableOD = true;
                 $scope.enablePitch = true;
                 $scope.enableQuantity = true;
                 break;
             case '8':
-                $scope.InputDisable()
+                $scope.InputDisable();
                 $scope.enableID = true;
                 $scope.enablePitch = true;
                 $scope.enableQuantity = true;
@@ -259,17 +292,17 @@ app.controller("ProdCtrl", function ($scope, $http) {
         }
 
         $scope.rmArr.push({
-                    rm_type: $scope.rmtypeSelected,
-                    rmgradeSelected: $scope.rmgradeSelected,
-                    rmthickSelected: $scope.rmthickSelected,
-                    rmdiaSelected: $scope.rmdiaSelected,
-                    rmIDSelected: $scope.rmIDSelected,
-                    rmODSelected: $scope.rmODSelected,
-                    rmPitchSelected: $scope.rmPitchSelected,
-                    rmweightSelected: $scope.rmweightSelected,
-                    rmlenSelected: $scope.rmlenSelected,
-                    rmqtySelected: $scope.rmqtySelected
-                });
+            rm_type: $scope.rmtypeSelected,
+            rmgradeSelected: $scope.rmgradeSelected,
+            rmthickSelected: $scope.rmthickSelected,
+            rmdiaSelected: $scope.rmdiaSelected,
+            rmIDSelected: $scope.rmIDSelected,
+            rmODSelected: $scope.rmODSelected,
+            rmPitchSelected: $scope.rmPitchSelected,
+            rmweightSelected: $scope.rmweightSelected,
+            rmlenSelected: $scope.rmlenSelected,
+            rmqtySelected: $scope.rmqtySelected
+        });
         $scope.addedRM = ($scope.rmArr);
 
         $scope.errorRM = "";

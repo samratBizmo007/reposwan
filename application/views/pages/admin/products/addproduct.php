@@ -39,24 +39,25 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom" ng-show='plantDiv'>
+                            <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom" >
                                 <div class="form-group w3-col l12">
-                                    <label for="stock_plant">Ex-stock Plant<b class="w3-text-red w3-medium">*</b> :</label>
+                                    <label for="stock_plant">Stock Plant<b class="w3-text-red w3-medium">*</b> :</label>
                                     <select name="stock_plant" class="form-control w3-small" id="stock_plant">
                                         <option value="0" class="w3-text-grey w3-light-grey " selected>Please choose any one plant</option>
-                                        <option value="ALANDI" class="w3-text-grey">ALANDI</option>
-                                        <option value="SANASWADI" class="w3-text-grey">SANASWADI</option>
+                                        <option ng-repeat="x in plants['status_message']" value="{{x.plant_name}}">{{x.plant_name}}</option>
+                                        <!--                                        <option value="ALANDI" class="w3-text-grey">ALANDI</option>
+                                        <option value="SANASWADI" class="w3-text-grey">SANASWADI</option>-->
                                     </select>
                                 </div>
-                                <div class="form-group w3-col l12">
+                                <div class="form-group w3-col l12" ng-show='plantDiv'>
                                     <label for="stock_plant">Ex-stock Quantity<b class="w3-text-red w3-medium">*</b> :</label>
                                     <input type="text" class="form-control" id="exstock_quantity" name="exstock_quantity" placeholder="Ex-stock Quantiry" >
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="w3-col l12">
-
-                        </div>-->
+                        <!--                        <div class="w3-col l12">
+                        
+                                                </div>-->
 
                         <div class="w3-col l12">
                             <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
@@ -78,211 +79,232 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="w3-col l12">
-                            <div class="w3-col l8" style="border:1px dashed">
-                                <div class="w3-col l12 w3-padding-top">
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="sr_no">Serial Number 1 :</label>
-                                            <input type="number" min="0" class="form-control" id="sr_no1" value="0" name="sr_no[]" placeholder="Enter serial number">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="part_no">Item Code 1 :</label>
-                                            <input type="text" class="form-control" id="item_code1" name="item_code[]" placeholder="Enter Item Code">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- extra added row div -->
-                                <div class="w3-col l12" id="addedmore_DivGeneral"></div>
-                                <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnGeneral" name="addMoreBtnGeneral"><i class="fa fa-plus"></i> Add more</a> 
-                            </div>
-                        </div>
-
                     </fieldset>
 
-
-                    <fieldset>
-                        <h2>Machinery Details</h2>            
-
-                        <div class="w3-col l12" style="border:1px dashed">
-                            <div class="w3-col l12 w3-padding-top" data-ng-repeat="product in productData">
-                                <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
-                                    <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
-                                    <div class="w3-card" >
-
-                                        <ul class="w3-ul">
-                                            <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
-                                        </ul>
-                                        <div class="w3-container w3-light-grey">
-                                            <div class="w3-row w3-margin-top">
-                                                <div class="w3-col l10 s10">
-                                                    <!-- fetch skills from db -->
-                                                    <select name="operations[]" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
-                                                        <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name| uppercase}}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="w3-col l2 s2">
-                                                    <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
-                                                </div>
+                    <div class="" ng-repeat="D in Data">
+                        <fieldset>
+                            <div class="w3-col l12">
+                                <div class="w3-col l8">
+                                    <div class="w3-col l12 w3-padding-top">
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="sr_no">Serial Number 1 :</label>
+                                                <input type="number" min="0" class="form-control" id="sr_no1" value="0" name="sr_no[]" placeholder="Enter serial number">
                                             </div>
-                                            <input type="hidden" name="skillAdded_field[]" id="skillAdded_field" value="{{skilJSON}}">
-                                            <p class="w3-text-red w3-center">{{errortext}}</p>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="part_no">Item Code 1 :</label>
+                                                <input type="text" class="form-control" id="item_code1" name="item_code[]" placeholder="Enter Item Code">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- extra added row div -->
+                                    <!--                                <div class="w3-col l12" id="addedmore_DivGeneral"></div>
+                                                                    <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnGeneral" name="addMoreBtnGeneral"><i class="fa fa-plus"></i> Add more</a> -->
+                                </div>
+                            </div>
+<!--                        </fieldset>
+
+                        <fieldset>-->
+                            <h2>Machinery Details</h2>            
+                            <div class="w3-col l12">
+                                <div class="w3-col l12 w3-padding-top" data-ng-repeat="product in productData">
+                                    <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                                        <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>
+                                        <div class="w3-card" >
+
+                                            <ul class="w3-ul">
+                                                <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                                            </ul>
+                                            <div class="w3-container w3-light-grey">
+                                                <div class="w3-row w3-margin-top">
+                                                    <div class="w3-col l12 s12">
+                                                        <!-- fetch skills from db -->
+                                                        <select name="operations[]" ng-model="addSkillbtn" ng-trim="false" class="form-control w3-small" id="operations">
+                                                            <option value="{{skill.skill_name}}" ng-repeat='skill in skills' class="w3-text-grey">{{skill.skill_name| uppercase}}</option>
+                                                        </select>
+                                                    </div>
+<!--                                                    <div class="w3-col l2 s2">
+                                                        <button class="w3-button theme_bg" type="button" ng-click="addSkill()" title="add operation">Add</button>
+                                                    </div>-->
+                                                </div>
+                                                <input type="hidden" name="skillAdded_field[]" id="skillAdded_field" value="{{skilJSON}}">
+                                                <p class="w3-text-red w3-center">{{errortext}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="machine">Machine used:</label>
+                                            <input type="number" min="0" class="form-control" id="machine1" name="machine[]" placeholder="eg. 20, 30, 40 ton">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="qtyhr">Quantity per hour:</label>
+                                            <input type="number" min="0" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
+                                        </div>
+                                    </div>
+                                    <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeChoice()"> -remove</a>
+                                </div>
+                                <a class="btn w3-text-red w3-margin-top w3-right" id="addMore" style="padding:0;" ng-click="addNewProductDiv()"><i class="fa fa-plus"></i> Add more</a> 
+                                <!-- extra added row div -->
+                                <!--                            <div class="w3-col l12" id="addedmore_DivMachine"></div>
+                                                            <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnMachine" name="addMoreBtnMachine"><i class="fa fa-plus"></i> Add more</a> -->
+                            </div>
+<!--                        </fieldset>
+
+                        <fieldset>-->
+                            <h2>Raw Material Details</h2>
+                            <div class="w3-col l12">
+                                <div class="w3-col l12 w3-padding-top" >              
+                                    <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_type">Raw Material Type<b class="w3-text-red w3-medium">*</b> :</label>
+                                            <select name="rm_type" class="form-control w3-small" id="rm_type_{{$index}}" ng-change="RmType($index)" ng-model="rmtypeSelected">
+                                                <?php foreach ($materialType['status_message'] as $key) { ?>
+                                                    <option value="<?php echo $key['mat_cat_id'] ?>" class="w3-text-grey"><?php echo $key['material_type'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_grade">Raw Material Grade<b class="w3-text-red w3-medium">*</b> :</label>
+                                            <input type="text" ng-model="rmgradeSelected" class="form-control" id="rm_grade_{{$index}}" name="rm_grade[]" placeholder="Enter Material Grade eg.CR, etc.">
+                                        </div>
+                                    </div>                          
+                                </div>
+                                <div class="w3-col l12" ng-show="rmSpecimen">
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_thick">Thickness :</label>
+                                            <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick_{{$index}}" name="rm_thick[]" placeholder="Material Thickness">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_dia">Diameter :</label>
+                                            <input type="number" ng-model="rmdiaSelected" min="0" ng-disabled="!enableDiameter" class="form-control" id="rm_dia_{{$index}}" name="rm_dia[]" placeholder="Material Diameter">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_id">ID :</label>
+                                            <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id_{{$index}}" name="rm_id[]" placeholder="Material ID">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_od">OD :</label>
+                                            <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od_{{$index}}" name="rm_od[]" placeholder="Material OD">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_pitch">Pitch :</label>
+                                            <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch_{{$index}}" name="rm_pitch[]" placeholder="Material Pitch">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_weight">Weight (in KGs) <b class="w3-text-red w3-medium">*</b> :</label>
+                                            <input type="number" min="0" ng-model="rmweightSelected" class="form-control" id="rm_weight_{{$index}}" name="rm_weight[]" placeholder="Material Weight">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_length">Length :</label>
+                                            <input type="number" min="0" ng-model="rmlenSelected" class="form-control" ng-disabled="!enableLength" id="rm_length_{{$index}}" name="rm_length[]" placeholder="Material Length">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
+                                        <div class="form-group">
+                                            <label for="rm_quantity">Quantity :</label>
+                                            <input type="number" min="0" ng-model="rmqtySelected" class="form-control" ng-disabled="!enableQuantity" id="rm_quantity_{{$index}}" name="rm_quantity[]" placeholder="Material Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
+                                        <div class="form-group w3-padding-top">
+                                            <button class="w3-button w3-margin-top theme_bg" type="button" ng-click="addRM()"><i class="fa fa-plus"></i> Add Material</button>
                                         </div>
                                     </div>
                                 </div>
+                                <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorRM"></p>
+                                <input type="hidden" class="form-control" name="addedRM_field" id="addedRM_field" value="{{addedRM}}">
+                                <!-- <pre>{{addedRM}}</pre> -->
+                            </div>
+
+                            <div class="w3-col l12 " ng-show='rm_table'>
+                                <table class="table table-responsive table-bordered w3-margin-top">
+                                    <thead>
+                                        <tr class="theme_bg w3-center">
+                                            <th>Material Grade</th>
+                                            <th>Material Thickness</th>
+                                            <th>Material Diameter</th>
+                                            <th>Material ID</th>
+                                            <th>Material OD</th>
+                                            <th>Material Pitch</th>
+                                            <th>Material Weight</th>
+                                            <th>Material Length</th>
+                                            <th>Material Quantity</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="mat in rmArr">
+                                        <tr class="w3-center">
+                                            <td>{{mat.rmgradeSelected}}</td>
+                                            <td>{{mat.rmthickSelected}}</td>
+                                            <td>{{mat.rmdiaSelected}}</td>
+                                            <td>{{mat.rmIDSelected}}</td>
+                                            <td>{{mat.rmODSelected}}</td>
+                                            <td>{{mat.rmPitchSelected}}</td>
+                                            <td>{{mat.rmweightSelected}} KG</td>
+                                            <td>{{mat.rmlenSelected}}</td>
+                                            <td>{{mat.rmqtySelected}}</td>
+                                            <td><a class="fa fa-remove w3-text-red" ng-click="removeMaterial($index)" title="remove material"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>            
+<!--                        </fieldset>
+
+                        <fieldset>-->
+                            <h2>Product Packing Quantity And Finished Weight</h2>
+                            <div class="w3-col l12">
                                 <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="machine">Machine used(in tonnes) 1:</label>
-                                        <input type="number" min="0" class="form-control" id="machine1" name="machine[]" placeholder="eg. 20, 30, 40 ton">
+                                    <div class="form-group w3-col l12">
+                                        <label for="Packing_Quantity_Per_Tray">Packing Quantity Per Tray<b class="w3-text-red w3-medium">*</b> :</label>
+                                        <input type="text" class="form-control" id="packingquantity_per_tray" name="packingquantity_per_tray" placeholder="Ex-stock Quantiry" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="qtyhr">Quantity per hour 1:</label>
-                                        <input type="number" min="0" class="form-control" id="qtyhr1" name="qtyhr[]" placeholder="eg.1, 2, 3, etc.">
-                                    </div>
-                                </div>
-                                <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeChoice()"> -remove</a>
-                            </div>
-                            <a class="btn w3-text-red w3-margin-top w3-right" id="addMore" style="padding:0;" ng-click="addNewProductDiv()"><i class="fa fa-plus"></i> Add more</a> 
-                            <!-- extra added row div -->
-                            <!--                            <div class="w3-col l12" id="addedmore_DivMachine"></div>
-                                                        <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnMachine" name="addMoreBtnMachine"><i class="fa fa-plus"></i> Add more</a> -->
-                        </div>
-
-                    </fieldset>
-
-
-                    <fieldset>
-                        <h2>Raw Material Details</h2>
-                        <div class="w3-col l12">
-                            <div class="w3-col l12 w3-padding-top" >              
-                                <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_type">Raw Material Type<b class="w3-text-red w3-medium">*</b> :</label>
-                                        <select name="rm_type" class="form-control w3-small" id="rm_type" ng-change="RmType()" ng-model="rmtypeSelected">
-                                            <?php foreach ($materialType['status_message'] as $key) { ?>
-                                                <option value="<?php echo $key['mat_cat_id'] ?>" class="w3-text-grey"><?php echo $key['material_type'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_grade">Raw Material Grade<b class="w3-text-red w3-medium">*</b> :</label>
-                                        <input type="text" ng-model="rmgradeSelected" class="form-control" id="rm_grade" name="rm_grade[]" placeholder="Enter Material Grade eg.CR, etc.">
-                                    </div>
-                                </div>                          
-                            </div>
-                            <div class="w3-col l12" ng-show="rmSpecimen">
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_thick">Thickness :</label>
-                                        <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_dia">Diameter :</label>
-                                        <input type="number" ng-model="rmdiaSelected" min="0" ng-disabled="!enableDiameter" class="form-control" id="rm_dia" name="rm_dia[]" placeholder="Material Diameter">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_id">ID :</label>
-                                        <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_od">OD :</label>
-                                        <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_pitch">Pitch :</label>
-                                        <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_weight">Weight (in KGs) <b class="w3-text-red w3-medium">*</b> :</label>
-                                        <input type="number" min="0" ng-model="rmweightSelected" class="form-control" id="rm_weight" name="rm_weight[]" placeholder="Material Weight">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_length">Length :</label>
-                                        <input type="number" min="0" ng-model="rmlenSelected" class="form-control" ng-disabled="!enableLength" id="rm_length" name="rm_length[]" placeholder="Material Length">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
-                                    <div class="form-group">
-                                        <label for="rm_quantity">Quantity :</label>
-                                        <input type="number" min="0" ng-model="rmqtySelected" class="form-control" ng-disabled="!enableQuantity" id="rm_quantity" name="rm_quantity[]" placeholder="Material Quantity">
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
-                                    <div class="form-group w3-padding-top">
-                                        <button class="w3-button w3-margin-top theme_bg" type="button" ng-click="addRM()"><i class="fa fa-plus"></i> Add Material</button>
+                                    <div class="form-group w3-col l12">
+                                        <label for="Net_Finished_Weight">Net Finished Weight<b class="w3-text-red w3-medium">*</b> :</label>
+                                        <input type="text" class="form-control" id="net_finished_weight" name="net_finished_weight" placeholder="Net Finished Weight" required>
                                     </div>
                                 </div>
                             </div>
-                            <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorRM"></p>
-                            <input type="hidden" class="form-control" name="addedRM_field" id="addedRM_field" value="{{addedRM}}">
-                            <!-- <pre>{{addedRM}}</pre> -->
-                        </div>
-
-                        <div class="w3-col l12 " ng-show='rm_table'>
-                            <table class="table table-responsive table-bordered w3-margin-top">
-                                <thead>
-                                    <tr class="theme_bg w3-center">
-                                        <th>Material Grade</th>
-                                        <th>Material Thickness</th>
-                                        <th>Material Diameter</th>
-                                        <th>Material ID</th>
-                                        <th>Material OD</th>
-                                        <th>Material Pitch</th>
-                                        <th>Material Weight</th>
-                                        <th>Material Length</th>
-                                        <th>Material Quantity</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody ng-repeat="mat in rmArr">
-                                    <tr class="w3-center">
-                                        <td>{{mat.rmgradeSelected}}</td>
-                                        <td>{{mat.rmthickSelected}}</td>
-                                        <td>{{mat.rmdiaSelected}}</td>
-                                        <td>{{mat.rmIDSelected}}</td>
-                                        <td>{{mat.rmODSelected}}</td>
-                                        <td>{{mat.rmPitchSelected}}</td>
-                                        <td>{{mat.rmweightSelected}} KG</td>
-                                        <td>{{mat.rmlenSelected}}</td>
-                                        <td>{{mat.rmqtySelected}}</td>
-                                        <td><a class="fa fa-remove w3-text-red" ng-click="removeMaterial($index)" title="remove material"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>            
-                    </fieldset>
-
+                        </fieldset>
+                        <!--remove button for remove div-->
+                        <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeProductChoice()"> -remove</a>
+                    </div>
+                    <!-- div for add more -->
+                    <div class="w3-col l12">
+                        <a class="btn w3-text-red w3-margin-top w3-right" id="addMore" style="padding:0;" ng-click="addNewProductSpecificationDiv()"><i class="fa fa-plus"></i> Add more</a>                     
+                        <!--this is add more button ends here-->
+                    </div>
                     <fieldset>
                         <h2>Pricing Details</h2>            
                         <div class="w3-col l12">
                             <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
-
                                 <div class="form-group">
                                     <label for="old_rate">Old Rate<b class="w3-text-red w3-medium">*</b> :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-inr"></i></span>
                                         <input type="number" class="form-control" step="0.01" min="0" id="old_rate" name="old_rate" placeholder="Enter Old Rate" required>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">
@@ -292,24 +314,6 @@
                                         <span class="input-group-addon"><i class="fa fa-inr"></i></span>
                                         <input type="number"cstep="0.01" min="0" class="form-control" id="new_rate" name="new_rate" placeholder="Enter New Rate" required>
                                     </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <h2>Product Packing Quantity And Finished Weight</h2>
-                        <div class="w3-col l12">
-                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                <div class="form-group w3-col l12">
-                                    <label for="Packing_Quantity_Per_Tray">Packing Quantity Per Tray<b class="w3-text-red w3-medium">*</b> :</label>
-                                    <input type="text" class="form-control" id="packingquantity_per_tray" name="packingquantity_per_tray" placeholder="Ex-stock Quantiry" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                <div class="form-group w3-col l12">
-                                    <label for="Net_Finished_Weight">Net Finished Weight<b class="w3-text-red w3-medium">*</b> :</label>
-                                    <input type="text" class="form-control" id="net_finished_weight" name="net_finished_weight" placeholder="Net Finished Weight" required>
                                 </div>
                             </div>
                         </div>
@@ -324,7 +328,6 @@
                 <div id="formOutput"></div>
             </div>
         </div>
-
     </div>
     <br />
 
