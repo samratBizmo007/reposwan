@@ -146,7 +146,7 @@ if ($admin_name != '') {
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <a href="<?php echo base_url(); ?>settings/Settings" data-toggle="tooltip" data-placement="top" title="Settings">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen">
