@@ -178,74 +178,73 @@ app.controller("ProdCtrl", function ($scope, $http) {
 
     // check raw material type
     // function to disable all fields
-    $scope.InputDisable = function () {
-        $scope.enableThickness = false;
-        $scope.enableDiameter = false;
-        $scope.enableID = false;
-        $scope.enableOD = false;
-        $scope.enablePitch = false;
-        $scope.enableQuantity = false;
-        $scope.enableLength = false;
+    $scope.InputDisable = function (index) {
+        document.getElementById("rm_thick_" + index).value = '';
+        document.getElementById("rm_dia_" + index).value = '';
+        document.getElementById("rm_id_" + index).value = '';
+        document.getElementById("rm_od_" + index).value = '';
+        document.getElementById("rm_pitch_" + index).value = '';
+        document.getElementById("rm_weight_" + index).value = '';
+        document.getElementById("rm_length_" + index).value = '';
+        document.getElementById("rm_quantity_" + index).value = '';
+
+        document.getElementById("rm_thick_" + index).disabled = true;
+        document.getElementById("rm_dia_" + index).disabled = true;
+        document.getElementById("rm_id_" + index).disabled = true;
+        document.getElementById("rm_od_" + index).disabled = true;
+        document.getElementById("rm_pitch_" + index).disabled = true;
+        //document.getElementById("rm_weight_" + index).disabled = true;
+        document.getElementById("rm_length_" + index).disabled = true;
+        document.getElementById("rm_quantity_" + index).disabled = true;
     };
     $scope.RmType = function (index) {
         var type = document.getElementById("rm_type_" + index).value;
-        alert(type);
-
-        $scope.rmgradeSelected = '';
-        $scope.rmweightSelected = '';
-        $scope.rmthickSelected = '';
-        $scope.rmdiaSelected = '';
-        $scope.rmIDSelected = '';
-        $scope.rmODSelected = '';
-        $scope.rmPitchSelected = '';
-        $scope.rmlenSelected = '';
-        $scope.rmqtySelected = '';
         $scope.rmSpecimen = true;
         // check type selected
-        switch ($scope.rmtypeSelected) {
+        switch (type) {
             case '1':
-                $scope.InputDisable();
-                $scope.enableThickness = true;
-                $scope.enableQuantity = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_thick_" + index).disabled = false;
+                document.getElementById("rm_quantity_" + index).disabled = false;
                 break;
             case '2':
-                $scope.InputDisable();
-                $scope.enableDiameter = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_dia_" + index).disabled = false;
                 break;
             case '3':
-                $scope.InputDisable();
-                $scope.enableThickness = true;
-                $scope.enableOD = true;
-                $scope.enableQuantity = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_thick_" + index).disabled = false;
+                document.getElementById("rm_od_" + index).disabled = false;
+                document.getElementById("rm_quantity_" + index).disabled = false;
                 break;
             case '4':
-                $scope.InputDisable();
-                $scope.enableID = true;
-                $scope.enableOD = true;
-                $scope.enableLength = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_length_" + index).disabled = false;
+                document.getElementById("rm_id_" + index).disabled = false;
+                document.getElementById("rm_od_" + index).disabled = false;
                 break;
             case '5':
-                $scope.InputDisable();
-                $scope.enableOD = true;
-                $scope.enableLength = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_od_" + index).disabled = false;
+                document.getElementById("rm_length_" + index).disabled = false;
                 break;
             case '6':
-                $scope.InputDisable();
-                $scope.enableID = true;
-                $scope.enablePitch = true;
-                $scope.enableQuantity = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_id_" + index).disabled = false;
+                document.getElementById("rm_pitch_" + index).disabled = false;
+                document.getElementById("rm_quantity_" + index).disabled = false;
                 break;
             case '7':
-                $scope.InputDisable();
-                $scope.enableOD = true;
-                $scope.enablePitch = true;
-                $scope.enableQuantity = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_od_" + index).disabled = false;
+                document.getElementById("rm_pitch_" + index).disabled = false;
+                document.getElementById("rm_quantity_" + index).disabled = false;
                 break;
             case '8':
-                $scope.InputDisable();
-                $scope.enableID = true;
-                $scope.enablePitch = true;
-                $scope.enableQuantity = true;
+                $scope.InputDisable(index);
+                document.getElementById("rm_id_" + index).disabled = false;
+                document.getElementById("rm_pitch_" + index).disabled = false;
+                document.getElementById("rm_quantity_" + index).disabled = false;
                 break;
         }
         //$scope.enableID=true;
@@ -255,66 +254,76 @@ app.controller("ProdCtrl", function ($scope, $http) {
     $scope.rmArr = [];
 
     // add skill to temp 
-    $scope.addRM = function () {
+    $scope.addRM = function (index) {
+        var type = document.getElementById("rm_type_" + index).value;
+        var grade = document.getElementById("rm_grade_" + index).value;
+        var thickness = document.getElementById("rm_thick_" + index).value;
+        var diameter = document.getElementById("rm_dia_" + index).value;
+        var id = document.getElementById("rm_id_" + index).value;
+        var od = document.getElementById("rm_od_" + index).value;
+        var pitch = document.getElementById("rm_pitch_" + index).value;
+        var weight = document.getElementById("rm_weight_" + index).value;
+        var length = document.getElementById("rm_length_" + index).value;
+        var quantity = document.getElementById("rm_quantity_" + index).value;
 
-        if (!$scope.rmtypeSelected) {
+        if (!type) {
             $scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Please select Raw Material Type!</p>";
             return;
         }
-        if (!$scope.rmgradeSelected) {
+        if (!grade) {
             $scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Grade is required!</p>";
             return;
         }
-        if (!$scope.rmweightSelected) {
+        if (!weight) {
             $scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Raw Material Weight (in KGs) is required!</p>";
             return;
         }
-        if (!$scope.rmthickSelected) {
-            $scope.rmthickSelected = 0;
+        if (!thickness) {
+            thickness = 0;
         }
-        if (!$scope.rmdiaSelected) {
-            $scope.rmdiaSelected = 0;
+        if (!diameter) {
+            diameter = 0;
         }
-        if (!$scope.rmIDSelected) {
-            $scope.rmIDSelected = 0;
+        if (!id) {
+            id = 0;
         }
-        if (!$scope.rmODSelected) {
-            $scope.rmODSelected = 0;
+        if (!od) {
+            od = 0;
         }
-        if (!$scope.rmPitchSelected) {
-            $scope.rmPitchSelected = 0;
+        if (!pitch) {
+            pitch = 0;
         }
-        if (!$scope.rmlenSelected) {
-            $scope.rmlenSelected = 0;
+        if (!length) {
+            length = 0;
         }
-        if (!$scope.rmqtySelected) {
-            $scope.rmqtySelected = 0;
+        if (!quantity) {
+            quantity = 0;
         }
 
         $scope.rmArr.push({
-            rm_type: $scope.rmtypeSelected,
-            rmgradeSelected: $scope.rmgradeSelected,
-            rmthickSelected: $scope.rmthickSelected,
-            rmdiaSelected: $scope.rmdiaSelected,
-            rmIDSelected: $scope.rmIDSelected,
-            rmODSelected: $scope.rmODSelected,
-            rmPitchSelected: $scope.rmPitchSelected,
-            rmweightSelected: $scope.rmweightSelected,
-            rmlenSelected: $scope.rmlenSelected,
-            rmqtySelected: $scope.rmqtySelected
+            rm_type: type,
+            rmgradeSelected: grade,
+            rmthickSelected: thickness,
+            rmdiaSelected: diameter,
+            rmIDSelected: id,
+            rmODSelected: od,
+            rmPitchSelected: pitch,
+            rmweightSelected: weight,
+            rmlenSelected: length,
+            rmqtySelected: quantity
         });
         $scope.addedRM = ($scope.rmArr);
 
         $scope.errorRM = "";
-        $scope.rmgradeSelected = '';
-        $scope.rmweightSelected = '';
-        $scope.rmthickSelected = '';
-        $scope.rmdiaSelected = '';
-        $scope.rmIDSelected = '';
-        $scope.rmODSelected = '';
-        $scope.rmPitchSelected = '';
-        $scope.rmlenSelected = '';
-        $scope.rmqtySelected = '';
+        grade = '';
+        weight = '';
+        thickness = '';
+        diameter = '';
+        id = '';
+        od = '';
+        pitch = '';
+        length = '';
+        quantity = '';
 
         $scope.rm_table = 'true';
     };
