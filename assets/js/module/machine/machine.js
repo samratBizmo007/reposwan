@@ -5,8 +5,6 @@
 var machine = angular.module('machineApp', []);
 machine.controller('machineController', function ($scope, $http, $sce)
 {
-
-
     $(function () {
         $("#add_MachineForm").submit(function () {
             dataString = $("#add_MachineForm").serialize();
@@ -27,9 +25,6 @@ machine.controller('machineController', function ($scope, $http, $sce)
             return false;  //stop the actual form post !important!
         });
     });
-
-
-
 
 });
 

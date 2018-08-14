@@ -10,7 +10,8 @@ class Machine_model extends CI_Model {
     public function addMachineInfo($data) {
         extract($data);
         // print_r($data);die();
-        $sql = "INSERT INTO machine_master(machine_name,machine_type,machine_capacity) VALUES ('$machine_name','$machine_type','$machine_capacity')";
+        $sql = "INSERT INTO machine_master(machine_name,machine_type,machine_capacity,quantity_per_hr) VALUES"
+                . " ('$machine_name','$machine_type','$machine_capacity','$qty_per_hr')";
 
         if ($this->db->query($sql)) {
             $response = array(
@@ -69,7 +70,8 @@ class Machine_model extends CI_Model {
         extract($data);
         //print_r($data);die();
         $sql = "UPDATE machine_master SET machine_name = '$machine_name',"
-                . "machine_type='$machine_type',machine_capacity='$machine_capacity' WHERE machine_id = '$machine_id'";
+                . "machine_type='$machine_type',machine_capacity='$machine_capacity', "
+                . "quantity_per_hr='$qty_per_hr' WHERE machine_id = '$machine_id'";
 
         //echo $sql;die();
         $this->db->query($sql);

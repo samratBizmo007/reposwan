@@ -23,7 +23,11 @@
                                         <div class="col-lg-6 col-xs-12 col-sm-12" id="machinetype">
                                             <label>Machine Type <b class="w3-text-red w3-medium">*</b></label>
                                             <input type="text" name="machine_type" ng-model="machine_type" id="machine_type"  class="form-control" placeholder="Machine Type" required>
-                                        </div>  
+                                        </div>
+                                        <div class="col-lg-6 col-xs-12 col-sm-12" id="">
+                                            <label>Machine Quantity Per Hour <b class="w3-text-red w3-medium">*</b></label>
+                                            <input type="text" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr"  class="form-control" placeholder="Machine Quantity Per Hr" required>
+                                        </div> 
                                     </div>											                           
                                 </div>
                             </div>
@@ -79,6 +83,9 @@
                                 Machine Capacity
                             </th>
                             <th class="text-center">
+                                Machine Quantity Per Hr
+                            </th>
+                            <th class="text-center">
                                 Action
                             </th>
                         </tr>
@@ -96,6 +103,7 @@
                                     <td class="w3-center"><?php echo $val['machine_name']; ?></td>
                                     <td class="w3-center"><?php echo $val['machine_type']; ?></td>
                                     <td class="w3-center"><?php echo $val['machine_capacity']; ?></td>
+                                    <td class="w3-center"><?php echo $val['quantity_per_hr']; ?></td>
                                     <td class="w3-center">
                                         <a class="btn w3-padding-small" data-toggle="modal" data-target="#updateMachineModal_<?php echo $val['machine_id']; ?>" title="Update Machine Details">
                                             <i class="w3-text-green w3-large fa fa-edit"></i>
@@ -139,7 +147,11 @@
                                                                             <div class="col-lg-6 col-xs-12 col-sm-12" id="machinetype">
                                                                                 <label>Machine Type </label>
                                                                                 <input type="text" name="machine_type" value="<?php echo $val['machine_type']; ?>" id="machine_type"  class="form-control" placeholder="Machine Type" required>
-                                                                            </div>  
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-xs-12 col-sm-12" id="">
+                                                                                <label>Machine Quantity Per Hour </label>
+                                                                                <input type="text" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr"  value="<?php echo $val['quantity_per_hr']; ?>" class="form-control" placeholder="Quantity Per Hour" required>
+                                                                            </div> 
                                                                         </div>                                                                   
                                                                     </div>
 
@@ -211,8 +223,6 @@
                                 }
                             </script>
                             <!-- Modal Ends Here-->
-
-
                             </tr>
                             <?php
                             $i++;
