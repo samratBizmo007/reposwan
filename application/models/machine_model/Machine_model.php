@@ -106,4 +106,23 @@ class Machine_model extends CI_Model {
         return $response;
     }
 
+    public function getQuantityPerHr($machine_id) {
+        $query = "SELECT quantity_per_hr FROM machine_master WHERE machine_id= '$machine_id'";
+        $result = $this->db->query($query);
+        // handle db error
+        if (!$result) {
+            // Has keys 'code' and 'message'
+            $error = $this->db->error();
+            return $error;
+            die();
+        }
+        // if no db errors
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+
+            return $result->result_array();
+        }
+    }
+
 }

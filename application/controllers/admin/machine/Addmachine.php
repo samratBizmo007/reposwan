@@ -6,6 +6,7 @@ class Addmachine extends CI_controller {
         parent::__construct();
         //start session     
         $admin_name = $this->session->userdata('admin_name');
+        $this->load->model('machine_model/Machine_model');
 
         if ($admin_name == '') {
             redirect('login');
@@ -269,6 +270,12 @@ class Addmachine extends CI_controller {
                  <td colspan="5" class="w3-center">No Records Found..!</td>
                  </tr>';
         }
+    }
+
+    public function getQuantityPerHr() {
+        extract($_GET);
+        $result = $this->Machine_model->getQuantityPerHr($machine_id);
+        print_r($result[0]['quantity_per_hr']);
     }
 
 }

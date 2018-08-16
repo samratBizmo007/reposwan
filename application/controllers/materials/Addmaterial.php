@@ -5,13 +5,15 @@ class Addmaterial extends CI_controller {
     public function __construct() {
         parent::__construct();
         //start session     
-        $admin_name=$this->session->userdata('admin_name');
-        
-        if($admin_name==''){ redirect('login'); }
-        else {
-            $sessionArr=explode('|', $admin_name);
-        //check session variable set or not, otherwise logout
-            if(($sessionArr[0]!='SWANROCKSPlates')){
+        $admin_name = $this->session->userdata('admin_name');
+        $this->load->model('material_model/Material_model');
+
+        if ($admin_name == '') {
+            redirect('login');
+        } else {
+            $sessionArr = explode('|', $admin_name);
+            //check session variable set or not, otherwise logout
+            if (($sessionArr[0] != 'SWANROCKSPlates')) {
                 redirect('login');
             }
         }
@@ -73,6 +75,12 @@ class Addmaterial extends CI_controller {
                }, 1000);
                </script>';
         }
+    }
+
+    public function getMaterialDetailsByCategory() {
+        extract($_GET);
+        $result = $this->Material_model->getMaterialDetailsByCategory($material_category);
+        echo json_encode($result);
     }
 
 }

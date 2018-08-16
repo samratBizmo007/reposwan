@@ -27,8 +27,10 @@ class Addproduct extends CI_Controller {
     // main index function
     public function index() {
         // get material categories from db
-        $this->load->model('material_model/material_model');
-        $data['materialType'] = $this->material_model->getAllMaterialCategories();
+        $this->load->model('material_model/Material_model');
+        $data['materialType'] = $this->Material_model->getAllMaterialCategories();
+        $data['skills'] = $this->product_model->getSkills();
+        $data['machines'] = $this->product_model->getMachines();
 
         $this->load->view('includes/header');
         $this->load->view('pages/admin/products/addproduct', $data);
