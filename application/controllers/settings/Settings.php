@@ -25,8 +25,10 @@ class Settings extends CI_Controller {
 
     // main index function
     public function index() {
+        $data['adminDetails']=Settings::getAdminDetails();
+         // print_r($data);
         $this->load->view('includes/header');
-        $this->load->view('pages/settings/settings');
+        $this->load->view('pages/settings/settings',$data);
         $this->load->view('includes/footer');
     }
  //---function for add skill
@@ -132,4 +134,49 @@ class Settings extends CI_Controller {
 
         echo json_encode($result);
     }
+
+      //----------this function to update admin email-----------------------------//
+ public function updateEmail() { 
+  extract($_POST);
+ 
+  $data=$_POST;
+  $path = base_url();
+  $url = $path.'api/Setting_api/updateEmail';
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $response_json = curl_exec($ch);
+  curl_close($ch);
+  $response = json_decode($response_json, true);
+  if ($response['status'] != 200) {
+    echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> '.$response['status_message'].'</h4>
+    ';
+  } else {
+    echo '<h4 class="w3-text-black w3-margin"><i class="fa fa-check"></i> '.$response['status_message'].'</h4>
+    <script>
+    window.setTimeout(function() {
+     location.reload();
+   }, 1000);
+   </script>';
+ }
+}
+//----------------this fun to update admin email end---------------//
+
+     
+//----------this function to get admin details-----------------------------
+ public function getAdminDetails() {
+
+  $path = base_url();
+  $url = $path . 'api/Setting_api/getAdminDetails';
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_HTTPGET, true);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $response_json = curl_exec($ch);
+  curl_close($ch);
+  $response = json_decode($response_json, true);
+  // print_r($response_json);die();
+  return $response;
+}
+
 }

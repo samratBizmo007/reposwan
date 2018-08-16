@@ -101,6 +101,18 @@
             </div>
         </div>
         <!-- Div for Add Plant-->
+            <div class="col-md-4 col-sm-12 col-xs-12 w3-margin">
+                        <label><i class="fa fa-envelope"></i> SetUp Email-ID</label><br>
+                        <form id="updateEmail">
+                            <div class="w3-col l8 w3-padding-right w3-margin-bottom">
+                                <input type="email" name="admin_email" value="<?php echo $adminDetails['status_message'][0]['value']; ?>" placeholder="Enter Email-ID here..." id="admin_email" class="w3-input" required>
+                            </div>
+                            <div class="w3-col l4">
+                                <button type="submit" class="w3-button theme_bg">Update Email-ID</button>
+                            </div>
+                        </form>
+                    </div>
+
     </div>
 </div>
 
@@ -254,3 +266,29 @@
     angular.bootstrap(document.getElementById("cat"), ['categoryApp']);
 </script>
 
+<!--  script to update email id   -->
+<script>
+    $(function(){
+        $("#updateEmail").submit(function(){
+            dataString = $("#updateEmail").serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url(); ?>settings/settings/updateEmail",
+                data: dataString,
+                return: false,  //stop the actual form post !important!
+
+           success: function(data)
+           {
+           
+            $.alert(data);                       
+           }
+
+       });
+
+         return false;  //stop the actual form post !important!
+
+     });
+    });
+</script>
+<!-- script ends here -->

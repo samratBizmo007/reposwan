@@ -153,6 +153,7 @@ class Addmachine extends CI_controller {
                                     <td class="w3-center">' . $val['machine_name'] . '</td>
                                     <td class="w3-center">' . $val['machine_type'] . '</td>
                                     <td class="w3-center">' . $val['machine_capacity'] . '</td>
+                                    <td class="w3-center">' . $val['quantity_per_hr'] . '</td>
                                     <td class="">
                                     <div class="w3-center">
                                         <a class="btn w3-padding-small" data-toggle="modal" data-target="#upMachineModal_' . $val['machine_id'] . '" title="Update Machine Details">
@@ -196,6 +197,10 @@ class Addmachine extends CI_controller {
                                                                             <div class="col-lg-6 col-xs-12 col-sm-12" id="machinetype">
                                                                                 <label class="w3-left">Machine Type </label>
                                                                                 <input type="text" name="machine_type" value="' . $val['machine_type'] . '" id="machine_type"  class="form-control" placeholder="Machine Type" required>
+                                                                            </div>
+                                                                               <div class="col-lg-6 col-xs-12 col-sm-12" id="">
+                                                                                <label class="w3-left">Machine Quantity Per Hour </label>
+                                                                                <input type="text" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr"  value="' . $val['quantity_per_hr'] . '" class="form-control" placeholder="Quantity Per Hour" required>
                                                                             </div>  
                                                                         </div>                                                                   
                                                                     </div>
