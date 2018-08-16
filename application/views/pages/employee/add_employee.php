@@ -157,7 +157,7 @@
                                                                     <label for="operations">Operations Performed <b class="w3-text-red w3-medium">*</b> </label>
                                                                     <div class="w3-card" >
                                                                         <ul class="w3-ul">
-                                                                            <li ng-repeat="y in employeeSkills">{{y| uppercase}}<span ng-click="deleteSkill(y,<?php echo $val['emp_id']; ?>)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+                                                                            <li ng-repeat="y in employeeSkills track by $index">{{y| uppercase}}<span ng-click="deleteSkill(y,<?php echo $val['emp_id']; ?>)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
                                                                         </ul>
                                                                         <ul class="w3-ul">
                                                                             <li ng-repeat="x in products">{{x| uppercase}}<span ng-click="removeSkill($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
