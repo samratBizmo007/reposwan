@@ -131,17 +131,15 @@ class Material_model extends CI_Model {
                 . "diameter='$diameter',remark='$remark',"
                 . "modified_date=NOW(),modified_time=NOW(),status='1' WHERE material_id = '$material_id'";
         //echo $sql;die();
-        $this->db->query($sql);
+      $this->db->query($sql);
         if ($this->db->affected_rows() > 0) {
             $response = array(
-                'status' => 200, //---------insert db success code
-                'status_message' => 'Material details updated Successfully..'
-            );
+                'status' => 200,
+                'status_message' => 'Material Details Updated Successfully..');
         } else {
             $response = array(
-                'status' => 500, //---------db error code 
-                'status_message' => 'Something Went Wrong... Material Not Updated Successfully.!!!'
-            );
+                'status' => 500,
+                'status_message' => 'Material Details Not Updated Successfully..');
         }
         return $response;
     }
