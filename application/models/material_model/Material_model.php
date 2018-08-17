@@ -205,9 +205,7 @@ class Material_model extends CI_Model {
     }
 
     public function getMaterialDetailsByCategory($material_category) {
-
-        $query = "SELECT * FROM material_master WHERE prod_id='$prod_id'";
-
+        $query = "SELECT * FROM material_tab WHERE mat_cat_id='$material_category' GROUP BY(material_grade)";
         $result = $this->db->query($query);
         // handle db error
         if (!$result) {
@@ -221,9 +219,26 @@ class Material_model extends CI_Model {
         if ($result->num_rows() <= 0) {
             return false;
         } else {
-
             return $result->result_array();
         }
     }
 
+    public function getMaterialDetailsByGrade($mat_grade){
+          $query = "SELECT * FROM material_tab WHERE material_grade='$mat_grade'";
+        $result = $this->db->query($query);
+        // handle db error
+        if (!$result) {
+            // Has keys 'code' and 'message'
+            $error = $this->db->error();
+            return $error;
+            die();
+        }
+        // if no db errors
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        } 
+    }
+    
 }

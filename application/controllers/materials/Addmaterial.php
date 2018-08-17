@@ -80,7 +80,17 @@ class Addmaterial extends CI_controller {
     public function getMaterialDetailsByCategory() {
         extract($_GET);
         $result = $this->Material_model->getMaterialDetailsByCategory($material_category);
-        echo json_encode($result);
+        //echo $result;
+        for ($i = 0; $i < count($result); $i++) {
+            //print_r($result[$i]['material_grade']);
+            echo '<option value="' . $result[$i]['material_grade'] . '">' . $result[$i]['material_grade'] . '</option>';
+        }
+    }
+
+    public function getMaterialDetailsByGrade() {
+        extract($_GET);
+        $result = $this->Material_model->getMaterialDetailsByGrade($mat_grade);
+        print_r($result);
     }
 
 }

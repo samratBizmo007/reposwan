@@ -43,45 +43,12 @@
 //    });
 //});
 
-function getQuantityPerHr(id) {
-    var machine_id = $("#machine_" + id).val();
-    $.ajax({
-        type: "GET",
-        url: BASE_URL + "admin/machine/addmachine/getQuantityPerHr",
-        data: {
-            machine_id: machine_id
-        },
-        cache: false,
-        success: function (data) {
-            if (data != '') {
-                $('#qtyhr_' + id).val(data);
-            }
-        }
-    });
-}
-
-function getMaterialDetailsByCategory(id) {
-    var material_category = $("#rm_type_" + id).val();
-    $.ajax({
-        type: "GET",
-        url: BASE_URL + "materials/addmaterial/getMaterialDetailsByCategory",
-        data: {
-            material_category: material_category
-        },
-        cache: false,
-        success: function (data) {
-            alert(data);
-        }
-    });
-}
-
 // Angular script to add required skills in ad product form
 var app = angular.module("addProductForm", ['ngSanitize']);
 app.controller("ProdCtrl", function ($scope, $http) {
 //------------------------------------------------------------------------------------------------------//
 
     $scope.productData = [{id: 'choice1'}];
-
     $scope.addNewProductDiv = function () {
         //document.getElementById("remove").style.display = "block";
         var newItemNo = $scope.productData.length + 1;
@@ -125,7 +92,7 @@ app.controller("ProdCtrl", function ($scope, $http) {
             $scope.errortext = "This operation is already listed.";
         }
     };
-
+//--------------------------------------------------------------------------------------------------------------------------------
     // remove skill from temp
     $scope.removeSkill = function (x) {
         $scope.errortext = "";
@@ -145,18 +112,8 @@ app.controller("ProdCtrl", function ($scope, $http) {
             // $scope.mes=response;
         });
     };
+    //-------------------------------------------------------------------------------------------------------------
     $scope.showPlants();
-    // get all skills in select box
-//    $scope.getSkills = function () {
-//        $http({
-//            method: 'get',
-//            url: BASE_URL + 'admin/products/addproduct/getAllSkills'
-//        }).then(function successCallback(response) {
-//            // Assign response to skills object
-//            $scope.skills = response.data;
-//        });
-//    };
-//    $scope.getSkills();
 
     // check product type and display plant
     $scope.prodType = function () {
@@ -168,73 +125,83 @@ app.controller("ProdCtrl", function ($scope, $http) {
 
     // check raw material type
     // function to disable all fields
-    $scope.InputDisable = function (index) {
-        document.getElementById("rm_thick_" + index).value = '';
-        document.getElementById("rm_dia_" + index).value = '';
-        document.getElementById("rm_id_" + index).value = '';
-        document.getElementById("rm_od_" + index).value = '';
-        document.getElementById("rm_pitch_" + index).value = '';
-        document.getElementById("rm_weight_" + index).value = '';
-        document.getElementById("rm_length_" + index).value = '';
-        document.getElementById("rm_quantity_" + index).value = '';
+    $scope.InputDisable = function () {
+        document.getElementById("rm_thick").value = '';
+        document.getElementById("rm_dia").value = '';
+        document.getElementById("rm_id").value = '';
+        document.getElementById("rm_od").value = '';
+        document.getElementById("rm_pitch").value = '';
+        document.getElementById("rm_weight").value = '';
+        document.getElementById("rm_length").value = '';
+        document.getElementById("rm_quantity").value = '';
+        document.getElementById("Drawing_no").value = '';
 
-        document.getElementById("rm_thick_" + index).disabled = true;
-        document.getElementById("rm_dia_" + index).disabled = true;
-        document.getElementById("rm_id_" + index).disabled = true;
-        document.getElementById("rm_od_" + index).disabled = true;
-        document.getElementById("rm_pitch_" + index).disabled = true;
+
+        document.getElementById("rm_thick").disabled = true;
+        document.getElementById("rm_dia").disabled = true;
+        document.getElementById("rm_id").disabled = true;
+        document.getElementById("rm_od").disabled = true;
+        document.getElementById("rm_pitch").disabled = true;
         //document.getElementById("rm_weight_" + index).disabled = true;
-        document.getElementById("rm_length_" + index).disabled = true;
-        document.getElementById("rm_quantity_" + index).disabled = true;
+        document.getElementById("rm_length").disabled = true;
+        document.getElementById("rm_quantity").disabled = true;
+        document.getElementById("Drawing_no").disabled = true;
+
     };
-    $scope.RmType = function (index) {
-        var type = document.getElementById("rm_type_" + index).value;
+    $scope.RmType = function () {
+        $scope.getMaterialDetailsByCategory();
+        var type = document.getElementById("rm_type").value;
+        //alert(index);
         $scope.rmSpecimen = true;
         // check type selected
         switch (type) {
             case '1':
-                $scope.InputDisable(index);
-                document.getElementById("rm_thick_" + index).disabled = false;
-                document.getElementById("rm_quantity_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_thick").disabled = false;
+                document.getElementById("rm_quantity").disabled = false;
                 break;
             case '2':
-                $scope.InputDisable(index);
-                document.getElementById("rm_dia_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_dia").disabled = false;
                 break;
             case '3':
-                $scope.InputDisable(index);
-                document.getElementById("rm_thick_" + index).disabled = false;
-                document.getElementById("rm_od_" + index).disabled = false;
-                document.getElementById("rm_quantity_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_thick").disabled = false;
+                document.getElementById("rm_od").disabled = false;
+                document.getElementById("rm_quantity").disabled = false;
+                document.getElementById("Drawing_no").disabled = false;
                 break;
             case '4':
-                $scope.InputDisable(index);
-                document.getElementById("rm_length_" + index).disabled = false;
-                document.getElementById("rm_id_" + index).disabled = false;
-                document.getElementById("rm_od_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_length").disabled = false;
+                document.getElementById("rm_id").disabled = false;
+                document.getElementById("rm_od").disabled = false;
                 break;
             case '5':
-                $scope.InputDisable(index);
-                document.getElementById("rm_od_" + index).disabled = false;
-                document.getElementById("rm_length_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_od").disabled = false;
+                document.getElementById("rm_length").disabled = false;
                 break;
             case '6':
-                $scope.InputDisable(index);
-                document.getElementById("rm_id_" + index).disabled = false;
-                document.getElementById("rm_pitch_" + index).disabled = false;
-                document.getElementById("rm_quantity_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_id").disabled = false;
+                document.getElementById("rm_pitch").disabled = false;
+                document.getElementById("rm_quantity").disabled = false;
+                document.getElementById("Drawing_no").disabled = false;
                 break;
             case '7':
-                $scope.InputDisable(index);
-                document.getElementById("rm_od_" + index).disabled = false;
-                document.getElementById("rm_pitch_" + index).disabled = false;
-                document.getElementById("rm_quantity_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_od").disabled = false;
+                document.getElementById("rm_pitch").disabled = false;
+                document.getElementById("rm_quantity").disabled = false;
+                document.getElementById("Drawing_no").disabled = false;
                 break;
             case '8':
-                $scope.InputDisable(index);
-                document.getElementById("rm_id_" + index).disabled = false;
-                document.getElementById("rm_pitch_" + index).disabled = false;
-                document.getElementById("rm_quantity_" + index).disabled = false;
+                $scope.InputDisable();
+                document.getElementById("rm_id").disabled = false;
+                document.getElementById("rm_pitch").disabled = false;
+                document.getElementById("rm_quantity").disabled = false;
+                document.getElementById("Drawing_no").disabled = false;
                 break;
         }
         //$scope.enableID=true;
@@ -242,19 +209,157 @@ app.controller("ProdCtrl", function ($scope, $http) {
 
     // script to add multiple raw material in div
     $scope.rmArr = [];
+    $scope.MachineSelectedArr = [];
+    $scope.MachineArr = [];
+    $scope.ProductsArr = [];
+    $scope.machines = [];
+    $scope.machinesSelected = [];
+    $scope.req_materials = [];
+    //$scope.machines = '';
+
+//-----------------------------------------------------------------------------------------------------------------------------------//
+//creating array of sub products for add product master
+    $scope.submitProduct = function () {
+        var serial_no = $('#sr_no').val();
+        var item_code = $('#item_code').val();
+        var packingquantity_per_tray = $('#packingquantity_per_tray').val();
+        var net_finished_weight = $('#net_finished_weight').val();
+        var addedMachines_field = $('#addedMachines_field').val();
+        var addedRM_field = $('#addedRM_field').val();
+        //alert(net_finished_weight);
+        var machine_details = $scope.MachineArr;
+        var machineSelected_details = $scope.MachineSelectedArr;
+        var requiredMaterial = $scope.rmArr;
+        if (!serial_no) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Add Item Serial No.!</p>";
+            return;
+        }
+        if (!item_code) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Add Item Code.!</p>";
+            return;
+        }
+        if (!packingquantity_per_tray) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Add Item's Packing Quantity Per Tray.!</p>";
+            return;
+        }
+        if (!net_finished_weight) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Add Item's Net Finished Weight.!</p>";
+            return;
+        }
+        if (!machine_details) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Select Item's Required Machines Details.!</p>";
+            return;
+        }
+        if (!requiredMaterial) {
+            $scope.errorForProductDetails = "<p><i class='fa fa-minus-circle'></i> Please Select And Add Item's Required Raw Material.!</p>";
+            return;
+        }
+
+        $scope.ProductsArr.push({
+            serial_no: serial_no,
+            item_code: item_code,
+            machine_details: machine_details,
+            machineSelected_details: machineSelected_details,
+            packingquantity_per_tray: packingquantity_per_tray,
+            net_finished_weight: net_finished_weight,
+            requiredMaterial: requiredMaterial
+        });
+        $scope.addedProducts = ($scope.ProductsArr);
+        $scope.errorForProductDetails = '';
+        serial_no = '';
+        item_code = '';
+        addedMachines_field = '';
+        addedRM_field = '';
+        packingquantity_per_tray = '';
+        net_finished_weight = '';
+        $scope.productsDiv = 'true';
+
+        $scope.getAllProducts($scope.ProductsArr);
+        $scope.MachineArr.length = 0;
+        $scope.MachineSelectedArr.length = 0;
+        $scope.rmArr.length = 0;
+    };
+
+    $scope.AllProduct = [];
+    $scope.getAllProducts = function (prod) {
+        $scope.AllProduct.push(prod);
+    };
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------
+    $scope.addMachineDetails = function () {
+
+        var operations = document.getElementById("operations").value;
+        var machine = document.getElementById("machine").value;
+        var qtyhr = document.getElementById("qtyhr").value;
+
+        var operationSelected = $("#operations option:selected").text();
+        var machineSelected = $("#machine option:selected").text();
+        var qtyhrAdded = $("#qtyhr").val();
+        //alert(operationSelected);
+        if (!operations) {
+            $scope.errorMachine = "<p><i class='fa fa-minus-circle'></i> Please select Raw Material Type!</p>";
+            return;
+        }
+        if (!machine) {
+            $scope.errorMachine = "<p><i class='fa fa-minus-circle'></i> Please Select Machine name and Type!</p>";
+            return;
+        }
+        if (!qtyhr) {
+            $scope.errorMachine = "<p><i class='fa fa-minus-circle'></i> Quantity Per Hour required!</p>";
+            return;
+        }
+
+        $scope.MachineArr.push({
+            operations: operations,
+            machine: machine,
+            qtyhr: qtyhr
+        });
+
+        $scope.MachineSelectedArr.push({
+            operationSelected: operationSelected,
+            machineSelected: machineSelected,
+            qtyhrAdded: qtyhrAdded
+        });
+
+        $scope.addedMachines = ($scope.MachineArr);
+        $scope.addedMachineSelectedArr = ($scope.MachineSelectedArr);
+
+        $scope.errorMachine = "";
+        operations = '';
+        machine = '';
+        qtyhr = '';
+        $scope.machineDiv = 'true';
+        //alert($scope.machineDiv);
+    };
+
+    // remove material from temp table
+    $scope.removeMachineDetails = function (x) {
+        //alert(x);
+        $scope.errorMachine = "";
+        $scope.MachineArr.splice(x, 1);
+        $scope.addedMachines = JSON.stringify($scope.MachineArr);
+
+        $scope.MachineSelectedArr.splice(x, 1);
+        $scope.addedMachineSelectedArr = JSON.stringify($scope.MachineSelectedArr);
+    };
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------
 
     // add skill to temp 
-    $scope.addRM = function (index) {
-        var type = document.getElementById("rm_type_" + index).value;
-        var grade = document.getElementById("rm_grade_" + index).value;
-        var thickness = document.getElementById("rm_thick_" + index).value;
-        var diameter = document.getElementById("rm_dia_" + index).value;
-        var id = document.getElementById("rm_id_" + index).value;
-        var od = document.getElementById("rm_od_" + index).value;
-        var pitch = document.getElementById("rm_pitch_" + index).value;
-        var weight = document.getElementById("rm_weight_" + index).value;
-        var length = document.getElementById("rm_length_" + index).value;
-        var quantity = document.getElementById("rm_quantity_" + index).value;
+    $scope.addRM = function () {
+        //alert(index);
+        var type = document.getElementById("rm_type").value;
+        var grade = document.getElementById("rm_grade").value;
+        var thickness = document.getElementById("rm_thick").value;
+        var diameter = document.getElementById("rm_dia").value;
+        var id = document.getElementById("rm_id").value;
+        var od = document.getElementById("rm_od").value;
+        var pitch = document.getElementById("rm_pitch").value;
+        var weight = document.getElementById("rm_weight").value;
+        var length = document.getElementById("rm_length").value;
+        var quantity = document.getElementById("rm_quantity").value;
+        var drawing_no = document.getElementById("Drawing_no").value;
 
         if (!type) {
             $scope.errorRM = "<p><i class='fa fa-minus-circle'></i> Please select Raw Material Type!</p>";
@@ -289,6 +394,9 @@ app.controller("ProdCtrl", function ($scope, $http) {
         if (!quantity) {
             quantity = 0;
         }
+        if (!drawing_no) {
+            drawing_no = 0;
+        }
 
         $scope.rmArr.push({
             rm_type: type,
@@ -300,7 +408,8 @@ app.controller("ProdCtrl", function ($scope, $http) {
             rmPitchSelected: pitch,
             rmweightSelected: weight,
             rmlenSelected: length,
-            rmqtySelected: quantity
+            rmqtySelected: quantity,
+            rmdrawingSelected: drawing_no
         });
         $scope.addedRM = ($scope.rmArr);
 
@@ -314,7 +423,7 @@ app.controller("ProdCtrl", function ($scope, $http) {
         pitch = '';
         length = '';
         quantity = '';
-
+        drawing_no = '';
         $scope.rm_table = 'true';
     };
 
@@ -324,8 +433,44 @@ app.controller("ProdCtrl", function ($scope, $http) {
         $scope.rmArr.splice(x, 1);
         $scope.addedRM = JSON.stringify($scope.rmArr);
     };
+//----------------------------------------------------------------------------------------------------------------------------------------------
 
+    $scope.getMaterialDetailsByCategory = function () {
+        var material_category = $("#rm_type").val();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "materials/addmaterial/getMaterialDetailsByCategory",
+            data: {
+                material_category: material_category
+            },
+            cache: false,
+            success: function (data) {
+                $("#rm_grade").empty();
+                $("#rm_grade").append(data);
+            }
+        });
+    };
+
+    $scope.getQuantityPerHr = function () {
+        var machine_id = $("#machine").val();
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "admin/machine/addmachine/getQuantityPerHr",
+            data: {
+                machine_id: machine_id
+            },
+            cache: false,
+            success: function (data) {
+                if (data != '') {
+                    $('#qtyhr').val(data);
+                }
+            }
+        });
+    };
 });
+
+
+
 
 // ------------POST form data to PHP controller--------------
 $(function () {
@@ -397,5 +542,5 @@ app.controller("allProdCtrl", function ($scope, $http, $window) {
                 }
             }
         });
-    }
+    };
 });
