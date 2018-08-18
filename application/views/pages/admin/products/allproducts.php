@@ -29,10 +29,10 @@ fieldset{
                   <th class="w3-center">Customer Name</th>
                   <th class="w3-center">Part name/Title</th>
                   <th class="w3-center">Drg No./Part No.</th>
-                  <th class="w3-center">Serial No.</th>
-                  <th class="w3-center">Revision No.</th>
-                  <th class="w3-center">Item Code</th>
-                  <th class="w3-center">Date of Addition</th>
+<!--                   <th class="w3-center">Serial No.</th>
+ -->                  <th class="w3-center">Revision No.</th>
+<!--                   <th class="w3-center">Item Code</th>
+ -->                  <th class="w3-center">Date of Addition</th>
                   <th class="w3-center">Action</th>
                 </tr>
               </thead>
@@ -55,17 +55,17 @@ fieldset{
                       <td><?php echo $key['customer_name']; ?></td>
                       <td><?php echo $key['product_name']; ?></td>
                       <td><?php echo $key['drawing_no']; ?></td>
-                      <td><?php 
+                    <!--   <td><?php 
                       foreach (json_decode($key['sr_item_code'],TRUE) as $val) {
                         echo '<div class="w3-col l12 w3-center w3-border">'.$val['sr_no'].'</div>';
                       }
-                      ?></td>
+                      ?></td> -->
                       <td><?php echo $key['revision_no']; ?></td>
-                      <td><?php 
+                     <!--  <td><?php 
                       foreach (json_decode($key['sr_item_code'],TRUE) as $val) {
                         echo '<div class="w3-col l12 w3-center w3-border">'.$val['item_code'].'</div>';
                       }
-                      ?></td>
+                      ?></td> -->
                       <td><?php echo $key['added_date']; ?></td>
                       <td>
                         <a class="btn w3-large" style="padding: 0" title="View Product" href="<?php echo base_url(); ?>admin/products/viewproduct/<?php echo base64_encode($key['prod_id']); ?>"><i class="fa fa-search-plus"></i></a>

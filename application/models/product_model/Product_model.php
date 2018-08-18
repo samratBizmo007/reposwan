@@ -145,6 +145,9 @@ class Product_model extends CI_Model {
         $query = "SELECT * FROM product_master WHERE prod_id='$prod_id'";
 
         $result = $this->db->query($query);
+
+        $allData['product_detail']=$result->result_array();
+        //$allData
         // handle db error
         if (!$result) {
             // Has keys 'code' and 'message'
@@ -153,12 +156,27 @@ class Product_model extends CI_Model {
             die();
         }
 
+        $sub_products='';
         // if no db errors
         if ($result->num_rows() <= 0) {
             return false;
         } else {
+            foreach ($result->result_array() as $row) {
+                $sub_products = $row['sub_products'];
+            }
 
-            return $result->result_array();
+            $arr=json_decode($sub_products);
+
+            $allSubProducts=[];
+            // get subproductsb details
+            foreach ($arr as $key) {
+                $sub_query = "SELECT * FROM product_tab WHERE p_id='$key'";
+
+        $sub_result = $this->db->query($sub_query);
+        $allSubProducts[]=$sub_result->result_array();
+            }
+            $allData['subProduct_detail']=$allSubProducts;
+            return $allData;
         }
     }
 
