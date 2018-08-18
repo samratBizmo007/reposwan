@@ -50,20 +50,53 @@ class Product_model extends CI_Model {
     // add new product to master table--------------------------
     public function addNewProduct($data) {
         extract($data);
+        //print_r($data);die();
+        $sub_products = json_decode($product_info, TRUE);
+        //print_r($sub_products);
+        //die();
+        $product_id = array();
+        $products = array();
+        $parent_id = '';
+        $serial_no = '';
+        $part_code = '';
+        $machine_info = '';
+        $packing_qty_per_tray = '';
+        $finished_weight = '';
+        for ($i = 0; $i < count($sub_products); $i++) {
+            //print_r($sub_products[$i]);die();
+            $sql = "SELECT * FROM information_schema.TABLES WHERE TABLE_NAME ='product_tab' AND TABLE_SCHEMA='swan_db'";
+            //---this sql query for get auto increment value of product table
+            //---the parent_id is used to get autoincrement id of product table-------------------------------------------------//        
+            $serial_no = $sub_products[$i]['serial_no'];
+            $part_code = $sub_products[$i]['item_code'];
+            $machine_info = json_encode($sub_products[$i]['machine_details']);
+            $requiredMaterial = json_encode($sub_products[$i]['requiredMaterial']);
+            $packing_qty_per_tray = $sub_products[$i]['packingquantity_per_tray'];
+            $finished_weight = $sub_products[$i]['net_finished_weight'];
+
+            $result = $this->db->query($sql);
+            foreach ($result->result_array() as $row) {
+                $parent_id = $row['AUTO_INCREMENT'];
+            }
+            $product_id[] = $parent_id;
+            $sqlInsert = "INSERT INTO product_tab (sr_no,part_code,machine_info,material_details,packing_qty_per_tray,finished_weight) "
+                    . "values ('$serial_no','$part_code','$machine_info','$requiredMaterial','$packing_qty_per_tray','$finished_weight')";
+            $InsertResult = $this->db->query($sqlInsert);
+        }
+
+       // $sqlInsertMasterProduct = "INSERT INTO product_master () values ()";
+
+
         if (!empty($data)) {
             $insertData = array(
                 'customer_name' => $customer_name,
                 'prod_type' => $prod_type,
+                'sub_products' => json_encode($product_id),
                 'stock_plant' => $stock_plant,
                 'ex_stock_quantity' => $exstock_quantity,
                 'product_name' => $product_name,
                 'drawing_no' => $drawing_no,
                 'revision_no' => $revision_no,
-                'sr_item_code' => $sr_item_code,
-                'quantity_per_tray' => $packingquantity_per_tray,
-                'finished_weight' => $net_finished_weight,
-                'machine_qtyhr' => $machine_qtyhr,
-                'rm_required' => $rm_required,
                 'old_rate' => $old_rate,
                 'new_rate' => $new_rate,
                 'added_date' => date('Y-m-d'),

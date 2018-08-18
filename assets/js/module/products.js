@@ -255,7 +255,50 @@ app.controller("ProdCtrl", function ($scope, $http) {
             return;
         }
 
-        $scope.ProductsArr.push({
+//        $scope.ProductsArr.push({
+//            serial_no: serial_no,
+//            item_code: item_code,
+//            machine_details: machine_details,
+//            machineSelected_details: machineSelected_details,
+//            packingquantity_per_tray: packingquantity_per_tray,
+//            net_finished_weight: net_finished_weight,
+//            requiredMaterial: requiredMaterial
+//        });
+//        $scope.addedProducts = ($scope.ProductsArr);
+        $scope.errorForProductDetails = '';
+
+        addedMachines_field = '';
+        addedRM_field = '';
+
+        $scope.productsDiv = 'true';
+
+        $scope.getAllProducts(serial_no, item_code, $scope.MachineArr, $scope.MachineSelectedArr, packingquantity_per_tray, net_finished_weight, $scope.rmArr);
+        $('#packingquantity_per_tray').val('');
+        $('#net_finished_weight').val('');
+        $('#sr_no').val('');
+        $('#item_code').val('');
+//        $("#operations option:selected").text('');
+//        $("#machine option:selected").text('');
+        $("#qtyhr").val('');
+//        $("#rm_type option:selected").text('');
+//        $("#rm_grade option:selected").text('');
+        document.getElementById("rm_thick").value = '';
+        document.getElementById("rm_dia").value = '';
+        document.getElementById("rm_id").value = '';
+        document.getElementById("rm_od").value = '';
+        document.getElementById("rm_pitch").value = '';
+        document.getElementById("rm_weight").value = '';
+        document.getElementById("rm_length").value = '';
+        document.getElementById("rm_quantity").value = '';
+        document.getElementById("Drawing_no").value = '';
+        $scope.MachineArr = [];
+        $scope.MachineSelectedArr = [];
+        $scope.rmArr = [];
+    };
+
+    $scope.AllProduct = [];
+    $scope.getAllProducts = function (serial_no, item_code, machine_details, machineSelected_details, packingquantity_per_tray, net_finished_weight, requiredMaterial) {
+        $scope.AllProduct.push({
             serial_no: serial_no,
             item_code: item_code,
             machine_details: machine_details,
@@ -264,25 +307,14 @@ app.controller("ProdCtrl", function ($scope, $http) {
             net_finished_weight: net_finished_weight,
             requiredMaterial: requiredMaterial
         });
-        $scope.addedProducts = ($scope.ProductsArr);
-        $scope.errorForProductDetails = '';
-        serial_no = '';
-        item_code = '';
-        addedMachines_field = '';
-        addedRM_field = '';
-        packingquantity_per_tray = '';
-        net_finished_weight = '';
-        $scope.productsDiv = 'true';
+        $scope.addedProducts = ($scope.AllProduct);
 
-        $scope.getAllProducts($scope.ProductsArr);
-        $scope.MachineArr.length = 0;
-        $scope.MachineSelectedArr.length = 0;
-        $scope.rmArr.length = 0;
     };
 
-    $scope.AllProduct = [];
-    $scope.getAllProducts = function (prod) {
-        $scope.AllProduct.push(prod);
+    $scope.removeProductDetails = function (x) {
+        $scope.errorForProductDetails = "";
+        $scope.AllProduct.splice(x, 1);
+        $scope.addedProducts = JSON.stringify($scope.AllProduct);
     };
 
 
@@ -469,9 +501,6 @@ app.controller("ProdCtrl", function ($scope, $http) {
     };
 });
 
-
-
-
 // ------------POST form data to PHP controller--------------
 $(function () {
     $("#addProduct").submit(function () {
@@ -497,7 +526,6 @@ $(function () {
             error: function (data) {
                 $('#submitForm').removeAttr("disabled");
                 $('#formOutput').html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Something went wrong. Please refresh the page and try once again.</div>');
-
                 $('#submitForm').html(' <i class="fa fa-save"></i> Save and Add New Product ');
                 window.setTimeout(function () {
                     $(".alert").fadeTo(500, 0).slideUp(500, function () {

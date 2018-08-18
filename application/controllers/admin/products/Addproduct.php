@@ -46,13 +46,27 @@ class Addproduct extends CI_Controller {
 
     // add new product function
     public function addNewProduct() {
-        //print_r($_POST);die();
         extract($_POST);
         //echo $prod_type;
         if ($prod_type == '? undefined:undefined ?') {
             echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Warning!</strong> Please select Product type in General Details.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			}, 5000);
+			</script>';
+            die();
+        }
+
+        if ($addedMachines_field == '') {
+            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Warning!</strong> Please select at least one machine details.
 			</div>
 			<script>
 			window.setTimeout(function() {
@@ -77,20 +91,7 @@ class Addproduct extends CI_Controller {
 			</script>';
             die();
         }
-        if ($skillAdded_field == '' || $skillAdded_field == '[]') {
-            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<strong>Warning!</strong> Please add at least one Operation in Machinery Details.
-			</div>
-			<script>
-			window.setTimeout(function() {
-			$(".alert").fadeTo(500, 0).slideUp(500, function(){
-			$(this).remove(); 
-			});
-			}, 5000);
-			</script>';
-            die();
-        }
+
         if ($addedRM_field == '' || $addedRM_field == '[]') {
             echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -105,25 +106,41 @@ class Addproduct extends CI_Controller {
 			</script>';
             die();
         }
-        $SerialItemArr = array();
-        $MachineQtyArr = array();
-
-        // json for serial no and respective item code
-        for ($i = 0; $i < count($sr_no); $i++) {
-            $SerialItemArr[] = array(
-                'sr_no' => $sr_no[$i],
-                'item_code' => $item_code[$i]
-            );
+        if ($addedProducts_field == '' || $addedProducts_field == '[]') {
+            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Warning!</strong> Please add at least one Sub Product.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			}, 5000);
+			</script>';
+            die();
         }
-
-        // json for machine and quantity per hr
-        for ($i = 0; $i < count($machine); $i++) {
-            $MachineQtyArr[] = array(
-                'operations' => $operations[$i],
-                'machine' => $machine[$i],
-                'qtyhr' => $qtyhr[$i]
-            );
-        }
+//        print_r($addedProducts_field);
+//        die();
+//        $SerialItemArr = array();
+//        $MachineQtyArr = array();
+//
+//        // json for serial no and respective item code
+//        for ($i = 0; $i < count($sr_no); $i++) {
+//            $SerialItemArr[] = array(
+//                'sr_no' => $sr_no[$i],
+//                'item_code' => $item_code[$i]
+//            );
+//        }
+//
+//        // json for machine and quantity per hr
+//        for ($i = 0; $i < count($machine); $i++) {
+//            $MachineQtyArr[] = array(
+//                'operations' => $operations[$i],
+//                'machine' => $machine[$i],
+//                'qtyhr' => $qtyhr[$i]
+//            );
+//        }
         //echo json_encode($MachineQtyArr);die();
         $prodData = array(
             'customer_name' => $customer_name,
@@ -133,12 +150,7 @@ class Addproduct extends CI_Controller {
             'product_name' => $product_name,
             'drawing_no' => $drawing_no,
             'revision_no' => $revision_no,
-            'sr_item_code' => json_encode($SerialItemArr),
-            //'operations' => $skillAdded_field,
-            'machine_qtyhr' => json_encode($MachineQtyArr),
-            'rm_required' => $addedRM_field,
-            'packingquantity_per_tray' => $packingquantity_per_tray,
-            'net_finished_weight' => $net_finished_weight,
+            'product_info' => $addedProducts_field,
             'old_rate' => $old_rate,
             'new_rate' => $new_rate
         );

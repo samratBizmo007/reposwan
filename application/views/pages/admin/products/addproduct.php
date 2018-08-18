@@ -85,18 +85,18 @@
                     <?php // print_r($machines); ?>
                     <div class="w3-col l12" data-ng-repeat="d in Data">
                         <fieldset>
-                            <div class="w3-col l12">
+                            <div class="w3-col l12 ">
                                 <div class="w3-col l8">
                                     <div class="w3-col l12 w3-padding-top">
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="sr_no">Serial Number 1 :</label>
+                                                <label for="sr_no">Serial Number :</label>
                                                 <input type="number" min="0" class="form-control" ng-model="sr_no" id="sr_no" value="0" name="sr_no" placeholder="Enter serial number">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12 col-xs-12">
                                             <div class="form-group">
-                                                <label for="part_no">Item Code 1 :</label>
+                                                <label for="part_no">Item Code :</label>
                                                 <input type="text" class="form-control" id="item_code" ng-model="item_code" name="item_code" placeholder="Enter Item Code">
                                             </div>
                                         </div>
@@ -131,7 +131,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label for="qtyhr">Quantity per hour:</label>
-                                            <input type="text" class="form-control" id="qtyhr" ng-model="qtyhr" name="qtyhr_0[]" placeholder="Machine Quantity Per Hr">
+                                            <input type="text" class="form-control" id="qtyhr" ng-model="qtyhr" name="qtyhr" placeholder="Machine Quantity Per Hr">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-12 col-xs-12">
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
                                 <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorMachine"></p>
-                                <input type="text" class="form-control" name="addedMachines_field" id="addedMachines_field" value="{{addedMachines}}">
+                                <input type="hidden" class="form-control" name="addedMachines_field" id="addedMachines_field" value="{{addedMachines}}">
 
                                 <div class=" w3-margin-bottom" ng-show="machineDiv">
                                     <div class="w3-col l12 w3-center">
@@ -233,7 +233,7 @@
                                     </div>
                                     <div class="col-lg-2 col-xs-12 col-sm-12 w3-margin-bottom">
                                         <label for="rm_drawingNo">Drawing No :</label>
-                                        <input type="number" name="Drawing_no" ng-model="rmdrawingSelected" ng-disabled="!enableDrawing" id="Drawing_no" min="0" step="0.01" class="form-control" placeholder="Drawing No" required>
+                                        <input type="number" name="Drawing_no" ng-model="rmdrawingSelected" ng-disabled="!enableDrawing" id="Drawing_no" min="0" step="0.01" class="form-control" placeholder="Drawing No">
                                     </div>
                                     <div class="col-md-2 col-sm-12 col-xs-12 w3-margin-bottom">
                                         <div class="form-group w3-padding-top">
@@ -242,7 +242,7 @@
                                     </div>
                                 </div>
                                 <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorRM"></p>
-                                <input type="text" class="form-control" name="addedRM_field" id="addedRM_field" value="{{addedRM}}">
+                                <input type="hidden" class="form-control" name="addedRM_field" id="addedRM_field" value="{{addedRM}}">
                                 <!-- <pre>{{addedRM}}</pre> -->
                             </div>
                             <!---------------------------------------------------////////////////-------------------------------------------------------->
@@ -287,13 +287,13 @@
                                 <div class="col-md-4 col-sm-12 col-xs-12">
                                     <div class="form-group w3-col l12">
                                         <label for="Packing_Quantity_Per_Tray">Packing Quantity Per Tray<b class="w3-text-red w3-medium">*</b> :</label>
-                                        <input type="number" class="form-control" id="packingquantity_per_tray" name="packingquantity_per_tray" placeholder="Ex-stock Quantiry" required>
+                                        <input type="number" class="form-control" id="packingquantity_per_tray" name="packingquantity_per_tray" placeholder="Ex-stock Quantiry">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-xs-12">
                                     <div class="form-group w3-col l12">
                                         <label for="Net_Finished_Weight">Net Finished Weight<b class="w3-text-red w3-medium">*</b> :</label>
-                                        <input type="number" class="form-control" id="net_finished_weight" name="net_finished_weight" placeholder="Net Finished Weight" required>
+                                        <input type="number" class="form-control" id="net_finished_weight" name="net_finished_weight" placeholder="Net Finished Weight">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-xs-12">
@@ -303,8 +303,9 @@
                                 </div>
                             </div>
                             <!---------------------------------------------------////////////////-------------------------------------------------------->
-
                         </fieldset>
+                        <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorForProductDetails"></p>
+
                         <!--remove button for remove div-->
                         <!--                        <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeProductChoice()"> -remove</a>-->
                         <!--                        <div class="w3-col l12" id="addedmore_DivGeneral"></div>-->
@@ -340,56 +341,22 @@
                     <div class="w3-col l12 w3-center">
                         <button type="submit" name="submitForm" id="submitForm" class="w3-center w3-hover-text-white btn theme_bg w3-margin-top"> <i class="fa fa-save"></i> Save and Add New Product </button>
                     </div>
-{{AllProduct}}
-                    <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorForProductDetails"></p>
                     <input type="hidden" class="form-control" name="addedProducts_field" id="addedProducts_field" value="{{addedProducts}}">
                     <div ng-show="productsDiv">
-                        <!--                        <div class="w3-col l12" ng-repeat="prod in ProductsArr">
-                                                    <div class="w3-col l2">
-                                                        {{prod.serial_no}}
-                                                    </div>
-                                                    <div class="w3-col l2">
-                                                        {{prod.item_code}}
-                                                    </div>
-                                                    <div class="w3-col l3" ng-repeat="p in prod.machineSelected_details">
-                                                        <div class="w3-col l4">{{p.operationSelected}}</div>
-                                                        <div class="w3-col l4">{{p.machineSelected}}</div>
-                                                        <div class="w3-col l4">{{p.qtyhrAdded}}</div>
-                                                    </div>
-                                                    <div class="w3-col l3" ng-repeat="m in prod.requiredMaterial">
-                                                        <div class="w3-col l1">{{m.rm_type}}</div>
-                                                        <div class="w3-col l1">{{m.rmgradeSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmthickSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmdiaSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmIDSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmODSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmPitchSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmweightSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmlenSelected}}</div>
-                                                        <div class="w3-col l1">{{m.rmqtySelected}}</div>
-                                                    </div>
-                                                    <div class="w3-col l2">
-                                                        {{prod.packingquantity_per_tray}}
-                                                    </div>
-                                                    <div class="w3-col l2">
-                                                        {{prod.net_finished_weight}}
-                                                    </div>                           
-                                                </div>-->
-
                         <table class="table table-responsive table-bordered w3-margin-top">
                             <thead>
                                 <tr class="theme_bg w3-center">
-                                    <th>Item Sr.No</th>
+                                    <th>Sr.No</th>
                                     <th>Item Code</th>
-                                    <th>Required Machine Details</th>
-                                    <th>Required Material Details</th>
-                                    <th>Item Quantity Per Tray</th>
-                                    <th>Item Net Finished Weight</th>                                
+                                    <th>Machine Details</th>
+                                    <th>Material Details</th>
+                                    <th>Item Qty / Tray</th>
+                                    <th>Finished Weight</th>                                
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="w3-center"ng-repeat="prod in AllProduct[0]">
+                                <tr class="w3-center"ng-repeat="prod in AllProduct">
                                     <td>{{prod.serial_no}}</td>
                                     <td>{{prod.item_code}}</td>
                                     <td>
@@ -402,11 +369,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{prod.machine_details}}
-                                                <tr ng-repeat="p in prod.machine_details">
-                                                    <td>{{p.operations}}</td>
-                                                    <td>{{p.machine}}</td>
-                                                    <td>{{p.qtyhr}}</td>
+                                                <tr ng-repeat="p in prod.machineSelected_details">
+                                                    <td>{{p.operationSelected}}</td>
+                                                    <td>{{p.machineSelected}}</td>
+                                                    <td>{{p.qtyhrAdded}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -415,17 +381,17 @@
                                         <table class="table table-responsive table-bordered w3-margin-top">
                                             <thead>
                                                 <tr class="theme_bg w3-center">
-                                                    <th>Mat.Type</th>
+                                                    <th>Type</th>
                                                     <th>Grade</th>
-                                                    <th>Thickness</th>
-                                                    <th>Diameter</th>
+                                                    <th>Thick</th>
+                                                    <th>Diam</th>
                                                     <th>ID</th>
                                                     <th>OD</th>
                                                     <th>Pitch</th>
                                                     <th>Weight</th>
                                                     <th>Length</th>
-                                                    <th>Thickness</th>
-                                                    <th>DrawingNo</th>
+                                                    <th>Thick</th>
+                                                    <th>DrgNo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -447,7 +413,7 @@
                                     </td>
                                     <td>{{prod.packingquantity_per_tray}}</td>
                                     <td>{{prod.net_finished_weight}}</td>                                    
-                                    <td><a class="fa fa-remove w3-text-red" ng-click="" title="remove Product"></a></td>
+                                    <td><a class="fa fa-remove w3-text-red" ng-click="removeProductDetails($index)" title="remove Product"></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -483,7 +449,7 @@
 <div class="form-group">\n\
 <!-- fetch skills from db -->\n\
 <label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>\n\
-<select name="operations_' +                                   x +                                   '[]" id="operations_' +                                   x +                                   '" ng-trim="false" class="form-control w3-small" id="operations">\n\
+<select name="operations_' +                                       x +                                       '[]" id="operations_' +                                       x +                                       '" ng-trim="false" class="form-control w3-small" id="operations">\n\
 <?php foreach ($skills as $key) { ?><option value="<?php echo $key['skill_name'] ?>" class="w3-text-grey"><?php echo $key['skill_name'] ?></option>\n\
 <?php } ?></select>\n\
 </div>\n\
