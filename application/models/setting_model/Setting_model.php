@@ -22,10 +22,28 @@ class Setting_model extends CI_Model {
         return $response;
     }
 
+
+ //-------UPDATE ADMIN UPDATE FUNCTION--------------//
+    public function updatePass($pass) {
+
+        $sql = "UPDATE admin_details SET value='$pass' WHERE name='password'";
+
+        if ($this->db->query($sql)) {
+            $response = array(
+                'status' => 200,
+                'status_message' => 'Password Updated Successfully..!');
+        } else {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'Password Updation Failed...!');
+        }
+        return $response;
+    }
+
      // -----------------------GET ADMIN EMAIL----------------------//
       public function getAdminDetails() {
 
-        $query = "SELECT * FROM admin_details WHERE id='3'";
+        $query = "SELECT * FROM admin_details ";
 
         $result = $this->db->query($query);
 

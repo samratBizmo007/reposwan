@@ -19,6 +19,16 @@ class Setting_api extends REST_Controller {
 		return $this->response($result);			
 	}
 	
+
+// -----------------------UPDATE PASSWORD API----------------------//
+	//-------------------------------------------------------------//
+	public function updatePass_post(){
+		extract($_POST);
+		$result = $this->Setting_model->updatePass($admin_pass);
+		return $this->response($result);			
+	}
+
+
 	public function getAdminDetails_get(){
 		// extract($_GET);
 		$result = $this->Setting_model->getAdminDetails();
