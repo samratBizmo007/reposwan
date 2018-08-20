@@ -21,9 +21,19 @@
                     <input type="date" name="to_date" ng-model="to_date" id="to_date" value="" class="form-control" placeholder="To Date" required>
                 </div>
                 <div class="col-lg-2 col-xs-12 col-sm-12" id="materialWeight" style="padding-top: 23px;">
-                    <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getAllPurchaseOrdersByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
+                    <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getPoDetails();getAllPurchaseOrdersByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
                 </div>
             </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                    <label for="rm_grade">Purchase Orders<b class="w3-text-red w3-medium">*</b> :</label>
+                    <select name="po_orders" class="form-control w3-small" ng-model="po_ordersSelected" onchange="getPoProductDetails()" id="po_orders">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="w3-col l12" id="requiredMaterial">
+
         </div>
         <!-- table div starts here-->
         <div class="row clearfix" style=" margin-top: 5px;">
@@ -53,17 +63,14 @@
                                 Quantity
                             </th>
                             <th class="text-center">
-                                Balance
-                            </th>
-                            <th class="text-center">
                                 Due&nbsp;Date
                             </th>
                             <th class="text-center">
                                 Remark
                             </th>
-                            <th class="text-center">
+<!--                            <th class="text-center">
                                 Action
-                            </th>
+                            </th>-->
                         </tr>
                     </thead>
                     <tbody id='addedRows'>                       
@@ -75,14 +82,14 @@
                             <td class="w3-center">{{p.product_code + "/" + p.sr_no}}</td>
                             <td class="w3-center">{{p.unit_rate}}</td>                            
                             <td class="w3-center">{{p.quantity}}</td>                            
-                            <td class="w3-center" width="10%">
-                                {{p.balanced}}
-                            </td>                            
                             <td class="w3-center">{{p.po_duedate}}</td>
-                            <td class="w3-center">
-                                {{p.remark}}                                
+                            <td class="w3-center w3-text-green" ng-if="p.remark_type != 1">
+                                {{p.remark}}                               
                             </td>
-                            <td class="">
+                            <td class="w3-center w3-text-red" ng-if="p.remark_type == 1">
+                                {{p.remark}}                               
+                            </td>
+<!--                            <td class="">
                                 <div class="w3-center">
                                     <a class="btn w3-padding-small w3-text-green w3-center" data class="btn" data-toggle="modal" data-target="#updateMaterialModal_{{p.po_id}}" title="Update Po Details">
                                         Material Required
@@ -91,13 +98,13 @@
                                 <div id="updateMaterialModal_{{p.po_id}}" class="modal" role="dialog">
                                     <form id="updateMaterialForm" name="updateMaterialForm">
                                         <div class="modal-dialog modal-lg">
-                                            <!----------------------------------- Modal content------------------------------------>
+                                            --------------------------------- Modal content----------------------------------
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     <h4 class="modal-title">Show Po Details</h4>
                                                 </div>
-                                                <!----------------------------------- Modal Body------------------------------------>                                        
+                                                --------------------------------- Modal Body----------------------------------                                        
                                                 <div class="modal-body">
                                                     <div class="container" style="margin-top: 0px;margin-bottom: 0px;">
                                                         <fieldset>
@@ -198,26 +205,26 @@
                                                                 <div class="col-lg-12 col-xs-12 col-sm-12 w3-center" id="materialWeight" style="padding-top: 23px;">
                                                                     <button type="button" title="filter Po by date" id="btnsubmit" class="w3-medium w3-button theme_bg">Change Status</button>
                                                                 </div>
-                                                                <!--                                                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
-                                                                                                                                    <div class="w3-right w3-margin-right">
-                                                                                                                                        <label class="">Total Net Amount:<span class=""> {{p.po_total}}</span></label>
-                                                                                                                                    </div>
-                                                                                                                                </div>-->
-                                                                <!-- REGISTER DIV ENDS -->   
+                                                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
+                                                                    <div class="w3-right w3-margin-right">
+                                                                        <label class="">Total Net Amount:<span class=""> {{p.po_total}}</span></label>
+                                                                    </div>
+                                                                </div>
+                                                                REGISTER DIV ENDS    
                                                             </div>
                                                         </fieldset>
                                                     </div>
                                                 </div>
-                                                <!----------------------------------- Modal Body------------------------------------>                                                                               
+                                                --------------------------------- Modal Body----------------------------------                                                                               
                                             </div>
-                                            <!----------------------------------- Modal content------------------------------------->
+                                            --------------------------------- Modal content-----------------------------------
                                         </div>
                                     </form>
                                 </div>
-                            </td>                                                   
+                            </td>                                                   -->
                         </tr>
-                        <tr ng-if=" po == ''">
-                            <td colspan="11" class="w3-center"></td>
+                        <tr ng-if=" po == []">
+                            <td colspan="11" class="w3-center">No Records Found.</td>
                         </tr>
                     </tbody>
                 </table>

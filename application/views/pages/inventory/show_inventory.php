@@ -191,9 +191,9 @@
                                         <th class="text-center">
                                             Rev.no
                                         </th>-->
-                                        <th class="text-center">
+<!--                                        <th class="text-center">
                                             Item Code
-                                        </th>
+                                        </th>-->
                                         <th class="text-center">
                                             Drawing no
                                         </th>
@@ -234,13 +234,13 @@
                                                     }
                                                     ?>
                                                 </td>
-                                                <td class="w3-center">
+<!--                                                <td class="w3-center">
                                                     <?php
-                                                    foreach (json_decode($val['sr_item_code'], true) as $key) {
-                                                        echo '<div class="w3-center">' . $key['item_code'] . '</div>';
-                                                    }
+//                                                    foreach (json_decode($val['sr_item_code'], true) as $key) {
+//                                                        echo '<div class="w3-center">' . $key['item_code'] . '</div>';
+//                                                    }
                                                     ?>
-                                                </td>
+                                                </td>-->
                                                 <td class="w3-center"><?php echo $val['drawing_no']; ?></td>
                                                 <td class="w3-center">
                                                     <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['production_quantity'] ?>">

@@ -47,6 +47,7 @@
                                                 <label>Product Name <b class="w3-text-red w3-medium">*</b></label>
                                                 <input type="text" name="product_name[]" ng-model="product_name" id="product_name_{{$index}}" class="form-control" placeholder="Product Name" required>
                                                 <input type="hidden" name="prod_id[]" ng-model="prod_id" id="prod_id_{{$index}}" value="{{prod_id}}" class="form-control" placeholder="Product Name" required>
+                                                <input type="hidden" name="subprod_id[]" ng-model="subprod_id" id="subprod_id_{{$index}}" value="{{subprod_id}}" class="form-control" placeholder="Product Name" required>
                                             </div>
                                         </div>
                                         <div class="w3-col l12 w3-margin-bottom">                                            
@@ -72,7 +73,7 @@
                                         <div class="w3-col l12 w3-margin-bottom">
                                             <div id="materialRate" class="col-lg-4 col-xs-12 col-sm-12">                                        
                                                 <label>Unit Rate <b class="w3-text-red w3-medium">*</b></label>
-                                                <input type="text" name="unit_rate[]" ng-model="unit_rate" id="unit_rate_{{$index}}" value="" min="0" class="form-control" placeholder="Unit Rate" required>
+                                                <input type="text" name="unit_rate[]" ng-model="unit_rate" id="unit_rate_{{$index}}" value="" min="0" class="form-control" readonly placeholder="Unit Rate" required>
                                             </div>
                                             <div class="col-lg-4 col-xs-12 col-sm-12" id="">
                                                 <label>Quantity <b class="w3-text-red w3-medium">*</b></label>

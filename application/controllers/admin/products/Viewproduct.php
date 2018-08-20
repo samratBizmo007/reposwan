@@ -10,6 +10,7 @@ class Viewproduct extends CI_Controller {
         parent::__construct();
         // load common model
         $this->load->model('product_model/product_model');
+        $this->load->model('material_model/Material_model');
         //start session		
         $admin_name = $this->session->userdata('admin_name');
         if ($admin_name == '') {
@@ -31,6 +32,10 @@ class Viewproduct extends CI_Controller {
         $prod_id = base64_decode($record_num);
         // call to model function to get all products from db
         $data['prodDetails'] = $this->product_model->getProductDetails($prod_id);
+        $data['skill_data'] = $this->product_model->getSkills();
+        $data['machine_data'] = $this->product_model->getMachines();
+        $data['materialType'] = $this->Material_model->getAllMaterialCategories();
+
         $this->load->view('includes/header');
         $this->load->view('pages/admin/products/viewproducts', $data);
         $this->load->view('includes/footer');

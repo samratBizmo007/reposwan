@@ -36,10 +36,10 @@ $prod_id = base64_decode($record_num);
                 if ($prodDetails['product_detail']) {
                     foreach ($prodDetails['product_detail'] as $key) {
                         ?>
-                                                                                                    <!-- <input type="text" name="hiddendata" ng-model="hiddendata"> -->
+                                                                                                                                                                                                            <!-- <input type="text" name="hiddendata" ng-model="hiddendata"> -->
                         <div class="w3-col l12" id="detailsDiv" >
                             <div class="w3-col l12">
-                                  <h2>Product Name: <?php echo $key['product_name']; ?></h2><br>
+                                <h2>Product Name: <?php echo $key['product_name']; ?></h2><br>
                                 <h5><b><u>General Details</u></b></h5>
                                 <table class="table table-bordered table-responsive">
                                     <thead>
@@ -51,11 +51,10 @@ $prod_id = base64_decode($record_num);
                                             <th class="w3-center">Customer Name</th>
                                             <th class="w3-center">Part name / Title</th>
                                             <th class="w3-center">Drawing No. / Part No.</th>
-<!--                                             <th class="w3-center">Serial No.</th>
- -->                                            <th class="w3-center">Revision No.</th>
-<!--                                             <th class="w3-center">Item Code</th>
- -->                                            <th class="w3-center">Packing Quantity / Tray</th>
-                                            <th class="w3-center">Finished Weight</th>
+        <!--                                             <th class="w3-center">Serial No.</th>
+                                            -->                                            <th class="w3-center">Revision No.</th>
+                                           <!--                                             <th class="w3-center">Item Code</th>
+                                            -->                                   
                                             <th class="w3-center">Date of Addition</th>
                                         </tr>
                                     </thead>
@@ -84,53 +83,126 @@ $prod_id = base64_decode($record_num);
                                             <td><?php echo $key['product_name']; ?></td>
                                             <td><?php echo $key['drawing_no']; ?></td>
                                            <!--  <td><?php
-                                                foreach (json_decode($key['sr_item_code'], TRUE) as $val) {
-                                                    echo '<div class="w3-col l12 w3-center w3-border">' . $val['sr_no'] . '</div>';
-                                                }
-                                                ?></td> -->
+                                            foreach (json_decode($key['sr_item_code'], TRUE) as $val) {
+                                                echo '<div class="w3-col l12 w3-center w3-border">' . $val['sr_no'] . '</div>';
+                                            }
+                                            ?></td> -->
                                             <td><?php echo $key['revision_no']; ?></td>
                                            <!--  <td><?php
-                                                foreach (json_decode($key['sr_item_code'], TRUE) as $val) {
-                                                    echo '<div class="w3-col l12 w3-center w3-border">' . $val['item_code'] . '</div>';
-                                                }
-                                                ?></td> -->
-                                            <td><?php echo $key['quantity_per_tray']; ?></td>
-                                            <td><?php echo $key['finished_weight']; ?></td>
+                                            foreach (json_decode($key['sr_item_code'], TRUE) as $val) {
+                                                echo '<div class="w3-col l12 w3-center w3-border">' . $val['item_code'] . '</div>';
+                                            }
+                                            ?></td> -->
+                                           
                                             <td><?php echo $key['added_date']; ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                 <h5><b><u>Sub Product Details</u></b></h5>
-                                       <table class="table table-bordered table-responsive">
+                                <h5><b><u>Sub Product Details</u></b></h5>
+                                <table class="table table-bordered table-responsive">
                                     <thead>
                                         <tr class="theme_bg w3-center">
+                                            <th class="w3-center">Sr.No</th>
                                             <th class="w3-center">Part Code</th>
-                                          
                                             <th class="w3-center">Machine Information</th>
                                             <th class="w3-center">Material Details</th>
                                             <th class="w3-center">Packing Quantity Per Trey</th>
-                                           <th class="w3-center">Finished Weight</th>
+                                            <th class="w3-center">Finished Weight</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                        for ($i=0; $i <count($prodDetails['subProduct_detail']) ; $i++) { ?>
-                                        <tr>
-                                        <td><?php echo $prodDetails['subProduct_detail'][$i][0]['part_code']; ?></td>
-                                        <td><?php
-                                        foreach(json_decode($prodDetails['subProduct_detail'][$i][0]['machine_info'])as $json){
-                                            print_r($json);
-
-                                        }
-                                        ?></td>
-                                        <td><?php echo $prodDetails['subProduct_detail'][$i][0]['']; ?></td>
-                                        <td><?php echo $prodDetails['subProduct_detail'][$i][0]['packing_qty_per_tray']; ?></td>
-                                        <td><?php echo $prodDetails['subProduct_detail'][$i][0]['finished_weight']; ?></td>
-
-                                        </tr>
-                                    
-                                    
                                         <?php
+                                        for ($i = 0; $i < count($prodDetails['subProduct_detail']); $i++) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $prodDetails['subProduct_detail'][$i][0]['sr_no']; ?></td>
+                                                <td><?php echo $prodDetails['subProduct_detail'][$i][0]['part_code']; ?></td>
+                                                <td>
+                                                    <table class="table table-responsive table-bordered w3-margin-top">
+                                                        <thead>
+                                                            <tr class="theme_bg w3-center">
+                                                                <th>Operation</th>
+                                                                <th>Machine</th>
+                                                                <th>Qty per/Hr</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $skill_name = '';
+                                                            $machineData = '';
+                                                            foreach (json_decode($prodDetails['subProduct_detail'][$i][0]['machine_info'], TRUE) as $man) {
+                                                                foreach ($skill_data as $skil) {
+                                                                    if ($skil['skill_id'] == $man['operations']) {
+                                                                        $skill_name = $skil['skill_name'];
+                                                                    }
+                                                                }
+                                                                foreach ($machine_data as $mach) {
+                                                                    if ($mach['machine_id'] == $man['machine']) {
+                                                                        $machineData = $mach['machine_name'] . '/' . $mach['machine_capacity'];
+                                                                    }
+                                                                }
+                                                                echo'<tr>
+                                                            <td>' . $skill_name . '</td>
+                                                            <td>' . $machineData . '</td>
+                                                            <td>' . $man['qtyhr'] . '</td>
+                                                            </tr>';
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td>
+                                                    <table class="table table-responsive table-bordered w3-margin-top">
+                                                        <thead>
+                                                            <tr class="theme_bg w3-center">
+                                                                <th>Type</th>
+                                                                <th>Grade</th>
+                                                                <th>Thick</th>
+                                                                <th>Diam</th>
+                                                                <th>ID</th>
+                                                                <th>OD</th>
+                                                                <th>Pitch</th>
+                                                                <th>Weight</th>
+                                                                <th>Length</th>
+                                                                <th>Thick</th>
+                                                                <th>DrgNo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $materialCategoty = '';
+                                                            foreach (json_decode($prodDetails['subProduct_detail'][$i][0]['material_details'], true) as $mat) {
+                                                                foreach ($materialType['status_message'] as $mat_type) {
+                                                                    //print_r($mat_type);
+                                                                    if ($mat['rm_type'] == $mat_type['mat_cat_id']) {
+                                                                        $materialCategoty = $mat_type['material_type'];
+                                                                    }
+                                                                }
+                                                                echo '<tr>
+                                                    <td >' . $materialCategoty . '</td>
+                                                    <td >' . $mat['rmgradeSelected'] . '</td>
+                                                    <td >' . $mat['rmthickSelected'] . '</td>
+                                                    <td >' . $mat['rmdiaSelected'] . '</td>
+                                                    <td >' . $mat['rmIDSelected'] . '</td>
+                                                    <td >' . $mat['rmODSelected'] . '</td>
+                                                    <td >' . $mat['rmPitchSelected'] . '</td>
+                                                    <td >' . $mat['rmweightSelected'] . '</td>
+                                                    <td >' . $mat['rmlenSelected'] . '</td>
+                                                    <td >' . $mat['rmqtySelected'] . '</td>
+                                                    <td>' . $mat['rmdrawingSelected'] . '</td>
+                                                </tr>';
+                                                            }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td><?php echo $prodDetails['subProduct_detail'][$i][0]['packing_qty_per_tray']; ?></td>
+                                                <td><?php echo $prodDetails['subProduct_detail'][$i][0]['finished_weight']; ?></td>
+
+                                            </tr>
+
+
+                                            <?php
                                         }
                                         ?>
                                     </tbody>
@@ -138,11 +210,11 @@ $prod_id = base64_decode($record_num);
                                 <div class="w3-col l12">
                                     <div class="w3-col l4">
                                         <div class="col-lg-12">
-                           
+
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
-                                       
+
                                     </div>                
                                 </div>
                             </div>
@@ -232,7 +304,7 @@ $prod_id = base64_decode($record_num);
                         </div>
 
                     </fieldset>
-                 <fieldset>
+                    <fieldset>
                         <h2>Pricing Details</h2>            
                         <div class="w3-col l12">
                             <div class="col-md-4 col-sm-6 col-xs-6 w3-margin-bottom">

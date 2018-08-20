@@ -92,6 +92,8 @@ myApp.controller('PoController', function ($scope, $http, $sce) {
     $scope.getDetailedProductInfo = function (index) {
         var part_no = document.getElementById("part_drwing_no_" + index).value;
         var rev_no = document.getElementById("revision_no_" + index).value;
+//        var prod_id = document.getElementById("prod_id_" + index).value;
+//        alert(prod_id);
         document.getElementById("old_rate_" + index).value = '';
         document.getElementById("unit_rate_" + index).value = '';
         document.getElementById("sr_no_" + index).value = '';
@@ -111,32 +113,28 @@ myApp.controller('PoController', function ($scope, $http, $sce) {
             method: 'get',
             url: BASE_URL + 'po_order/po_order/getDetailedProductInfo?part_no=' + part_no + '&rev_no=' + rev_no
         }).then(function successCallback(response) {
-            // Assign response to skills object
-            console.log(response.data);
-            //console.log(JSON.parse(response.data['sr_item_code']));
-            //console.log(response.data.new_rate);
+
             if (response.data != '500') {
                 document.getElementById("old_rate_" + index).value = response.data.old_rate;
                 document.getElementById("unit_rate_" + index).value = response.data.new_rate;
-                //$scope.srItemCode = JSON.parse(response.data['sr_item_code']);
-                var srNo = JSON.parse(response.data['sr_item_code']);
+                var srNo = (response.data);
                 var select, i, option;
                 var selectNew, j, newOption;
+                
                 select = document.getElementById('sr_no_' + index);
-                for (i = 0; i < srNo.length; i++) {
-                    //console.log(srNo[i]);
+                for (i = 0; i < srNo['subProd'].length; i++) {
                     option = document.createElement('option');
-                    option.value = option.text = srNo[i].sr_no;
+                    option.value = option.text = srNo['subProd'][i][0].sr_no;
                     select.add(option);
                 }
-                //var srNo = JSON.parse(response.data['sr_item_code']);
+                
                 selectNew = document.getElementById('product_code_' + index);
-                for (j = 0; j < srNo.length; j++) {
-                    //alert(srNo[j].item_code);
+                for (j = 0; j < srNo['subProd'].length; j++) {
                     newOption = document.createElement('option');
-                    newOption.value = newOption.text = srNo[j].item_code;
+                    newOption.value = newOption.text = srNo['subProd'][j][0].part_code;
                     selectNew.add(newOption);
                 }
+                
                 $scope.message_info = '';
             } else {
                 document.getElementById("old_rate_" + index).value = 'N/A';
@@ -156,9 +154,7 @@ myApp.controller('PoController', function ($scope, $http, $sce) {
             method: 'get',
             url: BASE_URL + 'po_order/po_order/getNetAmount?unit_rate=' + unit_rate + '&quantity=' + quantity
         }).then(function successCallback(response) {
-            // Assign response to skills object
             console.log(response.data);
-            //var dataNew = response.data;
             document.getElementById("netAmount_" + index).value = response.data;
         });
     };

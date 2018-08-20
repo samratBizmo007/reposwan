@@ -54,10 +54,31 @@ class Po_model extends CI_Model {
         $sql = "SELECT * FROM product_master WHERE drawing_no= '$part_no' AND revision_no='$rev_no'";
         $result = $this->db->query($sql);
         //echo $sql;die();
+        $subproducts = '';
+        $product = '';
+        $old_rate = '';
+        $new_rate = '';
+        $prod_details = array();
         if ($result->num_rows() <= 0) {
             return false;
         } else {
-            return $result->result_array();
+            foreach ($result->result_array() as $row) {
+                $subproducts = json_decode($row['sub_products'], true);
+                $old_rate = $row['old_rate'];
+                $new_rate = $row['new_rate'];
+            }
+            //print_r($subproducts);die();
+            $subProd=[];
+            for ($i = 0; $i < count($subproducts); $i++) {
+                $product = $subproducts[$i];
+                $sqlSelect = "SELECT * FROM product_tab WHERE p_id = '$product'";
+                $resultSelect = $this->db->query($sqlSelect);
+                $subProd[] = $resultSelect->result_array();
+            }
+            $prod_details['subProd'] = $subProd;
+            $prod_details['old_rate'] = $old_rate;
+            $prod_details['new_rate'] = $new_rate;
+            return $prod_details;
         }
     }
 
@@ -82,7 +103,7 @@ class Po_model extends CI_Model {
                 $unit_rate = $product_detail[$i]['unit_rate'];
                 $quantity = $product_detail[$i]['quantity'];
                 $netAmount = $product_detail[$i]['netAmount'];
-                $due_date =  $product_detail[$i]['due_date'];
+                $due_date = $product_detail[$i]['due_date'];
                 $sql = "INSERT INTO purchase_orders(customer_name,po_total,"
                         . "po_duedate,order_no,prod_id,"
                         . "line_no,part_drwing_no,product_name,"

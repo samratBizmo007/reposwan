@@ -79,12 +79,12 @@ class Product_model extends CI_Model {
                 $parent_id = $row['AUTO_INCREMENT'];
             }
             $product_id[] = $parent_id;
-            $sqlInsert = "INSERT INTO product_tab (sr_no,part_code,machine_info,material_details,packing_qty_per_tray,finished_weight) "
-                    . "values ('$serial_no','$part_code','$machine_info','$requiredMaterial','$packing_qty_per_tray','$finished_weight')";
+            $sqlInsert = "INSERT INTO product_tab (drawing_no,sr_no,part_code,machine_info,material_details,packing_qty_per_tray,finished_weight) "
+                    . "values ('$drawing_no','$serial_no','$part_code','$machine_info','$requiredMaterial','$packing_qty_per_tray','$finished_weight')";
             $InsertResult = $this->db->query($sqlInsert);
         }
 
-       // $sqlInsertMasterProduct = "INSERT INTO product_master () values ()";
+        // $sqlInsertMasterProduct = "INSERT INTO product_master () values ()";
 
 
         if (!empty($data)) {
@@ -143,10 +143,8 @@ class Product_model extends CI_Model {
     // get particular product details from db-------------------------------------
     public function getProductDetails($prod_id) {
         $query = "SELECT * FROM product_master WHERE prod_id='$prod_id'";
-
         $result = $this->db->query($query);
-
-        $allData['product_detail']=$result->result_array();
+        $allData['product_detail'] = $result->result_array();
         //$allData
         // handle db error
         if (!$result) {
@@ -155,8 +153,7 @@ class Product_model extends CI_Model {
             return $error;
             die();
         }
-
-        $sub_products='';
+        $sub_products = '';
         // if no db errors
         if ($result->num_rows() <= 0) {
             return false;
@@ -164,18 +161,15 @@ class Product_model extends CI_Model {
             foreach ($result->result_array() as $row) {
                 $sub_products = $row['sub_products'];
             }
-
-            $arr=json_decode($sub_products);
-
-            $allSubProducts=[];
+            $arr = json_decode($sub_products);
+            $allSubProducts = [];
             // get subproductsb details
             foreach ($arr as $key) {
                 $sub_query = "SELECT * FROM product_tab WHERE p_id='$key'";
-
-        $sub_result = $this->db->query($sub_query);
-        $allSubProducts[]=$sub_result->result_array();
+                $sub_result = $this->db->query($sub_query);
+                $allSubProducts[] = $sub_result->result_array();
             }
-            $allData['subProduct_detail']=$allSubProducts;
+            $allData['subProduct_detail'] = $allSubProducts;
             return $allData;
         }
     }

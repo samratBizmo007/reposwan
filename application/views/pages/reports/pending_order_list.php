@@ -96,8 +96,8 @@
                                 </div>                              
                             </td>                            
                         </tr>
-                        <tr ng-if=" po == ''">
-                            <td colspan="11" class="w3-center"></td>
+                        <tr ng-if=" po == []">
+                            <td colspan="11" class="w3-center">No Records Found.</td>
                         </tr>
                     </tbody>
                 </table>

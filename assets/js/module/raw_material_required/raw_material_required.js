@@ -18,9 +18,9 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
             //console.log(JSON.parse(data[i].product_details));
             //alert(data[i].customer_name);
             products = JSON.parse(data[i].product_details);
-            srItemCode = JSON.parse(data[i].sr_item_code);
-            machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
-            rawMaterialRequired = JSON.parse(data[i].rm_required);
+            //srItemCode = JSON.parse(data[i].sr_item_code);
+            //machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
+            //rawMaterialRequired = JSON.parse(data[i].rm_required);
             $scope.po.push({'customer_name': data[i].customer_name,
                 'order_no': data[i].order_no,
                 'po_duedate': data[i].po_duedate,
@@ -78,9 +78,9 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                     // console.log(data[i].product_details);
                     //alert(data[i].customer_name);
                     products = JSON.parse(data[i].product_details);
-                    srItemCode = JSON.parse(data[i].sr_item_code);
-                    machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
-                    rawMaterialRequired = JSON.parse(data[i].rm_required);
+//                    srItemCode = JSON.parse(data[i].sr_item_code);
+//                    machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
+//                    rawMaterialRequired = JSON.parse(data[i].rm_required);
                     $scope.po.push({'customer_name': data[i].customer_name,
                         'order_no': data[i].order_no,
                         'po_duedate': data[i].po_duedate,
@@ -114,4 +114,113 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
         });
     };
 
+    $scope.getPoDetails = function () {
+        var from_date = $("#from_date").val();
+        var to_date = $("#to_date").val();
+        //alert(from_date);
+        if (from_date == '') {
+            $scope.message = $sce.trustAsHtml('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select From Date.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+            return false;
+        }
+        if (to_date == '') {
+            $scope.message = $sce.trustAsHtml('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select To date.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "required_rawmaterial/Required_rawmaterial/getPoDetails",
+            data: {
+                from_date: from_date,
+                to_date: to_date
+            },
+            cache: false,
+            success: function (data) {
+                //$.alert(data);
+                $("#po_orders").empty();
+                $("#po_orders").html(data);
+            }
+        });
+    };
+
 });
+
+function getPoProductDetails() {
+    var po_orders = $("#po_orders").val();
+    //alert(po_orders);
+    $.ajax({
+        type: "GET",
+        url: BASE_URL + "required_rawmaterial/Required_rawmaterial/getPoProductDetails",
+        data: {
+            po_orders: po_orders
+        },
+        cache: false,
+        success: function (data) {
+            //$.alert(data);
+            $("#requiredMaterial").empty();
+            $("#requiredMaterial").html(data);
+        }
+    });
+}
+function updateGradeDetails(index) {
+    //alert(index);
+    var total_weight = $("#total_weight_" + index).val();
+    var actual_weight = $("#actual_weight_" + index).val();
+    var selected_grade = $("#selected_grade_" + index).val();
+    // var po_orders = $("#po_orders").val();
+    //alert(po_orders);
+    var remaining_weight = '';
+    remaining_weight = actual_weight - total_weight;
+    //alert(remaining_weight);
+    if (remaining_weight < 0) {
+        $("#messg_" + index).html('<b>There Is No Enough Required Material Weight For This Product.</b>');
+        return false;
+    } else {
+        $("#remaining_weight_" + index).val(remaining_weight);
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "required_rawmaterial/Required_rawmaterial/updateGradeDetails",
+            data: {
+                selected_grade: selected_grade,
+                remaining_weight: remaining_weight
+            },
+            cache: false,
+            success: function (data) {
+                //$.alert(data);
+                $("#message").html(data);
+            }
+        });
+    }
+}
+function submitStatus(id) {
+    var po_id = $("#po_id_" + id).val();
+    var remark = $("#remark").val();
+    var remarkType = $('input[name=remarktype]:checked').val();
+    
+    if (remarkType == undefined) {
+        $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select Remark Type.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+        return false;
+    }
+    if (remark == '') {
+        $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Set Remark To This Purchase Order.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+        return false;
+    }
+
+    $.ajax({
+        type: "GET",
+        url: BASE_URL + "required_rawmaterial/Required_rawmaterial/submitStatus",
+        data: {
+            po_id: po_id,
+            remark: remark,
+            remarkType: remarkType
+        },
+        cache: false,
+        success: function (data) {
+            //$.alert(data);
+            //$scope.message = $sce.trustAsHtml(data);
+            $("#message").html(data);
+        }
+    });
+
+}
+
+

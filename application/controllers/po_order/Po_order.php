@@ -95,10 +95,11 @@ class Po_order extends CI_controller {
     public function getDetailedProductInfo() {
         extract($_GET);
         $result = $this->Po_model->getDetailedProductInfo($part_no, $rev_no);
+       // print_r($result);die();
         if (!$result) {
             echo '500';
         } else {
-            print_r(json_encode($result[0]));
+            echo (json_encode($result));
         }
     }
 
@@ -148,6 +149,7 @@ class Po_order extends CI_controller {
         //print_r($data);
         //die();
         $result = $this->Po_model->addPurchaseOrder($data);
+        //print_r($result);die();
         if ($result) {
             echo '200';
         } else {
