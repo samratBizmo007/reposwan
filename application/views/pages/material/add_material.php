@@ -51,7 +51,7 @@
                     </div>
                     <!-- REGISTER DIV ENDS -->   
                 </div>
-                <div class="col-lg-1"></div>
+                <div class="col-lg-1" id="message"></div>
             </div>
         </fieldset>
     </div>
