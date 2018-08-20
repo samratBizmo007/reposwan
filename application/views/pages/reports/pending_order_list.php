@@ -86,7 +86,7 @@
                             </td>                            
                             <td class="w3-center">{{p.po_duedate}}</td>
                             <td class="w3-center">
-                                <input type="text" class="form-control w3-center" id="remark_{{p.po_id}}" onkeyup="" value="{{p.remark}}">                                
+                                <input type="text" disabled class="form-control w3-center" id="remark_{{p.po_id}}" onkeyup="" value="{{p.remark}}">                                
                             </td>
                             <td class="">
                                 <div class="w3-center">

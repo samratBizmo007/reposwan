@@ -65,15 +65,30 @@ class Addmaterial extends CI_controller {
         //echo $material_rate; die();
         //print_r($response_json);die();
         if ($response['status'] != 200) {
-            echo '<h4 class="w3-text-red w3-margin"><i class="fa fa-warning"></i> ' . $response['status_message'] . '</h4>
-            ';
+            echo '<div class="alert alert-danger alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong>'.$response['status_message'].'.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			location.reload();
+			}, 1000);
+			</script>';
         } else {
-            echo '<h4 class="w3-text-black w3-margin"><i class="fa fa-cube"></i> ' . $response['status_message'] . '</h4>
-            <script>
-            window.setTimeout(function() {
-               location.reload();
-               }, 1000);
-               </script>';
+            echo '<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong>'.$response['status_message'].'.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			}, 1000);
+			</script>';
         }
     }
 

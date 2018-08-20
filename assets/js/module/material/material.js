@@ -160,6 +160,8 @@ myApp.controller('materialController', function ($scope, $http, $sce) {
                 success: function (data)
                 {
                     $.alert(data);
+                    $("#message").html(data);
+
                     $('#btnsubmit').html('<button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>');
                 }
             });
