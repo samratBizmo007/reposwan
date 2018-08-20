@@ -159,7 +159,7 @@ myApp.controller('materialController', function ($scope, $http, $sce) {
                 return: false, //stop the actual form post !important!
                 success: function (data)
                 {
-                    $.alert(data);
+                    //$.alert(data);
                     $("#message").html(data);
 
                     $('#btnsubmit').html('<button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>');
