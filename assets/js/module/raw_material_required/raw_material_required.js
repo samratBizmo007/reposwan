@@ -11,7 +11,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
     $scope.po = [];
 
     $http.get(BASE_URL + "required_rawmaterial/Required_rawmaterial/getPurchaseOrdersDetails").then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         var data = response.data;
         var i, products, srItemCode, machineQuantityPerHr, rawMaterialRequired;
         for (i = 0; i < data.length; i++) {
@@ -47,7 +47,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                 'rawMaterialRequired': rawMaterialRequired
             });
         }
-        console.log($scope.po);
+        //console.log($scope.po);
         //$scope.poData = $scope.po;
     });
 //-------------get Po details ends-------------------------------------//
@@ -136,8 +136,15 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
             cache: false,
             success: function (data) {
                 //$.alert(data);
-                $("#po_orders").empty();
-                $("#po_orders").html(data);
+                var podata = '';
+                console.log(JSON.parse(data));
+                podata = JSON.parse(data);
+                var i;
+                //$("#po_orders").empty();
+                for (i = 0; i < podata.length; i++) {
+                    $('#po_orders').append('<option value="' + podata[i].product_code + '/' + podata[i].po_id + '">Order_No- </p>' + podata[i].order_no + ' - Line_No: ' + podata[i].line_no + ' - Part code: ' + podata[i].product_code + ' - Due Date: ' + podata[i].po_duedate + '</option>');
+                }
+                //$("#po_orders").html(data);
             }
         });
     };
@@ -146,6 +153,11 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
 
 function getPoProductDetails() {
     var po_orders = $("#po_orders").val();
+    //
+    if (po_orders == '' && po_orders == 0) {
+        $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select The Valid Purchase Order.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+        return false;
+    }
     //alert(po_orders);
     $.ajax({
         type: "GET",
@@ -195,7 +207,7 @@ function submitStatus(id) {
     var po_id = $("#po_id_" + id).val();
     var remark = $("#remark").val();
     var remarkType = $('input[name=remarktype]:checked').val();
-    
+
     if (remarkType == undefined) {
         $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select Remark Type.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
         return false;

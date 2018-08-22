@@ -28,6 +28,7 @@
                 <div class="form-group">
                     <label for="rm_grade">Purchase Orders<b class="w3-text-red w3-medium">*</b> :</label>
                     <select name="po_orders" class="form-control w3-small" ng-model="po_ordersSelected" onchange="getPoProductDetails()" id="po_orders">
+                        <option value="0" selected>Select Purchase Orders</option>
                     </select>
                 </div>
             </div>

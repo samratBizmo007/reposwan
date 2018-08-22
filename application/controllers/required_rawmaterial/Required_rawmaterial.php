@@ -48,11 +48,12 @@ class Required_rawmaterial extends CI_controller {
     public function getPoDetails() {
         extract($_GET);
         $result = $this->Rawmaterial_required_model->getAllPurchaseOrdersByDate($from_date, $to_date);
-        //print_r($result); die();
-        for ($i = 0; $i < count($result); $i++) {
-            //print_r($result[$i]['material_grade']);
-            echo '<option value="' . $result[$i]['product_code'] . '/' . $result[$i]['po_id'] . '"><p class="w3-text-red">Order_No- </p>' . $result[$i]['order_no'] . ' - Line_No: ' . $result[$i]['line_no'] . ' - Part code: ' . $result[$i]['product_code'] . ' - Due Date: ' . $result[$i]['po_duedate'] . '</option>';
-        }
+        print_r(json_encode($result));
+       // die();
+//        for ($i = 0; $i < count($result); $i++) {
+//            //print_r($result[$i]['material_grade']);
+//            echo '<option value="' . $result[$i]['product_code'] . '/' . $result[$i]['po_id'] . '"><p class="w3-text-red">Order_No- </p>' . $result[$i]['order_no'] . ' - Line_No: ' . $result[$i]['line_no'] . ' - Part code: ' . $result[$i]['product_code'] . ' - Due Date: ' . $result[$i]['po_duedate'] . '</option>';
+//        }
     }
 
     public function getPoProductDetails() {
@@ -162,7 +163,7 @@ class Required_rawmaterial extends CI_controller {
                 . '</div>'
                 . '<div class="w3-col l2 w3-center" style="padding-right: 2px;">'
                 . '<br>'
-                . ' <button href="" class="w3-text-green s3-text-center w3-padding-top" onclick="updateGradeDetails(' . $j . ');">Update</button>'
+                . '<button href="" class="w3-text-white theme_bg w3-small s3-text-center" onclick="updateGradeDetails(' . $j . ');">Update Material Inventory</button>'
                 . '</div>'
                 . '<div class="w3-col l2" style="padding-right: 2px;">'
                 . '<lable>Remaining Weight</lable>'
@@ -189,11 +190,11 @@ class Required_rawmaterial extends CI_controller {
                     <button type="button" title="filter Po by date" id="btnsubmit" onclick="submitStatus(' . $i . ');" class="w3-medium w3-button theme_bg">Change Status</button>
                 </div>';
 
-            echo'<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
-                    <div class="w3-right w3-margin-right">
-                        <label class="">Total Net Amount:<span class="">' . $result[$i]['net_amount'] . '</span></label>
-                    </div>
-                </div>';
+//            echo'<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
+//                    <div class="w3-right w3-margin-right">
+//                        <label class="">Total Net Amount:<span class="">' . $result[$i]['net_amount'] . '</span></label>
+//                    </div>
+//                </div>';
 
             echo'</div>
                 </fieldset>';

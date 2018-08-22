@@ -115,26 +115,28 @@ myApp.controller('PoController', function ($scope, $http, $sce) {
         }).then(function successCallback(response) {
 
             if (response.data != '500') {
+//                $('#sr_no_' + index).val('');
+//                $('#product_code_' + index).val('');
                 document.getElementById("old_rate_" + index).value = response.data.old_rate;
                 document.getElementById("unit_rate_" + index).value = response.data.new_rate;
                 var srNo = (response.data);
                 var select, i, option;
                 var selectNew, j, newOption;
-                
+                console.log(srNo);
                 select = document.getElementById('sr_no_' + index);
                 for (i = 0; i < srNo['subProd'].length; i++) {
                     option = document.createElement('option');
                     option.value = option.text = srNo['subProd'][i][0].sr_no;
                     select.add(option);
                 }
-                
+
                 selectNew = document.getElementById('product_code_' + index);
                 for (j = 0; j < srNo['subProd'].length; j++) {
                     newOption = document.createElement('option');
                     newOption.value = newOption.text = srNo['subProd'][j][0].part_code;
                     selectNew.add(newOption);
                 }
-                
+
                 $scope.message_info = '';
             } else {
                 document.getElementById("old_rate_" + index).value = 'N/A';

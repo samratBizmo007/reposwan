@@ -34,7 +34,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                             <table class="table table-responsive" id="tab_logic">
                                 <thead>
-                                    <tr class="theme_bg">
+                                    <tr class="theme_bg w3-small">
                                         <th class="text-center">
                                             Sr.no
                                         </th>
@@ -66,7 +66,7 @@
                                             Pitch
                                         </th>
                                         <th class="text-center">
-                                            Dia.no
+                                            Dig.no
                                         </th>
                                         <th class="text-center">
                                             Thickness
@@ -75,26 +75,20 @@
                                             Diameter
                                         </th>
                                         <th class="text-center">
-                                            Remark
+                                            Remaining Weight
                                         </th>
-<!--                                        <th class="text-center">
-                                            added date
-                                        </th>
-                                        <th class="text-center">
-                                            modified date
-                                        </th>-->
                                         <th class="text-center">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody id='addedRows'>
-                                    <tr id="rowCount" ng-if="materials['status'] == 200" ng-repeat=" m in materials['status_message']">
+                                    <tr class="w3-small" id="rowCount" ng-if="materials['status'] == 200" ng-repeat=" m in materials['status_message']">
                                         <td class="w3-center" width="4%">{{$index + 1}}</td>
                                         <td class="w3-center" width="7%">{{ m.material_type}}</td>
                                         <td class="w3-center" width="7%">{{ m.material_grade}}</td>
                                         <td class="w3-center"width="7%">{{ m.material_rate}}</td>
-                                        <td class="w3-center" width="7%">
+                                        <td class="w3-center" width="10%">
                                             <input type="text" id="weight_{{m.material_id}}" class="form-control w3-center" value="{{ m.material_weight}}">
                                         </td>
                                         <td class="w3-center" width="7%">
@@ -122,7 +116,7 @@
                                             <input type="text" id="diameter_{{m.material_id}}" class="form-control w3-center" value="{{ m.diameter}}">
                                         </td>
                                         <td class="w3-center" width="15%">
-                                            <input type="text" id="remark_{{m.material_id}}" class="form-control w3-center" value="{{ m.remark}}">
+                                            <input type="text" id="remark_{{m.material_id}}" class="form-control w3-center" value="{{ m.remaining_weight}}">
                                         </td>
 <!--                                        <td class="w3-center">{{ m.added_date}}</td>
                                         <td class="w3-center">{{ m.modified_date}}</td>-->
@@ -185,15 +179,6 @@
                                         <th class="text-center">
                                             Product Type
                                         </th>
-<!--                                        <th class="text-center">
-                                            Sr.no
-                                        </th>
-                                        <th class="text-center">
-                                            Rev.no
-                                        </th>-->
-<!--                                        <th class="text-center">
-                                            Item Code
-                                        </th>-->
                                         <th class="text-center">
                                             Drawing no
                                         </th>
@@ -234,13 +219,6 @@
                                                     }
                                                     ?>
                                                 </td>
-<!--                                                <td class="w3-center">
-                                                    <?php
-//                                                    foreach (json_decode($val['sr_item_code'], true) as $key) {
-//                                                        echo '<div class="w3-center">' . $key['item_code'] . '</div>';
-//                                                    }
-                                                    ?>
-                                                </td>-->
                                                 <td class="w3-center"><?php echo $val['drawing_no']; ?></td>
                                                 <td class="w3-center">
                                                     <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['production_quantity'] ?>">
