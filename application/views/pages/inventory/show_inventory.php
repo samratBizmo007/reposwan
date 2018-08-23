@@ -195,45 +195,120 @@
                                             modified date
                                         </th>
                                         <th class="text-center">
+                                            See SubProducts
+                                        </th>
+                                        <th class="text-center">
                                             Action
                                         </th>                                          
                                     </tr>
                                 </thead>
                                 <tbody id='productaddedRows'>
                                     <?php
-                                    //print_r($products['status_message'][0]);
+                                    // print_r($products);
+                                    //die();
                                     if ($products['status'] == 200) {
-                                        foreach ($products['status_message'] as $val) {
+                                        for ($i = 0; $i < count($products['status_message']); $i++) {
+                                            $this->load->model('inventory_model/Inventory_model');
+                                            $result = $this->Inventory_model->SubProductDetails($products['status_message'][$i]['sub_products']);
+                                            //print_r($result);
                                             $type = 'REGULAR';
-                                            if ($val['prod_type'] == '1') {
+                                            if ($products['status_message'][$i]['prod_type'] == '1') {
                                                 $type = 'EX-STOCK';
                                             }
                                             ?>
                                             <tr id="rowCount">
-                                                <td class="w3-center"><?php echo $val['customer_name']; ?></td>
-                                                <td class="w3-center"><?php echo $val['product_name']; ?></td>
+                                                <td class="w3-center"><?php echo $products['status_message'][$i]['customer_name']; ?></td>
+                                                <td class="w3-center"><?php echo $products['status_message'][$i]['product_name']; ?></td>
                                                 <td class="w3-center"><?php
                                                     echo $type;
-                                                    if ($val['prod_type'] != '0') {
-                                                        echo '<br>(' . $val['stock_plant'] . ')';
+                                                    if ($products['status_message'][$i]['prod_type'] != '0') {
+                                                        echo '<br>(' . $products['status_message'][$i]['stock_plant'] . ')';
                                                     }
                                                     ?>
                                                 </td>
-                                                <td class="w3-center"><?php echo $val['drawing_no']; ?></td>
+                                                <td class="w3-center"><?php echo $products['status_message'][$i]['drawing_no']; ?></td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['production_quantity'] ?>">
+                                                    <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['production_quantity'] ?>">
                                                 </td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="dispatched_quantity_<?php echo $val['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $val['prod_id'] ?>);" value="<?php echo $val['dispatched'] ?>">
+                                                    <input type="number" class="form-control w3-center" id="dispatched_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['dispatched'] ?>">
                                                 </td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="total_quantity_<?php echo $val['prod_id'] ?>" value="<?php echo $val['total_quantity'] ?>">
+                                                    <input type="number" class="form-control w3-center" readonly id="total_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" value="<?php echo $products['status_message'][$i]['total_quantity'] ?>">
                                                 </td>
-                                                <td class="w3-center"><?php echo $val['modified_date']; ?></td>
+                                                <td class="w3-center"><?php echo $products['status_message'][$i]['modified_date']; ?></td>
                                                 <td class="w3-center">
-                                                    <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateProductDetails(<?php echo $val['prod_id']; ?>);" title="Update Product Details">
+                                                    <button type="button" class="btn sub" onclick="showSubproducts(<?php echo $products['status_message'][$i]['prod_id']; ?>);">Sub-Products<span class=" fa fa-chevron-down"></span></button>
+                                                </td>
+                                                <td class="w3-center">
+                                                    <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateProductDetails(<?php echo $products['status_message'][$i]['prod_id']; ?>);" title="Update Product Details">
                                                         Update
                                                     </a>
+                                                </td>
+                                            </tr>
+                                            <tr id="collapseme_<?php echo $products['status_message'][$i]['prod_id']; ?>" class="collapse out">
+                                                <td colspan="10">
+                                                    <div>
+                                                        <table class="table table-responsive">
+                                                            <thead>
+                                                                <tr class="theme_bg">
+                                                                    <th class="text-center">
+                                                                        Drawing No
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        S.R No
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        Product Code
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        Packing Qty / Tray
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        Net Finished Weight
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        SubProduct Prod'n Quantity
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        Dispatched Quantity
+                                                                    </th>
+                                                                    <th class="text-center">
+                                                                        Total Quantity
+                                                                    </th>
+
+                                                                    <th class="text-center">
+                                                                        Action
+                                                                    </th>                                          
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php for ($j = 0; $j < count($result); $j++) { ?>
+                                                                    <tr>
+                                                                        <td class="w3-center"><?php echo $products['status_message'][$i]['drawing_no']; ?></td>
+                                                                        <td class="w3-center"><?php echo $result[$j][0]['sr_no']; ?></td>
+                                                                        <td class="w3-center"><?php echo $result[$j][0]['part_code']; ?></td>
+                                                                        <td class="w3-center"><?php echo $result[$j][0]['packing_qty_per_tray']; ?></td>
+                                                                        <td class="w3-center"><?php echo $result[$j][0]['finished_weight']; ?></td>
+                                                                        <td class="w3-center">
+                                                                            <input type="number" class="form-control w3-center" id="subProduct_Qty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['subproduct_quantity']; ?>">
+                                                                        </td>
+                                                                        <td class="w3-center">
+                                                                            <input type="number" class="form-control w3-center" id="subProduct_DispatchQty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['sub_dispatched_qty']; ?>">
+                                                                        </td>
+                                                                        <td class="w3-center">
+                                                                            <input type="number" class="form-control w3-center" readonly id="totalSub_Product_<?php echo $result[$j][0]['p_id']; ?>" value="<?php echo $result[$j][0]['total_qty']; ?>">
+                                                                        </td>
+                                                                        <td class="w3-center">
+                                                                            <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateSubProductDetails(<?php echo $result[$j][0]['p_id']; ?>);" title="Update Product Details">
+                                                                                Update
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
@@ -241,7 +316,7 @@
                                     } else {
                                         ?>
                                         <tr>
-                                            <td class="w3-center" colspan="7">No Records Found..!</td>
+                                            <td class="w3-center" colspan="10">No Records Found..!</td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -255,6 +330,17 @@
     </div>
 </div>
 <script>
+    function showSubproducts(prod_id) {
+        //alert(prod_id);
+        if ($("#collapseme_" + prod_id).hasClass("out")) {
+            $("#collapseme_" + prod_id).addClass("in");
+            $("#collapseme_" + prod_id).removeClass("out");
+        } else {
+            $("#collapseme_" + prod_id).addClass("out");
+            $("#collapseme_" + prod_id).removeClass("in");
+        }
+    }
+
     function changecolor(btn) {
         if (btn == 1) {
             $("#prod").css("background-color", "#fff");

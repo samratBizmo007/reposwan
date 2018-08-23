@@ -96,6 +96,28 @@ function getProducts() {
     });
 }
 
+function getTotalSubproductQuantity(p_id) {
+    var subProduct_Qty = $('#subProduct_Qty_' + p_id).val();
+    var subProduct_DispatchQty = $('#subProduct_DispatchQty_' + p_id).val();
+    $.ajax({
+        type: "POST",
+        url: BASE_URL + "inventory/showinventory/getTotalSubproductQuantity",
+        data: {
+            subProduct_Qty: subProduct_Qty,
+            subProduct_DispatchQty: subProduct_DispatchQty,
+            p_id: p_id
+        },
+        return: false, //stop the actual form post !important!
+        success: function (data) {
+            //$.alert(data);
+            console.log(data);
+            $('#totalSub_Product_' + p_id).val(data);
+        }
+    });
+}
+//function showSubproducts() {
+//
+//}
 
 function updateProductDetails(prod_id) {
     var production_quantity = $('#production_quantity_' + prod_id).val();
@@ -118,6 +140,31 @@ function updateProductDetails(prod_id) {
                 $('#messageDiv').html('<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Product Quantity Updated successfully.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});	}, 1000);</script>');
             } else {
                 $('#messageDiv').html('<div class="alert alert-danger alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Product Quantity Not Updated successfully.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 1000);</script>')
+            }
+        }
+    });
+}
+function updateSubProductDetails(p_id) {
+    var subProduct_Qty = $('#subProduct_Qty_' + p_id).val();
+    var subProduct_DispatchQty = $('#subProduct_DispatchQty_' + p_id).val();
+    var totalSub_Product = $('#totalSub_Product_' + p_id).val();
+    $.ajax({
+        type: "POST",
+        url: BASE_URL + "inventory/showinventory/updateSubProductDetails",
+        data: {
+            subProduct_Qty: subProduct_Qty,
+            subProduct_DispatchQty: subProduct_DispatchQty,
+            totalSub_Product: totalSub_Product,
+            p_id: p_id
+        },
+        return: false, //stop the actual form post !important!
+        success: function (data) {
+            //$.alert(data);
+            console.log(data);
+            if (data == 200) {
+                $('#messageDiv').html('<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success!</strong> Sub Product Quantity Updated successfully.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});	}, 1000);</script>');
+            } else {
+                $('#messageDiv').html('<div class="alert alert-danger alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Sub Product Quantity Not Updated successfully.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 1000);</script>')
             }
         }
     });
