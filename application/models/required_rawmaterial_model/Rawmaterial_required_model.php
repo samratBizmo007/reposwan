@@ -17,6 +17,17 @@ class Rawmaterial_required_model extends CI_Model {
         }
     }
 
+    public function getSubProductDetails($p_code, $p_id) {
+        $sql = "SELECT subproduct_quantity FROM purchase_orders as p JOIN product_master as m JOIN product_tab as t on(p.prod_id = m.prod_id) AND (t.part_code = p.product_code) WHERE p.po_id = '$p_id' AND p.product_code='$p_code'";
+        $result = $this->db->query($sql);
+        //echo $sql;die();
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        }
+    }
+
     public function getAllPurchaseOrdersByDate($from_date, $to_date) {
         $frm_date = date_create($from_date);
         $t_date = date_create($to_date);
@@ -42,8 +53,8 @@ class Rawmaterial_required_model extends CI_Model {
         }
     }
 
-    public function getMaterialTotalWeight($grade) {
-        $sql = "SELECT * FROM material_tab WHERE material_grade= '$grade'";
+    public function getMaterialTotalWeight($grade,$type) {
+        $sql = "SELECT * FROM material_tab WHERE material_grade= '$grade' AND mat_cat_id = '$type'";
         $result = $this->db->query($sql);
         $total = 0;
         if ($result->num_rows() <= 0) {
@@ -68,10 +79,10 @@ class Rawmaterial_required_model extends CI_Model {
         }
     }
 
-    public function submitStatus($po_id, $remark, $remarkType){
-        if($remarkType == 'Positive'){
+    public function submitStatus($po_id, $remark, $remarkType) {
+        if ($remarkType == 'Positive') {
             $status = 1;
-        }else{
+        } else {
             $status = 0;
         }
         $updateSql = "UPDATE purchase_orders SET remark = '$remark',remark_type = '$status',"
@@ -83,5 +94,5 @@ class Rawmaterial_required_model extends CI_Model {
             return FALSE;
         }
     }
-    
+
 }

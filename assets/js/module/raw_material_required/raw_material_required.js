@@ -11,12 +11,12 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
     $scope.po = [];
 
     $http.get(BASE_URL + "required_rawmaterial/Required_rawmaterial/getPurchaseOrdersDetails").then(function (response) {
-        //console.log(response.data);
+        console.log(response.data);
         var data = response.data;
-        var i, products, srItemCode, machineQuantityPerHr, rawMaterialRequired;
+        var i, products;
         for (i = 0; i < data.length; i++) {
             //console.log(JSON.parse(data[i].product_details));
-            //alert(data[i].customer_name);
+            //alert(data[i].remark_type);
             products = JSON.parse(data[i].product_details);
             //srItemCode = JSON.parse(data[i].sr_item_code);
             //machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
@@ -30,6 +30,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                 'sr_no': data[i].sr_no,
                 'balanced': data[i].balanced,
                 'remark': data[i].remark,
+                'remark_type': data[i].remark_type,
                 'prod_id': data[i].prod_id,
                 'product_code': data[i].product_code,
                 'quantity': data[i].quantity,
@@ -41,10 +42,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                 'added_date': data[i].added_date,
                 'added_time': data[i].added_time,
                 'modified_date': data[i].modified_date,
-                'modified_time': data[i].modified_time,
-                'sr_ItemCode': srItemCode,
-                'machine_qty_hr': machineQuantityPerHr,
-                'rawMaterialRequired': rawMaterialRequired
+                'modified_time': data[i].modified_time
             });
         }
         //console.log($scope.po);
@@ -71,7 +69,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
             // Assign response to skills object
             $scope.po = [];
             var data = response.data;
-            var i, products, srItemCode, machineQuantityPerHr, rawMaterialRequired;
+            var i, products;
             //console.log(data);
             if (data != 500) {
                 for (i = 0; i < data.length; i++) {
@@ -90,6 +88,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                         'sr_no': data[i].sr_no,
                         'balanced': data[i].balanced,
                         'remark': data[i].remark,
+                        'remark_type': data[i].remark_type,
                         'prod_id': data[i].prod_id,
                         'product_code': data[i].product_code,
                         'quantity': data[i].quantity,
@@ -101,10 +100,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
                         'added_date': data[i].added_date,
                         'added_time': data[i].added_time,
                         'modified_date': data[i].modified_date,
-                        'modified_time': data[i].modified_time,
-                        'sr_ItemCode': srItemCode,
-                        'machine_qty_hr': machineQuantityPerHr,
-                        'rawMaterialRequired': rawMaterialRequired
+                        'modified_time': data[i].modified_time
                     });
                 }
             } else {
@@ -185,6 +181,7 @@ function updateGradeDetails(index) {
     //alert(remaining_weight);
     if (remaining_weight < 0) {
         $("#messg_" + index).html('<b>There Is No Enough Required Material Weight For This Product.</b>');
+        $("#remaining_weight_" + index).val(remaining_weight);
         return false;
     } else {
         $("#remaining_weight_" + index).val(remaining_weight);

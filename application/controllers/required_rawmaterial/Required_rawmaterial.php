@@ -49,11 +49,6 @@ class Required_rawmaterial extends CI_controller {
         extract($_GET);
         $result = $this->Rawmaterial_required_model->getAllPurchaseOrdersByDate($from_date, $to_date);
         print_r(json_encode($result));
-       // die();
-//        for ($i = 0; $i < count($result); $i++) {
-//            //print_r($result[$i]['material_grade']);
-//            echo '<option value="' . $result[$i]['product_code'] . '/' . $result[$i]['po_id'] . '"><p class="w3-text-red">Order_No- </p>' . $result[$i]['order_no'] . ' - Line_No: ' . $result[$i]['line_no'] . ' - Part code: ' . $result[$i]['product_code'] . ' - Due Date: ' . $result[$i]['po_duedate'] . '</option>';
-//        }
     }
 
     public function getPoProductDetails() {
@@ -66,34 +61,58 @@ class Required_rawmaterial extends CI_controller {
         //print_r($podetails);
         $result = $this->Rawmaterial_required_model->getPoProductDetails($p_code, $p_id);
         //print_r($result);
+        $stock = $this->Rawmaterial_required_model->getSubProductDetails($p_code, $p_id);
         $this->load->model('material_model/Material_model');
 
         $materialCategories = $this->Material_model->getAllMaterialCategories();
         $total = 0;
         $material_quantity = 0;
+        $Po_ProductQuantity = 0;
+        $stockQuantity = 0;
         //print_r($result);
         for ($i = 0; $i < count($result); $i++) {
             //print_r($result[$i]['material_details']);
 
             echo '<fieldset>
             <div class="row w3-padding" style="margin-top: 5px; margin-bottom: 5px;">';
-
+           // print_r($stock[0]['subproduct_quantity']);
             echo'<div class=" w3-col l12 w3-padding-bottom">
             Customer Name: <b class="w3-text-black">' . $result[$i]['customer_name'] . '</b>
             </div>';
-
+            if ($stock[0]['subproduct_quantity'] == 0) {
+                $Po_ProductQuantity = $result[$i]['quantity'];
+            } else {
+                //---------if sub product stock quantity is grater than po quantity 
+                if ($stock[0]['subproduct_quantity'] >= $result[$i]['quantity']) {
+                    $Po_ProductQuantity = $result[$i]['quantity'];
+                    $stockQuantity = $stock[0]['subproduct_quantity'] - $result[$i]['quantity'];
+                } else {
+                    $Po_ProductQuantity = $result[$i]['quantity'] - $stock[0]['subproduct_quantity'];
+                    $stockQuantity = $result[$i]['quantity'] - $stock[0]['subproduct_quantity'];
+                }
+            }
+            //echo '';
             echo'<div class="w3-col l12">
-                <div class=" w3-col l4">
+                <div class=" w3-col l3">
                     Drawing no : <b class="w3-text-black">' . $result[$i]['part_drwing_no'] . '</b> 
                 </div>
-                <div class=" w3-col l4">
+                <div class=" w3-col l3">
                     Revision No : <b class="w3-text-black">' . $result[$i]['revision_no'] . '</b> 
                 </div>
-                <div class=" w3-col l4">
-                    Product Quantity : <b class="w3-text-black">' . $result[$i]['quantity'] . '</b> 
+                <div class=" w3-col l3">
+                   P.O Product Quantity : <b class="w3-text-black">' . $result[$i]['quantity'] . '</b> 
+                </div>
+                <div class=" w3-col l3">
+                    Stock Quantity : <b class="w3-text-black">' . $stock[0]['subproduct_quantity'] . '</b> 
                 </div>
             </div>';
             $materialDetails = json_decode($result[$i]['material_details'], true);
+
+//            echo'<div class="w3-col l12">'
+//            . '<div></div>'
+//            . '<div></div>'
+//            . '<div></div>'
+//            . '</div>';
 
             echo'<div class="col-lg-12">
                  <hr>';
@@ -105,8 +124,8 @@ class Required_rawmaterial extends CI_controller {
                         $materialCat = $mat_type['material_type'];
                     }
                 }
+                
                 switch ($materialDetails[$j]['rm_type']) {
-
                     case '1':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
                         break;
@@ -115,6 +134,7 @@ class Required_rawmaterial extends CI_controller {
                         break;
                     case '3':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        break;
                     case '4':
                         $material_quantity = $materialDetails[$j]['rmlenSelected'];
                         break;
@@ -131,10 +151,10 @@ class Required_rawmaterial extends CI_controller {
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
                         break;
                 }
-                $actualWeigth = $this->Rawmaterial_required_model->getMaterialTotalWeight($materialDetails[$j]['rmgradeSelected']);
+                $actualWeigth = $this->Rawmaterial_required_model->getMaterialTotalWeight($materialDetails[$j]['rmgradeSelected'],$materialDetails[$j]['rm_type']);
 
-
-                $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $result[$i]['quantity'];
+//--------------------material specification div----------------------------------------------//
+                $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
 
                 echo'<div class="w3-col l12 w3-padding-bottom">'
                 . '<div class="w3-col l1" style="padding-right: 2px;">'
@@ -151,7 +171,7 @@ class Required_rawmaterial extends CI_controller {
                 . '</div>'
                 . '<div class="w3-col l1" style="padding-right: 2px;">'
                 . '<lable>Prod.Qty</lable>'
-                . '<input type="text" disabled class="form-control" value="' . $result[$i]['quantity'] . '">'
+                . '<input type="text" disabled class="form-control" value="' . $Po_ProductQuantity . '">'
                 . '</div>'
                 . '<div class="w3-col l2" style="padding-right: 2px;">'
                 . '<lable>R.M. Required</lable>'
@@ -172,8 +192,6 @@ class Required_rawmaterial extends CI_controller {
                 . '<span class="w3-text-red" id="messg_' . $j . '"></span>'
                 . '</div>';
             }
-
-
             echo'</div>';
             echo '<div class="w3-lg-12">'
             . '<lable><b>Remark Type</b></lable><br>'
@@ -189,13 +207,6 @@ class Required_rawmaterial extends CI_controller {
             echo'<div class="col-lg-12 col-xs-12 col-sm-12 w3-center" id="materialWeight" style="padding-top: 23px;">
                     <button type="button" title="filter Po by date" id="btnsubmit" onclick="submitStatus(' . $i . ');" class="w3-medium w3-button theme_bg">Change Status</button>
                 </div>';
-
-//            echo'<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 w3-padding">
-//                    <div class="w3-right w3-margin-right">
-//                        <label class="">Total Net Amount:<span class="">' . $result[$i]['net_amount'] . '</span></label>
-//                    </div>
-//                </div>';
-
             echo'</div>
                 </fieldset>';
         }
