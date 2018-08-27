@@ -21,10 +21,21 @@
                     <input type="date" name="to_date" ng-model="to_date" id="to_date" value="" class="form-control" placeholder="To Date" required>
                 </div>
                 <div class="col-lg-2 col-xs-12 col-sm-12" id="materialWeight" style="padding-top: 23px;">
-                    <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getSharedPo()" class="w3-medium w3-button theme_bg">Search P.O</button>
+                    <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getSharedPo();getSharedPoDetails()" class="w3-medium w3-button theme_bg">Search P.O</button>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 w3-margin-bottom">
+                <div class="form-group">
+                    <label for="rm_grade">Purchase Orders<b class="w3-text-red w3-medium">*</b> :</label>
+                    <select name="sharedpoOrdersSelected" class="form-control w3-small" ng-model="sharedpoOrdersSelected" onchange="getUpdatePoForSharedQuantityDetails()" id="sharedpoOrdersSelected">
+                        <option value="" selected>Select Purchase Orders</option>
+                    </select>
                 </div>
             </div>
             <div id="message" ng-bind-html="message"></div>
+        </div>
+        <div class="w3-col l12" id="sharedPurchasedOrders">
+
         </div>
         <div class="row clearfix" style=" margin-top: 5px;">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -44,7 +55,7 @@
                                 Line No
                             </th>
                             <th class="text-center">
-                                Drawing No / Sr.No
+                                PartCode / Sr.No
                             </th>
                             <th class="text-center">
                                 Rate
@@ -54,6 +65,9 @@
                             </th>
                             <th class="text-center">
                                 Due&nbsp;Date
+                            </th>
+                            <th class="text-center">
+                                Shared Qty
                             </th>
                             <th class="text-center">
                                 Remark
@@ -70,6 +84,7 @@
                             <td class="w3-center">{{p.unit_rate}}</td>                            
                             <td class="w3-center">{{p.quantity}}</td>                            
                             <td class="w3-center">{{p.po_duedate}}</td>
+                            <td class="w3-center">{{p.shared_product_quantity}}</td>
                             <td class="w3-center w3-text-green" ng-if="p.remark_type != 1">
                                 {{p.remark}}                               
                             </td>
@@ -77,7 +92,7 @@
                                 {{p.remark}}                               
                             </td>                                                  
                         </tr>
-                        <tr ng-if=" po == []">
+                        <tr ng-if="po == []">
                             <td colspan="11" class="w3-center">No Records Found.</td>
                         </tr>
                     </tbody>

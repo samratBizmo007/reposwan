@@ -150,7 +150,7 @@ myApp.controller('requiredMaterialController', function ($scope, $http, $sce) {
 function getPoProductDetails() {
     var po_orders = $("#po_orders").val();
     //
-    if (po_orders == '' && po_orders == 0) {
+    if (po_orders == '' || po_orders == 0) {
         $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select The Valid Purchase Order.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
         return false;
     }

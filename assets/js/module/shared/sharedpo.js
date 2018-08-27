@@ -8,7 +8,7 @@ var myApp = angular.module('sharedPOApp', []);
 myApp.controller('sharedPOController', function ($scope, $http, $sce) {
 
     $scope.po = [];
-    
+
     $http.get(BASE_URL + "sharing/shared_PO/getPurchaseOrdersDetails").then(function (response) {
         //console.log(response.data);
         var data = response.data;
@@ -40,16 +40,14 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
                 'added_date': data[i].added_date,
                 'added_time': data[i].added_time,
                 'modified_date': data[i].modified_date,
-                'modified_time': data[i].modified_time,
-                'sr_ItemCode': srItemCode,
-                'machine_qty_hr': machineQuantityPerHr,
-                'rawMaterialRequired': rawMaterialRequired
+                'shared_product_quantity': data[i].shared_product_quantity,
+                'modified_time': data[i].modified_time
             });
         }
         //console.log($scope.po);
         //$scope.poData = $scope.po;
     });
-    
+
     $scope.getSharedPo = function () {
         var from_date = document.getElementById("from_date").value;
         var to_date = document.getElementById("to_date").value;
@@ -69,7 +67,7 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
             // Assign response to skills object
             $scope.po = [];
             var data = response.data;
-            var i, products, srItemCode, machineQuantityPerHr, rawMaterialRequired;
+            var i, products;
             //console.log(data);
             if (data != 500) {
                 for (i = 0; i < data.length; i++) {
@@ -99,10 +97,9 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
                         'added_date': data[i].added_date,
                         'added_time': data[i].added_time,
                         'modified_date': data[i].modified_date,
-                        'modified_time': data[i].modified_time,
-                        'sr_ItemCode': srItemCode,
-                        'machine_qty_hr': machineQuantityPerHr,
-                        'rawMaterialRequired': rawMaterialRequired
+                        'shared_product_quantity': data[i].shared_product_quantity,
+                        'modified_time': data[i].modified_time
+
                     });
                 }
             } else {
@@ -112,4 +109,109 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
         });
     };
 
+
+    $scope.getSharedPoDetails = function () {
+        var from_date = $("#from_date").val();
+        var to_date = $("#to_date").val();
+        //alert(from_date);
+        if (from_date == '') {
+            $scope.message = $sce.trustAsHtml('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select From Date.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+            return false;
+        }
+        if (to_date == '') {
+            $scope.message = $sce.trustAsHtml('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select To date.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "sharing/shared_PO/getSharedPoDetails",
+            data: {
+                from_date: from_date,
+                to_date: to_date
+            },
+            cache: false,
+            success: function (data) {
+                //$.alert(data);
+                var podata = '';
+                console.log(JSON.parse(data));
+                podata = JSON.parse(data);
+                var i, str;
+                $("#sharedpoOrdersSelected").empty();
+                for (i = 0; i < podata.length; i++) {
+                    //alert(podata[i].product_code);
+                    str += '<option value="' + podata[i].product_code + '/' + podata[i].po_id + '">Order_No- </p>' + podata[i].order_no + ' - Line_No: ' + podata[i].line_no + ' - Part code: ' + podata[i].product_code + ' - Due Date: ' + podata[i].po_duedate + '</option>';
+                }
+                $("#sharedpoOrdersSelected").html(str);
+            }
+        });
+    };
+
+    $scope.getUpdatePoForSharedQuantityDetails = function () {
+        var sharedpo_orders = $("#sharedpoOrdersSelected").val();
+        //alert(sharedpo_orders);
+        if (sharedpo_orders == '' || sharedpo_orders == 0) {
+            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select The Valid Purchase Order.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+            return false;
+        }
+        //alert(po_orders);
+        $.ajax({
+            type: "GET",
+            url: BASE_URL + "sharing/shared_PO/getUpdatePoForSharedQuantityDetails",
+            data: {
+                sharedpo_orders: sharedpo_orders
+            },
+            cache: false,
+            success: function (data) {
+                $.alert(data);
+                $("#sharedPurchasedOrders").empty();
+                $("#sharedPurchasedOrders").html(data);
+            }
+        });
+    };
+
 });
+
+function getUpdatePoForSharedQuantityDetails() {
+    var sharedpo_orders = $("#sharedpoOrdersSelected").val();
+    //alert(sharedpo_orders);
+    if (sharedpo_orders == '' || sharedpo_orders == 0) {
+        $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select The Valid Purchase Order.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+        return false;
+    }
+    //alert(po_orders);
+    $.ajax({
+        type: "GET",
+        url: BASE_URL + "sharing/shared_PO/getUpdatePoForSharedQuantityDetails",
+        data: {
+            sharedpo_orders: sharedpo_orders
+        },
+        cache: false,
+        success: function (data) {
+            //$.alert(data);
+            $("#sharedPurchasedOrders").empty();
+            $("#sharedPurchasedOrders").html(data);
+        }
+    });
+}
+function updateSharedQuantity(po_id) {
+    var sharedQuantity = $("#sharedQuantity").val();
+    if (sharedQuantity == '' || sharedQuantity == 0) {
+        $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Add Valid Shared Product Quantity.</div><script>window.setTimeout(function() {	$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});}, 2000);</script>');
+        return false;
+    }
+    //alert(po_orders);
+    $.ajax({
+        type: "GET",
+        url: BASE_URL + "sharing/shared_PO/updateSharedQuantity",
+        data: {
+            sharedQuantity: sharedQuantity,
+            po_id: po_id
+        },
+        cache: false,
+        success: function (data) {
+            //$.alert(data);
+            //$("#sharedPurchasedOrders").empty();
+            $("#message").html(data);
+        }
+    });
+}
