@@ -47,7 +47,7 @@ class SharedPO_model extends CI_Model {
     }
 
     public function updateSharedQuantity($sharedQuantity, $po_id) {
-        $updateSql = "UPDATE purchase_orders SET shared_product_quantity = '$sharedQuantity',"
+        $updateSql = "UPDATE purchase_orders SET shared_product_quantity = '$sharedQuantity',shared='1',"
                 . "modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
         $this->db->query($updateSql);
         if ($this->db->affected_rows() > 0) {

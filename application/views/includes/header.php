@@ -96,8 +96,14 @@ if ($admin_name != '') {
                                     </ul>
                                 </li>
                                 <li><a href="<?php echo base_url(); ?>required_rawmaterial/Required_rawmaterial"><i class="fa fa-sliders"></i> Required Raw Material </a></li>
-                                 <li><a href="<?php echo base_url(); ?>sharing/Shared_PO"><i class="fa fa-list"></i>Shared Purchase Orders</a></li>
-                                 <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="fa fa-cog"></i>Settings</a></li>
+                                <li><a href="<?php echo base_url(); ?>sharing/Shared_PO"><i class="fa fa-list"></i>Shared Purchase Orders</a></li>
+                                <li><a><i class="fa fa-wrench"></i> Production Section <span class=" fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="<?php echo base_url(); ?>production/production_planning">Production Planning</a></li>
+                                        <li><a href="<?php echo base_url(); ?>production/production">Production Module</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="fa fa-cog"></i>Settings</a></li>
                             </ul>
                         </div>
                         <div class="menu_section"><!-- 

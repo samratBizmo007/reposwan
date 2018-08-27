@@ -162,7 +162,7 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
             },
             cache: false,
             success: function (data) {
-                $.alert(data);
+                //$.alert(data);
                 $("#sharedPurchasedOrders").empty();
                 $("#sharedPurchasedOrders").html(data);
             }
