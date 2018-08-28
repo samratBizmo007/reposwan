@@ -209,11 +209,6 @@ class Production_planning extends CI_controller {
         echo $date;
     }
 
-    public function endDateTime() {
-        $date = date('Y-m-d H:i:s');
-        echo $date;
-    }
-
     public function updatePoDetails() {
         extract($_POST);
         //print_r($_POST);die();

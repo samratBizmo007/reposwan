@@ -128,14 +128,4 @@ function startDateTime() {
     });
 }
 
-function endDateTime() {
-    $.ajax({
-        type: "GET",
-        url: BASE_URL + "production/production_planning/endDateTime",
-        cache: false,
-        success: function (data) {
-            //$.alert(data);
-            $("#endDate").val(data);
-        }
-    });
-}
+

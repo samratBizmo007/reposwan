@@ -44,11 +44,10 @@ class Production_planning_model extends CI_Model {
 
     public function updatePoDetails($data) {
         extract($data);
-        //print_r($end);        die();
-        
-            $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$po_machine_detail',start_datetime = '$start',"
-                    . "modified_date= NOW(),modified_time= NOW(),in_progress='1' WHERE po_id = '$po_id'";
-       
+
+        $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$po_machine_detail',start_datetime = '$start',"
+                . "modified_date= NOW(),modified_time= NOW(),in_progress='1' WHERE po_id = '$po_id'";
+
         $this->db->query($updateSql);
         if ($this->db->affected_rows() > 0) {
             return TRUE;
@@ -64,11 +63,5 @@ class Production_planning_model extends CI_Model {
         }
     }
 
-    public function updateMachineData($machines) {
-        foreach (json_decode($machines, TRUE) as $key) {
-            $update = "UPDATE machine_master SET availability = '0' WHERE machine_id='$key'";
-            $this->db->query($update);
-        }
-    }
-
+    
 }
