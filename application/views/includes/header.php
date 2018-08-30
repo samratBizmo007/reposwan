@@ -103,6 +103,7 @@ if ($admin_name != '') {
                                         <li><a href="<?php echo base_url(); ?>production/production">Production Module</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="<?php echo base_url(); ?>finished_products/finished_products"><i class="fa fa-cube"></i>Finished Products</a></li>
                                 <li><a href="<?php echo base_url(); ?>settings/Settings"><i class="fa fa-cog"></i>Settings</a></li>
                             </ul>
                         </div>

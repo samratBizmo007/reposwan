@@ -42,24 +42,32 @@ class Production_model extends CI_Model {
         extract($data);
         //print_r($data);die();
         $machinedetails = Production_model::getPoMachineDetails($po_id);
-
+        $machine = '';
         if ($end != '') {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
                     . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='0',shared='0' WHERE po_id = '$po_id'";
+
+            //$machinedetails = Production_model::getPoMachineDetails($po_id);
+
+            foreach (json_decode($machinedetails, TRUE) as $key) {
+                $machine = $key['machines'];
+                $update = "UPDATE machine_master SET availability = '0' WHERE machine_id='$machine'";
+                $this->db->query($update);
+            }
         } else if ($end == '') {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
                     . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='1' WHERE po_id = '$po_id'";
-        }elseif ($po_status == 1) {
+        } elseif ($po_status == 1) {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
                     . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='0',shared='0' WHERE po_id = '$po_id'";
         }
-        
+
         $this->db->query($updateSql);
         if ($this->db->affected_rows() > 0) {
             return TRUE;

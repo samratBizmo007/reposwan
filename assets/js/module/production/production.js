@@ -163,7 +163,7 @@ function getRejectedCalculation() {
         inprocess = po_shared_qty - produced_qty;
         $("#inprocess_qty").val(inprocess);
     } else if (rejected_qty != '') {
-        inprocess = produced_qty - rejected_qty; 
+        inprocess = (po_shared_qty - produced_qty) - rejected_qty; 
         $("#inprocess_qty").val(inprocess);
     }
 }
