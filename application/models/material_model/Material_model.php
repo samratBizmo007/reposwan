@@ -66,25 +66,36 @@ class Material_model extends CI_Model {
 //        if (!isset($circle_quantity)) {
 //            $circle_quantity = 0;
 //        }
-        $sql = "INSERT INTO material_tab(mat_cat_id,material_grade,material_rate,material_weight,id,od,length,pitching,quantity,diagram_no,thickness,"
-                . "diameter,remark,added_date,added_time,status)"
-                . "VALUES ('$mat_cat_id','$material_grade','$material_rate','$material_weight',"
-                . "'$id','$od','$length','$pitching','$quantity','$Diagram_no','$thickness',"
-                . "'$diameter','$remark',now(),now(),'1')";
-//        echo $sql;die();
-        //$this->db->query($sql)
-        if ($this->db->query($sql)) {
-            $response = array(
-                'status' => 200, //---------insert db success code
-                'status_message' => 'Material Added Successfully..'
-            );
-        } else {
+
+        $sqlSelect = "SELECT * FROM material_tab WHERE material_grade ='$material_grade' AND mat_cat_id = '$mat_cat_id'";
+        $result = $this->db->query($sqlSelect);
+        // print_r(count($result));die();
+        if (count($result) == '1') {
             $response = array(
                 'status' => 500, //---------db error code 
                 'status_message' => 'Something Went Wrong... Material Not Added Successfully.!!!'
             );
+        } else {
+            $sql = "INSERT INTO material_tab(mat_cat_id,material_grade,material_rate,material_weight,id,od,length,pitching,quantity,diagram_no,thickness,"
+                    . "diameter,remark,added_date,added_time,status)"
+                    . "VALUES ('$mat_cat_id','$material_grade','$material_rate','$material_weight',"
+                    . "'$id','$od','$length','$pitching','$quantity','$Diagram_no','$thickness',"
+                    . "'$diameter','$remark',now(),now(),'1')";
+//        echo $sql;die();
+            //$this->db->query($sql)
+            if ($this->db->query($sql)) {
+                $response = array(
+                    'status' => 200, //---------insert db success code
+                    'status_message' => 'Material Added Successfully..'
+                );
+            } else {
+                $response = array(
+                    'status' => 500, //---------db error code 
+                    'status_message' => 'Something Went Wrong... Material Not Added Successfully.!!!'
+                );
+            }
+            return $response;
         }
-        return $response;
     }
 
     // ----------------------Fun For Add Material Details End-------------------------------------//
@@ -131,7 +142,7 @@ class Material_model extends CI_Model {
                 . "diameter='$diameter',remark='$remark',"
                 . "modified_date=NOW(),modified_time=NOW(),status='1' WHERE material_id = '$material_id'";
         //echo $sql;die();
-      $this->db->query($sql);
+        $this->db->query($sql);
         if ($this->db->affected_rows() > 0) {
             $response = array(
                 'status' => 200,
@@ -221,8 +232,8 @@ class Material_model extends CI_Model {
         }
     }
 
-    public function getMaterialDetailsByGrade($mat_grade){
-          $query = "SELECT * FROM material_tab WHERE material_grade='$mat_grade'";
+    public function getMaterialDetailsByGrade($mat_grade) {
+        $query = "SELECT * FROM material_tab WHERE material_grade='$mat_grade'";
         $result = $this->db->query($query);
         // handle db error
         if (!$result) {
@@ -236,7 +247,7 @@ class Material_model extends CI_Model {
             return false;
         } else {
             return $result->result_array();
-        } 
+        }
     }
-    
+
 }

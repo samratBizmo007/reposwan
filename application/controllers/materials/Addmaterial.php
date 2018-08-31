@@ -63,7 +63,7 @@ class Addmaterial extends CI_controller {
         curl_close($ch);
         $response = json_decode($response_json, true);
         //echo $material_rate; die();
-        //print_r($response_json);die();
+        print_r($response_json);die();
         if ($response['status'] != 200) {
             echo '500';
         } else {
