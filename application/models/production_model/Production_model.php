@@ -47,7 +47,7 @@ class Production_model extends CI_Model {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
                     . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
                     . "end_datetime = '$end',"
-                    . "modified_date= NOW(),modified_time= NOW(),in_progress='0',shared='0' WHERE po_id = '$po_id'";
+                    . "modified_date= NOW(),modified_time= NOW(),in_progress='1',shared='1' WHERE po_id = '$po_id'";
 
             //$machinedetails = Production_model::getPoMachineDetails($po_id);
 
@@ -65,7 +65,7 @@ class Production_model extends CI_Model {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
                     . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
                     . "end_datetime = '$end',"
-                    . "modified_date= NOW(),modified_time= NOW(),in_progress='0',shared='0' WHERE po_id = '$po_id'";
+                    . "modified_date= NOW(),modified_time= NOW(),in_progress='1',shared='1' WHERE po_id = '$po_id'";
         }
 
         $this->db->query($updateSql);

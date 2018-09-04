@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                     <label>Punch Id <b class="w3-text-red w3-medium">*</b></label>
-                                    <input type="number" name="emp_punch_id" ng-model="employee.emp_punch_id" id="emp_punch_id" class="form-control" placeholder="Employee Punching Id" value="" required>
+                                    <input type="number" name="emp_punch_id" ng-model="employee.emp_punch_id" id="emp_punch_id" min="0" class="form-control" placeholder="Employee Punching Id" value="" required>
                                 </div>
                             </div>
                             <div class="w3-col l12">
@@ -148,7 +148,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                                                     <label>Punch Id <b class="w3-text-red w3-medium">*</b></label>
-                                                                    <input type="number" name="emp_punch_id" id="emp_punch_id" class="form-control" placeholder="Employee Punching Id" value="<?php echo $val['employee_punch_id']; ?>" required>
+                                                                    <input type="number" name="emp_punch_id" min="0" id="emp_punch_id" class="form-control" placeholder="Employee Punching Id" value="<?php echo $val['employee_punch_id']; ?>" required>
                                                                 </div>
                                                             </div>
                                                             <!--div for add employee skills-->

@@ -68,6 +68,11 @@ if ($admin_name != '') {
                                         <li><a href="<?php echo base_url(); ?>materials/allmaterial">View All Materials</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="<?php echo base_url(); ?>admin/machine/addmachine"><i class="fa fa-sliders"></i> Machine Section </a>
+                                </li>
+                                <li><a href="<?php echo base_url(); ?>employee/employee"><i class="fa fa-user"></i> Employee Section </a>
+
+                                </li>
                                 <li><a><i class="fa fa-cube"></i> Product Section <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo base_url(); ?>admin/products/addproduct">Add New Product</a></li>
@@ -79,11 +84,7 @@ if ($admin_name != '') {
                                         <li><a href="<?php echo base_url(); ?>inventory/showinventory">View Inventory</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="<?php echo base_url(); ?>admin/machine/addmachine"><i class="fa fa-sliders"></i> Machine Section </a>
-                                </li>
-                                <li><a href="<?php echo base_url(); ?>employee/employee"><i class="fa fa-user"></i> Employee Section </a>
-
-                                </li>
+                                
                                 <li><a><i class="fa fa-first-order"></i> Purchase Order Section <span class=" fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo base_url(); ?>po_order/po_order">Add Purchase Order</a></li>

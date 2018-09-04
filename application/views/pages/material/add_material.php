@@ -40,12 +40,12 @@
                                 <div class="w3-col l12 w3-margin-bottom">
                                     <div class="col-lg-12 col-xs-12 col-sm-12">
                                         <label>Remark</label>
-                                        <textarea  class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;"></textarea>
+                                        <textarea class="form-control" name="remark" id="remark" ng-model="materialData.remark" placeholder="Remark" rows="5" cols="50" style="resize: none;"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class=" w3-center w3-col l12" style="">
-                                <button  type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>
+                                <button type="submit" title="add Material" id="btnsubmit" class="w3-medium w3-button theme_bg">Add Material</button>
                             </div>
                         </form>
                     </div>

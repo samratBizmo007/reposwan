@@ -26,7 +26,7 @@
                                         </div>
                                         <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                             <label>Machine Quantity Per Hour <b class="w3-text-red w3-medium">*</b></label>
-                                            <input type="text" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr"  class="form-control" placeholder="Machine Quantity Per Hr" required>
+                                            <input type="number" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr" min="0" class="form-control" placeholder="Machine Quantity Per Hr" required>
                                         </div> 
                                     </div>											                           
                                 </div>
@@ -150,7 +150,7 @@
                                                                             </div>
                                                                             <div class="col-lg-6 col-xs-12 col-sm-12" id="">
                                                                                 <label>Machine Quantity Per Hour </label>
-                                                                                <input type="text" name="qty_per_hr" ng-model="qty_per_hr" id="qty_per_hr"  value="<?php echo $val['quantity_per_hr']; ?>" class="form-control" placeholder="Quantity Per Hour" required>
+                                                                                <input type="number" name="qty_per_hr" ng-model="qty_per_hr" min="0" id="qty_per_hr"  value="<?php echo $val['quantity_per_hr']; ?>" class="form-control" placeholder="Quantity Per Hour" required>
                                                                             </div> 
                                                                         </div>                                                                   
                                                                     </div>

@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="form-group w3-col l12" ng-show='plantDiv'>
                                     <label for="stock_plant">Ex-stock Quantity<b class="w3-text-red w3-medium">*</b> :</label>
-                                    <input type="text" class="form-control" id="exstock_quantity" ng-model="exstock_quantity" name="exstock_quantity" placeholder="Ex-stock Quantiry" >
+                                    <input type="number" min="0" class="form-control" id="exstock_quantity" ng-model="exstock_quantity" name="exstock_quantity" placeholder="Ex-stock Quantiry" >
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label for="qtyhr">Quantity per hour:</label>
-                                            <input type="text" class="form-control" id="qtyhr" ng-model="qtyhr" name="qtyhr" placeholder="Machine Quantity Per Hr">
+                                            <input type="number" class="form-control" id="qtyhr" ng-model="qtyhr" name="qtyhr" placeholder="Machine Quantity Per Hr">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-12 col-xs-12">

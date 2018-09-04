@@ -33,7 +33,7 @@
                                         <div class="w3-col l12 w3-margin-bottom">
                                             <div class="col-lg-6 col-xs-12 col-sm-12" id="materialWeight">
                                                 <label>Line No <b class="w3-text-red w3-medium">*</b></label>
-                                                <input type="text" name="line_no[]" ng-model="line_no" id="line_no_{{$index}}" class="form-control" placeholder="Line No" required>
+                                                <input type="number" name="line_no[]" ng-model="line_no" id="line_no_{{$index}}" class="form-control" placeholder="Line No" required>
                                             </div>
                                         </div>
                                         <div class="w3-col l12 w3-margin-bottom">
@@ -73,11 +73,11 @@
                                         <div class="w3-col l12 w3-margin-bottom">
                                             <div id="materialRate" class="col-lg-4 col-xs-12 col-sm-12">                                        
                                                 <label>Unit Rate <b class="w3-text-red w3-medium">*</b></label>
-                                                <input type="text" name="unit_rate[]" ng-model="unit_rate" id="unit_rate_{{$index}}" value="" min="0" class="form-control" readonly placeholder="Unit Rate" required>
+                                                <input type="number" name="unit_rate[]" ng-model="unit_rate" id="unit_rate_{{$index}}" value="" min="0" class="form-control" readonly placeholder="Unit Rate" required>
                                             </div>
                                             <div class="col-lg-4 col-xs-12 col-sm-12" id="">
                                                 <label>Quantity <b class="w3-text-red w3-medium">*</b></label>
-                                                <input type="number" name="quantity[]" ng-model="quantity" id="quantity_{{$index}}" ng-change="getNetAmount($index)" value="" min="0" class="form-control" placeholder="Quantity" required>
+                                                <input type="number" name="quantity[]" min="0" ng-model="quantity" id="quantity_{{$index}}" ng-change="getNetAmount($index)" value="" min="0" class="form-control" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-lg-4 col-xs-12 col-sm-12" id="">
                                                 <label>Net Amount <b class="w3-text-red w3-medium">*</b></label>

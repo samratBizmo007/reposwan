@@ -136,12 +136,13 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
                 console.log(JSON.parse(data));
                 podata = JSON.parse(data);
                 var i, str;
-                $("#sharedpoOrdersSelected").empty();
+                //$("#sharedpoOrdersSelected").empty();
                 for (i = 0; i < podata.length; i++) {
                     //alert(podata[i].product_code);
-                    str += '<option value="' + podata[i].product_code + '/' + podata[i].po_id + '">Order_No- </p>' + podata[i].order_no + ' - Line_No: ' + podata[i].line_no + ' - Part code: ' + podata[i].product_code + ' - Due Date: ' + podata[i].po_duedate + '</option>';
+                    $('#sharedpoOrdersSelected').append('<option value="' + podata[i].product_code + '/' + podata[i].po_id + '">Order_No- </p>' + podata[i].order_no + ' - Line_No: ' + podata[i].line_no + ' - Part code: ' + podata[i].product_code + ' - Due Date: ' + podata[i].po_duedate + '</option>');
+                    //str += '<option value="' + podata[i].product_code + '/' + podata[i].po_id + '">Order_No- </p>' + podata[i].order_no + ' - Line_No: ' + podata[i].line_no + ' - Part code: ' + podata[i].product_code + ' - Due Date: ' + podata[i].po_duedate + '</option>';
                 }
-                $("#sharedpoOrdersSelected").html(str);
+                //$("#sharedpoOrdersSelected").html(str);
             }
         });
     };

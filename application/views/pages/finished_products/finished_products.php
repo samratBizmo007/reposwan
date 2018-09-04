@@ -1,4 +1,7 @@
 <!-- page content -->
+<?php 
+error_reporting(E_ERROR | E_PARSE);
+?>
 <style>
     .active{
         background-color: #2A3F54;
@@ -74,31 +77,41 @@
                                         <div class="w3-col l4 col-xs-12 col-sm-12">
                                             Shared Qty : <b class="w3-text-black">{{po.shared_product_quantity}}</b>
                                         </div>
+                                    
+                                        <div class="w3-col l4 col-xs-12 col-sm-12">
+                                            Produced Qty : <b class="w3-text-black">{{po.produced_qty}}</b>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom"><hr>
                                         <div class="col-lg-3 col-xs-12 col-sm-12">
                                             <label>Stock Qty</label>
-                                            <input class="form-control w3-center" id="stock_quantity_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="stock_quantity" value="{{po.subproduct_quantity}}">
+                                            <input type="number" min="0" class="form-control w3-center" id="stock_quantity_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="stock_quantity" value="{{po.totalQty}}">
+                                            <input type="hidden" min="0" class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
                                         </div>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
+<!--                                        <div class="col-lg-3 col-xs-12 col-sm-12">
                                             <label>Produced Qty</label>
-                                            <input class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
+                                            <input type="number" min="0" class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
                                         </div>
                                         <div class="col-lg-3 col-xs-12 col-sm-12">
                                             <label>Total Qty</label>
-                                            <input class="form-control w3-center" id="total_qty_{{po.po_id}}" readonly name="total_qty" value="{{po.totalQty}}">
+                                            <input type="number" min="0" class="form-control w3-center" id="total_qty_{{po.po_id}}" readonly name="total_qty" value="{{po.totalQty}}">
                                         </div>
                                         <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Po Prod Qty</label>
-                                            <input class="form-control w3-center" id="po_quantity_{{po.po_id}}" name="po_quantity" value="{{po.quantity}}">
+                                            <label>Remaining Qty</label>
+                                            <input type="number" min="0" class="form-control w3-center" id="Remaining_{{po.po_id}}" readonly name="Remaining" value="">
+                                        </div>-->
+                                        <div class="col-lg-3 col-xs-12 col-sm-12">
+                                            <label>Balanced</label>
+                                            <input type="number" min="0" class="form-control w3-center" readonly id="Balanced_{{po.po_id}}" name="Balanced" value="{{po.balanced}}">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom w3-padding-top">
                                         <div class="col-lg-3 col-xs-12 col-sm-12">
                                             <label>Dispatched Qty</label>
-                                            <input type="number" class="form-control w3-center" ng-model="dispatched_qty" id="dispatched_qty_{{po.po_id}}" name="dispatched_qty" value="{{po.dispatched}}">
+                                            <input type="number" class="form-control w3-center" min="0" ng-model="dispatched_qty" id="dispatched_qty_{{po.po_id}}" name="dispatched_qty" value="{{po.dispatched}}">
                                             <input type="hidden" id="po_id" name="po_id" readonly class="form-control" value="{{po.po_id}}">
+                                            <input type="hidden" id="po_quantity_{{po.po_id}}" name="po_quantity" readonly class="form-control" value="{{po.quantity}}">
                                             <input type="hidden" id="machineDetails" name="machineDetails" class="form-control" value="{{po.po_machinedetails}}">
                                         </div>
                                         <div class="col-lg-3 col-xs-12 col-sm-12">

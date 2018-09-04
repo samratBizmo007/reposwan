@@ -36,7 +36,61 @@ class Finished_products extends CI_controller {
         //extract($_POST);
         $data = $_POST;
         $result = $this->Finished_products_model->updateFinishedProductDetails($data);
-        if ($result) {
+        // print_r($result);
+        // die();
+        if ($result == 800) {
+            echo'<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Failure!</strong> Total Dispatched Quantity is greater than po quantity.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			//location.reload();
+			}, 1000);
+			</script>';
+        } elseif ($result == 700) {
+            echo'<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Failure!</strong> Dispatched Quantity is greater than po quantity.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			//location.reload();
+			}, 1000);
+			</script>';
+        } elseif ($result == 700) {
+            echo'<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Failure!</strong> Total Dispatched Quantity is greater than Stock quantity.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			//location.reload();
+			}, 1000);
+			</script>';
+        } elseif ($result == 900) {
+            echo'<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Failure!</strong> Stock Quantity is less than po dispatched quantity.
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			//location.reload();
+			}, 1000);
+			</script>';
+        } elseif ($result == 200) {
             echo '<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Success!</strong> PO Updated successfully added.
@@ -49,8 +103,8 @@ class Finished_products extends CI_controller {
 			//location.reload();
 			}, 1000);
 			</script>';
-        } else {
-            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+        } elseif ($result == 500) {
+            echo '<div class="alert alert-danger alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Failure!</strong> PO Updation Failed .
 			</div>

@@ -44,6 +44,8 @@ class Finished_products_model extends CI_Model {
 
     public function updateFinishedProductDetails($data) {
         extract($data);
+        //print_r($data);die();
+
         $billdetails = array();
         $billInfo = array();
         $sql = "SELECT * FROM purchase_orders WHERE po_id = '$po_id'";
@@ -62,96 +64,91 @@ class Finished_products_model extends CI_Model {
             'dispatched_date' => $dispatched_date
         );
         $subStockQty = 0;
+
+
         if ($billno_dispatched_qty == '') {
-            $billInfo[] = json_encode($billArry);
-            //print_r($dispatched_qty); die();
-            $bills = json_encode($billArry);
-            //-------------------update the po details for produced qty and dispatched qty-------------------------- 
-            //$subProductDetails = '';
-            $update = "UPDATE purchase_orders SET produced_qty='$produced_qty',total_quantity='$total_qty',"
-                    . "dispatched_qty='$dispatched_qty',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
-            //echo $update; die();
-            $this->db->query($update);
+            if ($dispatched_qty <= $po_quantity) {
+                if ($dispatched_qty <= $stock_quantity) {
 
-            $subProductDetails = Finished_products_model::getSubProductDetail($part_drwing_no, $product_code);
-            $subProducts = json_decode($subProductDetails, TRUE);
-            extract($subProducts[0]);
-            $subStockQty = $subStockQty - $dispatched_qty;
-            //print_r($subStockQty);die();
-            $total_qty = $total_qty - $dispatched_qty;
-            //echo $remaining_qty;
-            $sqlupdate = "UPDATE product_tab SET subproduct_quantity = '$subStockQty',"
-                    . "total_qty = '$total_qty' "
-                    . "WHERE drawing_no='$part_drwing_no' AND part_code='$product_code'";
+                    $billInfo[] = json_encode($billArry);
+                    //print_r($dispatched_qty); die();
+                    $bills = json_encode($billArry);
 
-            $this->db->query($sqlupdate);
 
-            $poDetails = Finished_products_model::getPoDetail($po_id);
-            $poInfo = json_decode($poDetails, TRUE);
-            extract($poInfo[0]);
-            //print_r($poInfo[0]);
-            $updatepo = "UPDATE purchase_orders SET produced_qty='$po_produced_qty',total_quantity='$remaining_qty',"
-                    . "dispatched_qty='$dispatched_qty',"
-                    . "modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
-            //$resultUpdateop = $this->db->query($updatepo);
+                    $subProductDetails = Finished_products_model::getSubProductDetail($part_drwing_no, $product_code);
+                    $subProducts = json_decode($subProductDetails, TRUE);
+                    extract($subProducts[0]);
 
-            $this->db->query($updatepo);
-            if ($this->db->affected_rows() > 0) {
-                return TRUE;
+                    $stock_quantity = $stock_quantity - $dispatched_qty;
+                    $balanced = $po_quantity - $dispatched_qty;
+
+                    //-------------------update the po details for produced qty and dispatched qty-------------------------- 
+                    //$subProductDetails = '';
+                    $update = "UPDATE purchase_orders SET produced_qty='$stock_quantity',balanced='$balanced',"
+                            . "dispatched_qty='$dispatched_qty',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
+                    //echo $update; die();
+                    $this->db->query($update);
+                    //-------------------update the po details for produced qty and dispatched qty--------------------------//
+
+                    if ($this->db->affected_rows() > 0) {
+                        return 200;
+                    } else {
+                        return 500;
+                    }
+                } else {
+                    return 700;
+                }
             } else {
-                return FALSE;
+                return 700;
             }
         } else {
-            $billdetails = array_merge(json_decode($billno_dispatched_qty, true), $billArry);
-            $billInfo[] = json_encode($billdetails);
-            $bills = json_encode($billdetails);
-            $totaldispatched = 0;
-            for ($i = 0; $i < count($billdetails); $i++) {
-                $totaldispatched = $billdetails[$i]['dispatched_qty'] + $totaldispatched;
+//            print_r($billArry);
+//            die();
+            $newdispatched = 0;
+            for ($i = 0; $i < count($billArry); $i++) {
+                $newdispatched = $billArry[$i]['dispatched_qty'] + $newdispatched;
+                //print_r($billdetails[$i]['dispatched_qty']);die();
             }
 
-            $sqlSelect = "SELECT * FROM purchase_orders WHERE po_id = '$po_id'";
-            $result = $this->db->query($sqlSelect);
-            $billno_dispatched_qty = '';
-            if ($result->num_rows() <= 0) {
-                return false;
-            } else {
-                foreach ($result->result_array() as $row) {
-                    $total_quantityNew = $row['total_quantity'];
+            if ($newdispatched <= $stock_quantity) {
+
+                $billdetails = array_merge(json_decode($billno_dispatched_qty, true), $billArry);
+                $billInfo[] = json_encode($billdetails);
+                $bills = json_encode($billdetails);
+                
+                $totaldispatched = 0;
+                for ($i = 0; $i < count($billdetails); $i++) {
+                    $totaldispatched = $billdetails[$i]['dispatched_qty'] + $totaldispatched;
                 }
-            }
+//                echo 'totdis'.$totaldispatched.'<br>';
+//                echo 'poqnt'.$po_quantity.'<br>';
+//                echo 'disqty'.$dispatched_qty.'<br>';
+//                die();
+                
+                if ($totaldispatched <= $po_quantity) {
+//                if ($totaldispatched < $stock_quantity) {
+                    $stock_quantity = $stock_quantity - $dispatched_qty;
+                    $balanced = $po_quantity - $totaldispatched;
 
-            $update = "UPDATE purchase_orders SET produced_qty='$produced_qty',total_quantity='$total_qty',"
-                    . "dispatched_qty='$totaldispatched',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
-            //echo $update; die();
-            $this->db->query($update);
+                    $update = "UPDATE purchase_orders SET produced_qty='$stock_quantity',balanced='$balanced',"
+                            . "dispatched_qty='$totaldispatched',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
+                    //echo $update; die();
+                    $this->db->query($update);
 
-            $subProductDetails = Finished_products_model::getSubProductDetail($part_drwing_no, $product_code);
-            $subProducts = json_decode($subProductDetails, TRUE);
-            extract($subProducts);
+                    if ($this->db->affected_rows() > 0) {
+                        return 200;
+                    } else {
+                        return 500;
+                    }
 
-            $remaining_qtyNew = $total_quantityNew - $dispatched_qty;
-            //echo $remaining_qty;
-            $sqlupdate = "UPDATE product_tab SET subproduct_quantity = '$remaining_qtyNew',"
-                    . "total_qty = '$remaining_qtyNew' "
-                    . "WHERE drawing_no='$part_drwing_no' AND part_code='$product_code'";
-
-            $this->db->query($sqlupdate);
-
-            $poDetails = Finished_products_model::getPoDetail($po_id);
-            $poInfo = json_decode($poDetails, TRUE);
-            extract($poInfo[0]);
-            //print_r($poInfo[0]);
-            $updatepo = "UPDATE purchase_orders SET produced_qty='$po_produced_qty',total_quantity='$remaining_qtyNew',"
-                    . "dispatched_qty='$po_dispatched_qty',"
-                    . "modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
-            //$resultUpdateop = $this->db->query($updatepo);
-
-            $this->db->query($updatepo);
-            if ($this->db->affected_rows() > 0) {
-                return TRUE;
+//                } else {
+//                    return 1000;
+//                }
+                } else {
+                    return 800;
+                }
             } else {
-                return FALSE;
+                return 900;
             }
         }
     }

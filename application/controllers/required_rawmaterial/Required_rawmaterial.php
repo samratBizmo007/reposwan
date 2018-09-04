@@ -108,12 +108,6 @@ class Required_rawmaterial extends CI_controller {
             </div>';
             $materialDetails = json_decode($result[$i]['material_details'], true);
 
-//            echo'<div class="w3-col l12">'
-//            . '<div></div>'
-//            . '<div></div>'
-//            . '<div></div>'
-//            . '</div>';
-
             echo'<div class="col-lg-12">
                  <hr>';
             for ($j = 0; $j < count($materialDetails); $j++) {
@@ -167,19 +161,19 @@ class Required_rawmaterial extends CI_controller {
                 . '</div>'
                 . '<div class="w3-col l1" style="padding-right: 2px;">'
                 . '<lable>Weight</lable>'
-                . '<input type="text" disabled class="form-control" value="' . $materialDetails[$j]['rmweightSelected'] . '">'
+                . '<input type="number" min="0" disabled class="form-control" value="' . $materialDetails[$j]['rmweightSelected'] . '">'
                 . '</div>'
                 . '<div class="w3-col l1" style="padding-right: 2px;">'
                 . '<lable>Prod.Qty</lable>'
-                . '<input type="text" disabled class="form-control" value="' . $Po_ProductQuantity . '">'
+                . '<input type="number" min="0" disabled class="form-control" value="' . $Po_ProductQuantity . '">'
                 . '</div>'
                 . '<div class="w3-col l2" style="padding-right: 2px;">'
                 . '<lable>R.M. Required</lable>'
-                . '<input type="text" id="total_weight_' . $j . '" disabled class="form-control" value="' . $total . '">'
+                . '<input type="number" min="0" id="total_weight_' . $j . '" disabled class="form-control" value="' . $total . '">'
                 . '</div>'
                 . '<div class="w3-col l2" style="padding-right: 2px;">'
                 . '<lable>Actual Tot.Weight</lable>'
-                . '<input type="text" id="actual_weight_' . $j . '" disabled class="form-control" value="' . $actualWeigth . '">'
+                . '<input type="number" min="0" id="actual_weight_' . $j . '" disabled class="form-control" value="' . $actualWeigth . '">'
                 . '</div>'
                 . '<div class="w3-col l2 w3-center" style="padding-right: 2px;">'
                 . '<br>'
@@ -187,7 +181,7 @@ class Required_rawmaterial extends CI_controller {
                 . '</div>'
                 . '<div class="w3-col l2" style="padding-right: 2px;">'
                 . '<lable>Remaining Weight</lable>'
-                . '<input type="text" id="remaining_weight_' . $j . '" disabled class="form-control" value="">'
+                . '<input type="number" min="0" id="remaining_weight_' . $j . '" disabled class="form-control" value="">'
                 . '</div>'
                 . '<span class="w3-text-red" id="messg_' . $j . '"></span>'
                 . '</div>';

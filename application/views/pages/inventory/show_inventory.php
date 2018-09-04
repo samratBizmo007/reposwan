@@ -89,34 +89,34 @@
                                         <td class="w3-center" width="7%">{{ m.material_grade}}</td>
                                         <td class="w3-center"width="7%">{{ m.material_rate}}</td>
                                         <td class="w3-center" width="10%">
-                                            <input type="text" id="weight_{{m.material_id}}" class="form-control w3-center" value="{{ m.material_weight}}">
+                                            <input type="number" min="0" id="weight_{{m.material_id}}" class="form-control w3-center" value="{{ m.material_weight}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="quantity_{{m.material_id}}" class="form-control w3-center" value="{{ m.quantity}}">
+                                            <input type="number" min="0" id="quantity_{{m.material_id}}" class="form-control w3-center" value="{{ m.quantity}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="length_{{m.material_id}}" class="form-control w3-center" value="{{ m.length}}">
+                                            <input type="number" min="0" id="length_{{m.material_id}}" class="form-control w3-center" value="{{ m.length}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="id_{{m.material_id}}" class="form-control w3-center" value="{{ m.id}}">
+                                            <input type="number" min="0" id="id_{{m.material_id}}" class="form-control w3-center" value="{{ m.id}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="od_{{m.material_id}}" class="form-control w3-center" value="{{ m.od}}">
+                                            <input type="number" min="0" id="od_{{m.material_id}}" class="form-control w3-center" value="{{ m.od}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="pitching_{{m.material_id}}" class="form-control w3-center" value="{{ m.pitching}}">
+                                            <input type="number" min="0" id="pitching_{{m.material_id}}" class="form-control w3-center" value="{{ m.pitching}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="diagram_no_{{m.material_id}}" class="form-control w3-center" value="{{ m.diagram_no}}">
+                                            <input type="number" min="0" id="diagram_no_{{m.material_id}}" class="form-control w3-center" value="{{ m.diagram_no}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="thickness_{{m.material_id}}" class="form-control w3-center" value="{{ m.thickness}}">
+                                            <input type="number" min="0" id="thickness_{{m.material_id}}" class="form-control w3-center" value="{{ m.thickness}}">
                                         </td>
                                         <td class="w3-center" width="7%">
-                                            <input type="text" id="diameter_{{m.material_id}}" class="form-control w3-center" value="{{ m.diameter}}">
+                                            <input type="number" min="0" id="diameter_{{m.material_id}}" class="form-control w3-center" value="{{ m.diameter}}">
                                         </td>
                                         <td class="w3-center" width="15%">
-                                            <input type="text" id="remark_{{m.material_id}}" class="form-control w3-center" value="{{ m.remaining_weight}}">
+                                            <input type="number" min="0" id="remark_{{m.material_id}}" class="form-control w3-center" value="{{ m.remaining_weight}}">
                                         </td>
 <!--                                        <td class="w3-center">{{ m.added_date}}</td>
                                         <td class="w3-center">{{ m.modified_date}}</td>-->
@@ -127,7 +127,7 @@
                                         </td>
                                     </tr>
                                     <tr ng-if="materials['status'] == 500">
-                                        <td class="w3-center" colspan="8">No Records Found..!</td>
+                                        <td class="w3-center" colspan="15">No Records Found..!</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -228,13 +228,13 @@
                                                 </td>
                                                 <td class="w3-center"><?php echo $products['status_message'][$i]['drawing_no']; ?></td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="production_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['production_quantity'] ?>">
+                                                    <input type="number" min="0" class="form-control w3-center" id="production_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['production_quantity'] ?>">
                                                 </td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" id="dispatched_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['dispatched'] ?>">
+                                                    <input type="number" min="0" class="form-control w3-center" id="dispatched_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" onkeyup="getTotalQuantity(<?php echo $products['status_message'][$i]['prod_id'] ?>);" value="<?php echo $products['status_message'][$i]['dispatched'] ?>">
                                                 </td>
                                                 <td class="w3-center">
-                                                    <input type="number" class="form-control w3-center" readonly id="total_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" value="<?php echo $products['status_message'][$i]['total_quantity'] ?>">
+                                                    <input type="number" min="0" class="form-control w3-center" readonly id="total_quantity_<?php echo $products['status_message'][$i]['prod_id'] ?>" value="<?php echo $products['status_message'][$i]['total_quantity'] ?>">
                                                 </td>
                                                 <td class="w3-center"><?php echo $products['status_message'][$i]['modified_date']; ?></td>
                                                 <td class="w3-center">
@@ -291,13 +291,13 @@
                                                                         <td class="w3-center"><?php echo $result[$j][0]['packing_qty_per_tray']; ?></td>
                                                                         <td class="w3-center"><?php echo $result[$j][0]['finished_weight']; ?></td>
                                                                         <td class="w3-center">
-                                                                            <input type="number" class="form-control w3-center" id="subProduct_Qty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['subproduct_quantity']; ?>">
+                                                                            <input type="number" min="0" class="form-control w3-center" id="subProduct_Qty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['subproduct_quantity']; ?>">
                                                                         </td>
                                                                         <td class="w3-center">
-                                                                            <input type="number" class="form-control w3-center" id="subProduct_DispatchQty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['sub_dispatched_qty']; ?>">
+                                                                            <input type="number" min="0" class="form-control w3-center" id="subProduct_DispatchQty_<?php echo $result[$j][0]['p_id']; ?>" onkeyup="getTotalSubproductQuantity(<?php echo $result[$j][0]['p_id']; ?>);" value="<?php echo $result[$j][0]['sub_dispatched_qty']; ?>">
                                                                         </td>
                                                                         <td class="w3-center">
-                                                                            <input type="number" class="form-control w3-center" readonly id="totalSub_Product_<?php echo $result[$j][0]['p_id']; ?>" value="<?php echo $result[$j][0]['total_qty']; ?>">
+                                                                            <input type="number" min="0" class="form-control w3-center" readonly id="totalSub_Product_<?php echo $result[$j][0]['p_id']; ?>" value="<?php echo $result[$j][0]['total_qty']; ?>">
                                                                         </td>
                                                                         <td class="w3-center">
                                                                             <a class="btn w3-block w3-text-green w3-padding-small" onclick="updateSubProductDetails(<?php echo $result[$j][0]['p_id']; ?>);" title="Update Product Details">

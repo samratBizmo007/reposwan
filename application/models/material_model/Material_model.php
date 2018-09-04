@@ -70,19 +70,19 @@ class Material_model extends CI_Model {
         $sqlSelect = "SELECT * FROM material_tab WHERE material_grade ='$material_grade' AND mat_cat_id = '$mat_cat_id'";
         $result = $this->db->query($sqlSelect);
         // print_r(count($result));die();
-        if (count($result) == '1') {
+        if ($result->num_rows() != 0) {
             $response = array(
                 'status' => 500, //---------db error code 
                 'status_message' => 'Something Went Wrong... Material Not Added Successfully.!!!'
             );
+            return $response;
         } else {
             $sql = "INSERT INTO material_tab(mat_cat_id,material_grade,material_rate,material_weight,id,od,length,pitching,quantity,diagram_no,thickness,"
                     . "diameter,remark,added_date,added_time,status)"
                     . "VALUES ('$mat_cat_id','$material_grade','$material_rate','$material_weight',"
                     . "'$id','$od','$length','$pitching','$quantity','$Diagram_no','$thickness',"
                     . "'$diameter','$remark',now(),now(),'1')";
-//        echo $sql;die();
-            //$this->db->query($sql)
+
             if ($this->db->query($sql)) {
                 $response = array(
                     'status' => 200, //---------insert db success code

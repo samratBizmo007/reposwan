@@ -11,12 +11,21 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
     $http.get(BASE_URL + "finished_products/finished_products/getSharedInprocessPoDetails").then(function (response) {
         console.log(response.data);
         var data = response.data;
-        var i, products, machinedetails, totalQty;
+        var i, products, machinedetails, totalQty, finishedpobills;
         if (data != '') {
             for (i = 0; i < data.length; i++) {
                 products = JSON.parse(data[i].product_details);
                 machinedetails = JSON.parse(data[i].po_machinedetails);
-                totalQty = parseInt(data[i].subproduct_quantity) + parseInt(data[i].produced_qty);
+                if (data[i].subproduct_quantity == 0) {
+                    totalQty = parseInt(data[i].subproduct_quantity) + parseInt(data[i].produced_qty);
+                } else {
+                    totalQty = parseInt(data[i].produced_qty);
+                }
+                if (data[i].billno_dispatched_qty != '') {
+                    finishedpobills = JSON.parse(data[i].billno_dispatched_qty);
+                } else {
+                    finishedpobills = '';
+                }
                 $scope.po.push({'customer_name': data[i].customer_name,
                     'order_no': data[i].order_no,
                     'po_duedate': data[i].po_duedate,
@@ -44,7 +53,9 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                     'modified_time': data[i].modified_time,
                     'subproduct_quantity': data[i].subproduct_quantity,
                     'totalQty': totalQty,
-                    'po_machinedetails': machinedetails
+                    'po_machinedetails': machinedetails,
+                    'balanced': data[i].balanced
+
                 });
             }
         } else {
@@ -75,14 +86,18 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
             // Assign response to skills object
             $scope.po = [];
             var data = response.data;
-            var i, products, machinedetails, totalQty;
+            var i, products, machinedetails, totalQty, finishedpobills;
             console.log(data);
             if (data != 500) {
                 for (i = 0; i < data.length; i++) {
                     products = JSON.parse(data[i].product_details);
                     machinedetails = JSON.parse(data[i].po_machinedetails);
                     totalQty = parseInt(data[i].subproduct_quantity) + parseInt(data[i].produced_qty);
-
+                    if (data[i].billno_dispatched_qty != '') {
+                        finishedpobills = JSON.parse(data[i].billno_dispatched_qty);
+                    } else {
+                        finishedpobills = '';
+                    }
                     $scope.po.push({'customer_name': data[i].customer_name,
                         'order_no': data[i].order_no,
                         'po_duedate': data[i].po_duedate,
@@ -110,7 +125,9 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                         'modified_time': data[i].modified_time,
                         'subproduct_quantity': data[i].subproduct_quantity,
                         'totalQty': parceInt(data[i].subproduct_quantity) + parceInt(data[i].produced_qty),
-                        'po_machinedetails': machinedetails
+                        'po_machinedetails': machinedetails,
+                        'balanced': data[i].balanced
+
                     });
                 }
             } else {
@@ -147,7 +164,20 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
         var dispatched_qty = $('#dispatched_qty_' + po_id).val();
         var bill_no = $('#bill_no_' + po_id).val();
         var dispatched_date = $('#dispatched_date_' + po_id).val();
-        //alert(po_orders);
+        var Balanced = $('#Balanced_' + po_id).val();
+        var remainingQty = $('#Remaining_' + po_id).val();
+        if (dispatched_qty == '') {
+            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Add Dispatched Quantity.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
+            return false;
+        }
+        if (dispatched_date == '') {
+            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Add Bill NO.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
+            return false;
+        }
+        if (bill_no == '') {
+            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select Dispatched Date.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: BASE_URL + "finished_products/finished_products/updateFinishedProductDetails",
@@ -161,7 +191,9 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                 po_quantity: po_quantity,
                 dispatched_qty: dispatched_qty,
                 bill_no: bill_no,
-                dispatched_date: dispatched_date
+                dispatched_date: dispatched_date,
+                Balanced: Balanced,
+                remainingQty: remainingQty
             },
             cache: false,
             success: function (data) {
@@ -187,7 +219,11 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                 for (i = 0; i < data.length; i++) {
                     products = JSON.parse(data[i].product_details);
                     machinedetails = JSON.parse(data[i].po_machinedetails);
-                    finishedpobills = JSON.parse(data[i].billno_dispatched_qty);
+                    if (data[i].billno_dispatched_qty != '') {
+                        finishedpobills = JSON.parse(data[i].billno_dispatched_qty);
+                    } else {
+                        finishedpobills = '';
+                    }
                     //alert(finishedpobills);
                     totalQty = parseInt(data[i].subproduct_quantity) + parseInt(data[i].produced_qty);
 
@@ -220,7 +256,8 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                         'totalQty': totalQty,
                         'shared_product_quantity': data[i].shared_product_quantity,
                         'po_machinedetails': machinedetails,
-                        'finishedpobills': finishedpobills
+                        'finishedpobills': finishedpobills,
+                        'balanced': data[i].balanced
                     });
                 }
             } else {

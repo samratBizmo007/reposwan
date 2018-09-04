@@ -105,7 +105,7 @@ class Shared_PO extends CI_controller {
             echo'<div class="w3-col l12 col-xs-12 col-sm-12">'
             . '<div class="w3-col l4 col-xs-12 col-sm-12">'
             . '<label>Shared Product Quantity</label>'
-            . '<input type="number" name="sharedQuantity" ng-model="sharedQuantity" id="sharedQuantity" value="' . $result[$i]['shared_product_quantity'] . '" class="form-control" placeholder="Shared Product Quantity" required>'
+            . '<input type="number" min="0" name="sharedQuantity" ng-model="sharedQuantity" id="sharedQuantity" value="' . $result[$i]['shared_product_quantity'] . '" class="form-control" placeholder="Shared Product Quantity" required>'
             . '</div>'
             . '<div class="w3-col l8 w3-right col-xs-12 col-sm-12" style="padding-top: 23px;">'
             . '<button  type="submit" title="filter Po by date" id="btnsubmit" onclick="updateSharedQuantity(' . $result[$i]['po_id'] . ');" class="w3-medium w3-button theme_bg">Add Shared Product Quantity</button>'

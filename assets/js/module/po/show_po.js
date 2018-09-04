@@ -9,23 +9,27 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
     $scope.po = [];
 
     $http.get(BASE_URL + "po_order/show_purchase_orders/getAllPODetails").then(function (response) {
-       // console.log(response.data);
+        // console.log(response.data);
         var data = response.data;
         var i, products;
-        for (i = 0; i < data.length; i++) {
-            console.log(JSON.parse(data[i].product_details));
-            //alert(data[i].customer_name);
-            products = JSON.parse(data[i].product_details);
-            $scope.po.push({'customer_name': data[i].customer_name,
-                'order_no': data[i].order_no,
-                'po_duedate': data[i].po_duedate,
-                'po_total': data[i].po_total,
-                'po_id': data[i].po_id,
-                'product_details': products,
-                'added_date': data[i].added_date,
-                'added_time': data[i].added_time,
-                'modified_date': data[i].modified_date,
-                'modified_time': data[i].modified_time});
+        if (data != '') {
+            for (i = 0; i < data.length; i++) {
+                console.log(JSON.parse(data[i].product_details));
+                //alert(data[i].customer_name);
+                products = JSON.parse(data[i].product_details);
+                $scope.po.push({'customer_name': data[i].customer_name,
+                    'order_no': data[i].order_no,
+                    'po_duedate': data[i].po_duedate,
+                    'po_total': data[i].po_total,
+                    'po_id': data[i].po_id,
+                    'product_details': products,
+                    'added_date': data[i].added_date,
+                    'added_time': data[i].added_time,
+                    'modified_date': data[i].modified_date,
+                    'modified_time': data[i].modified_time});
+            }
+        } else {
+            $scope.po = [];
         }
         console.log($scope.po);
         //$scope.poData = $scope.po;
@@ -73,7 +77,7 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
                 }
             } else {
                 $scope.po = [];
-               // $
+                // $
             }
         });
     };
