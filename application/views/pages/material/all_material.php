@@ -11,7 +11,7 @@
                 <h4>Find Material By Material Category </h4>                
             </div>
             <div class="w3-col l12 w3-margin-bottom">
-                <div class="col-lg-5 col-xs-12 col-sm-12" id="materialWeight">
+                <div class="col-lg-5 col-xs-12 col-sm-12" id="">
                     <label>Material Category <b class="w3-text-red w3-medium">*</b></label>
                     <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialdetails();" required>
                         <option value="0">All Material</option>
@@ -19,6 +19,10 @@
                             <option value="<?php echo $key['mat_cat_id']; ?>"><?php echo $key['material_type'] ?></option>
                         <?php } ?>
                     </select>
+                </div>
+                <div class="col-lg-5 col-xs-12 col-sm-12" id="">
+                    <label>Material Name <b class="w3-text-red w3-medium">*</b></label>
+                    <input type="text" name="material_grade" id="material_grade" onkeyup="getMaterialInfoByName();" class="form-control" placeholder="Material Grade" value="" required>
                 </div>
             </div>
         </div>
@@ -350,6 +354,21 @@
             url: BASE_URL + "materials/allmaterial/getMaterialdetails",
             data: {
                 mat_cat_id: mat_cat_id
+            },
+            return: false, //stop the actual form post !important!
+            success: function (data) {
+                //$.alert(data);
+                $('#addedRows').html(data);
+            }
+        });
+    }
+    function getMaterialInfoByName() {
+        var material_grade = $('#material_grade').val();
+        $.ajax({
+            type: "POST",
+            url: BASE_URL + "materials/allmaterial/getMaterialInfoByName",
+            data: {
+                material_grade: material_grade
             },
             return: false, //stop the actual form post !important!
             success: function (data) {

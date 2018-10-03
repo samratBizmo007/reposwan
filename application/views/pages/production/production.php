@@ -30,20 +30,29 @@
                     <button  type="button" title="filter Po by date" id="btnsubmit" ng-click="getAllSharedInprogressPoDetailsBydate()" class="w3-medium w3-button theme_bg">Search P.O</button>
                 </div>
             </div>
-            <fieldset>
-                <div class="col-lg-12 col-xs-12 col-sm-12 w3-small">
-                    <div id="sharedPoDiv" class="col-lg-3 w3-small col-xs-12 col-sm-12 w3-border-right">
-                        <div class="w3-col l12 w3-small" ng-repeat="p in po">
-                            <div class="test w3-bar-item w3-button w3-border-bottom" style="margin-bottom: 5px; width: 250px;">
-                                <a class="btn w3-small w3-text-black" ng-click="show_ProductionPo_Orderinfo(p.po_id, p.product_code)"><b>PO #O-{{p.order_no}} - {{p.product_code + "/" + p.sr_no}}</b></a>
+            <div ng-if="po == 500">
+                <fieldset>
+                    <div class="col-lg-12 col-xs-12 col-sm-12 w3-medium w3-center">
+                        <span class="w3-center w3-text-black"><b> NO Records Are Available..! </b></span>
+                    </div>
+                </fieldset>
+            </div>
+            <div ng-if="po != 500">
+                <fieldset>
+                    <div class="col-lg-12 col-xs-12 col-sm-12 w3-small">
+                        <div id="sharedPoDiv" class="col-lg-3 w3-small col-xs-12 col-sm-12 w3-border-right">
+                            <div class="w3-col l12 w3-small" ng-repeat="p in po">
+                                <div class="test w3-bar-item w3-button w3-border-bottom" style="margin-bottom: 5px; width: 250px;">
+                                    <a class="btn w3-small w3-text-black" ng-click="show_ProductionPo_Orderinfo(p.po_id, p.product_code)"><b>PO #O-{{p.order_no}} - {{p.product_code + "/" + p.sr_no}}</b></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="sharedPoDetailsDiv" class="col-lg-9 col-xs-12 col-sm-12">
+                        <div id="sharedPoDetailsDiv" class="col-lg-9 col-xs-12 col-sm-12">
 
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+                </fieldset>
+            </div>
         </div>
         <div id="message" ng-bind-html="message"></div>
     </div>

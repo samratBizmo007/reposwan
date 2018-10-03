@@ -81,10 +81,12 @@ class Finished_products_model extends CI_Model {
 
                     $stock_quantity = $stock_quantity - $dispatched_qty;
                     $balanced = $po_quantity - $dispatched_qty;
+                    $produced_qty = $produced_qty - $dispatched_qty;
+
 
                     //-------------------update the po details for produced qty and dispatched qty-------------------------- 
                     //$subProductDetails = '';
-                    $update = "UPDATE purchase_orders SET produced_qty='$stock_quantity',balanced='$balanced',"
+                    $update = "UPDATE purchase_orders SET produced_qty='$produced_qty',balanced='$balanced',"
                             . "dispatched_qty='$dispatched_qty',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
                     //echo $update; die();
                     $this->db->query($update);
@@ -111,11 +113,10 @@ class Finished_products_model extends CI_Model {
             }
 
             if ($newdispatched <= $stock_quantity) {
-
                 $billdetails = array_merge(json_decode($billno_dispatched_qty, true), $billArry);
                 $billInfo[] = json_encode($billdetails);
                 $bills = json_encode($billdetails);
-                
+
                 $totaldispatched = 0;
                 for ($i = 0; $i < count($billdetails); $i++) {
                     $totaldispatched = $billdetails[$i]['dispatched_qty'] + $totaldispatched;
@@ -124,26 +125,29 @@ class Finished_products_model extends CI_Model {
 //                echo 'poqnt'.$po_quantity.'<br>';
 //                echo 'disqty'.$dispatched_qty.'<br>';
 //                die();
-                
+
                 if ($totaldispatched <= $po_quantity) {
 //                if ($totaldispatched < $stock_quantity) {
-                    $stock_quantity = $stock_quantity - $dispatched_qty;
+                    $Newstock_quantity = $stock_quantity - $dispatched_qty;
                     $balanced = $po_quantity - $totaldispatched;
+                    $produced_qty = $produced_qty - $dispatched_qty;
+                    if ($produced_qty >= 0) {
 
-                    $update = "UPDATE purchase_orders SET produced_qty='$stock_quantity',balanced='$balanced',"
-                            . "dispatched_qty='$totaldispatched',billno_dispatched_qty='$bills',modified_date= NOW(),modified_time= NOW() WHERE po_id = '$po_id'";
-                    //echo $update; die();
-                    $this->db->query($update);
+                        $update = "UPDATE purchase_orders SET produced_qty='$produced_qty',balanced='$balanced',"
+                                . "dispatched_qty='$totaldispatched',billno_dispatched_qty='$bills',modified_date= NOW(),"
+                                . "modified_time= NOW() WHERE po_id = '$po_id'";
+                        //echo $update; die();
+                        $this->db->query($update);
 
-                    if ($this->db->affected_rows() > 0) {
-                        return 200;
-                    } else {
-                        return 500;
+                        if ($this->db->affected_rows() > 0) {
+                            return 200;
+                        } else {
+                            return 500;
+                        }
                     }
-
-//                } else {
-//                    return 1000;
-//                }
+                    else{
+                        return 1000;
+                    }
                 } else {
                     return 800;
                 }

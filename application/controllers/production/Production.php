@@ -198,7 +198,7 @@ class Production extends CI_controller {
         $data['produced_qty'] = $produced_qty;
         $data['rejected_qty'] = $rejected_qty;
         $data['inprocess_qty'] = $inprocess_qty;
-        $data['po_status'] = $status;
+        //$data['po_status'] = $status;
         $result = $this->Production_model->updatePoDetails($data);
         if ($result) {
             echo '<div class="alert alert-success alert-dismissible fade in alert-fixed w3-round">
@@ -210,7 +210,7 @@ class Production extends CI_controller {
 			$(".alert").fadeTo(500, 0).slideUp(500, function(){
 			$(this).remove(); 
 			});
-			location.reload();
+			//location.reload();
 			}, 1000);
 			</script>';
         } else {

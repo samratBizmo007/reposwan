@@ -14,31 +14,35 @@ myApp.controller('pendingPOAppController', function ($scope, $http, $sce) {
         console.log(response.data);
         var data = response.data;
         var i, products;
-        for (i = 0; i < data.length; i++) {
-            //console.log(JSON.parse(data[i].product_details));
-            //alert(data[i].customer_name);
-            products = JSON.parse(data[i].product_details);
-            $scope.po.push({'customer_name': data[i].customer_name,
-                'order_no': data[i].order_no,
-                'po_duedate': data[i].po_duedate,
-                'line_no': data[i].line_no,
-                'unit_rate': data[i].unit_rate,
-                'part_drwing_no': data[i].part_drwing_no,
-                'sr_no': data[i].sr_no,
-                'balanced': data[i].balanced,
-                'remark': data[i].remark,
-                'prod_id': data[i].prod_id,
-                'product_code': data[i].product_code,
-                'quantity': data[i].quantity,
-                'revision_no': data[i].revision_no,
-                'net_amount': data[i].net_amount,
-                'po_total': data[i].po_total,
-                'po_id': data[i].po_id,
-                'product_details': products,
-                'added_date': data[i].added_date,
-                'added_time': data[i].added_time,
-                'modified_date': data[i].modified_date,
-                'modified_time': data[i].modified_time});
+        if (data != 500) {
+            for (i = 0; i < data.length; i++) {
+                //console.log(JSON.parse(data[i].product_details));
+                //alert(data[i].customer_name);
+                products = JSON.parse(data[i].product_details);
+                $scope.po.push({'customer_name': data[i].customer_name,
+                    'order_no': data[i].order_no,
+                    'po_duedate': data[i].po_duedate,
+                    'line_no': data[i].line_no,
+                    'unit_rate': data[i].unit_rate,
+                    'part_drwing_no': data[i].part_drwing_no,
+                    'sr_no': data[i].sr_no,
+                    'balanced': data[i].balanced,
+                    'remark': data[i].remark,
+                    'prod_id': data[i].prod_id,
+                    'product_code': data[i].product_code,
+                    'quantity': data[i].quantity,
+                    'revision_no': data[i].revision_no,
+                    'net_amount': data[i].net_amount,
+                    'po_total': data[i].po_total,
+                    'po_id': data[i].po_id,
+                    'product_details': products,
+                    'added_date': data[i].added_date,
+                    'added_time': data[i].added_time,
+                    'modified_date': data[i].modified_date,
+                    'modified_time': data[i].modified_time});
+            }
+        } else {
+            $scope.po = 500;
         }
         //console.log($scope.po);
         //$scope.poData = $scope.po;
@@ -94,7 +98,7 @@ myApp.controller('pendingPOAppController', function ($scope, $http, $sce) {
                         'modified_time': data[i].modified_time});
                 }
             } else {
-                $scope.po = [];
+                $scope.po = 500;
                 // $
             }
         });

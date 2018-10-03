@@ -250,4 +250,24 @@ class Material_model extends CI_Model {
         }
     }
 
+    public function getMaterialInfoByName($material_grade) {
+        $query = "SELECT * FROM material_tab as m join material_category as c on(c.mat_cat_id = m.mat_cat_id) WHERE m.material_grade like '%$material_grade%'";
+        //echo $query;
+        //die();
+        $result = $this->db->query($query);
+        // handle db error
+        if (!$result) {
+            // Has keys 'code' and 'message'
+            $error = $this->db->error();
+            return $error;
+            die();
+        }
+        // if no db errors
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        }
+    }
+
 }

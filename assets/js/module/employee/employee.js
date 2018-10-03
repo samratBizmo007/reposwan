@@ -56,16 +56,8 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
             $scope.employeeSkills = response.data;
             $scope.empSkills = JSON.stringify($scope.employeeSkills);
             console.log($scope.empSkills);
-
             //$scope.selectedEmpSkills = JSON.stringify($scope.employeeSkills);
             $scope.fromDbSkills = JSON.stringify($scope.employeeSkills);
-
-            //alert(employeeSkills);
-//            $scope.dbSkills.push($scope.employeeSkills);
-//            $scope.empSkills = JSON.stringify($scope.dbSkills);
-            //$scope.employee.empSkills = JSON.stringify($scope.dbSkills);
-
-            //$scope.existingskills($scope.empSkills);
         });
     };
     //$scope.existingskills(empSkills);
@@ -89,9 +81,10 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
 
     $scope.submit = function () {
         if (!$scope.skilJSON) {
-            $scope.message = '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Employee Details Not Added Successfully.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove(); });}, 5000);</script>';
+            $scope.message = '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select atleast one operation.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove(); });}, 5000);</script>';
             return false;
         }
+        $('#btnsubmit').html('<span class="w3-card w3-padding-small w3-margin-bottom w3-round"><i class="fa fa-spinner fa-spin w3-large"></i> <b>Adding Employee. Hang on...</b></span>');
         $http({
             method: "POST",
             url: BASE_URL + "employee/employee/addEmployeeDetails",
@@ -100,6 +93,8 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
             console.log(data);
             //$.alert(data.data);
             $scope.message = data.data;
+            $('#btnsubmit').html('<span class="w3-card w3-padding-small w3-margin-bottom w3-round"><b>Add Employee</b></span>');
+
             $window.setTimeout(function () {
                 $(".alert").fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
@@ -126,19 +121,4 @@ myApp.controller('employeeController', function ($scope, $http, $window) {
             $scope.errortext = "This operation is already listed.";
         }
     };
-    // remove skill from temp
-//    $scope.removeSkill = function (x) {
-//        $scope.errortext = "";
-//        $scope.products.splice(x, 1);
-//        $scope.skilJSON = JSON.stringify($scope.products);
-//    };
 });
-//angular.bootstrap(document.getElementById("App"), ['employeeApp']);
-
-
-//var empApp = angular.module('updateEmployeeApp', ['ngSanitize']);
-//empApp.controller('updateEmployeeController', function ($scope, $http) {
-//
-//    
-//});
-//angular.bootstrap(document.getElementById("updateEmp"), ['updateEmployeeApp']);

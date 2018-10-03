@@ -45,7 +45,7 @@ class Production_model extends CI_Model {
         $machine = '';
         if ($end != '') {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
-                    . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
+                    . "inprocess_qty='$inprocess_qty',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='1',shared='1' WHERE po_id = '$po_id'";
 
@@ -58,12 +58,12 @@ class Production_model extends CI_Model {
             }
         } else if ($end == '') {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
-                    . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
+                    . "inprocess_qty='$inprocess_qty',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='1' WHERE po_id = '$po_id'";
         } elseif ($po_status == 1) {
             $updateSql = "UPDATE purchase_orders SET po_machinedetails = '$machinedetails',produced_qty='$produced_qty',rejected_qty='$rejected_qty',"
-                    . "inprocess_qty='$inprocess_qty',po_status='$po_status',"
+                    . "inprocess_qty='$inprocess_qty',"
                     . "end_datetime = '$end',"
                     . "modified_date= NOW(),modified_time= NOW(),in_progress='1',shared='1' WHERE po_id = '$po_id'";
         }

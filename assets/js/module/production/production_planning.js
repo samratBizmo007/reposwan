@@ -4,9 +4,10 @@ myApp.controller('productionPlanningController', function ($scope, $http, $sce) 
     $scope.po = [];
 
     $http.get(BASE_URL + "production/production_planning/getSharedPoDetails").then(function (response) {
-        //console.log(response.data);
+        console.log(response.data);
         var data = response.data;
         var i, products;
+        if(data != 500){
         for (i = 0; i < data.length; i++) {
             //console.log(JSON.parse(data[i].product_details));
             //alert(data[i].customer_name);
@@ -36,6 +37,9 @@ myApp.controller('productionPlanningController', function ($scope, $http, $sce) 
                 'modified_time': data[i].modified_time
             });
         }
+    }else{
+        $scope.po = 500;
+    }
         //console.log($scope.po);
         //$scope.poData = $scope.po;
     });
@@ -91,7 +95,7 @@ myApp.controller('productionPlanningController', function ($scope, $http, $sce) 
                     });
                 }
             } else {
-                $scope.po = [];
+                $scope.po = 500;
                 // $
             }
         });

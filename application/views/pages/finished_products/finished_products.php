@@ -1,5 +1,5 @@
 <!-- page content -->
-<?php 
+<?php
 error_reporting(E_ERROR | E_PARSE);
 ?>
 <style>
@@ -34,124 +34,121 @@ error_reporting(E_ERROR | E_PARSE);
                 </div>
             </div>
         </div>
-        <fieldset>
-            <div class="col-lg-12 col-xs-12 col-sm-12 w3-small">
-                <div id="sharedPoDiv" class="col-lg-3 w3-small w3-padding col-xs-12 col-sm-12" style="height: 500px; overflow-y: auto;">
-                    <div class="w3-col l12 w3-center w3-small" ng-repeat="p in po">
-                        <div class="test w3-bar-item w3-button w3-border-bottom" style="margin-bottom: 5px; width: 240px;">
-                            <a class="btn w3-small w3-text-center w3-text-black" ng-click="show_FinishedPoDetails(p.po_id, p.product_code)"><b>PO #O-{{p.order_no}} - {{p.product_code + "/" + p.sr_no}}</b></a>
+        <div ng-if="po == 500">
+            <fieldset>
+                <div class="col-lg-12 col-xs-12 col-sm-12 w3-medium w3-center">
+                    <span class="w3-center w3-text-black"><b> NO Records Are Available..! </b></span>
+                </div>
+            </fieldset>
+        </div>
+        <div ng-if="po != 500">
+            <fieldset>
+                <div class="col-lg-12 col-xs-12 col-sm-12 w3-small">
+                    <div id="sharedPoDiv" class="col-lg-3 w3-small w3-padding col-xs-12 col-sm-12" style="height: 500px; overflow-y: auto;">
+                        <div class="w3-col l12 w3-center w3-small" ng-repeat="p in po">
+                            <div class="test w3-bar-item w3-button w3-border-bottom" style="margin-bottom: 5px; width: 240px;">
+                                <a class="btn w3-small w3-text-center w3-text-black" ng-click="show_FinishedPoDetails(p.po_id, p.product_code)"><b>PO #O-{{p.order_no}} - {{p.product_code + "/" + p.sr_no}}</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finishedProductPo" class="col-lg-9 col-xs-12 col-sm-12" style=" display: none">
+                        <div class="w3-margin-bottom ">
+                            <fieldset>
+                                <div class="row" style="margin-top: 5px; margin-bottom: 5px;" ng-repeat="po in poData">
+                                    <form name="poProduction_form" id="poProduction_form" method="POST">
+                                        <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
+                                            <div class="w3-col l4 col-xs-12 col-sm-12">
+                                                Customer Name: <b class="w3-text-black">{{po.customer_name}}</b>
+                                            </div>
+                                            <div class="w3-col l4 col-xs-12 col-sm-12">
+                                                Order No: <b class="w3-text-black">{{po.order_no}}</b>
+                                            </div>
+                                            <div class="w3-col l4 col-xs-12 col-sm-12">
+                                                Part Code/ Sr.No: <b class="w3-text-black">{{po.product_code + "/" + po.sr_no}}</b>
+                                            </div>
+                                        </div>
+                                        <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
+                                            <div class=" w3-col l3 col-xs-12 col-sm-12">
+                                                Drawing no : <b class="w3-text-black">{{po.part_drwing_no}}</b>
+                                            </div>
+                                            <div class=" w3-col l3 col-xs-12 col-sm-12">
+                                                Revision No : <b class="w3-text-black">{{po.revision_no}}</b>
+                                            </div>
+                                            <div class=" w3-col l3 col-xs-12 col-sm-12">
+                                                P.O Prod Qty : <b class="w3-text-black">{{po.quantity}}</b>
+                                            </div>
+                                            <div class=" w3-col l3 col-xs-12 col-sm-12">
+                                                Stock Quantity : <b class="w3-text-black">{{po.subproduct_quantity}}</b>
+                                            </div>
+                                        </div>
+                                        <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
+                                            <div class="w3-col l4 col-xs-12 col-sm-12">
+                                                Shared Qty : <b class="w3-text-black">{{po.shared_product_quantity}}</b>
+                                            </div>
+
+                                            <div class="w3-col l4 col-xs-12 col-sm-12">
+                                                Produced Qty : <b class="w3-text-black">{{po.produced_qty}}</b>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom"><hr>
+                                            <div class="col-lg-3 col-xs-12 col-sm-12">
+                                                <label>Stock Qty</label>
+                                                <input type="number" min="0" class="form-control w3-center" id="stock_quantity_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="stock_quantity" value="{{po.totalQty}}">
+                                                <input type="hidden" min="0" class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
+                                            </div>
+                                            <div class="col-lg-3 col-xs-12 col-sm-12">
+                                                <label>Balanced</label>
+                                                <input type="number" min="0" class="form-control w3-center" readonly id="Balanced_{{po.po_id}}" name="Balanced" value="{{po.balanced}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom w3-padding-top">
+                                            <div class="col-lg-3 col-xs-12 col-sm-12">
+                                                <label>Dispatched Qty</label>
+                                                <input type="number" class="form-control w3-center" min="0" ng-model="dispatched_qty" id="dispatched_qty_{{po.po_id}}" name="dispatched_qty" value="{{po.dispatched}}">
+                                                <input type="hidden" id="po_id" name="po_id" readonly class="form-control" value="{{po.po_id}}">
+                                                <input type="hidden" id="po_quantity_{{po.po_id}}" name="po_quantity" readonly class="form-control" value="{{po.quantity}}">
+                                                <input type="hidden" id="machineDetails" name="machineDetails" class="form-control" value="{{po.po_machinedetails}}">
+                                            </div>
+                                            <div class="col-lg-3 col-xs-12 col-sm-12">
+                                                <label>Bill No</label>
+                                                <input type="text" class="form-control w3-center" ng-model="bill_no" id="bill_no_{{po.po_id}}" name="bill_no" value="">
+                                            </div>
+                                            <div class="col-lg-3 col-xs-12 col-sm-12">
+                                                <label>Date</label>
+                                                <input type="date" class="form-control w3-center" ng-model="dispatched_date" id="dispatched_date_{{po.po_id}}" name="dispatched_date" >
+                                            </div>
+                                        </div>
+                                        <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom" ng-repeat="f in po.finishedpobills"><hr>
+                                            <div class=" w3-col l4 col-xs-12 col-sm-12">
+                                                <label>Dispatched Qty:</label>
+                                                <span class="w3-text-black"><b>{{f.dispatched_qty}}</b></span>
+    <!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.dispatched_qty}}">-->
+                                            </div>
+                                            <div class=" w3-col l4 col-xs-12 col-sm-12">
+                                                <label>Bill NO: </label>
+                                                <span class="w3-text-black"><b>{{f.bill_no}}</b></span>
+    <!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.bill_no}}">-->
+                                            </div>
+                                            <div class=" w3-col l4 col-xs-12 col-sm-12">
+                                                <label>Dispatched Date: </label>
+                                                <span class="w3-text-black"><b>{{f.dispatched_date}}</b></span>
+    <!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.dispatched_date}}">-->
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-12 col-xs-12 col-sm-12 w3-center w3-padding-top" id="" style="padding-top: 20px;">
+                                            <button type="button" title="filter Po by date" id="btnsubmit" ng-click="updateFinishedProductDetails(po.po_id, po.product_code, po.part_drwing_no)" class="w3-medium w3-button w3-center theme_bg">Update Po</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
                 </div>
-                <div id="finishedProductPo" class="col-lg-9 col-xs-12 col-sm-12" style=" display: none">
-                    <div class="w3-margin-bottom ">
-                        <fieldset>
-                            <div class="row" style="margin-top: 5px; margin-bottom: 5px;" ng-repeat="po in poData">
-                                <form name="poProduction_form" id="poProduction_form" method="POST">
-                                    <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
-                                        <div class="w3-col l4 col-xs-12 col-sm-12">
-                                            Customer Name: <b class="w3-text-black">{{po.customer_name}}</b>
-                                        </div>
-                                        <div class="w3-col l4 col-xs-12 col-sm-12">
-                                            Order No: <b class="w3-text-black">{{po.order_no}}</b>
-                                        </div>
-                                        <div class="w3-col l4 col-xs-12 col-sm-12">
-                                            Part Code/ Sr.No: <b class="w3-text-black">{{po.product_code + "/" + po.sr_no}}</b>
-                                        </div>
-                                    </div>
-                                    <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
-                                        <div class=" w3-col l3 col-xs-12 col-sm-12">
-                                            Drawing no : <b class="w3-text-black">{{po.part_drwing_no}}</b>
-                                        </div>
-                                        <div class=" w3-col l3 col-xs-12 col-sm-12">
-                                            Revision No : <b class="w3-text-black">{{po.revision_no}}</b>
-                                        </div>
-                                        <div class=" w3-col l3 col-xs-12 col-sm-12">
-                                            P.O Prod Qty : <b class="w3-text-black">{{po.quantity}}</b>
-                                        </div>
-                                        <div class=" w3-col l3 col-xs-12 col-sm-12">
-                                            Stock Quantity : <b class="w3-text-black">{{po.subproduct_quantity}}</b>
-                                        </div>
-                                    </div>
-                                    <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom"><hr>
-                                        <div class="w3-col l4 col-xs-12 col-sm-12">
-                                            Shared Qty : <b class="w3-text-black">{{po.shared_product_quantity}}</b>
-                                        </div>
-                                    
-                                        <div class="w3-col l4 col-xs-12 col-sm-12">
-                                            Produced Qty : <b class="w3-text-black">{{po.produced_qty}}</b>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom"><hr>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Stock Qty</label>
-                                            <input type="number" min="0" class="form-control w3-center" id="stock_quantity_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="stock_quantity" value="{{po.totalQty}}">
-                                            <input type="hidden" min="0" class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
-                                        </div>
-<!--                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Produced Qty</label>
-                                            <input type="number" min="0" class="form-control w3-center" id="produced_qty_{{po.po_id}}" ng-keyup="getTotalQty(po.po_id)" name="produced_qty" value="{{po.produced_qty}}">
-                                        </div>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Total Qty</label>
-                                            <input type="number" min="0" class="form-control w3-center" id="total_qty_{{po.po_id}}" readonly name="total_qty" value="{{po.totalQty}}">
-                                        </div>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Remaining Qty</label>
-                                            <input type="number" min="0" class="form-control w3-center" id="Remaining_{{po.po_id}}" readonly name="Remaining" value="">
-                                        </div>-->
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Balanced</label>
-                                            <input type="number" min="0" class="form-control w3-center" readonly id="Balanced_{{po.po_id}}" name="Balanced" value="{{po.balanced}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-xs-12 col-sm-12 w3-padding-bottom w3-padding-top">
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Dispatched Qty</label>
-                                            <input type="number" class="form-control w3-center" min="0" ng-model="dispatched_qty" id="dispatched_qty_{{po.po_id}}" name="dispatched_qty" value="{{po.dispatched}}">
-                                            <input type="hidden" id="po_id" name="po_id" readonly class="form-control" value="{{po.po_id}}">
-                                            <input type="hidden" id="po_quantity_{{po.po_id}}" name="po_quantity" readonly class="form-control" value="{{po.quantity}}">
-                                            <input type="hidden" id="machineDetails" name="machineDetails" class="form-control" value="{{po.po_machinedetails}}">
-                                        </div>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Bill No</label>
-                                            <input type="text" class="form-control w3-center" ng-model="bill_no" id="bill_no_{{po.po_id}}" name="bill_no" value="">
-                                        </div>
-                                        <div class="col-lg-3 col-xs-12 col-sm-12">
-                                            <label>Date</label>
-                                            <input type="date" class="form-control w3-center" ng-model="dispatched_date" id="dispatched_date_{{po.po_id}}" name="dispatched_date" >
-                                        </div>
-                                    </div>
-                                    <div class="w3-col l12 col-xs-12 col-sm-12 w3-margin-bottom" ng-repeat="f in po.finishedpobills"><hr>
-                                        <div class=" w3-col l4 col-xs-12 col-sm-12">
-                                            <label>Dispatched Qty:</label>
-                                            <span class="w3-text-black"><b>{{f.dispatched_qty}}</b></span>
-<!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.dispatched_qty}}">-->
-                                        </div>
-                                        <div class=" w3-col l4 col-xs-12 col-sm-12">
-                                            <label>Bill NO: </label>
-                                            <span class="w3-text-black"><b>{{f.bill_no}}</b></span>
-<!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.bill_no}}">-->
-                                        </div>
-                                        <div class=" w3-col l4 col-xs-12 col-sm-12">
-                                            <label>Dispatched Date: </label>
-                                            <span class="w3-text-black"><b>{{f.dispatched_date}}</b></span>
-<!--                                            <input type="text" class="form-control w3-center" disabled value="{{f.dispatched_date}}">-->
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-12 col-xs-12 col-sm-12 w3-center w3-padding-top" id="" style="padding-top: 20px;">
-                                        <button type="button" title="filter Po by date" id="btnsubmit" ng-click="updateFinishedProductDetails(po.po_id, po.product_code, po.part_drwing_no)" class="w3-medium w3-button w3-center theme_bg">Update Po</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </fieldset>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
+            </fieldset>
+        </div>
         <!--        <div class="row clearfix" style=" margin-top: 5px;">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                         <table class="table table-responsive" id="tab_logic">

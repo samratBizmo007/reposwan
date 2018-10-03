@@ -13,13 +13,9 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
         //console.log(response.data);
         var data = response.data;
         var i, products, srItemCode, machineQuantityPerHr, rawMaterialRequired;
+        if(data != 500){
         for (i = 0; i < data.length; i++) {
-            //console.log(JSON.parse(data[i].product_details));
-            //alert(data[i].customer_name);
             products = JSON.parse(data[i].product_details);
-            //srItemCode = JSON.parse(data[i].sr_item_code);
-            //machineQuantityPerHr = JSON.parse(data[i].machine_qtyhr);
-            //rawMaterialRequired = JSON.parse(data[i].rm_required);
             $scope.po.push({'customer_name': data[i].customer_name,
                 'order_no': data[i].order_no,
                 'po_duedate': data[i].po_duedate,
@@ -44,6 +40,9 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
                 'modified_time': data[i].modified_time
             });
         }
+    }else{
+        $scope.po = 500;
+    }
         //console.log($scope.po);
         //$scope.poData = $scope.po;
     });
@@ -103,7 +102,7 @@ myApp.controller('sharedPOController', function ($scope, $http, $sce) {
                     });
                 }
             } else {
-                $scope.po = [];
+                $scope.po = 500;
                 // $
             }
         });

@@ -12,7 +12,7 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
         console.log(response.data);
         var data = response.data;
         var i, products, machinedetails, totalQty, finishedpobills;
-        if (data != '') {
+        if (data != 500) {
             for (i = 0; i < data.length; i++) {
                 products = JSON.parse(data[i].product_details);
                 machinedetails = JSON.parse(data[i].po_machinedetails);
@@ -59,7 +59,7 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                 });
             }
         } else {
-            $scope.po = [];
+            $scope.po = 500;
 
         }
         //console.log($scope.po);
@@ -131,7 +131,7 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                     });
                 }
             } else {
-                $scope.po = [];
+                $scope.po = 500;
             }
         });
     };
@@ -159,7 +159,7 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
     $scope.updateFinishedProductDetails = function (po_id, product_code, part_drwing_no) {
         var stock_quantity = $('#stock_quantity_' + po_id).val();
         var produced_qty = $('#produced_qty_' + po_id).val();
-        var total_qty = $('#total_qty_' + po_id).val();
+//        var total_qty = $('#total_qty_' + po_id).val();
         var po_quantity = $('#po_quantity_' + po_id).val();
         var dispatched_qty = $('#dispatched_qty_' + po_id).val();
         var bill_no = $('#bill_no_' + po_id).val();
@@ -171,40 +171,40 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
             return false;
         }
         if (dispatched_date == '') {
-            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Add Bill NO.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
-            return false;
-        }
-        if (bill_no == '') {
             $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong> Please Select Dispatched Date.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
             return false;
         }
-        $.ajax({
-            type: "POST",
+        if (bill_no == '') {
+            $("#message").html('<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Failure!</strong>Please Add Bill NO.</div><script>window.setTimeout(function() {$(".alert").fadeTo(500, 0).slideUp(500, function(){$(this).remove();});//location.reload();}, 1000);</script>');
+            return false;
+        }
+
+        $http({
+            method: 'POST',
             url: BASE_URL + "finished_products/finished_products/updateFinishedProductDetails",
-            data: {
+            headers: {'Content-Type': 'application/json'},
+            data: JSON.stringify({            
                 po_id: po_id,
                 product_code: product_code,
                 part_drwing_no: part_drwing_no,
                 stock_quantity: stock_quantity,
                 produced_qty: produced_qty,
-                total_qty: total_qty,
+//                total_qty: total_qty,
                 po_quantity: po_quantity,
                 dispatched_qty: dispatched_qty,
                 bill_no: bill_no,
                 dispatched_date: dispatched_date,
                 Balanced: Balanced,
                 remainingQty: remainingQty
-            },
-            cache: false,
-            success: function (data) {
-                $("#message").html(data);
-            }
+            })
+        }).then(function (data) {
+            $("#message").html(data.data);
         });
 
+        $scope.show_FinishedPoDetails(po_id, product_code);
     };
 
     $scope.show_FinishedPoDetails = function (po_id, product_code) {
-
         $http({
             method: 'get',
             url: BASE_URL + 'finished_products/finished_products/show_FinishedPoDetails?po_id=' + po_id + '&product_code=' + product_code
@@ -261,7 +261,7 @@ myApp.controller('finishedProdController', function ($scope, $http, $sce) {
                     });
                 }
             } else {
-                $scope.poData = [];
+                $scope.poData = 500;
             }
         });
 

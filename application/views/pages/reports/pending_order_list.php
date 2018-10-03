@@ -4,7 +4,7 @@
         <div id="err_message"></div>
         <div class="row x_title">
             <div class="w3-padding">
-                <h3><i class="fa fa-clipboard"></i> Pending P.O Orders</h3>
+                <h3><i class="fa fa-clipboard"></i>Customers Pending Orders Section</h3>
             </div>
         </div>
 
@@ -96,7 +96,7 @@
                                 </div>                              
                             </td>                            
                         </tr>
-                        <tr ng-if=" po == []">
+                        <tr ng-if=" po == 500">
                             <td colspan="11" class="w3-center">No Records Found.</td>
                         </tr>
                     </tbody>

@@ -33,11 +33,15 @@ class Finished_products extends CI_controller {
     }
 
     public function updateFinishedProductDetails() {
-        //extract($_POST);
-        $data = $_POST;
-        $result = $this->Finished_products_model->updateFinishedProductDetails($data);
-        // print_r($result);
-        // die();
+        $postdata = file_get_contents("php://input");
+        //print_r($postdata);die();
+        $request = json_decode($postdata, TRUE);
+//        extract($_POST);
+//        $data = $_POST;
+        //print_r($request);die();
+        $result = $this->Finished_products_model->updateFinishedProductDetails($request);
+         //print_r($result);
+         //die();
         if ($result == 800) {
             echo'<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -107,6 +111,18 @@ class Finished_products extends CI_controller {
             echo '<div class="alert alert-danger alert-dismissible fade in alert-fixed w3-round">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Failure!</strong> PO Updation Failed .
+			</div>
+			<script>
+			window.setTimeout(function() {
+			$(".alert").fadeTo(500, 0).slideUp(500, function(){
+			$(this).remove(); 
+			});
+			}, 5000);
+			</script>';
+        }elseif ($result == 1000) {
+            echo '<div class="alert alert-warning alert-dismissible fade in alert-fixed w3-round">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Failure!</strong> Produced Quantity is less than dispatched quantity.
 			</div>
 			<script>
 			window.setTimeout(function() {

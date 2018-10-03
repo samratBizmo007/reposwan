@@ -151,7 +151,7 @@
                                 </div>
                             </td>                            
                         </tr>
-                        <tr ng-if=" po == []">
+                        <tr ng-if=" po == 500">
                             <td colspan="5" class="w3-center">No Records Found</td>
                         </tr>
                     </tbody>

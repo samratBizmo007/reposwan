@@ -12,7 +12,7 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
         // console.log(response.data);
         var data = response.data;
         var i, products;
-        if (data != '') {
+        if (data != 500) {
             for (i = 0; i < data.length; i++) {
                 console.log(JSON.parse(data[i].product_details));
                 //alert(data[i].customer_name);
@@ -29,10 +29,8 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
                     'modified_time': data[i].modified_time});
             }
         } else {
-            $scope.po = [];
-        }
-        console.log($scope.po);
-        //$scope.poData = $scope.po;
+            $scope.po = 500;
+        }       
     });
 //-------------get Po details ends-------------------------------------//
 //--------------------funn for get po by date --------------------------//
@@ -76,7 +74,7 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
                         'modified_time': data[i].modified_time});
                 }
             } else {
-                $scope.po = [];
+                $scope.po = 500;
                 // $
             }
         });
