@@ -85,7 +85,7 @@ if ($admin_name != '') {
                                     </ul>
                                 </li>
 
-                                <li><a><i class="fa fa-first-order"></i> Purchase Order Section <span class=" fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-first-order"></i> Customer Purchase Order <span class=" fa fa-chevron-down" style="margin: -15px 0 0 0"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo base_url(); ?>po_order/po_order">Add Purchase Order</a></li>
                                         <li><a href="<?php echo base_url(); ?>po_order/show_purchase_orders">Show Purchase Orders</a></li>

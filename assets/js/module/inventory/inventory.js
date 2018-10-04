@@ -61,12 +61,38 @@ myApp.controller('showInventoryController', function ($scope, $http, $sce) {
         });
     };
 
-    $scope.getMaterialDetailsByType = function () {
-        var mat_cat_id = document.getElementById("mat_cat_id").value;
+    // $scope.getMaterialDetailsByType = function () {
+    //     var mat_cat_id = document.getElementById("mat_cat_id").value;
+    //     //alert(mat_cat_id);
+    //     $http({
+    //         method: 'get',
+    //         url: BASE_URL + 'inventory/showinventory/getMaterialDetailsByType?mat_cat_id=' + mat_cat_id
+    //     }).then(function successCallback(response) {
+    //         console.log(response.data);
+    //         $scope.materials = '';
+    //         $scope.materials = response.data;
+    //     });
+    // };
+
+    $scope.getMaterialInfoByName = function () {
+        var material_grade = document.getElementById("material_grade").value;
         //alert(mat_cat_id);
         $http({
             method: 'get',
-            url: BASE_URL + 'inventory/showinventory/getMaterialDetailsByType?mat_cat_id=' + mat_cat_id
+            url: BASE_URL + 'inventory/showinventory/getMaterialInfoByName?material_grade=' + material_grade
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.materials = '';
+            $scope.materials = response.data;
+        });
+    };
+
+    $scope.getMaterialInfoByThickness = function () {
+        var material_thickness = document.getElementById("material_thickness").value;
+        //alert(mat_cat_id);
+        $http({
+            method: 'get',
+            url: BASE_URL + 'inventory/showinventory/getMaterialInfoByThickness?material_thickness=' + material_thickness
         }).then(function successCallback(response) {
             console.log(response.data);
             $scope.materials = '';
