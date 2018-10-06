@@ -132,33 +132,41 @@ class Required_rawmaterial extends CI_controller {
                 switch ($materialDetails[$j]['rm_type']) {
                     case '1':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $Po_ProductQuantity;
                         break;
                     case '2':
                         $material_quantity = 1;
+                        $total = $materialDetails[$j]['rmweightSelected'] * $Po_ProductQuantity;
                         break;
                     case '3':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
                         break;
                     case '4':
                         $material_quantity = $materialDetails[$j]['rmlenSelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $Po_ProductQuantity;
                         break;
                     case '5':
                         $material_quantity = $materialDetails[$j]['rmlenSelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $Po_ProductQuantity;
                         break;
                     case '6':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
                         break;
                     case '7':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
                         break;
                     case '8':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
+                        $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
                         break;
                 }
                 $actualWeigth = $this->Rawmaterial_required_model->getMaterialTotalWeight($materialDetails[$j]['rmgradeSelected'], $materialDetails[$j]['rm_type']);
 
 //--------------------material specification div----------------------------------------------//
-                $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;
+
 
                 echo'<div class="w3-col l12 w3-padding-bottom">'
                 . '<div class="w3-col l1" style="padding-right: 2px;">'
