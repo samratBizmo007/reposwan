@@ -2,7 +2,7 @@
 <div class="right_col" role="main">
     <!-- top tiles -->
     <div class="container page_title" style="margin-top: 0px;margin-bottom: 0px;">
-        <div class="row x_title"><div class="w3-padding"><h3><i class="fa fa-plus"></i> Add Purchase Order</h3></div></div>
+        <div class="row x_title"><div class="w3-padding"><h3><i class="fa fa-plus"></i> Add Customer Purchase Order</h3></div></div>
         <fieldset>
             <div class="row" style=" margin-top: 5px;">
                 <div class="col-lg-1"></div>
@@ -20,11 +20,7 @@
                                     <div class="col-lg-6 col-xs-12 col-sm-12" id="materialWeight">
                                         <label>Order No <b class="w3-text-red w3-medium">*</b></label>
                                         <input type="text" name="order_no" ng-model="order_no" id="order_no" class="form-control" placeholder="Order_no" required>
-                                    </div>
-                                    <!--                                    <div class="col-lg-4 col-xs-12 col-sm-12" id="materialWeight">
-                                                                            <label>Due Date <b class="w3-text-red w3-medium">*</b></label>
-                                                                            <input type="date" name="po_duedate" ng-model="po_duedate" id="po_duedate" class="form-control" placeholder="Po Due Date" required>
-                                                                        </div>-->
+                                    </div>                                    
                                 </div>
                             </fieldset>
                             <div id="PoDiv" style="display: none;">
@@ -38,7 +34,7 @@
                                         </div>
                                         <div class="w3-col l12 w3-margin-bottom">
                                             <div class="col-lg-6 col-xs-12 col-sm-12" id="ProductDiv">
-                                                <label>Part No/Drawing No <b class="w3-text-red w3-medium">*</b></label>
+                                                <label>Part No <b class="w3-text-red w3-medium">*</b></label>
                                                 <select class="form-control" id="part_drwing_no_{{$index}}" ng-model="part_drwing_no" name="part_drwing_no[]" ng-change="getProductInfo($index)" required>
                                                     <option ng-repeat="p in partNo" value="{{p.drawing_no}}">{{p.drawing_no}}</option>
                                                 </select>                               

@@ -4,7 +4,7 @@
         <div id="err_message"></div>
         <div class="row x_title">
             <div class="w3-padding">
-                <h3><i class="fa fa-list"></i>Shared Purchase Orders</h3>
+                <h3><i class="fa fa-list"></i> Sharing Planning For Purchase Orders</h3>
             </div>
         </div>
         <div class="row x_title" style=" margin-top: 5px;">
@@ -27,8 +27,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12 w3-margin-bottom">
                 <div class="form-group">
                     <label for="rm_grade">Purchase Orders<b class="w3-text-red w3-medium">*</b> :</label>
-                    <select name="sharedpoOrdersSelected" class="form-control w3-small" ng-model="sharedpoOrdersSelected" onchange="getUpdatePoForSharedQuantityDetails()" id="sharedpoOrdersSelected">
-                        <option value="" selected>Select Purchase Orders</option>
+                    <select name="sharedpoOrders" class="form-control w3-small" ng-model="sharedpoOrdersSelected" onchange="getUpdatePoForSharedQuantityDetails()" id="sharedpoOrders">
+                        <!--<option value="" selected>Select Purchase Orders</option>-->
                     </select>
                 </div>
             </div>

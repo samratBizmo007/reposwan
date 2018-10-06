@@ -45,6 +45,16 @@ class Required_rawmaterial extends CI_controller {
         }
     }
 
+    public function getPoDataByPo_number() {
+        extract($_GET);
+        $result = $this->Rawmaterial_required_model->getPoDataByPo_number($po_number);
+        if (!$result) {
+            echo '500';
+        } else {
+            print_r(json_encode($result));
+        }
+    }
+
     public function getPoDetails() {
         extract($_GET);
         $result = $this->Rawmaterial_required_model->getAllPurchaseOrdersByDate($from_date, $to_date);
@@ -75,7 +85,7 @@ class Required_rawmaterial extends CI_controller {
 
             echo '<fieldset>
             <div class="row w3-padding" style="margin-top: 5px; margin-bottom: 5px;">';
-           // print_r($stock[0]['subproduct_quantity']);
+            // print_r($stock[0]['subproduct_quantity']);
             echo'<div class=" w3-col l12 w3-padding-bottom">
             Customer Name: <b class="w3-text-black">' . $result[$i]['customer_name'] . '</b>
             </div>';
@@ -118,7 +128,7 @@ class Required_rawmaterial extends CI_controller {
                         $materialCat = $mat_type['material_type'];
                     }
                 }
-                
+
                 switch ($materialDetails[$j]['rm_type']) {
                     case '1':
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
@@ -145,7 +155,7 @@ class Required_rawmaterial extends CI_controller {
                         $material_quantity = $materialDetails[$j]['rmqtySelected'];
                         break;
                 }
-                $actualWeigth = $this->Rawmaterial_required_model->getMaterialTotalWeight($materialDetails[$j]['rmgradeSelected'],$materialDetails[$j]['rm_type']);
+                $actualWeigth = $this->Rawmaterial_required_model->getMaterialTotalWeight($materialDetails[$j]['rmgradeSelected'], $materialDetails[$j]['rm_type']);
 
 //--------------------material specification div----------------------------------------------//
                 $total = $materialDetails[$j]['rmweightSelected'] * $material_quantity * $Po_ProductQuantity;

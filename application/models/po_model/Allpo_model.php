@@ -51,4 +51,22 @@ class Allpo_model extends CI_Model {
     }
 
 //---------------------fun for get all po by date ends-----------------------------------//
+//-------------fun for get the po by po number-------------------------------------------//
+    public function getPoByPo_number($po_number) {
+        if ($po_number == 'undefined') {
+            $sql = "SELECT * FROM purchase_orders";
+        } else {
+            $sql = "SELECT * FROM purchase_orders WHERE order_no like '%$po_number%'";
+        }
+        $result = $this->db->query($sql);
+        //echo $sql;
+        //die();
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        }
+    }
+
+//---------------------------------fun ends here.----------------------------------------//    
 }

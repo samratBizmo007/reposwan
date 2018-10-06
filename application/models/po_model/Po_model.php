@@ -104,7 +104,7 @@ class Po_model extends CI_Model {
                 $quantity = $product_detail[$i]['quantity'];
                 $netAmount = $product_detail[$i]['netAmount'];
                 $due_date = $product_detail[$i]['due_date'];
-                $sql = "INSERT INTO purchase_orders(customer_name,po_total,"
+                $sql = "INSERT INTO purchase_orders(customer_name,balanced,po_total,"
                         . "po_duedate,order_no,prod_id,"
                         . "line_no,part_drwing_no,product_name,"
                         . "revision_no,sr_no,product_code,"
@@ -112,7 +112,7 @@ class Po_model extends CI_Model {
                         . "product_details,added_date,"
                         . "added_time,modified_date,"
                         . "modified_time,status)"
-                        . "VALUES ('$customer_name','$total','$due_date',"
+                        . "VALUES ('$customer_name','$quantity','$total','$due_date',"
                         . "'$order_no','$prod_id','$line_no',"
                         . "'$part_drwing_no','$product_name',"
                         . "'$revision_no','$sr_no','$product_code',"

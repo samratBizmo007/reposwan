@@ -8,6 +8,8 @@ class Pending_orders extends CI_controller {
 
         $admin_name = $this->session->userdata('admin_name');
         $this->load->model('reports_model/Pendingorders_model');
+        $this->load->model('po_model/Allpo_model');
+
         $this->load->helper('file');
         $this->load->helper('url');
         $this->load->helper('download');
@@ -42,6 +44,16 @@ class Pending_orders extends CI_controller {
     public function getPoByDate() {
         extract($_GET);
         $result = $this->Pendingorders_model->getPoByDate($from_date, $to_date);
+        if (!$result) {
+            echo '500';
+        } else {
+            print_r(json_encode($result));
+        }
+    }
+
+    public function getPoByPo_number() {
+        extract($_GET);
+        $result = $this->Allpo_model->getPoByPo_number($po_number);
         if (!$result) {
             echo '500';
         } else {

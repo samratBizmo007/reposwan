@@ -185,7 +185,7 @@
                                 <div class="w3-col l12" ng-show="rmSpecimen">
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_thick">Thickness :</label>
+                                            <label for="rm_thick">Thickness(mm) :</label>
                                             <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness">
                                         </div>
                                     </div>
@@ -197,19 +197,19 @@
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_id">ID :</label>
+                                            <label for="rm_id">ID(mm) :</label>
                                             <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_od">OD :</label>
+                                            <label for="rm_od">OD(mm) :</label>
                                             <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_pitch">Pitch :</label>
+                                            <label for="rm_pitch">Pitch(mm) :</label>
                                             <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch">
                                         </div>
                                     </div>
@@ -306,14 +306,8 @@
                         </fieldset>
                         <p class="w3-padding-small w3-text-red w3-medium" ng-bind-html="errorForProductDetails"></p>
 
-                        <!--remove button for remove div-->
-                        <!--                        <a class="btn remove w3-right w3-text-black" id="remove" ng-show="$last" ng-click="removeProductChoice()"> -remove</a>-->
-                        <!--                        <div class="w3-col l12" id="addedmore_DivGeneral"></div>-->
                     </div>
-                    <!--                    <div class="w3-col l12">
-                                            <a class="btn w3-text-red w3-right" style="padding:0" id="addMore_Btn" name="addMoreBtnGeneral" ng-click="addNewProductSpecificationDiv()"><i class="fa fa-plus"></i> Add more</a>
-                                            <a class="btn w3-text-red w3-right" style="padding:0" id="addMoreBtnGeneral" name="addMoreBtnGeneral"><i class="fa fa-plus"></i> Add more</a>
-                                        </div>-->
+
                     <fieldset>
                         <h2>Pricing Details</h2>            
                         <div class="w3-col l12">
@@ -338,11 +332,11 @@
                         </div>
                     </fieldset>
 
-                    <div class="w3-col l12 w3-center">
+                    <div class="w3-col l12 w3-center w3-margin-bottom">
                         <button type="submit" name="submitForm" id="submitForm" class="w3-center w3-hover-text-white btn theme_bg w3-margin-top"> <i class="fa fa-save"></i> Save and Add New Product </button>
                     </div>
                     <input type="hidden" class="form-control" name="addedProducts_field" id="addedProducts_field" value="{{addedProducts}}">
-                    <div ng-show="productsDiv">
+                    <div class="w3-margin-top" ng-show="productsDiv">
                         <table class="table table-responsive table-bordered w3-margin-top">
                             <thead>
                                 <tr class="theme_bg w3-center">
@@ -390,7 +384,7 @@
                                                     <th>Pitch</th>
                                                     <th>Weight</th>
                                                     <th>Length</th>
-                                                    <th>Thick</th>
+                                                    <th>Qty</th>
                                                     <th>DrgNo</th>
                                                 </tr>
                                             </thead>
@@ -417,7 +411,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </form>
                 <div class="clearfix"></div>
@@ -431,63 +424,3 @@
 <!-- /page content -->
 
 <script src="<?php echo base_url(); ?>assets/js/module/products.js"></script>
-<script>
-                          
-</script>
-                                                <script>
-                                        // script to add extra div for serial no and item code
-                                                var wrapper = '';
-                                        function appendDivFun(no) {
-//e.preventDefault();
-//add_button = '';
-                                        var max_fields = 10; var wrapper = $("#addedmore_DivMachine_" + no); // var add_button = $("#addMoreBtnMachine");                                                 var x = '';
-                                        x = no; //alert(x);
-                                        if (x < max_fields) {                             x++;
-                                        $(wrapper).append('<div>\n\
-<div class="w3-col l12 w3-padding-top">\n\
-<div class="col-md-4 col-sm-12 col-xs-12 w3-margin-bottom">\n\
-<div class="form-group">\n\
-<!-- fetch skills from db -->\n\
-<label for="operations">Operations Performed<b class="w3-text-red w3-medium">*</b> :</label>\n\
-<select name="operations_' +                                       x +                                       '[]" id="operations_' +                                       x +                                       '" ng-trim="false" class="form-control w3-small" id="operations">\n\
-<?php foreach ($skills as $key) { ?><option value="<?php echo $key['skill_name'] ?>" class="w3-text-grey"><?php echo $key['skill_name'] ?></option>\n\
-<?php } ?></select>\n\
-</div>\n\
-</div>\n\
-\n\
-<div class="col-md-4 col-sm-12 col-xs-12">\n\
-<div class="form-group">\n\
-<label for="machine">Machine used:</label>\n\
-<select name="machine_' + x + '[]" id="machine_' + x + '" ng-trim="false" class="form-control w3-small" onchange="getQuantityPerHr(' + x + ')" id="operations">\n\
-<?php foreach ($machines as $key) { ?><option value="<?php echo $key['machine_id'] ?>" class="w3-text-grey"><?php echo $key['machine_name'] . '/' . $key['machine_capacity'] ?></option>\n\
-<?php } ?></select>\n\
-</div>\n\
-</div>\n\
-\n\
-<div class="col-md-4 col-sm-12 col-xs-12">\n\
-<div class="form-group">\n\
-<label for="qtyhr">Quantity per hour:</label>\n\
-<input type="text" class="form-control" id="qtyhr_' + x + '" name="qtyhr_' + x +'[]" placeholder="Machine Quantity Per Hr">\n\
-</div>\n\
-</div>\n\
-<a href="#" class="delete btn w3-text-black w3-right w3-small" title="remove section">remove <i class="fa fa-remove"></i>\n\
-</a>\n\
-</div>\n\
-</div>');
-//add input box
-} else {
-$.alert('<label class="w3-label w3-text-red"><i class="fa fa-warning w3-xlarge"></i> You reached the maximum limit of adding ' + max_fields + ' fields</label>');
-//alert when added more than 10 input fields
-}
-}
-;
-$(wrapper).on("click", ".delete", function (e) {
-//alert(0);
-e.preventDefault();
-$(this).parent('div').remove();
-x--;
-});
-
-
-
-</script>

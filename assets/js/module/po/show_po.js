@@ -30,7 +30,7 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
             }
         } else {
             $scope.po = 500;
-        }       
+        }
     });
 //-------------get Po details ends-------------------------------------//
 //--------------------funn for get po by date --------------------------//
@@ -80,6 +80,39 @@ myApp.controller('allPOAppController', function ($scope, $http, $sce) {
         });
     };
 //---------------------fun ends--------------------------------------------//
+//-------------------fun for get po by po number ------------------------------//
+    $scope.getPoByPo_number = function () {
+        //alert($scope.po_number);
+        $http({
+            method: 'get',
+            url: BASE_URL + 'po_order/show_purchase_orders/getPoByPo_number?po_number=' + $scope.po_number
+        }).then(function successCallback(response) {
+            // Assign response to skills object
+            console.log(response.data);
+            $scope.po = [];
+            var data = response.data;
+            var i, products;
+            if (data != 500) {
+                for (i = 0; i < data.length; i++) {
+                    products = JSON.parse(data[i].product_details);
+                    $scope.po.push({'customer_name': data[i].customer_name,
+                        'order_no': data[i].order_no,
+                        'po_duedate': data[i].po_duedate,
+                        'po_id': data[i].po_id,
+                        'po_total': data[i].po_total,
+                        'product_details': products,
+                        'added_date': data[i].added_date,
+                        'added_time': data[i].added_time,
+                        'modified_date': data[i].modified_date,
+                        'modified_time': data[i].modified_time});
+                }
+            } else {
+                $scope.po = 500;
+            }
+        });
+    };
+//-----------------------------------function ends -----------------------------//
+
     $scope.deletePODetails = function (po_id) {
         //alert(po_id);
         $.confirm({

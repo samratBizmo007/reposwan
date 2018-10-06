@@ -87,8 +87,8 @@ if ($admin_name != '') {
 
                                 <li><a><i class="fa fa-first-order"></i> Purchase Order Section <span class=" fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="<?php echo base_url(); ?>po_order/po_order">Add Purchase Order</a></li>
-                                        <li><a href="<?php echo base_url(); ?>po_order/show_purchase_orders">Show Purchase Orders</a></li>
+                                        <li><a href="<?php echo base_url(); ?>po_order/po_order">Add Customer Purchase Order</a></li>
+                                        <li><a href="<?php echo base_url(); ?>po_order/show_purchase_orders">Show Customers Purchase Orders</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-clipboard"></i> P.O Reports <span class=" fa fa-chevron-down"></span></a>
@@ -97,7 +97,7 @@ if ($admin_name != '') {
                                     </ul>
                                 </li>
                                 <li><a href="<?php echo base_url(); ?>required_rawmaterial/Required_rawmaterial"><i class="fa fa-sliders"></i> Required Raw Material </a></li>
-                                <li><a href="<?php echo base_url(); ?>sharing/Shared_PO"><i class="fa fa-list"></i>Shared Purchase Orders</a></li>
+                                <li><a href="<?php echo base_url(); ?>sharing/Shared_PO"><i class="fa fa-list"></i>Sharing Planning</a></li>
                                 <li><a><i class="fa fa-wrench"></i> Production Section <span class=" fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo base_url(); ?>production/production_planning">Production Planning</a></li>

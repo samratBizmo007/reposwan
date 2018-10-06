@@ -4,7 +4,7 @@
         <div id="err_message"></div>
         <div class="row x_title">
             <div class="w3-padding">
-                <h3><i class="fa fa-cubes"></i> All Purchase Orders</h3>
+                <h3><i class="fa fa-cubes"></i> All Customers Purchase Orders</h3>
             </div>
         </div>
         <div class="row x_title" style=" margin-top: 5px;">
@@ -13,15 +13,21 @@
             </div>
             <div class="w3-col l12 w3-margin-bottom">
                 <div class="col-lg-5 col-xs-12 col-sm-12" id="materialWeight">
-                    <label>From Date <b class="w3-text-red w3-medium">*</b></label>
+                    <label>P.O. From Due Date <b class="w3-text-red w3-medium">*</b></label>
                     <input type="date" name="from_date" ng-model="from_date" id="from_date" value="" class="form-control" placeholder="From Date" required>
                 </div>
                 <div class="col-lg-5 col-xs-12 col-sm-12" id="materialWeight">
-                    <label>To Date <b class="w3-text-red w3-medium">*</b></label>
+                    <label>P.O. To Due Date <b class="w3-text-red w3-medium">*</b></label>
                     <input type="date" name="to_date" ng-model="to_date" id="to_date" value="" class="form-control" placeholder="To Date" required>
                 </div>
                 <div class="col-lg-2 col-xs-12 col-sm-12" id="materialWeight" style="padding-top: 23px;">
                     <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getAllPoByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
+                </div>
+            </div>
+            <div class="w3-col l12 w3-margin-bottom">
+                <div class="col-lg-5 col-xs-12 col-sm-12">
+                    <label>P.O. Number <b class="w3-text-red w3-medium"></b></label>
+                    <input type="text" name="po_number" ng-model="po_number" id="po_number" ng-keyup="getPoByPo_number()" value="" class="form-control" placeholder="PO Number" required>
                 </div>
             </div>
         </div>

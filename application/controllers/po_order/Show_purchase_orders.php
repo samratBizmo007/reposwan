@@ -56,4 +56,14 @@ class Show_purchase_orders extends CI_controller {
         }
     }
 
+    public function getPoByPo_number() {
+        extract($_GET);
+        $result = $this->Allpo_model->getPoByPo_number($po_number);
+        if (!$result) {
+            echo '500';
+        } else {
+            print_r(json_encode($result));
+        }
+    }
+
 }

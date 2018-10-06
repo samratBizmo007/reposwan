@@ -1,48 +1,3 @@
-
-// script to add extra div for serial no and item code
-//$(document).ready(function () {
-//    var max_fields = 10;
-//    var wrapper = $("#addedmore_DivGeneral");
-//    var add_button = $("#addMoreBtnGeneral");
-//    var x = 1;
-//    var srno = 1;
-//    $(add_button).click(function (e) {
-//        e.preventDefault();
-//        if (x < max_fields) {
-//            x++;
-//            $(wrapper).append('<div><div class="w3-col l12"><hr>\n\
-//        <div class="col-md-6 col-sm-12 col-xs-12">\n\
-//        <div class="form-group">\n\
-//        <label for="sr_no">Serial Number ' + x + ' :</label>\n\
-//        <input type="number" min="0" class="form-control" id="sr_no' + x + '" value="' + srno + '" name="sr_no[]" placeholder="Enter serial number">\n\
-//        </div>\n\
-//        </div>\n\
-//        <div class="col-md-6 col-sm-12 col-xs-12">\n\
-//        <div class="form-group">\n\
-//        <label for="part_no">Item Code ' + x + ' :</label>\n\
-//        <input type="text" class="form-control" id="item_code' + x + '" name="item_code[]" placeholder="Enter Item Code">\n\
-//        </div>\n\
-//        </div>\n\
-//        <a href="#" class="delete btn w3-text-black w3-right w3-small" title="remove section">remove <i class="fa fa-remove"></i>\n\
-//        </a>\n\
-//        </div>\n\
-//        </div>');
-//            //add input box
-//
-//            srno++;
-//        } else {
-//            $.alert('<label class="w3-label w3-text-red"><i class="fa fa-warning w3-xlarge"></i> You reached the maximum limit of adding ' + max_fields + ' fields</label>');
-//            //alert when added more than 10 input fields
-//        }
-//    });
-//    $(wrapper).on("click", ".delete", function (e) {
-//        e.preventDefault();
-//        $(this).parent('div').remove();
-//        x--;
-//        srno--;
-//    });
-//});
-
 // Angular script to add required skills in ad product form
 var app = angular.module("addProductForm", ['ngSanitize']);
 app.controller("ProdCtrl", function ($scope, $http) {
@@ -158,7 +113,7 @@ app.controller("ProdCtrl", function ($scope, $http) {
             case '1':
                 $scope.InputDisable();
                 document.getElementById("rm_thick").disabled = false;
-                document.getElementById("rm_quantity").disabled = false;
+                document.getElementById("rm_quantity").disabled = true;
                 break;
             case '2':
                 $scope.InputDisable();

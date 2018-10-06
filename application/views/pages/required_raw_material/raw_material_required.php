@@ -24,11 +24,17 @@
                     <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getPoDetails();getAllPurchaseOrdersByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
                 </div>
             </div>
+            <div class="w3-col l12 w3-margin-bottom">
+                <div class="col-lg-5 col-xs-12 col-sm-12">
+                    <label>P.O. Number <b class="w3-text-red w3-medium"></b></label>
+                    <input type="text" name="po_number" ng-model="po_number" id="po_number" ng-keyup="getPoDataToDropdown();getPoDataByPo_number()" value="" class="form-control" placeholder="PO Number" required>
+                </div>
+            </div>
             <div class="col-md-12 col-sm-12 col-xs-12 w3-margin-bottom">
                 <div class="form-group">
                     <label for="rm_grade">Purchase Orders<b class="w3-text-red w3-medium">*</b> :</label>
                     <select name="po_orders" class="form-control w3-small" ng-model="po_ordersSelected" onchange="getPoProductDetails()" id="po_orders">
-                        <option value="" selected>Select Purchase Orders</option>
+<!--                        <option value="" selected>Select Purchase Orders</option>-->
                     </select>
                 </div>
             </div>

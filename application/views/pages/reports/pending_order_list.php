@@ -4,7 +4,7 @@
         <div id="err_message"></div>
         <div class="row x_title">
             <div class="w3-padding">
-                <h3><i class="fa fa-clipboard"></i>Customers Pending Orders Section</h3>
+                <h3><i class="fa fa-clipboard"></i> Customers Pending Orders Section</h3>
             </div>
         </div>
 
@@ -24,6 +24,12 @@
                 </div>
                 <div class="col-lg-2 col-xs-12 col-sm-12" id="materialWeight" style="padding-top: 23px;">
                     <button  type="submit" title="filter Po by date" id="btnsubmit" ng-click="getPoByDate()" class="w3-medium w3-button theme_bg">Search P.O</button>
+                </div>
+            </div>
+            <div class="w3-col l12 w3-margin-bottom">
+                <div class="col-lg-5 col-xs-12 col-sm-12">
+                    <label>P.O. Number <b class="w3-text-red w3-medium"></b></label>
+                    <input type="text" name="po_number" ng-model="po_number" id="po_number" ng-keyup="getPoByPo_number()" value="" class="form-control" placeholder="PO Number" required>
                 </div>
             </div>
             <div class="col-lg-12 col-xs-12 col-sm-12" id="materialWeight" style="padding-top:0px; padding-bottom: 10px;">

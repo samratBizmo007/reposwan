@@ -42,6 +42,20 @@ class Rawmaterial_required_model extends CI_Model {
         }
     }
 
+    public function getPoDataByPo_number($po_number) {
+        if ($po_number == 'undefined') {
+            $sql = "SELECT * FROM purchase_orders as p JOIN product_master as m on(p.prod_id = m.prod_id)";
+        } else {
+            $sql = "SELECT * FROM purchase_orders as p JOIN product_master as m on(p.prod_id = m.prod_id) WHERE p.order_no like '%$po_number%'";
+        }
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            return false;
+        } else {
+            return $result->result_array();
+        }
+    }
+
     public function getPoProductDetails($p_code, $p_id) {
         $sql = "SELECT * FROM purchase_orders as p JOIN product_master as m JOIN product_tab as t on(p.prod_id = m.prod_id) AND (t.part_code = p.product_code) WHERE p.po_id = '$p_id' AND p.product_code='$p_code'";
         //echo $sql; die();
@@ -53,7 +67,7 @@ class Rawmaterial_required_model extends CI_Model {
         }
     }
 
-    public function getMaterialTotalWeight($grade,$type) {
+    public function getMaterialTotalWeight($grade, $type) {
         $sql = "SELECT * FROM material_tab WHERE material_grade= '$grade' AND mat_cat_id = '$type'";
         $result = $this->db->query($sql);
         $total = 0;
