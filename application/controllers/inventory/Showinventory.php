@@ -92,6 +92,29 @@ class Showinventory extends CI_controller {
         print_r($response_json);
     }
 
+    public function getMaterialInfoByName() {
+        extract($_GET);
+        $this->load->model('material_model/Material_model');
+        $result = $this->Material_model->getMaterialDetailsByName($material_grade);
+        print_r(json_encode($result));
+    }
+
+    public function getMaterialInfoByThickness() {
+        extract($_GET);
+        $path = base_url();
+        $url = $path . 'api/Material_api/getMaterialInfoByThickness?material_thickness=' . $material_thickness;
+//create a new cURL resource
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPGET, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array());
+        $response_json = curl_exec($ch);
+//close cURL resource
+        curl_close($ch);
+        $response = json_decode($response_json, true);
+        print_r($response_json);
+    }
+
     public function getAllCustomerNames() {
         $result = $this->Inventory_model->getAllCustomerNames();
         return $result;

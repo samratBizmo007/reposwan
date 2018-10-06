@@ -8,21 +8,21 @@
         </div>
         <div class="row x_title" style=" margin-top: 5px;">
             <div class="w3-padding-small">
-                <h4>Find Material By Material Category </h4>                
+                <h4>Find Material By Material Type </h4>                
             </div>
             <div class="w3-col l12 w3-margin-bottom">
                 <div class="col-lg-5 col-xs-12 col-sm-12" id="">
-                    <label>Material Category <b class="w3-text-red w3-medium">*</b></label>
+                    <label>Material Type :</label>
                     <select class="form-control" id="mat_cat_id" name="mat_cat_id" onchange="getMaterialdetails();" required>
-                        <option value="0">All Material</option>
+                        <option value="0">Select material type</option>
                         <?php foreach ($material_type['status_message'] as $key) { ?>
                             <option value="<?php echo $key['mat_cat_id']; ?>"><?php echo $key['material_type'] ?></option>
                         <?php } ?>
                     </select>
                 </div>
                 <div class="col-lg-5 col-xs-12 col-sm-12" id="">
-                    <label>Material Name <b class="w3-text-red w3-medium">*</b></label>
-                    <input type="text" name="material_grade" id="material_grade" onkeyup="getMaterialInfoByName();" class="form-control" placeholder="Material Grade" value="" required>
+                    <label>Material Name/ Grade :</label>
+                    <input type="text" name="material_grade" id="material_grade" onkeyup="getMaterialInfoByName();" class="form-control" placeholder="Material Name/ Grade" value="" required>
                 </div>
             </div>
         </div>

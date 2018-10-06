@@ -70,4 +70,10 @@ class Material_api extends REST_Controller {
         $result = $this->Material_model->getMaterialdetails($mat_cat_id);
         return $this->response($result);
     }
+
+    public function getMaterialInfoByThickness_get(){
+        extract($_GET);
+        $result = $this->Material_model->getMaterialDetailsByThickness($material_thickness);
+        return $this->response($result);
+    }
 }

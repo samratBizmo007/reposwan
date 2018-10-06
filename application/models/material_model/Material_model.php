@@ -213,6 +213,47 @@ class Material_model extends CI_Model {
         return $response;
     }
 
+    public function getMaterialDetailsByThickness($material_thickness) {
+        $sql = '';
+        
+        $sql = "SELECT * FROM material_tab as m join material_category as c "
+                    . "on(c.mat_cat_id = m.mat_cat_id) "
+                    . "WHERE m.thickness LIKE '".$material_thickness."%'";
+        //echo $sql; die();
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'No data found.');
+        } else {
+            $response = array(
+                'status' => 200,
+                'status_message' => $result->result_array());
+        }
+        return $response;
+    }
+
+    public function getMaterialDetailsByName($material_grade) {
+        $sql = '';
+        
+        $sql = "SELECT * FROM material_tab as m join material_category as c "
+                    . "on(c.mat_cat_id = m.mat_cat_id) "
+                    . "WHERE m.material_grade LIKE '%".$material_grade."%'";
+        //echo $sql; die();
+        $result = $this->db->query($sql);
+        if ($result->num_rows() <= 0) {
+            $response = array(
+                'status' => 500,
+                'status_message' => 'No data found.');
+        } else {
+            $response = array(
+                'status' => 200,
+                'status_message' => $result->result_array());
+        }
+        return $response;
+    }
+
+
     public function getMaterialDetailsByCategory($material_category) {
         $query = "SELECT * FROM material_tab WHERE mat_cat_id='$material_category' GROUP BY(material_grade)";
         $result = $this->db->query($query);

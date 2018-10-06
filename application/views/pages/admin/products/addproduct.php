@@ -185,8 +185,8 @@
                                 <div class="w3-col l12" ng-show="rmSpecimen">
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_thick">Thickness(mm) :</label>
-                                            <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness">
+                                            <label for="rm_thick">Thickness (in mm) :</label>
+                                            <input type="number" ng-model="rmthickSelected" min="0" ng-disabled="!enableThickness" class="form-control" id="rm_thick" name="rm_thick[]" placeholder="Material Thickness (mm)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
@@ -197,20 +197,20 @@
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_id">ID(mm) :</label>
-                                            <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID">
+                                            <label for="rm_id">ID (in mm) :</label>
+                                            <input type="number" ng-model="rmIDSelected" min="0" ng-disabled="!enableID" class="form-control" id="rm_id" name="rm_id[]" placeholder="Material ID (mm)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_od">OD(mm) :</label>
-                                            <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD">
+                                            <label for="rm_od">OD (in mm) :</label>
+                                            <input type="number" min="0" ng-model="rmODSelected" ng-disabled="!enableOD" class="form-control" id="rm_od" name="rm_od[]" placeholder="Material OD (mm)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
                                         <div class="form-group">
-                                            <label for="rm_pitch">Pitch(mm) :</label>
-                                            <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch">
+                                            <label for="rm_pitch">Pitch (in mm) :</label>
+                                            <input type="number" min="0" ng-model="rmPitchSelected" ng-disabled="!enablePitch" class="form-control" id="rm_pitch" name="rm_pitch[]" placeholder="Material Pitch (mm)">
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-6 col-xs-6 w3-margin-bottom">
